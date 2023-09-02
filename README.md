@@ -95,9 +95,6 @@ as above.
 
 ## 进阶研究小组：
 
-$$
-
-$$
 
 <p float="left">
   <img src="https://github.com/zkp-co-learning/zkp-co-learn/assets/33189338/0e5ec85f-fd7e-4ce3-a579-d86c20b763aa" width="20%" />
@@ -115,16 +112,6 @@ $$
 ## 投稿
 欢迎大家把自己在写的内容放在这里， [zk-everything] 我们会同时排版到Antalpha Labs的公众号下.(最好留下联系方式，方便后续跟进）
 
-
-## 其他研究项目：
-
-- $$ ： 可群内联系 Maintainer @Keep @啊咪咪小熊
-- $$ ：可群内联系 Maintainer @cheerup （被动上岗，后续 Scroll 技术大佬会出手，放心）
-- [Nova研究小组]
-- [baby plonk]
-- $$ ：如上 ↑ 
-
-~<br />~
 
 ### [Github Discussion] 使用方法
 

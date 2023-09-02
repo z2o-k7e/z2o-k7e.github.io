@@ -1,0 +1,959 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>ch5-plonk-intro - zkp-co-learning</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../index.html">TOC</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Halo2</li><li class="chapter-item expanded "><a href="../halo2/0xparc halo2.html"><strong aria-hidden="true">1.</strong> 0xparc halo2</a></li><li class="chapter-item expanded "><a href="../halo2/1. Simple Examples.html"><strong aria-hidden="true">2.</strong> 1.Simple Examples</a></li><li class="chapter-item expanded "><a href="../halo2/2. Fibonacci (halo2-hope).html"><strong aria-hidden="true">3.</strong> 2.Fibonacci(halo2-hope)</a></li><li class="chapter-item expanded "><a href="../halo2/3. Fibonacci (ex1+ex2).html"><strong aria-hidden="true">4.</strong> 3. Fibonacci (ex1+ex2)</a></li><li class="chapter-item expanded "><a href="../halo2/4. IsZero Check (ex3).html"><strong aria-hidden="true">5.</strong> 4. IsZero Check (ex3)</a></li><li class="chapter-item expanded "><a href="../halo2/halo2 Source Code.html"><strong aria-hidden="true">6.</strong> halo2 Source Code</a></li><li class="chapter-item expanded "><a href="../halo2/StarLi halo2.html"><strong aria-hidden="true">7.</strong> StarLi halo2</a></li><li class="chapter-item expanded affix "><li class="part-title">Folding Schemes</li><li class="chapter-item expanded "><a href="../Nova/SuperNova.html"><strong aria-hidden="true">8.</strong> SuperNova</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">zk-everything</li><li class="chapter-item expanded "><a href="../zk-everything/BabySNARK tutorial.html"><strong aria-hidden="true">9.</strong> BabySNARK tutorial</a></li><li class="chapter-item expanded "><a href="../zk-everything/zk-learning-miles/KZG.html"><strong aria-hidden="true">10.</strong> KZG</a></li><li class="chapter-item expanded "><a href="../zk-everything/zk-learning-miles/Lecture1:Overview about Zeroknowledge.html"><strong aria-hidden="true">11.</strong> Lecture1:Overview about Zeroknowledge</a></li><li class="chapter-item expanded "><a href="../zk-everything/zk-learning-miles/Lecture2:Introduction to Modern SNARKs.html"><strong aria-hidden="true">12.</strong> Lecture2:Introduction to Modern SNARKs</a></li><li class="chapter-item expanded "><a href="../zk-everything/zk-learning-miles/Lecture12:ZKEVM.html"><strong aria-hidden="true">13.</strong> Lecture12:ZKEVM</a></li><li class="chapter-item expanded "><a href="../zk-everything/zk-learning-miles/Lecture16:Hardware acceleration.html"><strong aria-hidden="true">14.</strong> Lecture16:Hardware acceleration</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">ZKP Public Goods</li><li class="chapter-item expanded "><a href="../public goods/第二章.html"><strong aria-hidden="true">15.</strong> ch2</a></li><li class="chapter-item expanded "><a href="../public goods/4-Proving-System.html"><strong aria-hidden="true">16.</strong> ch4-Proving System</a></li><li class="chapter-item expanded "><a href="../public goods/5-plonk-intro.html" class="active"><strong aria-hidden="true">17.</strong> ch5-plonk-intro</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">zkp-co-learning</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="从代码中学习-plonk-协议"><a class="header" href="#从代码中学习-plonk-协议">从代码中学习 Plonk 协议</a></h1>
+<p>写作本文的目的主要是希望从代码的角度理解 Plonk 协议。因为我是开发者，之前读文章遇到公式感觉比较抽象，所以希望有这样的文章，可以从代码的角度来阐述 ZKP 的协议是如何工作的。</p>
+<p>这篇文章对应的源代码在<a href="https://github.com/Antalpha-Labs/baby-plonk">这里</a>，主要实现了 Plonk 协议的核心概念，需要结合<a href="https://github.com/sec-bit/learning-zkp/blob/develop/plonk-intro-cn/README.md">郭宇老师的 Plonk 系列文章</a>阅读。</p>
+<h2 id="流程"><a class="header" href="#流程">流程</a></h2>
+<p>通过测试 <code>test.py</code> 看到验证 Plonk 协议主要分为以下几个部分：</p>
+<ul>
+<li>Setup</li>
+<li>Program</li>
+<li>Assignment</li>
+<li>Generate proof</li>
+<li>Verify</li>
+</ul>
+<pre><code class="language-python=">def prover_test():
+    print(&quot;Beginning prover test&quot;)
+    # powers should be 2^n so that we can use roots of unity for FFT
+    # and should be bigger than len(coeffs) of polynomial to do KZG commitment
+    # the value here is: powers = 4 * group_order
+    # which is bigger than the order of quotient polynomial
+    group_order = 8
+    powers = group_order * 4
+    setup = Setup.generate_srs(powers)
+
+    program = Program([&quot;e public&quot;, &quot;c &lt;== a * b&quot;, &quot;e &lt;== c * d&quot;], group_order)
+    assignments = {&quot;a&quot;: 3, &quot;b&quot;: 4, &quot;c&quot;: 12, &quot;d&quot;: 5, &quot;e&quot;: 60}
+    prover = Prover(setup, program)
+    proof = prover.prove(assignments)
+    print(&quot;Prover test success&quot;)
+    return setup, proof, group_order
+
+def verifier_test(setup, proof, group_order):
+    print(&quot;Beginning verifier test&quot;)
+    program = Program([&quot;e public&quot;, &quot;c &lt;== a * b&quot;, &quot;e &lt;== c * d&quot;], group_order)
+    public = [60]
+    vk = setup.verification_key(program.common_preprocessed_input())
+    assert vk.verify_proof(group_order, proof, public)
+    print(&quot;Verifier test success&quot;)
+
+</code></pre>
+<p>整个协议的过程：</p>
+<ol>
+<li>给定一个计算/电路/程序:</li>
+</ol>
+<pre><code>a * b = c
+c * d = e
+其中 e 是公开值
+</code></pre>
+<ol start="2">
+<li>prover 选择特定的一组值 witness = (a, b, c, d, e)，这组值满足上面的约束条件</li>
+<li>在保持 witness 不公开的前提下，prover 生成一个证明 proof, 可以证明 prover 知道 witness</li>
+<li>verifier 验证 proof 的真实性</li>
+</ol>
+<p>下面我们通过代码依次看看每个步骤都做了什么。</p>
+<h2 id="setup"><a class="header" href="#setup">Setup</a></h2>
+<pre><code class="language-python=">@dataclass
+class Setup(object):
+    #   ([1]₁, [x]₁, ..., [x^{d-1}]₁)
+    # = ( G,    xG,  ...,  x^{d-1}G ), where G is a generator of G_1
+    powers_of_x: list[G1Point]
+    # [x]₂ = xH, where H is a generator of G_2
+    X2: G2Point
+
+    @classmethod
+    def generate_srs(cls, powers: int):
+        print(&quot;Start to generate structured reference string&quot;)
+        # tau is a random number whatever you choose
+        tau = 218313819403157342856071133
+
+        # Initialize powers_of_x with 0 values
+        powers_of_x = [0] * powers
+        # powers_of_x[0] =  b.G1 * tau**0 = b.G1
+        # powers_of_x[1] =  b.G1 * tau**1 = powers_of_x[0] * tau
+        # powers_of_x[2] =  b.G1 * tau**2 = powers_of_x[1] * tau
+        # ...
+        # powers_of_x[i] =  b.G1 * tau**i = powers_of_x[i - 1] * tau
+        powers_of_x[0] = b.G1
+
+        for i in range(powers):
+            if i &gt; 0:
+                powers_of_x[i] = b.multiply(powers_of_x[i - 1], tau)
+
+        assert b.is_on_curve(powers_of_x[1], b.b)
+        print(&quot;Generated G1 side, X^1 point: {}&quot;.format(powers_of_x[1]))
+
+        X2 = b.multiply(b.G2, tau)
+        assert b.is_on_curve(X2, b.b2)
+        print(&quot;Generated G2 side, X^1 point: {}&quot;.format(X2))
+
+        assert b.pairing(b.G2, powers_of_x[1]) == b.pairing(X2, b.G1)
+        print(&quot;X^1 points checked consistent&quot;)
+        print(&quot;Finished to generate structured reference string&quot;)
+
+        return cls(powers_of_x, X2)
+
+    # Encodes the KZG commitment that evaluates to the given values in the group
+    def commit(self, values: Polynomial) -&gt; G1Point:
+        if (values.basis == Basis.LAGRANGE):
+            # inverse FFT from Lagrange basis to monomial basis
+            coeffs = values.ifft().values
+        elif (values.basis == Basis.MONOMIAL):
+            coeffs = values.values
+        if len(coeffs) &gt; len(self.powers_of_x):
+            raise Exception(&quot;Not enough powers in setup&quot;)
+        return ec_lincomb([(s, x) for s, x in zip(self.powers_of_x, coeffs)])
+
+    # Generate the verification key for this program with the given setup
+    def verification_key(self, pk: CommonPreprocessedInput) -&gt; VerificationKey:
+        return VerificationKey(
+            pk.group_order,
+            self.commit(pk.QM),
+            self.commit(pk.QL),
+            self.commit(pk.QR),
+            self.commit(pk.QO),
+            self.commit(pk.QC),
+            self.commit(pk.S1),
+            self.commit(pk.S2),
+            self.commit(pk.S3),
+            self.X2,
+            Scalar.root_of_unity(pk.group_order),
+        )
+    
+</code></pre>
+<p>这里有几个函数，第一个函数 <code>generate_srs</code> 用于生成 structured reference string(SRS)，用于给多项式在群上生成 KZG commitment。基本流程：</p>
+<ol>
+<li>选择一个随机数作为 tau 的值</li>
+<li>从椭圆曲线上获得两个生成元 G1 和 G2，有现成的函数库可以拿到</li>
+<li>生成所需要的 SRS 值</li>
+<li>最后对生成的值进行验证</li>
+</ol>
+<p>第二个函数 <code>commit</code>，就是实际用来生成 KZG commitment 的函数</p>
+<p>第三个函数 <code>verification_key</code> 用来给 verifier 生成 verification key，用来验证 proof</p>
+<h2 id="program"><a class="header" href="#program">Program</a></h2>
+<pre><code class="language-python">program = Program([&quot;e public&quot;, &quot;c &lt;== a * b&quot;, &quot;e &lt;== c * d&quot;], group_order)
+</code></pre>
+<p>Program 类的目标是 Arithmetization，将某种计算转换成数学表示。这里的<code>计算</code>指的是一段电路，<code>数学表示</code>指的是多项式。</p>
+<p>在 Plonk 中，可以用八个多项式来表示这个 Program: QL, QR, QM, QO, QC, S1, S2, S3。所以 Program 类的主要目标就是处理上面电路的字符串的表示，最终得到这八个多项式。这八个多项式是公开的，prover 和 verifier 都可以得到这个信息。</p>
+<p>经过一定的处理，prover 得到 prover key(pk)。</p>
+<pre><code class="language-python=">@dataclass
+class CommonPreprocessedInput:
+    &quot;&quot;&quot;Common preprocessed input&quot;&quot;&quot;
+
+    group_order: int
+    # q_M(X) multiplication selector polynomial
+    QM: Polynomial
+    # q_L(X) left selector polynomial
+    QL: Polynomial
+    # q_R(X) right selector polynomial
+    QR: Polynomial
+    # q_O(X) output selector polynomial
+    QO: Polynomial
+    # q_C(X) constants selector polynomial
+    QC: Polynomial
+    # S_σ1(X) first permutation polynomial S_σ1(X)
+    S1: Polynomial
+    # S_σ2(X) second permutation polynomial S_σ2(X)
+    S2: Polynomial
+    # S_σ3(X) third permutation polynomial S_σ3(X)
+    S3: Polynomial
+
+</code></pre>
+<p>verifier 得到 verification key，在上面的 <code>Setup</code> 步骤中也提到了。</p>
+<pre><code class="language-python=">    # Generate the verification key for this program with the given setup
+    def verification_key(self, pk: CommonPreprocessedInput) -&gt; VerificationKey:
+        return VerificationKey(
+            pk.group_order,
+            self.commit(pk.QM),
+            self.commit(pk.QL),
+            self.commit(pk.QR),
+            self.commit(pk.QO),
+            self.commit(pk.QC),
+            self.commit(pk.S1),
+            self.commit(pk.S2),
+            self.commit(pk.S3),
+            self.X2,
+            Scalar.root_of_unity(pk.group_order),
+        )
+</code></pre>
+<p>和 prover 不一样的是，为什么中间 8 个值要用 commitment 的形式发给 verifier 呢？这是因为 Plonk 协议为了保证 verifier 端验证的计算复杂度尽量低，所以没有给出原始的多项式，而只给出了 KZG 承诺的值，后面会看到，verifier 通过 pairing 验证就可以保证这些承诺值和原始的多项式是一一对应的，prover 欺骗不了 verifier，这样既保证的正确性，也保证了 verifier 验证的简单性。</p>
+<h2 id="assignment"><a class="header" href="#assignment">Assignment</a></h2>
+<pre><code class="language-python">assignments = {&quot;a&quot;: 3, &quot;b&quot;: 4, &quot;c&quot;: 12, &quot;d&quot;: 5, &quot;e&quot;: 60}
+</code></pre>
+<p>Assignment 是对电路中引线的赋值，也叫 witness 或者 private input。这些值只有 prover 知道，对 verifier 是保密的。prover 最终要向 verifier 提供证明，保证将这些值输入到 program 中能得到指定的结果。</p>
+<h2 id="generate-proof"><a class="header" href="#generate-proof">Generate proof</a></h2>
+<pre><code class="language-python">proof = prover.prove(assignments)
+</code></pre>
+<p>这里是协议的重点，分为五轮。</p>
+<h3 id="主体逻辑"><a class="header" href="#主体逻辑">主体逻辑：</a></h3>
+<pre><code class="language-python=">    def prove(self, witness: dict[Optional[str], int]) -&gt; Proof:
+        # Initialise Fiat-Shamir transcript
+        transcript = Transcript(b&quot;plonk&quot;)
+
+        # Collect fixed and public information
+        # FIXME: Hash pk and PI into transcript
+        public_vars = self.program.get_public_assignments()
+        PI = Polynomial(
+            [Scalar(-witness[v]) for v in public_vars]
+            + [Scalar(0) for _ in range(self.group_order - len(public_vars))],
+            Basis.LAGRANGE,
+        )
+        self.PI = PI
+
+        # Round 1
+        msg_1 = self.round_1(witness)
+        self.beta, self.gamma = transcript.round_1(msg_1)
+
+        # Round 2
+        msg_2 = self.round_2()
+        self.alpha, self.fft_cofactor = transcript.round_2(msg_2)
+
+        # Round 3
+        msg_3 = self.round_3()
+        self.zeta = transcript.round_3(msg_3)
+
+        # Round 4
+        msg_4 = self.round_4()
+        self.v = transcript.round_4(msg_4)
+
+        # Round 5
+        msg_5 = self.round_5()
+
+        return Proof(msg_1, msg_2, msg_3, msg_4, msg_5)
+
+</code></pre>
+<p>通过 5 轮的计算会生成必要的 proof，这些 proof 之后交给 verifier 进行验证，如果通过，则整个协议完成。</p>
+<h3 id="round-0-初始化"><a class="header" href="#round-0-初始化">Round 0: 初始化：</a></h3>
+<pre><code class="language-python=">    def __init__(self, setup: Setup, program: Program):
+        self.group_order = program.group_order
+        self.setup = setup
+        self.program = program
+        self.pk = program.common_preprocessed_input()
+
+</code></pre>
+<h3 id="round-1-生成对-witnessassignments-多项式的承诺"><a class="header" href="#round-1-生成对-witnessassignments-多项式的承诺">Round 1: 生成对 witness/assignments 多项式的承诺</a></h3>
+<p>这个过程和相关知识可以参考 <a href="https://github.com/sec-bit/learning-zkp/blob/develop/plonk-intro-cn/plonk-arithmetization.md">理解 PLONK（一）：Plonkish Arithmetization
+</a> 和 <a href="https://github.com/sec-bit/learning-zkp/blob/develop/plonk-intro-cn/plonk-lagrange-basis.md">理解 PLONK（二）：多项式编码
+</a>。多项式承诺相关知识可以参考 <a href="https://github.com/sec-bit/learning-zkp/blob/develop/plonk-intro-cn/plonk-polycom.mdf">理解 Plonk（五）：多项式承诺
+</a></p>
+<p>大体流程:</p>
+<ol>
+<li>根据 group_order 初始化 A, B, C 这三个 witness 多项式的点值 A_values，B_values，C_values，这些点值用于后面生成多项式，也就是生成的 <code>Polynomial</code> 类</li>
+<li>依次读取 program 中引线的值，将左引线的值 L 添加到 A_values, 右引线的值添加到 B_values 中，输出引线的值添加到 C_values 中</li>
+<li>通过 <code>Polynomial</code> 类生成 A，B，C 多项式</li>
+<li>生成 A，B，C 多项式的 KZG 承诺</li>
+<li>验证门约束等式是否成立</li>
+</ol>
+<pre><code class="language-python=">    def round_1(
+        self,
+        witness: dict[Optional[str], int],
+    ) -&gt; Message1:
+        program = self.program
+        setup = self.setup
+        group_order = self.group_order
+
+        if None not in witness:
+            witness[None] = 0
+
+        # 1. 根据 group_order 初始化 A, B, C 多项式的点值
+        # A_values，B_values，C_values，这些点值用于后面
+        # 生成多项式，也就是 `Polynomial` 类
+        # Compute wire assignments
+        A_values = [Scalar(0) for _ in range(group_order)]
+        B_values = [Scalar(0) for _ in range(group_order)]
+        C_values = [Scalar(0) for _ in range(group_order)]
+
+        # 2. 依次读取 program 中引线的值，将左引线的值 L 添加到 A_values, 
+        # 右引线的值添加到 B_values 中，输出引线的值添加到 C_values 中
+        for i, gate_wires in enumerate(program.wires()):
+            A_values[i] = Scalar(witness[gate_wires.L])
+            B_values[i] = Scalar(witness[gate_wires.R])
+            C_values[i] = Scalar(witness[gate_wires.O])
+
+        # 3. 通过 `Polynomial` 类生成 A，B，C 多项式
+        self.A = Polynomial(A_values, Basis.LAGRANGE)
+        self.B = Polynomial(B_values, Basis.LAGRANGE)
+        self.C = Polynomial(C_values, Basis.LAGRANGE)
+
+        # 4. 生成 A，B，C 多项式的 KZG 承诺
+        a_1 = setup.commit(self.A)
+        b_1 = setup.commit(self.B)
+        c_1 = setup.commit(self.C)
+
+        # 5. 验证门约束等式是否成立
+        # Sanity check that witness fulfils gate constraints
+        assert (
+            self.A * self.pk.QL
+            + self.B * self.pk.QR
+            + self.A * self.B * self.pk.QM
+            + self.C * self.pk.QO
+            + self.PI
+            + self.pk.QC
+            == Polynomial([Scalar(0)] * group_order, Basis.LAGRANGE)
+        )
+
+        return Message1(a_1, b_1, c_1)
+</code></pre>
+<h3 id="round-2-生成-permutation-accumulator-多项式-z-的-kzg-承诺"><a class="header" href="#round-2-生成-permutation-accumulator-多项式-z-的-kzg-承诺">Round 2: 生成 Permutation Accumulator 多项式 Z 的 KZG 承诺</a></h3>
+<p>参考文章 <a href="https://github.com/sec-bit/learning-zkp/blob/develop/plonk-intro-cn/plonk-permutation.md">理解 PLONK（三）：置换证明
+</a></p>
+<p>要给 <code>Z</code> 生成承诺，首先要构造<code>Z</code>，然后可以直接对多项式生成 KZG 承诺。</p>
+<p>大体流程：</p>
+<ol>
+<li>初始化<code>Z</code> 的点值数组 <code>Z_values</code> 第一个值为 1</li>
+<li>在 group_order 内，依次用上一次的值乘以当前的累乘因子，获得当前 <code>Z_values</code> 的值</li>
+<li>确保最后一项为 1（具体原理请看上面的文章）</li>
+<li>检查生成值的有效性</li>
+<li>用 Lagrange 形式构造多项式</li>
+<li>生成 KZG 承诺</li>
+</ol>
+<pre><code class="language-python=">    def round_2(self) -&gt; Message2:
+        group_order = self.group_order
+        setup = self.setup
+
+        Z_values = [Scalar(1)]
+        roots_of_unity = Scalar.roots_of_unity(group_order)
+        for i in range(group_order):
+            Z_values.append(
+                Z_values[-1]
+                * self.rlc(self.A.values[i], roots_of_unity[i])
+                * self.rlc(self.B.values[i], 2 * roots_of_unity[i])
+                * self.rlc(self.C.values[i], 3 * roots_of_unity[i])
+                / self.rlc(self.A.values[i], self.pk.S1.values[i])
+                / self.rlc(self.B.values[i], self.pk.S2.values[i])
+                / self.rlc(self.C.values[i], self.pk.S3.values[i])
+            )
+        assert Z_values.pop() == 1
+
+        # Sanity-check that Z was computed correctly
+        for i in range(group_order):
+            assert (
+                self.rlc(self.A.values[i], roots_of_unity[i])
+                * self.rlc(self.B.values[i], 2 * roots_of_unity[i])
+                * self.rlc(self.C.values[i], 3 * roots_of_unity[i])
+            ) * Z_values[i] - (
+                self.rlc(self.A.values[i], self.pk.S1.values[i])
+                * self.rlc(self.B.values[i], self.pk.S2.values[i])
+                * self.rlc(self.C.values[i], self.pk.S3.values[i])
+            ) * Z_values[
+                (i + 1) % group_order
+            ] == 0
+
+        Z = Polynomial(Z_values, Basis.LAGRANGE)
+        z_1 = setup.commit(Z)
+        print(&quot;Permutation accumulator polynomial successfully generated&quot;)
+
+        self.Z = Z
+        return Message2(z_1)
+
+</code></pre>
+<p>其中 <code>rlc</code> 的定义：</p>
+<pre><code class="language-python=">    def rlc(self, term_1, term_2):
+        return term_1 + term_2 * self.beta + self.gamma
+
+</code></pre>
+<h3 id="round-3-生成商多项式的承诺"><a class="header" href="#round-3-生成商多项式的承诺">Round 3: 生成商多项式的承诺</a></h3>
+<p>相关知识可以参考文章 <a href="https://github.com/sec-bit/learning-zkp/blob/develop/plonk-intro-cn/plonk-constraints.md">理解 PLONK（四）：算术约束与拷贝约束
+</a></p>
+<p>大体流程:</p>
+<ol>
+<li>构造消失多项式(Vanishing Polynomial): ZH_coeff</li>
+<li>构造电路的门约束多项式: <code>gate_constraints_coeff</code></li>
+<li>构造 Copy Constraints 的多项式: <code>permutation_grand_product</code></li>
+<li>构造 <code>Copy Constraints 第一个值为 1</code> 这个约束的多项式: <code>permutation_first_row_coeff</code></li>
+<li>求出商多项式 <code>quotient polynomial</code>: T_coeff</li>
+<li>计算商多项式的 KZG 承诺</li>
+</ol>
+<pre><code class="language-python=">    def round_3(self) -&gt; Message3:
+        group_order = self.group_order
+        setup = self.setup
+
+        # Compute the quotient polynomial
+
+        alpha = self.alpha
+
+        roots_of_unity = Scalar.roots_of_unity(group_order)
+
+        A_coeff, B_coeff, C_coeff, S1_coeff, S2_coeff, S3_coeff, Z_coeff, QL_coeff, QR_coeff, QM_coeff, QO_coeff, QC_coeff, PI_coeff = (
+            x.ifft()
+            for x in (
+                self.A,
+                self.B,
+                self.C,
+                self.pk.S1,
+                self.pk.S2,
+                self.pk.S3,
+                self.Z,
+                self.pk.QL,
+                self.pk.QR,
+                self.pk.QM,
+                self.pk.QO,
+                self.pk.QC,
+                self.PI,
+            )
+        )
+
+        L0_coeff = (
+            Polynomial([Scalar(1)] + [Scalar(0)] * (group_order - 1), Basis.LAGRANGE)
+        ).ifft()
+
+        # x^8 - 1 coeffs are [-1, 0, 0, 0, 0, 0, 0, 0, 1]
+        # which needs 9 points(n + 1) to determine the polynomial
+        ZH_array = [Scalar(-1)] + [Scalar(0)] * (group_order - 1) + [Scalar(1)]
+        ZH_coeff = Polynomial(ZH_array, Basis.MONOMIAL)
+
+        gate_constraints_coeff = (
+            A_coeff * QL_coeff
+            + B_coeff * QR_coeff
+            + A_coeff * B_coeff * QM_coeff
+            + C_coeff * QO_coeff
+            + PI_coeff
+            + QC_coeff
+        )
+
+        normal_roots = Polynomial(
+            roots_of_unity, Basis.LAGRANGE
+        )
+
+        roots_coeff = normal_roots.ifft()
+        # z * w
+        ZW = self.Z.shift(1)
+        ZW_coeff = ZW.ifft()
+
+        for i in range(group_order):
+            assert (
+                self.rlc(self.A.values[i], roots_of_unity[i])
+                * self.rlc(self.B.values[i], 2 * roots_of_unity[i])
+                * self.rlc(self.C.values[i], 3 * roots_of_unity[i])
+            ) * self.Z.values[i] - (
+                self.rlc(self.A.values[i], self.pk.S1.values[i])
+                * self.rlc(self.B.values[i], self.pk.S2.values[i])
+                * self.rlc(self.C.values[i], self.pk.S3.values[i])
+            ) * ZW.values[
+                i % group_order
+            ] == 0
+
+        permutation_grand_product_coeff = (
+            (
+                self.rlc(A_coeff, roots_coeff)
+                * self.rlc(B_coeff, roots_coeff * Scalar(2))
+                * self.rlc(C_coeff, roots_coeff * Scalar(3))
+            )
+            * Z_coeff
+            - (
+                self.rlc(A_coeff, S1_coeff)
+                * self.rlc(B_coeff, S2_coeff)
+                * self.rlc(C_coeff, S3_coeff)
+            )
+            * ZW_coeff
+        )
+
+        permutation_first_row_coeff = (Z_coeff - Scalar(1)) * L0_coeff
+
+        all_constraints = (
+            gate_constraints_coeff
+            + permutation_grand_product_coeff * alpha
+            + permutation_first_row_coeff * alpha**2
+        )
+
+        # quotient polynomial
+        T_coeff = all_constraints / ZH_coeff
+
+        print(&quot;Generated the quotient polynomial&quot;)
+
+        W_t = setup.commit(T_coeff)
+
+        self.A_coeff = A_coeff
+        self.B_coeff = B_coeff
+        self.C_coeff = C_coeff
+        self.S1_coeff = S1_coeff
+        self.S2_coeff = S2_coeff
+        self.S3_coeff = S3_coeff
+        self.Z_coeff = Z_coeff
+        self.ZW_coeff = ZW_coeff
+        self.QL_coeff = QL_coeff
+        self.QR_coeff = QR_coeff
+        self.QM_coeff = QM_coeff
+        self.QO_coeff = QO_coeff
+        self.QC_coeff = QC_coeff
+        self.PI_coeff = PI_coeff
+        self.T_coeff = T_coeff
+
+        return Message3(W_t)
+</code></pre>
+<h3 id="round-4-对各个多项式在一个随机的-zeta-点求值"><a class="header" href="#round-4-对各个多项式在一个随机的-zeta-点求值">Round 4: 对各个多项式在一个随机的 zeta 点求值</a></h3>
+<p>相关知识可以参考文章 <a href="https://github.com/sec-bit/learning-zkp/blob/develop/plonk-intro-cn/plonk-constraints.md">理解 PLONK（四）：算术约束与拷贝约束
+</a></p>
+<p>这一步比较简单，对各个多项式在一个随机的 zeta 点求值。这里有一个知识点，就是如何获取 zeta 这个随机值，使用的方法叫做Fiat-Shamir 变换，可以将一个需要 prover 和 verifier 进行交互的证明转化成不需要交互的证明，简单介绍可以参考 <a href="https://github.com/sec-bit/learning-zkp/blob/3bff37c46c7b4f447b0bb9304d1ebc039a582c5f/zkp-intro/4/zkp-rom.md#fiat-shamir-%E5%8F%98%E6%8D%A2--%E4%BB%8E-public-coin-%E5%88%B0-nizk">这篇文章</a>，代码可以参考 <a href="https://github.com/Antalpha-Labs/baby-plonk/blob/main/transcript.py">这里</a>。</p>
+<pre><code class="language-python=">    def round_4(self) -&gt; Message4:
+        group_order = self.group_order
+        zeta = self.zeta
+
+        a_eval = self.A_coeff.coeff_eval(zeta)
+        b_eval = self.B_coeff.coeff_eval(zeta)
+        c_eval = self.C_coeff.coeff_eval(zeta)
+        s1_eval = self.S1_coeff.coeff_eval(zeta)
+        s2_eval = self.S2_coeff.coeff_eval(zeta)
+        s3_eval = self.S3_coeff.coeff_eval(zeta)
+        root_of_unity = Scalar.root_of_unity(group_order)
+        z_eval = self.Z_coeff.coeff_eval(zeta)
+        zw_eval = self.Z_coeff.coeff_eval(zeta * root_of_unity)
+        ql_eval = self.QL_coeff.coeff_eval(zeta)
+        qr_eval = self.QR_coeff.coeff_eval(zeta)
+        qm_eval = self.QM_coeff.coeff_eval(zeta)
+        qo_eval = self.QO_coeff.coeff_eval(zeta)
+        qc_eval = self.QC_coeff.coeff_eval(zeta)
+        t_eval = self.T_coeff.coeff_eval(zeta)
+
+        self.a_eval = a_eval
+        self.b_eval = b_eval
+        self.c_eval = c_eval
+        self.ql_eval = ql_eval
+        self.qr_eval = qr_eval
+        self.qm_eval = qm_eval
+        self.qo_eval = qo_eval
+        self.qc_eval = qc_eval
+        self.s1_eval = s1_eval
+        self.s2_eval = s2_eval
+        self.s3_eval = s3_eval
+        self.z_eval = z_eval
+        self.zw_eval = zw_eval
+        self.t_eval = t_eval
+
+        return Message4(
+            a_eval,
+            b_eval,
+            c_eval,
+            ql_eval,
+            qr_eval,
+            qm_eval,
+            qo_eval,
+            qc_eval,
+            s1_eval,
+            s2_eval,
+            s3_eval,
+            z_eval,
+            zw_eval,
+            t_eval
+        )
+
+</code></pre>
+<p><code>coeff_eval</code> 是一个多项式求值的函数。具体实现可以看<a href="https://github.com/Antalpha-Labs/baby-plonk/blob/main/poly.py">这里</a>。</p>
+<h3 id="round-5-对每个多项式生成-kzg-承诺中需要的两个承诺"><a class="header" href="#round-5-对每个多项式生成-kzg-承诺中需要的两个承诺">Round 5: 对每个多项式生成 KZG 承诺中需要的两个承诺</a></h3>
+<p>相关知识可以参考文章 <a href="https://github.com/sec-bit/learning-zkp/blob/develop/plonk-intro-cn/plonk-constraints.md">理解 PLONK（四）：算术约束与拷贝约束
+</a>。</p>
+<p>这一步也比较简单，生成所需的 KZG 承诺，为 verifier 进行 verify 做准备。</p>
+<pre><code class="language-python=">    def round_5(self) -&gt; Message5:
+        W_a, W_a_quot = self.generate_commitment(self.A_coeff, self.a_eval)
+        W_b, W_b_quot = self.generate_commitment(self.B_coeff, self.b_eval)
+        W_c, W_c_quot = self.generate_commitment(self.C_coeff, self.c_eval)
+        W_ql, W_ql_quot = self.generate_commitment(self.QL_coeff, self.ql_eval)
+        W_qr, W_qr_quot = self.generate_commitment(self.QR_coeff, self.qr_eval)
+        W_qm, W_qm_quot = self.generate_commitment(self.QM_coeff, self.qm_eval)
+        W_qo, W_qo_quot = self.generate_commitment(self.QO_coeff, self.qo_eval)
+        W_qc, W_qc_quot = self.generate_commitment(self.QC_coeff, self.qc_eval)
+        W_s1, W_s1_quot = self.generate_commitment(self.S1_coeff, self.s1_eval)
+        W_s2, W_s2_quot = self.generate_commitment(self.S2_coeff, self.s2_eval)
+        W_s3, W_s3_quot = self.generate_commitment(self.S3_coeff, self.s3_eval)
+        W_z, W_z_quot = self.generate_commitment(self.Z_coeff, self.z_eval)
+        W_zw, W_zw_quot = self.generate_commitment(self.ZW_coeff, self.zw_eval)
+        W_t, W_t_quot = self.generate_commitment(self.T_coeff, self.t_eval)
+
+        print(&quot;Generated final quotient witness polynomials&quot;)
+        return Message5(
+            W_a, W_a_quot,
+            W_b, W_b_quot,
+            W_c, W_c_quot,
+            W_ql, W_ql_quot,
+            W_qr, W_qr_quot,
+            W_qm, W_qm_quot,
+            W_qo, W_qo_quot,
+            W_qc, W_qc_quot,
+            W_s1, W_s1_quot,
+            W_s2, W_s2_quot,
+            W_s3, W_s3_quot,
+            W_z, W_z_quot,
+            W_zw, W_zw_quot,
+            W_t, W_t_quot,
+        )
+</code></pre>
+<p>生成承诺的代码:</p>
+<pre><code class="language-python=">
+    def generate_commitment(self, coeff: Polynomial, eval: Scalar):
+        setup = self.setup
+        zeta = self.zeta
+        # Polynomial for (X - zeta)
+        ZH_zeta_coeff = Polynomial([-zeta, Scalar(1)], Basis.MONOMIAL)
+        quot_coeff = (coeff - eval) / ZH_zeta_coeff
+        # witness for polynomial itself
+        w = setup.commit(coeff)
+        # witness for quotient polynomial
+        w_quot = setup.commit(quot_coeff)
+        return w, w_quot
+
+</code></pre>
+<h2 id="verify"><a class="header" href="#verify">Verify</a></h2>
+<p>再回顾一下测试中的代码是这样进行验证的:</p>
+<pre><code class="language-python=">def verifier_test(setup, proof, group_order):
+    print(&quot;Beginning verifier test&quot;)
+    program = Program([&quot;e public&quot;, &quot;c &lt;== a * b&quot;, &quot;e &lt;== c * d&quot;], group_order)
+    public = [60]
+    vk = setup.verification_key(program.common_preprocessed_input())
+    assert vk.verify_proof(group_order, proof, public)
+    print(&quot;Verifier test success&quot;)
+
+</code></pre>
+<p><code>VerificationKey</code> 的代码在<a href="https://github.com/Antalpha-Labs/baby-plonk/blob/main/verifier.py">这里</a>，最核心的方法是 <code>verify_proof</code></p>
+<p>verifier 主要做两件事情:</p>
+<ol>
+<li>验证 KZG 承诺，保证多项式是和所承诺的一致</li>
+<li>验证最终组合出来的多项式求值的相等性</li>
+</ol>
+<pre><code class="language-python=">    def verify_proof(self, group_order: int, pf, public=[]) -&gt; bool:
+        # 4. Compute challenges
+        beta, gamma, alpha, zeta, v, u = self.compute_challenges(pf)
+        proof = pf.flatten()
+
+        # 5. Compute zero polynomial evaluation Z_H(ζ) = ζ^n - 1
+        ZH_ev = zeta**group_order - 1
+
+        # 6. Compute Lagrange polynomial evaluation L_0(ζ)
+        L0_ev = ZH_ev / (group_order * (zeta - 1))
+
+        # 7. Compute public input polynomial evaluation PI(ζ).
+        PI = Polynomial(
+            [Scalar(-x) for x in public]
+            + [Scalar(0) for _ in range(group_order - len(public))],
+            Basis.LAGRANGE,
+        )
+        PI_ev = PI.barycentric_eval(zeta)
+
+        # verify KZG10 commitment
+        self.verify_commitment(proof, proof[&quot;W_a&quot;], &quot;W_a_quot&quot;, &quot;a_eval&quot;, zeta)
+        self.verify_commitment(proof, proof[&quot;W_b&quot;], &quot;W_b_quot&quot;, &quot;b_eval&quot;, zeta)
+        self.verify_commitment(proof, proof[&quot;W_c&quot;], &quot;W_c_quot&quot;, &quot;c_eval&quot;, zeta)
+        self.verify_commitment(proof, proof[&quot;W_z&quot;], &quot;W_z_quot&quot;, &quot;z_eval&quot;, zeta)
+        self.verify_commitment(proof, proof[&quot;W_zw&quot;], &quot;W_zw_quot&quot;, &quot;zw_eval&quot;, zeta)
+        self.verify_commitment(proof, proof[&quot;W_t&quot;], &quot;W_t_quot&quot;, &quot;t_eval&quot;, zeta)
+        self.verify_commitment(proof, self.Ql, &quot;W_ql_quot&quot;, &quot;ql_eval&quot;, zeta)
+        self.verify_commitment(proof, self.Qr, &quot;W_qr_quot&quot;, &quot;qr_eval&quot;, zeta)
+        self.verify_commitment(proof, self.Qm, &quot;W_qm_quot&quot;, &quot;qm_eval&quot;, zeta)
+        self.verify_commitment(proof, self.Qo, &quot;W_qo_quot&quot;, &quot;qo_eval&quot;, zeta)
+        self.verify_commitment(proof, self.Qc, &quot;W_qc_quot&quot;, &quot;qc_eval&quot;, zeta)
+        self.verify_commitment(proof, self.S1, &quot;W_s1_quot&quot;, &quot;s1_eval&quot;, zeta)
+        self.verify_commitment(proof, self.S2, &quot;W_s2_quot&quot;, &quot;s2_eval&quot;, zeta)
+        self.verify_commitment(proof, self.S3, &quot;W_s3_quot&quot;, &quot;s3_eval&quot;, zeta)
+
+        a_eval = proof[&quot;a_eval&quot;]
+        b_eval = proof[&quot;b_eval&quot;]
+        c_eval = proof[&quot;c_eval&quot;]
+        ql_eval = proof[&quot;ql_eval&quot;]
+        qr_eval = proof[&quot;qr_eval&quot;]
+        qm_eval = proof[&quot;qm_eval&quot;]
+        qo_eval = proof[&quot;qo_eval&quot;]
+        qc_eval = proof[&quot;qc_eval&quot;]
+        s1_eval = proof[&quot;s1_eval&quot;]
+        s2_eval = proof[&quot;s2_eval&quot;]
+        s3_eval = proof[&quot;s3_eval&quot;]
+        z_eval = proof[&quot;z_eval&quot;]
+        zw_eval = proof[&quot;zw_eval&quot;]
+        t_eval = proof[&quot;t_eval&quot;]
+
+        f_eval = (
+            (a_eval + beta * zeta + gamma)
+            * (b_eval + beta * zeta * 2 + gamma)
+            * (c_eval + beta * zeta * 3 + gamma)
+        )
+        g_eval = (
+            (a_eval + beta * s1_eval + gamma)
+            * (b_eval + beta * s2_eval + gamma)
+            * (c_eval + beta * s3_eval + gamma)
+        )
+
+        gate_constraints_eval = (
+            ql_eval * a_eval
+            + qr_eval * b_eval
+            + qm_eval * a_eval * b_eval
+            + qo_eval * c_eval
+            + qc_eval
+            + PI_ev
+        )
+
+        permutation_grand_product_eval = z_eval * f_eval - zw_eval * g_eval
+
+        permutation_first_row_eval = L0_ev * (z_eval - 1)
+
+        left = (
+            gate_constraints_eval
+            + alpha * permutation_grand_product_eval
+            +  alpha ** 2 * permutation_first_row_eval
+        )
+
+        right = t_eval * ZH_ev
+
+        assert left == right
+
+        print(&quot;Done equation check for all constraints&quot;)
+        return True
+
+    # Compute challenges (should be same as those computed by prover)
+    def compute_challenges(
+        self, proof
+    ) -&gt; tuple[Scalar, Scalar, Scalar, Scalar, Scalar, Scalar]:
+        transcript = Transcript(b&quot;plonk&quot;)
+        beta, gamma = transcript.round_1(proof.msg_1)
+        alpha, _fft_cofactor = transcript.round_2(proof.msg_2)
+        zeta = transcript.round_3(proof.msg_3)
+        v = transcript.round_4(proof.msg_4)
+        u = transcript.round_5(proof.msg_5)
+
+        return beta, gamma, alpha, zeta, v, u
+
+    def verify_commitment(self, proof, W, W_quot_key, eval_key, zeta):
+        W_quot = proof[W_quot_key]
+        eval = proof[eval_key]
+        ec_comb = ec_lincomb(
+            [
+                (W, 1),
+                (W_quot, zeta),
+                (b.G1, -eval),
+            ]
+        )
+
+        assert b.pairing(self.X_2, W_quot) == b.pairing(b.G2, ec_comb)
+        print(f&quot;Done KZG10 commitment check for {eval_key} polynomial&quot;)
+
+</code></pre>
+<h2 id="最后"><a class="header" href="#最后">最后</a></h2>
+<p>以上就是 Plonk 协议的代码讲解，接下来建议读者亲自运行一下<a href="https://github.com/Antalpha-Labs/baby-plonk">这个代码</a>，打印其中一些值看看，这样会对协议的了解更加深刻。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../public goods/4-Proving-System.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../public goods/4-Proving-System.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

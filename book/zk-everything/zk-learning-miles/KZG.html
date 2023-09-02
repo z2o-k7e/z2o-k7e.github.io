@@ -85,7 +85,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../../index.html">TOC</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Halo2</li><li class="chapter-item expanded "><a href="../../halo2/0xparc halo2.html"><strong aria-hidden="true">1.</strong> 0xparc halo2</a></li><li class="chapter-item expanded "><a href="../../halo2/1. Simple Examples.html"><strong aria-hidden="true">2.</strong> Simple Examples</a></li><li class="chapter-item expanded "><a href="../../halo2/2. Fibonacci (halo2-hope).html"><strong aria-hidden="true">3.</strong> 2.Fibonacci(halo2-hope)</a></li><li class="chapter-item expanded affix "><li class="part-title">Folding Schemes</li><li class="chapter-item expanded "><a href="../../Nova/SuperNova.html"><strong aria-hidden="true">4.</strong> SuperNova</a></li><li class="chapter-item expanded affix "><li class="part-title">zk-everything</li><li class="chapter-item expanded "><a href="../../zk-everything/BabySNARK tutorial.html"><strong aria-hidden="true">5.</strong> BabySNARK tutorial</a></li><li class="chapter-item expanded "><a href="../../zk-everything/zk-learning-miles/KZG.html" class="active"><strong aria-hidden="true">6.</strong> KZG</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../../index.html">TOC</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Halo2</li><li class="chapter-item expanded "><a href="../../halo2/0xparc halo2.html"><strong aria-hidden="true">1.</strong> 0xparc halo2</a></li><li class="chapter-item expanded "><a href="../../halo2/1. Simple Examples.html"><strong aria-hidden="true">2.</strong> 1.Simple Examples</a></li><li class="chapter-item expanded "><a href="../../halo2/2. Fibonacci (halo2-hope).html"><strong aria-hidden="true">3.</strong> 2.Fibonacci(halo2-hope)</a></li><li class="chapter-item expanded "><a href="../../halo2/3. Fibonacci (ex1+ex2).html"><strong aria-hidden="true">4.</strong> 3. Fibonacci (ex1+ex2)</a></li><li class="chapter-item expanded "><a href="../../halo2/4. IsZero Check (ex3).html"><strong aria-hidden="true">5.</strong> 4. IsZero Check (ex3)</a></li><li class="chapter-item expanded "><a href="../../halo2/halo2 Source Code.html"><strong aria-hidden="true">6.</strong> halo2 Source Code</a></li><li class="chapter-item expanded "><a href="../../halo2/StarLi halo2.html"><strong aria-hidden="true">7.</strong> StarLi halo2</a></li><li class="chapter-item expanded affix "><li class="part-title">Folding Schemes</li><li class="chapter-item expanded "><a href="../../Nova/SuperNova.html"><strong aria-hidden="true">8.</strong> SuperNova</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">zk-everything</li><li class="chapter-item expanded "><a href="../../zk-everything/BabySNARK tutorial.html"><strong aria-hidden="true">9.</strong> BabySNARK tutorial</a></li><li class="chapter-item expanded "><a href="../../zk-everything/zk-learning-miles/KZG.html" class="active"><strong aria-hidden="true">10.</strong> KZG</a></li><li class="chapter-item expanded "><a href="../../zk-everything/zk-learning-miles/Lecture1:Overview about Zeroknowledge.html"><strong aria-hidden="true">11.</strong> Lecture1:Overview about Zeroknowledge</a></li><li class="chapter-item expanded "><a href="../../zk-everything/zk-learning-miles/Lecture2:Introduction to Modern SNARKs.html"><strong aria-hidden="true">12.</strong> Lecture2:Introduction to Modern SNARKs</a></li><li class="chapter-item expanded "><a href="../../zk-everything/zk-learning-miles/Lecture12:ZKEVM.html"><strong aria-hidden="true">13.</strong> Lecture12:ZKEVM</a></li><li class="chapter-item expanded "><a href="../../zk-everything/zk-learning-miles/Lecture16:Hardware acceleration.html"><strong aria-hidden="true">14.</strong> Lecture16:Hardware acceleration</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">ZKP Public Goods</li><li class="chapter-item expanded "><a href="../../public goods/第二章.html"><strong aria-hidden="true">15.</strong> ch2</a></li><li class="chapter-item expanded "><a href="../../public goods/4-Proving-System.html"><strong aria-hidden="true">16.</strong> ch4-Proving System</a></li><li class="chapter-item expanded "><a href="../../public goods/5-plonk-intro.html"><strong aria-hidden="true">17.</strong> ch5-plonk-intro</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -422,6 +422,9 @@ _<em>—</em> if the equation holds, the verifier accepts the proof
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
+                            <a rel="next" href="../../zk-everything/zk-learning-miles/Lecture1:Overview about Zeroknowledge.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -433,10 +436,29 @@ _<em>—</em> if the equation holds, the verifier accepts the proof
                         <i class="fa fa-angle-left"></i>
                     </a>
 
+                    <a rel="next" href="../../zk-everything/zk-learning-miles/Lecture1:Overview about Zeroknowledge.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
 

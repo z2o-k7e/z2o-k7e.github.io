@@ -1,0 +1,900 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>StarLi halo2 - zkp-co-learning</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../index.html">TOC</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Halo2</li><li class="chapter-item expanded "><a href="../halo2/0xparc halo2.html"><strong aria-hidden="true">1.</strong> 0xparc halo2</a></li><li class="chapter-item expanded "><a href="../halo2/1. Simple Examples.html"><strong aria-hidden="true">2.</strong> 1.Simple Examples</a></li><li class="chapter-item expanded "><a href="../halo2/2. Fibonacci (halo2-hope).html"><strong aria-hidden="true">3.</strong> 2.Fibonacci(halo2-hope)</a></li><li class="chapter-item expanded "><a href="../halo2/3. Fibonacci (ex1+ex2).html"><strong aria-hidden="true">4.</strong> 3. Fibonacci (ex1+ex2)</a></li><li class="chapter-item expanded "><a href="../halo2/4. IsZero Check (ex3).html"><strong aria-hidden="true">5.</strong> 4. IsZero Check (ex3)</a></li><li class="chapter-item expanded "><a href="../halo2/halo2 Source Code.html"><strong aria-hidden="true">6.</strong> halo2 Source Code</a></li><li class="chapter-item expanded "><a href="../halo2/StarLi halo2.html" class="active"><strong aria-hidden="true">7.</strong> StarLi halo2</a></li><li class="chapter-item expanded affix "><li class="part-title">Folding Schemes</li><li class="chapter-item expanded "><a href="../Nova/SuperNova.html"><strong aria-hidden="true">8.</strong> SuperNova</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">zk-everything</li><li class="chapter-item expanded "><a href="../zk-everything/BabySNARK tutorial.html"><strong aria-hidden="true">9.</strong> BabySNARK tutorial</a></li><li class="chapter-item expanded "><a href="../zk-everything/zk-learning-miles/KZG.html"><strong aria-hidden="true">10.</strong> KZG</a></li><li class="chapter-item expanded "><a href="../zk-everything/zk-learning-miles/Lecture1:Overview about Zeroknowledge.html"><strong aria-hidden="true">11.</strong> Lecture1:Overview about Zeroknowledge</a></li><li class="chapter-item expanded "><a href="../zk-everything/zk-learning-miles/Lecture2:Introduction to Modern SNARKs.html"><strong aria-hidden="true">12.</strong> Lecture2:Introduction to Modern SNARKs</a></li><li class="chapter-item expanded "><a href="../zk-everything/zk-learning-miles/Lecture12:ZKEVM.html"><strong aria-hidden="true">13.</strong> Lecture12:ZKEVM</a></li><li class="chapter-item expanded "><a href="../zk-everything/zk-learning-miles/Lecture16:Hardware acceleration.html"><strong aria-hidden="true">14.</strong> Lecture16:Hardware acceleration</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">ZKP Public Goods</li><li class="chapter-item expanded "><a href="../public goods/第二章.html"><strong aria-hidden="true">15.</strong> ch2</a></li><li class="chapter-item expanded "><a href="../public goods/4-Proving-System.html"><strong aria-hidden="true">16.</strong> ch4-Proving System</a></li><li class="chapter-item expanded "><a href="../public goods/5-plonk-intro.html"><strong aria-hidden="true">17.</strong> ch5-plonk-intro</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">zkp-co-learning</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<p>第一代 zkp 算法:  groth16 , groth16 算法的每一个新的业务, 每次迭代都需要重新做 Setup, 模式太重, 需要强信任</p>
+<p>后面的 universal setup 优化: 只需要做一次 Setup, 所有的业务都可以使用. 最初代的 universal setup 算法是 Sonic, poly-com 用了 KZG, 但是性能不够</p>
+<p>19 年 ZCash 团队设计出了 Halo 算法, 使用了 Inner Product argument 替换 KZG, 把实现 universal Setup 的条件更进一步削弱了, 改成了不需要 Setup . Halo2 不光想支持 SNARK 算法, 他更想支持递归特性, 而因为 Sonic 的验证是线性的, 所以其提出了一套 <code>嵌套均摊</code> (nested amortization) 技术</p>
+<p>History : </p>
+<ul>
+<li>Sonic : 支持 universal Setup 的 SNARK (性能不够)</li>
+<li>Halo: Sonic +  Inner Product argument  + <code>嵌套均摊</code> (nested amortization) 技术</li>
+<li>PLONK : 对 Sonic 的改进</li>
+<li>Plookup : PLONK + lookup table</li>
+<li>UltraPLONK : Plookup + custom gate  (需要 Setup)</li>
+<li>Halo2 : UltraPLONK + <code>嵌套均摊</code> (nested amortization) 技术  (无需 Setup)
+<ul>
+<li>通过 nested amortization 将递归证明的 overhead 降低</li>
+</ul>
+</li>
+</ul>
+<p>总结下 : </p>
+<ul>
+<li>Groth16 : 第一代 Pairing-based zk-SNARKs </li>
+<li>PLONK : 第二代 Pairing-based zk-SNARKs (universal <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">e</span><span class="mord mathnormal">t</span><span class="mord mathnormal">u</span><span class="mord mathnormal">p</span></span></span></span> )</li>
+<li>Halo2 : 第三代 zkp 技术, YYDS ! 
+<ul>
+<li>不需要 Setup </li>
+<li>不需要配对曲线, 只需要一个支持离散对数的曲线, 需要的安全性假设较弱</li>
+<li>支持递归</li>
+</ul>
+</li>
+</ul>
+<h3 id="concepts"><a class="header" href="#concepts">Concepts</a></h3>
+<p>The arithmetization used by Halo 2 comes from <a href="https://eprint.iacr.org/2019/953">PLONK</a>, or more precisely its extension UltraPLONK that supports custom gates and lookup arguments. We'll call it <a href="https://twitter.com/feministPLT/status/1413815927704014850"><em><strong>PLONKish</strong></em></a>.</p>
+<h4 id="inner-product-argument"><a class="header" href="#inner-product-argument">Inner Product Argument</a></h4>
+<p>星想法对 [Inner Product Argument] 的介绍</p>
+<ul>
+<li>No Setup</li>
+<li></li>
+</ul>
+<h4 id="custom-gate"><a class="header" href="#custom-gate">Custom Gate</a></h4>
+<p>Custom Gate 可以引用同一列的多行 Cell, 类似于 d 、 d_next 的作用</p>
+<ul>
+<li>代价 : 证明中需要多增加一个 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span> 即多增加一个 Fr 
+Custom Gate 的表达式是一个多元高次多项式, 即, 最高次数可以 &gt;2 </li>
+<li>Standard PLONK : Degree = 2 
+每一个 Custom Gate 都有一个对应的 selector column 与其对应</li>
+</ul>
+<p>Custom Gate 只能够引用相对偏移的 cells, 偏移值的类型是 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;color:red;">R</span><span class="mord mathnormal" style="color:red;">o</span><span class="mord mathnormal" style="color:red;">t</span><span class="mord mathnormal" style="color:red;">a</span><span class="mord mathnormal" style="color:red;">t</span><span class="mord mathnormal" style="color:red;">i</span><span class="mord mathnormal" style="color:red;">o</span><span class="mord mathnormal" style="color:red;">n</span></span></span></span></p>
+<p>![[Pasted image 20230822142938.png]]
+一个 Custom Gate 可以涉及到若干个 advice/Instance/fixed/selector 
+它可以引用相对位置(上 1 行, 上 2 行, 下 1 行, 下 2 行) </p>
+<p>如上图有 2 个 gates, 对于 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord mathnormal">G</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> , 其 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>  设置为 1 , 则需要满足 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">u</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal">o</span><span class="mord mathnormal">m</span><span class="mspace"> </span><span class="mspace"> </span><span class="mord mathnormal">G</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>
+对于下面那个, <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:-0.0576em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 都是 1 , 则 Custom Gate 0 / 1 都需要满足</p>
+<h3 id="halo2-arithmetization"><a class="header" href="#halo2-arithmetization">Halo2 Arithmetization</a></h3>
+<ul>
+<li>Halo 里用 R1CS 来表述 Circuit，模式如: <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span></span></span></span></li>
+<li>Halo2 里用 Plonk Arithmetization 来表示 Circuit，模式如： <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">qR</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">qO</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mord mathnormal">c</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">qM</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.07847em;">X</span><span class="mord mathnormal">b</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">qC</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></li>
+</ul>
+<p>其中，<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">q</span></span></span></span>  为 selector polynomial, 不同的取值，代表不同的 Gate，如下表所示：</p>
+<h3 id="halo2-编程"><a class="header" href="#halo2-编程">Halo2 编程</a></h3>
+<p>![[Pasted image 20230822150314.png]]</p>
+<h3 id="电路进阶-sha256-优化实现"><a class="header" href="#电路进阶-sha256-优化实现">电路进阶 (sha256 优化实现)</a></h3>
+<ul>
+<li>Groth16 + R1CS 实现 SHA256 :
+<ul>
+<li>约需要 2.5W 行 R1CS 约束 ...</li>
+</ul>
+</li>
+<li>Halo2 + Custom Gate + lookup table  : 
+<ul>
+<li>2099 行  (影响的是多项式的次数 : Groth16 中多项式的次数至少是 25000, 这里只需要 2099 次数)</li>
+<li>11 advice columns</li>
+<li>3 fixed constant columns</li>
+<li>20 Custom Gates.</li>
+<li>20 Selector columns  (控制 Custom Gates.)</li>
+<li>Spread Table 使用了 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">16</span></span></span></span></span></span></span></span></span></span></span></span>  行  ( 使用的是 u16, 所以是  <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">16</span></span></span></span></span></span></span></span></span></span></span></span>  行)
+<ul>
+<li>为什么  <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">16</span></span></span></span></span></span></span></span></span></span></span></span> 远大于 2099 ?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="halo2电路构建源代码导读"><a class="header" href="#halo2电路构建源代码导读">Halo2电路构建源代码导读</a></h3>
+<ul>
+<li>PLONK/Groth16 约束系统由一条条相对独立的约束组成（约束只能约束该行上的变量），并且一条约束指定了支持的计算（乘法或者加法组合）</li>
+<li>Halo2 的约束系统中的约束并不限定在一行上的变量，并且采用“custom gate”，任意指定约束需要的计算</li>
+</ul>
+<p>Cell : Cell指定在一个Region中的某行某列 , 其定义在 <code>src/circuit.rs</code> :</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct Cell {  
+    region_index: RegionIndex,  
+    row_offset: usize,  
+    column: Column&lt;Any&gt;,  
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Region : </p>
+<ul>
+<li>给 Cell 进行配置的时候, 是需要按照一个 Region 来的, Region 可以认为是小的功能模块, Region 在论文里是没有的, 是为了方便开发实现加进去的逻辑.</li>
+<li>在一个 Region 里面的逻辑可以 copy, 在写电路的时候看到的是一个一个的 Region, 在生成另外一个 Region 的时候, 可以把相同的逻辑做平移, 因为都是使用的 <code>相对坐标</code> 
+<ul>
+<li>(为了更好的电路模块化，电路构建往往是相对于一个 Region, 同一个电路模块，可以在不同的 Region 中“复制”)</li>
+</ul>
+</li>
+<li>开发人员写代码关注的事 Region 里的实现 —— 在 Region 里干什么事, 然后 Region 会自己找合适的地方放置这些 Chip</li>
+</ul>
+<h4 id="chipcfiginstructionlayouter"><a class="header" href="#chipcfiginstructionlayouter">Chip/cfig/instruction/Layouter</a></h4>
+<ul>
+<li><strong>Chip(芯片)</strong>  :  电路由一个个 Chip 逻辑堆砌而成。每个 Chip 的创建从 “Config”开始。</li>
+<li><strong>Config</strong>  :  所谓的 Config，就是申请Chip需要的Column以及配置Fixed列的逻辑含义。这些配置可能是 Custom Gate，可能是 lookup。</li>
+<li><strong>Instructions</strong>  : 每一个 Chip 都有指令（Instruction）。通过指令的调用，将 Chip 的部分或者全部功能加入电路中</li>
+<li><strong>Layouter</strong>
+<ul>
+<li>Layouter 做的事就是根据需求, 找到能放下 Chip 的空地, 把他放置上去, 类似在一个矩形上画东西: 把 Chip 放到画布上, 就像华容道, 组出来的矩阵可大可小, 有好有坏... </li>
+<li>将 Chip 添加到一个电路上需要布局。Layouter 就是用来实现布局。Layouter 接口定义在src/circuit.rs中：</li>
+</ul>
+</li>
+</ul>
+<p>Layouter 本身存在层级关系，所以 Layouter Interface 定义了<code>get_root / push_namespace / pop_namespace / namespace</code> 等相关的函数。核心逻辑在其他三个函数：</p>
+<ul>
+<li><code>assign_region</code> - 获取一个 region，在这个 region 上可以进行各种“assignment”(赋值)，定义在 <code>RegionLayouter</code> 接口中</li>
+<li><code>assign_table</code> - 获取一个 table，并设置 table，接口定义在 <code>TableLayouter</code> 接口中。</li>
+<li><code>constrain_instance</code> - 限制一个 Cell 和 Instance 列中的某个 Cell 一致</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait Layouter&lt;F: Field&gt; {  
+    type Root: Layouter&lt;F&gt;;  
+      
+    fn assign_region&lt;A, AR, N, NR&gt;(&amp;mut self, name: N, assignment: A) -&gt; Result&lt;AR, Error&gt;  
+    where  
+        A: FnMut(Region&lt;'_, F&gt;) -&gt; Result&lt;AR, Error&gt;,  
+        N: Fn() -&gt; NR,  
+        NR: Into&lt;String&gt;;  
+  
+    fn assign_table&lt;A, N, NR&gt;(&amp;mut self, name: N, assignment: A) -&gt; Result&lt;(), Error&gt;  
+    where  
+        A: FnMut(Table&lt;'_, F&gt;) -&gt; Result&lt;(), Error&gt;,  
+        N: Fn() -&gt; NR,  
+        NR: Into&lt;String&gt;;  
+  
+    fn constrain_instance(  
+        &amp;mut self,  
+        cell: Cell,  
+        column: Column&lt;Instance&gt;,  
+        row: usize,  
+    ) -&gt; Result&lt;(), Error&gt;;  
+  
+    fn get_root(&amp;mut self) -&gt; &amp;mut Self::Root;  
+    fn push_namespace&lt;NR, N&gt;(&amp;mut self, name_fn: N)  
+    where  
+        NR: Into&lt;String&gt;,  
+        N: FnOnce() -&gt; NR;  
+    fn pop_namespace(&amp;mut self, gadget_name: Option&lt;String&gt;);  
+    fn namespace&lt;NR, N&gt;(&amp;mut self, name_fn: N) -&gt; NamespacedLayouter&lt;'_, F, Self::Root&gt;  
+    where  
+        NR: Into&lt;String&gt;,  
+        N: FnOnce() -&gt; NR,  
+    {  
+        self.get_root().push_namespace(name_fn);  
+  
+        NamespacedLayouter(self.get_root(), PhantomData)  
+    }  
+}
+<span class="boring">}</span></code></pre></pre>
+<h4 id="assignment"><a class="header" href="#assignment"><strong>Assignment</strong></a></h4>
+<ul>
+<li>前面提到, 布局的过程中用的 Region, 但是其被放置的画布是一个全局的矩阵, 在 synthesize 完成后, 是要对所有的 Cells 进行赋值的</li>
+<li>电路“赋值”的接口 就是 <strong>Assignment</strong> ，定义在 <code>src/plonk/circuit.rs</code> ：</li>
+<li><strong>Assignment</strong> 处理的东西比较 Tricky: 
+<ul>
+<li>它既要知道 Region 信息(Region 用的是一些 relative 相对信息)</li>
+<li>又要把 Region 信息翻译 Translate 成全局信息, 因为最后结果是全局的, 中间的 Assign 过程是曲折的, 是通过 Region 进行转换的 ...</li>
+</ul>
+</li>
+</ul>
+<h3 id="电路内部框架"><a class="header" href="#电路内部框架">电路内部框架</a></h3>
+<p>为了方便 Devs 开发电路，Halo2 的内部抽象了布局的接口 , 目前有 2 套 Layouter 的实现：</p>
+<ol>
+<li><code>SimpleFloorPlanner</code></li>
+<li><code>V1/V1Plan</code>  为了理解 Halo2 的内部逻辑，这里只详细讲解 <code>SimpleFloorPlanner</code> : </li>
+</ol>
+<p>![[Pasted image 20230824151908.png]]</p>
+<p>如上图, <code>SimpleFloorPlanner</code> 处在最核心高层, 是一个更高阶的管理器 , <code>Layouter</code> 是水平布局器, 基本上只负责一层的构建 </p>
+<p>整个框架由四个接口组成：<code>FloorPlanner</code>，<code>Layouter</code>，<code>RegionLayout/TableLayout </code>以及Assignment</p>
+<p>简单的说，一个 FloorPlanner 拥有一个 Layouter，一个 Layouter 可以分配多个 RegionLayout 或者TableLayout。电路对 Cell 的 assignment 通过 Assignment 实现</p>
+<p>先从三者的整体调用关系讲起：</p>
+<ul>
+<li><em>SimpleFloorPlanner</em> 是对 <em>FloorPlanner</em> 接口的实现，定义在 <code>src/circuit/floor_planner/single_pass.rs</code> 中：</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct SimpleFloorPlanner;
+
+// SimpleFloorPlanner实现了FloorPlanner trait 的synthesize函数。
+// 容易看出，该函数创建出SingleChipLayouter对象，并直接调用相应的synthesize函数开始电路的synthesize
+impl FloorPlanner for SimpleFloorPlanner {
+    fn synthesize&lt;F: Field, CS: Assignment&lt;F&gt;, C: Circuit&lt;F&gt;&gt;(
+        cs: &amp;mut CS,
+        circuit: &amp;C,
+        config: C::Config,
+        constants: Vec&lt;Column&lt;Fixed&gt;&gt;,
+    ) -&gt; Result&lt;(), Error&gt; {
+        let layouter = SingleChipLayouter::new(cs, constants)?;
+        circuit.synthesize(config, layouter)
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p><code>SingleChipLayouter</code> 定义在 <code>src/circuit/floor_planner/single_pass.rs</code> 中，包括了电路的所有的信息。</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct SingleChipLayouter&lt;'a, F: Field, CS: Assignment&lt;F&gt; + 'a&gt; {
+    cs: &amp;'a mut CS,
+    constants: Vec&lt;Column&lt;Fixed&gt;&gt;,
+    /// Stores the starting row for each region.
+    regions: Vec&lt;RegionStart&gt;,
+    /// Stores the first empty row for each column.
+    columns: HashMap&lt;RegionColumn, usize&gt;,
+    /// Stores the table fixed columns.
+    table_columns: Vec&lt;TableColumn&gt;,
+    _marker: PhantomData&lt;F&gt;,
+}
+<span class="boring">}</span></code></pre></pre>
+<p><code>SingleChipLayouter</code> 的 Region 管理比较简单，某行整体属于某个 Region 。</p>
+<ul>
+<li>regions 记录每个 Region 的行的开始偏移(starting row)。</li>
+<li>cs 是 Assignment 接口的实现，存储所有电路的赋值信息。</li>
+<li>columns 记录当前操作 RegionColumn 对应的空的 row 的偏移。table_columns 记录 Table 需要的 Fixed 的 Column。</li>
+<li>简单的说，<code>SingleChipLayouter</code> 记录了电路（包括布局）需要的所有信息。</li>
+</ul>
+<p>SingleChipLayouter's <strong>assign_region</strong> 函数实现一个 Region 的 synthesize 过程。简单的说，SingleChipLayouter 的 assign_region 函数的主要逻辑就是创建一个 region ，并将 region 内的布局转化为全局布局。SingleChipLayouter 的 <code>assign_region</code> 逻辑可以分成两部分：</p>
+<ol>
+<li>通过 RegionShape 获取 Region 的“形状”。所谓的“形状”，包括主要是采用的 Column 的信息</li>
+<li>根据上一步获取的 Column 信息，找出和其他 Region 不冲突的起始问题。</li>
+</ol>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// 
+fn assign_region&lt;A, AR, N, NR&gt;(&amp;mut self, name: N, mut assignment: A) -&gt; Result&lt;AR, Error&gt;
+where
+    A: FnMut(Region&lt;'_, F&gt;) -&gt; Result&lt;AR, Error&gt;,
+    N: Fn() -&gt; NR,
+    NR: Into&lt;String&gt;,
+{
+    let region_index = self.regions.len(); // 获取当前Region的编号
+
+    // Get shape of the region. 这个 Region 有几行几列?
+    // 调用 RegionShape 的 Region 接口，收集该 Region 的电路涉及到的 Column 信息
+    let mut shape = RegionShape::new(region_index.into());
+    {
+        let region: &amp;mut dyn RegionLayouter&lt;F&gt; = &amp;mut shape;
+        assignment(region.into())?;
+    }
+
+    // Lay out this region. We implement the simplest approach here: position the
+    // region starting at the earliest row for which none of the columns are in use.
+    let mut region_start = 0; //根据收集到的Column信息，获取Region开始的行号
+    for column in &amp;shape.columns {
+        region_start = cmp::max(region_start, self.columns.get(column).cloned().unwrap_or(0));
+    }
+    self.regions.push(region_start.into());
+
+    // Update column usage information. //在Region中记录下所有使用的Column的信息
+    for column in shape.columns {
+        self.columns.insert(column, region_start + shape.row_count);
+    }
+
+    // Assign region cells.
+    self.cs.enter_region(name); //创建Region
+    let mut region = SingleChipLayouterRegion::new(self, region_index.into());
+    let result = {
+        let region: &amp;mut dyn RegionLayouter&lt;F&gt; = &amp;mut region;
+        assignment(region.into()) //采用SingleChipLayouterRegion对电路赋值
+    }?;
+    let constants_to_assign = region.constants;
+    self.cs.exit_region(); //退出Region
+
+    // Assign constants. For the simple floor planner, we assign constants in order in
+    // the first `constants` column.
+    if self.constants.is_empty() {//如果制定了constants，需要增加置换限制
+        if !constants_to_assign.is_empty() {
+            return Err(Error::NotEnoughColumnsForConstants);
+        }
+    } else {
+        let constants_column = self.constants[0];
+        let next_constant_row = self
+            .columns
+            .entry(Column::&lt;Any&gt;::from(constants_column).into())
+            .or_default();
+        for (constant, advice) in constants_to_assign {
+            self.cs.assign_fixed(
+                || format!(&quot;Constant({:?})&quot;, constant.evaluate()),
+                constants_column,
+                *next_constant_row,
+                || Ok(constant),
+            )?;
+            self.cs.copy(
+                constants_column.into(),
+                *next_constant_row,
+                advice.column,
+                *self.regions[*advice.region_index] + advice.row_offset,
+            )?;
+            *next_constant_row += 1;
+        }
+    }
+
+    Ok(result)
+}
+<span class="boring">}</span></code></pre></pre>
+<p>类似 0XPARC 里提到的, 即使第二行可以放置一个 Region, 但是 <code>SimpleFloorPlanner</code> 管不了那么多, 我就是往后一行放 ... (这个电路是一直往下的, 不会向左找找, 向右找找, 是比较初级的)</p>
+<p>SingleChipLayouter's <code>assign_table</code>  : 当前的电路中增加查找表逻辑：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn assign_table&lt;A, N, NR&gt;(&amp;mut self, name: N, mut assignment: A) -&gt; Result&lt;(), Error&gt;  
+where  
+    A: FnMut(Table&lt;'_, F&gt;) -&gt; Result&lt;(), Error&gt;,  
+    N: Fn() -&gt; NR,  
+    NR: Into&lt;String&gt;,  
+{  
+    // Maintenance hazard: there is near-duplicate code in `v1::AssignmentPass::assign_table`.  
+    // Assign table cells.  
+    self.cs.enter_region(name); //创建一个Region  
+    let mut table = SimpleTableLayouter::new(self.cs, &amp;self.table_columns);  
+    {  
+        let table: &amp;mut dyn TableLayouter&lt;F&gt; = &amp;mut table;  
+        assignment(table.into()) //查找表赋值  
+    }?;  
+    let default_and_assigned = table.default_and_assigned;  
+    self.cs.exit_region(); //退出当前Region  
+  
+    // Check that all table columns have the same length `first_unused`,  
+    // and all cells up to that length are assigned.  
+    let first_unused = { //获取出所有查找表相关的Column对应的最大使用行数  
+        match default_and_assigned  
+            .values()  
+            .map(|(_, assigned)| {  
+                if assigned.iter().all(|b| *b) {  
+                    Some(assigned.len())  
+                } else {  
+                    None  
+                }  
+            })  
+            .reduce(|acc, item| match (acc, item) {  
+                (Some(a), Some(b)) if a == b =&gt; Some(a),  
+                _ =&gt; None,  
+            }) {  
+            Some(Some(len)) =&gt; len,  
+            _ =&gt; return Err(Error::SynthesisError), // TODO better error  
+        }  
+    };  
+  
+    // Record these columns so that we can prevent them from being used again.  
+    for column in default_and_assigned.keys() {  
+        self.table_columns.push(*column);  
+    }  
+    //根据default_and_assigned信息，采用default值扩展所有的column  
+    for (col, (default_val, _)) in default_and_assigned {  
+        // default_val must be Some because we must have assigned  
+        // at least one cell in each column, and in that case we checked  
+        // that all cells up to first_unused were assigned.  
+        self.cs  
+            .fill_from_row(col.inner(), first_unused, default_val.unwrap())?;  
+    }  
+  
+    Ok(())  
+}
+<span class="boring">}</span></code></pre></pre>
+<p><code>default_and_assigned</code> 记录了在一个 Fixed Column 上的 default 值以及某个 cell 是否已经设置</p>
+<p><code>SingleChipLayouterRegion</code> 实现了 Region 接口。如果在 Region 中需要给一个 Advice 列中 Cell 赋值，可以采用 assign_advice 函数：</p>
+<pre><code class="language-RUST">fn assign_advice&lt;'v&gt;(  
+    &amp;'v mut self,  
+    annotation: &amp;'v (dyn Fn() -&gt; String + 'v),  
+    column: Column&lt;Advice&gt;,  
+    offset: usize,  
+    to: &amp;'v mut (dyn FnMut() -&gt; Result&lt;Assigned&lt;F&gt;, Error&gt; + 'v),  
+) -&gt; Result&lt;Cell, Error&gt; {  
+    self.layouter.cs.assign_advice( //调用Assignment接口设置相应的Cell信息，特别注意的是在设置的时候需要Cell的全局偏移  
+        annotation,  
+        column,  
+        *self.layouter.regions[*self.region_index] + offset,  
+        to,  
+    )?;  
+  
+    Ok(Cell {  
+        region_index: self.region_index,  
+        row_offset: offset,  
+        column: column.into(),  
+    })  
+}
+</code></pre>
+<p><code>cs.assign_fixed</code> 函数，对 fixed Column 进行赋值。可以参考 MockProver 的实现(src/dev.rs)</p>
+<ul>
+<li>这个 cs 不是 constrain System , 只是 Assignment 的接口 : MockProver</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn assign_fixed&lt;V, VR, A, AR&gt;(
+    &amp;mut self,
+    _: A,
+    column: Column&lt;Fixed&gt;,
+    row: usize,
+    to: V,
+) -&gt; Result&lt;(), Error&gt;
+where
+    V: FnOnce() -&gt; Result&lt;VR, Error&gt;,
+    VR: Into&lt;Assigned&lt;F&gt;&gt;,
+    A: FnOnce() -&gt; AR,
+    AR: Into&lt;String&gt;,
+{
+    ... //在一些检查后，设置Fixed列中的某个Cell（column，row指定）
+    *self
+        .fixed
+        .get_mut(column.index())
+        .and_then(|v| v.get_mut(row))
+        .ok_or(Error::BoundsFailure)? = CellValue::Assigned(to()?.into().evaluate());
+
+    Ok(())
+}
+<span class="boring">}</span></code></pre></pre>
+<p>cs.copy 函数，增加置换信息 : </p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn copy(
+    &amp;mut self,
+    left_column: Column&lt;Any&gt;,
+    left_row: usize,
+    right_column: Column&lt;Any&gt;,
+    right_row: usize,
+) -&gt; Result&lt;(), crate::plonk::Error&gt; {
+    if !self.usable_rows.contains(&amp;left_row) || !self.usable_rows.contains(&amp;right_row) {
+        return Err(Error::BoundsFailure);
+    }
+
+    self.permutation //增加Permutation信息
+        .copy(left_column, left_row, right_column, right_row)
+}
+<span class="boring">}</span></code></pre></pre>
+<p>接着我们再详细看看 RegionLayouter 和 TableLayouter 。RegionLayouter 定义在src/circuit/layouter.rs：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait RegionLayouter&lt;F: Field&gt;: fmt::Debug {
+    //enable选择子
+    fn enable_selector&lt;'v&gt;(
+        &amp;'v mut self,
+        annotation: &amp;'v (dyn Fn() -&gt; String + 'v),
+        selector: &amp;Selector,
+        offset: usize,
+    ) -&gt; Result&lt;(), Error&gt;;
+
+    //advice或者fixed赋值
+    fn assign_advice&lt;'v&gt;(
+        &amp;'v mut self,
+        annotation: &amp;'v (dyn Fn() -&gt; String + 'v),
+        column: Column&lt;Advice&gt;,
+        offset: usize,
+        to: &amp;'v mut (dyn FnMut() -&gt; Result&lt;Assigned&lt;F&gt;, Error&gt; + 'v),
+    ) -&gt; Result&lt;Cell, Error&gt;;
+
+    fn assign_advice_from_constant&lt;'v&gt;(
+        &amp;'v mut self,
+        annotation: &amp;'v (dyn Fn() -&gt; String + 'v),
+        column: Column&lt;Advice&gt;,
+        offset: usize,
+        constant: Assigned&lt;F&gt;,
+    ) -&gt; Result&lt;Cell, Error&gt;;
+
+    fn assign_advice_from_instance&lt;'v&gt;(
+        &amp;mut self,
+        annotation: &amp;'v (dyn Fn() -&gt; String + 'v),
+        instance: Column&lt;Instance&gt;,
+        row: usize,
+        advice: Column&lt;Advice&gt;,
+        offset: usize,
+    ) -&gt; Result&lt;(Cell, Option&lt;F&gt;), Error&gt;;
+
+    fn assign_fixed&lt;'v&gt;(
+        &amp;'v mut self,
+        annotation: &amp;'v (dyn Fn() -&gt; String + 'v),
+        column: Column&lt;Fixed&gt;,
+        offset: usize,
+        to: &amp;'v mut (dyn FnMut() -&gt; Result&lt;Assigned&lt;F&gt;, Error&gt; + 'v),
+    ) -&gt; Result&lt;Cell, Error&gt;;
+
+    //cell相等约束
+    fn constrain_constant(&amp;mut self, cell: Cell, constant: Assigned&lt;F&gt;) -&gt; Result&lt;(), Error&gt;;
+
+    fn constrain_equal(&amp;mut self, left: Cell, right: Cell) -&gt; Result&lt;(), Error&gt;;
+}
+<span class="boring">}</span></code></pre></pre>
+<p><code>RegionLayouter</code> 的接口很容易理解，包括设置选择子，给cell赋值，约束cell相等。</p>
+<p><code>TableLayouter</code> 的接口定义如下：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub trait TableLayouter&lt;F: Field&gt;: fmt::Debug {
+    fn assign_cell&lt;'v&gt;(
+        &amp;'v mut self,
+        annotation: &amp;'v (dyn Fn() -&gt; String + 'v),
+        column: TableColumn,
+        offset: usize,
+        to: &amp;'v mut (dyn FnMut() -&gt; Result&lt;Assigned&lt;F&gt;, Error&gt; + 'v),
+    ) -&gt; Result&lt;(), Error&gt;;
+}
+<span class="boring">}</span></code></pre></pre>
+<p>TableLayouter 只有一个接口：assign_cell.  assign_cell 是对表中的某个TableColumn的Cell进行赋值。</p>
+<p>至此，大体的电路构造的逻辑的框架相对清楚：Halo2 中的 Chip 电路由一个个 Region 组成，在Halo2 的框架中，Region 通过 Layouter 进行分配。电路的所有的信息都存储在 Assignment 的接口中。MockProver 是一个可以参考的 Assignment 的实现</p>
+<h3 id="constraintsystem"><a class="header" href="#constraintsystem">ConstraintSystem</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct ConstraintSystem&lt;F: Field&gt; {
+    pub(crate) gates: Vec&lt;Gate&lt;F&gt;&gt;,
+    // ...
+<span class="boring">}</span></code></pre></pre>
+<p>gates 描述了 “Custom Gate” 的限制表达式：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>#[derive(Clone, Debug)]  
+pub(crate) struct Gate&lt;F: Field&gt; {  
+    name: &amp;'static str,  
+    constraint_names: Vec&lt;&amp;'static str&gt;,  
+    polys: Vec&lt;Expression&lt;F&gt;&gt;,   // Attention !!
+    /// We track queried selectors separately from other cells, so that we can use them to  
+    /// trigger debug checks on gates.  
+    queried_selectors: Vec&lt;Selector&gt;,  
+    queried_cells: Vec&lt;VirtualCell&gt;,  
+}
+<span class="boring">}</span></code></pre></pre>
+<p>如上代码, 这个 polys 多项式表达的逻辑是你自己书写的, 而不是像 R1CS 中, 就那几个门都固化了, 必须按照这几个门的约束来写</p>
+<p>Halo2的电路构建分为两部分：</p>
+<ol>
+<li>Configure （电路配置）</li>
+<li>Synthesize（电路(实例)综合）</li>
+</ol>
+<h3 id="a2-b2-示例"><a class="header" href="#a2-b2-示例">a^2 +b^2 示例</a></h3>
+<h4 id="1-configure-过程"><a class="header" href="#1-configure-过程">1 <strong>Configure</strong> 过程</a></h4>
+<p>Configure 调用 ConstraintSystem 申请各种列以及 Gate 的信息。调用某个 Circuit 的 Configure 函数会顺序调用电路涉及到的 Chip 的 Configure 信息，这些信息都记录在 ConstraintSystem 中</p>
+<p>查看实例中的 Chip 的 Configure 函数 : </p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;F: FieldExt&gt; Circuit&lt;F&gt; for MyCircuit&lt;F&gt; {
+    ...
+    fn configure(meta: &amp;mut ConstraintSystem&lt;F&gt;) -&gt; Self::Config {
+        let advice = [meta.advice_column(), meta.advice_column()];
+        let instance = meta.instance_column();
+        let constant = meta.fixed_column();
+
+        FieldChip::configure(meta, advice, instance, constant)
+    }
+    ...
+}
+
+impl&lt;F: FieldExt&gt; FieldChip&lt;F&gt; {
+    fn construct(config: &lt;Self as Chip&lt;F&gt;&gt;::Config) -&gt; Self {
+        Self {
+            config,
+            _marker: PhantomData,
+        }
+    }
+
+    fn configure(
+        meta: &amp;mut ConstraintSystem&lt;F&gt;,
+        advice: [Column&lt;Advice&gt;; 2],
+        instance: Column&lt;Instance&gt;,
+        constant: Column&lt;Fixed&gt;,
+    ) -&gt; &lt;Self as Chip&lt;F&gt;&gt;::Config {
+        meta.enable_equality(instance.into());
+        meta.enable_constant(constant);
+        for column in &amp;advice {
+            meta.enable_equality((*column).into());
+        }
+        let s_mul = meta.selector();
+
+        meta.create_gate(&quot;mul&quot;, |meta| {
+            // | a0  | a1  | s_mul |
+            // |-----|-----|-------|
+            // | lhs | rhs | s_mul |
+            // | out |     |       |
+            let lhs = meta.query_advice(advice[0], Rotation::cur());
+            let rhs = meta.query_advice(advice[1], Rotation::cur());
+            let out = meta.query_advice(advice[0], Rotation::next());
+            let s_mul = meta.query_selector(s_mul);
+
+            vec![s_mul * (lhs * rhs - out)]
+        });
+
+        FieldConfig {
+            advice,
+            instance,
+            s_mul,
+            constant,
+        }
+    }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>示例电路申请了两个 advice 列，一个 instance 和 fixed 列, 同时电路构造了一个乘法 Gate：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>vec![s_mul * (lhs * rhs - out)]
+<span class="boring">}</span></code></pre></pre>
+<p>该乘法 Gate 就是相应的限制表达式。注意和其他零知识证明的约束系统不一样的是，一个约束可以采用多个行上的 Cell 。整个调用关系如下：
+<img src="https://mmbiz.qpic.cn/mmbiz_png/IXicdJl0t7b7ibicTPcMibia8flkibbicgl0ZXYMpUVphNgOz01Tc32lIpge03nubDSZxqbF187XTFWCbb7kT8vUK6Gow/640?wx_fmt=png&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1" alt="" /></p>
+<h4 id="synthesize"><a class="header" href="#synthesize">synthesize</a></h4>
+<p>Dream : synthesize 过程就不要看代码了, 看着一张图就够了
+在 Configure 完电路后，可以调用 <code>synthesize</code> 综合某个电路实例。整个调用关系如下：</p>
+<p>![[Pasted image 20230824174216.png]]</p>
+<p>看图, 某个 Chip 调用 Layouter 分配 Region，并在 Region 中指定约束。可以查看 FieldChip 的 mul 函数：</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>impl&lt;F: FieldExt&gt; NumericInstructions&lt;F&gt; for FieldChip&lt;F&gt; {
+fn mul(
+	&amp;self,
+	mut layouter: impl Layouter&lt;F&gt;,
+	a: Self::Num,
+	b: Self::Num,
+) -&gt; Result&lt;Self::Num, Error&gt; {
+	let config = self.config();
+
+	let mut out = None;
+	layouter.assign_region(
+		|| &quot;mul&quot;,
+		|mut region: Region&lt;'_, F&gt;| {
+		    // 获取到一个Region后，enable该row对应的乘法selector。
+			config.s_mul.enable(&amp;mut region, 0)?; 
+
+			let lhs = region.assign_advice( //对两个advice进行赋值
+				|| &quot;lhs&quot;,
+				config.advice[0],
+				0,
+				|| a.value.ok_or(Error::SynthesisError),
+			)?;
+			let rhs = region.assign_advice(
+				|| &quot;rhs&quot;,
+				config.advice[1],
+				0,
+				|| b.value.ok_or(Error::SynthesisError),
+			)?;
+			//限制两个 advice 和之前的 load 的 Cell 一致
+			region.constrain_equal(a.cell, lhs)?; 
+			region.constrain_equal(b.cell, rhs)?;
+
+			// Now we can assign the multiplication result into the output position.
+			let value = a.value.and_then(|a| b.value.map(|b| a * b));
+			let cell = region.assign_advice( //对乘法的输出进行赋值
+				|| &quot;lhs * rhs&quot;,
+				config.advice[0],
+				1,
+				|| value.ok_or(Error::SynthesisError),
+			)?;
+
+			// Finally, we return a variable representing the output,
+			// to be used in another part of the circuit.
+			out = Some(Number { cell, value });
+			Ok(())
+		},
+	)?;
+
+	Ok(out.unwrap())
+} // ...
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="summary"><a class="header" href="#summary">Summary</a></h3>
+<p>理解 Halo2，可以从两部分着手：1/ 电路构建 2/ 证明系统。从开发者的角度看，电路构建是接口。如何通过 Halo2 创建电路，这些电路在Halo2的内部如何表示是理解电路构建的关键。Halo2中的Chip电路由一个个 Region 组成，在 Halo2 的框架中，Region 通过 Layouter 进行分配。电路的所有的信息都存储在 Assignment 的接口中。Halo2的电路构建分为两部分：
+1/Configure （电路配置）
+2/ Synthesize（电路综合）。简单的说，Configure就是进行电路本身的配置。Synthesize进行某个电路实例的综合。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../halo2/halo2 Source Code.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../Nova/SuperNova.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../halo2/halo2 Source Code.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../Nova/SuperNova.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
