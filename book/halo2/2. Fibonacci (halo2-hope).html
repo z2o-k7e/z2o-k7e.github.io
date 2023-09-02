@@ -1,0 +1,389 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>2.Fibonacci(halo2-hope) - zkp-co-learning</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../index.html">TOC</a></li><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Halo2</li><li class="chapter-item expanded "><a href="../halo2/0xparc halo2.html"><strong aria-hidden="true">1.</strong> 0xparc halo2</a></li><li class="chapter-item expanded "><a href="../halo2/1. Simple Examples.html"><strong aria-hidden="true">2.</strong> Simple Examples</a></li><li class="chapter-item expanded "><a href="../halo2/2. Fibonacci (halo2-hope).html" class="active"><strong aria-hidden="true">3.</strong> 2.Fibonacci(halo2-hope)</a></li><li class="chapter-item expanded affix "><li class="part-title">Folding Schemes</li><li class="chapter-item expanded "><a href="../Nova/SuperNova.html"><strong aria-hidden="true">4.</strong> SuperNova</a></li><li class="chapter-item expanded affix "><li class="part-title">zk-everything</li><li class="chapter-item expanded "><a href="../zk-everything/BabySNARK tutorial.html"><strong aria-hidden="true">5.</strong> BabySNARK tutorial</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">zkp-co-learning</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<p><code>Question</code> :  这份代码我没明白的是, 你可以随意修改 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="color:red;">e</span><span class="mord mathnormal" style="margin-right:0.01968em;color:red;">l</span><span class="mord mathnormal" style="color:red;">e</span><span class="mord" style="color:red;"><span class="mord mathnormal" style="color:red;">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight" style="color:red;"><span class="mord mtight" style="color:red;">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord" style="color:red;">/</span><span class="mord mathnormal" style="color:red;">e</span><span class="mord mathnormal" style="margin-right:0.01968em;color:red;">l</span><span class="mord mathnormal" style="color:red;">e</span><span class="mord" style="color:red;"><span class="mord mathnormal" style="color:red;">m</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight" style="color:red;"><span class="mord mtight" style="color:red;">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 的值, 也不影响 Test 通过, 感觉少了一些 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;color:red;">P</span><span class="mord mathnormal" style="margin-right:0.02778em;color:red;">r</span><span class="mord mathnormal" style="color:red;">i</span><span class="mord mathnormal" style="margin-right:0.03588em;color:red;">v</span><span class="mord mathnormal" style="color:red;">a</span><span class="mord mathnormal" style="color:red;">t</span><span class="mord mathnormal" style="color:red;">e</span><span class="mspace" style="color:red;"><span style="color:red;"> </span></span><span class="mspace" style="color:red;"><span style="color:red;"> </span></span><span class="mord mathnormal" style="color:red;">in</span><span class="mord mathnormal" style="color:red;">p</span><span class="mord mathnormal" style="color:red;">u</span><span class="mord mathnormal" style="color:red;">t</span><span class="mclose" style="color:red;">?</span></span></span></span></p>
+<p><code>Goal</code> :    <strong>Given <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span></span></span></span> , we will prove <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord">9</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.04398em;">z</span></span></span></span> .</strong></p>
+<pre><code class="language-bash">    1, 1, 2, 3, 5, 8, 13, ...
+
+    | elem_1 | elem_2 | sum | q_fib
+    --------------------------------
+    |    1   |    1   |  2  |   1
+    |    1   |    2   |  3  |   1
+    |    2   |    3   |  5  |   1
+    |        |        |     |   0
+
+    q_fib * (elem_1 + elem_2 - elem_3) = 0
+</code></pre>
+<p><img src="http://imagesoda.oss-cn-beijing.aliyuncs.com/Sodaoo/2023-08-25-160959.png" alt="" /></p>
+<p>![[Fibonacci(halo2).excalidraw]]</p>
+<h3 id="struct-config"><a class="header" href="#struct-config">struct config</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct Config {
+    elem_1: Column&lt;Advice&gt;,
+    elem_2: Column&lt;Advice&gt;,
+    elem_3: Column&lt;Advice&gt;,
+    q_fib: Selector,
+}
+<span class="boring">}</span></code></pre></pre>
+<h3 id="impl-config--"><a class="header" href="#impl-config--">impl Config { ...</a></h3>
+<h4 id="fn-configure"><a class="header" href="#fn-configure">fn configure</a></h4>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn configure&lt;F: Field&gt;(cs: &amp;mut ConstraintSystem&lt;F&gt;) -&gt; Self {
+	// before using Permutation Argument, you need to enable_quality...
+	let elem_1 = cs.advice_column();
+	cs.enable_equality(elem_1);
+	let elem_2 = cs.advice_column();
+	cs.enable_equality(elem_2);
+	let elem_3 = cs.advice_column();
+	cs.enable_equality(elem_3);
+	let q_fib = cs.selector();
+
+	cs.create_gate(&quot;fibonacci&quot;, | virtual_cells | {
+		let q_fib = virtual_cells.query_selector(q_fib);
+		// if Rotation::next`  means  `ωx`
+		// 这 3 列都在同一行, 所以都是 Rotation::cur()
+		let elem_1 = virtual_cells.query_advice(elem_1, Rotation::cur());
+		let elem_2 = virtual_cells.query_advice(elem_2, Rotation::cur());
+		let elem_3 = virtual_cells.query_advice(elem_3, Rotation::cur());
+        // q_fib * (elem_1 + elem_2 - elem_3) = 0
+		vec![ q_fib * (elem_1 + elem_2 - elem_3), ]
+	});
+	Self { elem_1, elem_2, elem_3, q_fib }
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Q: <code>virtual_cells</code> 是什么意思 ? </p>
+<p>A by GPT : 在Halo2的上下文中，<code>virtual_cells</code> 这个名字可能不是最自明的，但其核心思想是，当我们定义一个新的门或约束时，我们需要一种方式来引用和查询电路的各个部分。这就是 <code>virtual_cells</code> 所做的事情。</p>
+<p>在 <code>configure</code> 函数中定义门时，你通常会为其提供一个闭包，该闭包描述了你的约束如何工作。为了描述这些约束，你需要查询电路的某些值。这些值可能在建议的列、查找列或固定列中。</p>
+<p>这就是 <code>virtual_cells</code> 的作用：它提供了一个方法来查询这些值，不管它们是在哪个列中。这就是为什么你会看到代码类似于:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let q_fib = virtual_cells.query_selector(q_fib);
+let elem_1 = virtual_cells.query_advice(elem_1, Rotation::cur()); // ....
+<span class="boring">}</span></code></pre></pre>
+<p>使用 <code>virtual_cells</code> 允许你以一个统一的方式来查询这些值，并将它们用于你的约束描述。这使得电路的定义更加清晰，尤其是当你需要处理多种不同类型的列时。</p>
+<p>总之，<code>virtual_cells</code> 为电路的约束提供了查询接口，让你可以在定义门或约束时访问和操作它们。</p>
+<h4 id="fn-init"><a class="header" href="#fn-init">fn init</a></h4>
+<p><code>init</code> 负责初始化 Fibonacci 序列前 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mclose">)</span></span></span></span> 个数 , 返回第 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">3</span><span class="mclose">)</span></span></span></span> 个数</p>
+<ul>
+<li><code>offset</code> 定义了该区域中的行的位置 (第一行)</li>
+<li><code>q_fib</code> Selector 选择器: 某约束在某一行上是否需要成立 </li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn init&lt;F: Field&gt;(
+  &amp;self,
+  mut layouter: impl Layouter&lt;F&gt;,
+  elem_1: Value&lt;F&gt;,
+  elem_2: Value&lt;F&gt;,
+) -&gt; Result&lt;(
+  AssignedCell&lt;F, F&gt;, // elem_2
+  AssignedCell&lt;F, F&gt;  // elem_3
+), Error&gt; {
+  layouter.assign_region(|| &quot;init Fibonacci&quot;, |mut region| {
+    let offset = 0;  // offset 定义了该区域中的行的位置 (第一行)            
+    self.q_fib.enable(&amp;mut region, offset)?;  // Enable q_fib
+
+    // Assign elem_1
+    region.assign_advice(|| &quot;elem_1&quot;, self.elem_1, offset, || elem_1)?;
+
+    // Assign elem_2
+    let elem_2 = region.assign_advice(|| &quot;elem_2&quot;, self.elem_2, offset, || elem_2)?;
+
+    let e3_val = elem_1 + elem_2.value_field().evaluate();
+    // Assign elem_3
+    let elem_3 = region.assign_advice(|| &quot;elem_3&quot;, self.elem_3, offset, || e3_val)?;
+    Ok ((elem_2, elem_3))
+  })
+}
+<span class="boring">}</span></code></pre></pre>
+<h4 id="fn-assign"><a class="header" href="#fn-assign">fn assign</a></h4>
+<p><strong>copy_advice  vs  assign_advice</strong>   i.e.   <strong>复制 vs. 重新赋值</strong>: </p>
+<ul>
+<li>当我们说“复制”，我们实际上是说我们要确保一个 Region-Cell 的值与另一个 Region-Cell 中的值是相同的。与其为每个地方重新计算/分配(assign)一个值，不如简单地“复制”该值到新位置，以确保它们是一样的。</li>
+<li><strong>Permutations and Copy Constraints</strong>:  Halo2使用一种称为&quot;permutation argument&quot;的技术来确保两个或多个单元格中的值是相同的。<code>copy_advice</code> 实际上是在背后使用这个技术，通过引入一个额外的约束来确保值的一致性。</li>
+</ul>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>fn assign&lt;F: Field&gt;(
+	&amp;self,
+	mut layouter: impl Layouter&lt;F&gt;,
+	elem_2: AssignedCell&lt;F, F&gt;,
+	elem_3: AssignedCell&lt;F, F&gt;,
+) -&gt; Result&lt;(
+	AssignedCell&lt;F, F&gt;, // elem_2
+	AssignedCell&lt;F, F&gt;  // elem_3
+), Error&gt; {
+	layouter.assign_region(|| &quot;steady-state Fibonacci&quot;, |mut region| {
+		let offset = 0;
+
+		// Enable q_fib
+		self.q_fib.enable(&amp;mut region, offset)?;
+
+		// Copy elem_1 (which is the previous elem_2)
+		let elem_1 = elem_2.copy_advice(|| &quot;copy elem_2 into current elem_1&quot;, &amp;mut region, self.elem_1, offset)?;
+
+		// Copy elem_2 (which is the previous elem_3)
+		let elem_2 = elem_3.copy_advice(|| &quot;copy elem_3 into current elem_2&quot;, &amp;mut region, self.elem_2, offset)?;
+
+		let e3_val = elem_1.value_field().evaluate() + elem_2.value_field().evaluate();
+		// Assign elem_3
+		let elem_3 = region.assign_advice(|| &quot;elem_3&quot;, self.elem_3, offset, || e3_val)?;
+
+		Ok((
+			elem_2,
+			elem_3
+		))
+	})
+}
+<span class="boring">}</span></code></pre></pre>
+<p>Q: 为什么 <code>elem_2.copy_advice</code>  没有使用 <code>assign_advice</code> ? </p>
+<p>A: 如下 : 正在将前一个 Region 中的 <code>elem_2</code> 复制到当前 Region 中的 <code>elem_1</code>。这意味着你希望当前 Region 的 <code>elem_1</code> 和前一个 Region 的 <code>elem_2</code> 持有相同的值 </p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>let elem_1 = elem_2.copy_advice(|| &quot;copy elem_2 into current elem_1&quot;, &amp;mut region, self.elem_1, offset)?;
+<span class="boring">}</span></code></pre></pre>
+<blockquote>
+<p>为什么要这样做？因为 Fibonacci 序列中的下一个数字是前 2 个数字的和。你正在滑动序列，所以前一个数字（前一个区域的 <code>elem_2</code>）现在成为当前区域的 <code>elem_1</code> </p>
+</blockquote>
+<h3 id="test"><a class="header" href="#test">Test</a></h3>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>    #[test]
+    fn test_fib() {
+
+        let circuit = MyCircuit {
+            elem_1: Value::known(Fp::one()), // 1
+            elem_2: Value::known(Fp::from(2)), // 1 ??
+        };
+
+        let prover = MockProver::run(3, &amp;circuit, vec![]).unwrap();
+        prover.assert_satisfied();
+    }
+<span class="boring">}</span></code></pre></pre>
+<p>laiyingtong 的这份代码我没明白的是, 你可以随意修改 elem_1 / elem_2 的值, 也不影响 Test 通过, 感觉少了一些 Private input ? </p>
+<pre><code class="language-bash">cargo test
+</code></pre>
+<h3 id="reference-"><a class="header" href="#reference-">Reference :</a></h3>
+<ul>
+<li>https://github.com/therealyingtong/halo2-hope/blob/main/src/fibonacci.rs</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../halo2/1. Simple Examples.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../Nova/SuperNova.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../halo2/1. Simple Examples.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../Nova/SuperNova.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
