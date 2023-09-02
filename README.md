@@ -1,10 +1,12 @@
-## 共学笔记整理[中文]
-[BabySNARK tutorial](https://github.com/zkp-co-learning/zkp-co-learn/blob/main/zk-everything/BabySNARK%20tutorial.md)
 
-[Lecture1:Introduction to Zero knowledge Interactive Proofs](https://github.com/zkp-co-learning/zkp-co-learn/blob/main/zk-everything/zk-learning-miles/Lecture1%3AOverview%20about%20Zeroknowledge.md)
 
-## 视频整理
-[Overview of jolt and lasso](https://www.youtube.com/watch?v=vDvyzVsyJm4&t=7s)
+# Playlists
+- [ZK Research HackerHouse (2023 Aug)](https://www.youtube.com/playlist?list=PLbQFt1T_44DySCe3glmsa6DoCJNFftCo5)
+- [Paris ZKML Demoday](https://www.youtube.com/playlist?list=PLbQFt1T_44DyhA8a1DTEZLNFKF9zoOWQ4)
+- [Nova Study Session](https://www.youtube.com/playlist?list=PLbQFt1T_44DwtG7Qv_BEyCP_t37qT9yMV)
+- [Paris ZKML](https://www.youtube.com/playlist?list=PLbQFt1T_44DwLHk3TOWUoFMYmVLksr3i6)
+- [ZK Co-learn 第二期](https://www.youtube.com/playlist?list=PLbQFt1T_44DwN1zWl-KWhkp3s0LAkF2a8)
+- [Zkstudy Session](https://www.youtube.com/playlist?list=PLbQFt1T_44DylOOLHiWCIpVGJsrXHhzbs)
 
 ---
 
