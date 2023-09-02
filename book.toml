@@ -7,3 +7,6 @@ title = "zkp-co-learning"
 
 [preprocessor.katex]
 after = ["links"]
+
+[output.html]
+mathjax-support = true

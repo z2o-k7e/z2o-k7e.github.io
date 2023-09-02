@@ -16,3 +16,4 @@
 
 # zk-everything
 - [BabySNARK tutorial](./zk-everything/BabySNARK%20tutorial.md)
+- [KZG](./zk-everything/zk-learning-miles/KZG.md)
