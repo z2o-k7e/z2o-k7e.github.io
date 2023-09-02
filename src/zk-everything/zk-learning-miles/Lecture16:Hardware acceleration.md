@@ -1,3 +1,4 @@
+<!-- toc -->
 ## Lecture 16: Hardware Acceleration of ZKP
 
 ### 1.Goals of HW Acceleration

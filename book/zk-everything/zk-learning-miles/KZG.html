@@ -8,7 +8,7 @@
 
         <!-- Custom HTML head -->
         
-        <meta name="description" content="">
+        <meta name="description" content="零知世界">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
@@ -131,9 +131,6 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
-                        </button>
                     </div>
 
                     <h1 class="menu-title">World of Z2O-K7E</h1>
@@ -146,16 +143,6 @@
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
-                    </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
-                        </ul>
-                    </div>
-                </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
@@ -169,6 +156,56 @@
                 <div id="content" class="content">
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<ul>
+<li><a href="#kzg">KZG</a>
+<ul>
+<li><a href="#1%E5%A4%9A%E9%A1%B9%E5%BC%8F%E8%A1%A8%E7%A4%BA">1.多项式表示</a></li>
+<li><a href="#2commitment-scheme">2.Commitment Scheme</a>
+<ul>
+<li><a href="#21-commit-schemes-%E8%BF%87%E7%A8%8B">2.1 Commit Schemes 过程：</a></li>
+<li><a href="#22-commit-schemes-%E6%80%A7%E8%B4%A8">2.2 commit Schemes 性质：</a></li>
+<li><a href="#23-polynomial-commitment-schemespcs">2.3 Polynomial Commitment Schemes：PCS</a></li>
+</ul>
+</li>
+<li><a href="#3%E8%AE%A1%E7%AE%97%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%9A%84%E6%89%BF%E8%AF%BA-c">3.计算多项式的承诺 C</a>
+<ul>
+<li><a href="#31-%E6%A4%AD%E5%9C%86%E6%9B%B2%E7%BA%BFec">3.1 椭圆曲线(EC)</a></li>
+<li><a href="#32-trusted-setup">3.2 Trusted Setup</a></li>
+<li><a href="#33-combine-trusted-setup-and-ec">3.3 combine Trusted Setup and EC</a></li>
+</ul>
+</li>
+<li><a href="#4%E8%AE%A1%E7%AE%97-proof">4.计算 proof</a></li>
+<li><a href="#5pairing">5.Pairing</a>
+<ul>
+<li><a href="#51-about-pairing">5.1 about pairing</a>
+<ul>
+<li><a href="#input">Input:</a></li>
+<li><a href="#output">output：</a></li>
+<li><a href="#properties">properties：</a></li>
+</ul>
+</li>
+<li><a href="#52-pairing-examples">5.2 Pairing examples</a>
+<ul>
+<li><a href="#1ex-y--2%CB%A3%CA%B8">1.e(x, y) = 2ˣʸ</a></li>
+<li><a href="#2%E8%A7%A3%E5%86%B3-diffie-hellman-%E9%9A%BE%E9%A2%98">2.解决 Diffie-Hellman 难题</a></li>
+<li><a href="#3bls%E7%AD%BE%E5%90%8D">3.BLS签名</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#6kzg">6.KZG</a>
+<ul>
+<li><a href="#kzg-%E5%AE%8C%E6%95%B4%E8%BF%87%E7%A8%8B">KZG 完整过程：</a></li>
+<li><a href="#kzg-%E5%88%86%E6%9E%90">KZG 分析</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结:</a></li>
+</ul>
+</li>
+<li><a href="#7batch-kzg-proofmulti-proof">7.Batch-KZG proof：multi proof</a></li>
+<li><a href="#8kzg-in-zk-rollup">8.KZG in ZK-Rollup</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0">参考文章</a></li>
+</ul>
+</li>
+</ul>
 <h1 id="kzg"><a class="header" href="#kzg">KZG</a></h1>
 <p>KZG 承诺又叫做 KZG10 承诺,是由 Kate, Zaverucha, and Goldberg 三位作者共同提出.</p>
 <h2 id="1多项式表示"><a class="header" href="#1多项式表示"><strong>1.多项式表示</strong></a></h2>
@@ -467,9 +504,6 @@ _<em>—</em> if the equation holds, the verifier accepts the proof
         </script>
 
 
-        <script src="../../elasticlunr.min.js"></script>
-        <script src="../../mark.min.js"></script>
-        <script src="../../searcher.js"></script>
 
         <script src="../../clipboard.min.js"></script>
         <script src="../../highlight.js"></script>

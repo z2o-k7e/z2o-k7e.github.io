@@ -1,3 +1,4 @@
+<!-- toc -->
 # KZG
 
 KZG 承诺又叫做 KZG10 承诺,是由 Kate, Zaverucha, and Goldberg 三位作者共同提出.

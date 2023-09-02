@@ -8,7 +8,7 @@
 
         <!-- Custom HTML head -->
         
-        <meta name="description" content="">
+        <meta name="description" content="零知世界">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
@@ -131,9 +131,6 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
-                        </button>
                     </div>
 
                     <h1 class="menu-title">World of Z2O-K7E</h1>
@@ -146,16 +143,6 @@
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
-                    </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
-                        </ul>
-                    </div>
-                </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
@@ -169,6 +156,32 @@
                 <div id="content" class="content">
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<ul>
+<li><a href="#concepts">Concepts</a>
+<ul>
+<li><a href="#inner-product-argument">Inner Product Argument</a></li>
+<li><a href="#custom-gate">Custom Gate</a></li>
+</ul>
+</li>
+<li><a href="#halo2-arithmetization">Halo2 Arithmetization</a></li>
+<li><a href="#halo2-%E7%BC%96%E7%A8%8B">Halo2 编程</a></li>
+<li><a href="#%E7%94%B5%E8%B7%AF%E8%BF%9B%E9%98%B6-sha256-%E4%BC%98%E5%8C%96%E5%AE%9E%E7%8E%B0">电路进阶 (sha256 优化实现)</a></li>
+<li><a href="#halo2%E7%94%B5%E8%B7%AF%E6%9E%84%E5%BB%BA%E6%BA%90%E4%BB%A3%E7%A0%81%E5%AF%BC%E8%AF%BB">Halo2电路构建源代码导读</a>
+<ul>
+<li><a href="#chipcfiginstructionlayouter">Chip/cfig/instruction/Layouter</a></li>
+<li><a href="#assignment">Assignment</a></li>
+</ul>
+</li>
+<li><a href="#%E7%94%B5%E8%B7%AF%E5%86%85%E9%83%A8%E6%A1%86%E6%9E%B6">电路内部框架</a></li>
+<li><a href="#constraintsystem">ConstraintSystem</a></li>
+<li><a href="#a2-b2-%E7%A4%BA%E4%BE%8B">a^2 +b^2 示例</a>
+<ul>
+<li><a href="#1-configure-%E8%BF%87%E7%A8%8B">1 Configure 过程</a></li>
+<li><a href="#synthesize">synthesize</a></li>
+</ul>
+</li>
+<li><a href="#summary">Summary</a></li>
+</ul>
 <p>第一代 zkp 算法:  groth16 , groth16 算法的每一个新的业务, 每次迭代都需要重新做 Setup, 模式太重, 需要强信任</p>
 <p>后面的 universal setup 优化: 只需要做一次 Setup, 所有的业务都可以使用. 最初代的 universal setup 算法是 Sonic, poly-com 用了 KZG, 但是性能不够</p>
 <p>19 年 ZCash 团队设计出了 Halo 算法, 使用了 Inner Product argument 替换 KZG, 把实现 universal Setup 的条件更进一步削弱了, 改成了不需要 Setup . Halo2 不光想支持 SNARK 算法, 他更想支持递归特性, 而因为 Sonic 的验证是线性的, 所以其提出了一套 <code>嵌套均摊</code> (nested amortization) 技术</p>
@@ -884,9 +897,6 @@ fn mul(
         </script>
 
 
-        <script src="../elasticlunr.min.js"></script>
-        <script src="../mark.min.js"></script>
-        <script src="../searcher.js"></script>
 
         <script src="../clipboard.min.js"></script>
         <script src="../highlight.js"></script>

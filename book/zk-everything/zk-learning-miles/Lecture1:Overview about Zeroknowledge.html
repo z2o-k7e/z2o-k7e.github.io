@@ -8,7 +8,7 @@
 
         <!-- Custom HTML head -->
         
-        <meta name="description" content="">
+        <meta name="description" content="零知世界">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
@@ -131,9 +131,6 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
-                        </button>
                     </div>
 
                     <h1 class="menu-title">World of Z2O-K7E</h1>
@@ -146,16 +143,6 @@
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
-                    </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
-                        </ul>
-                    </div>
-                </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
@@ -169,6 +156,64 @@
                 <div id="content" class="content">
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<ul>
+<li><a href="#lecture1introduction-to-zero-knowledge-interactive-proofs">Lecture1:Introduction to Zero knowledge Interactive Proofs</a></li>
+<li><a href="#np">NP</a>
+<ul>
+<li><a href="#np-proof">NP Proof:</a></li>
+<li><a href="#np-proofs-%E4%BE%8B%E5%AD%90">NP proofs 例子</a></li>
+<li><a href="#np-language-%E5%AE%9A%E4%B9%89">NP Language 定义:</a></li>
+</ul>
+</li>
+<li><a href="#zkp">ZKP</a>
+<ul>
+<li><a href="#%E4%BE%8B%E5%AD%90">例子</a></li>
+<li><a href="#definitions-of-zeroknowledge-interactive-proof">Definitions of Zeroknowledge interactive Proof</a>
+<ul>
+<li><a href="#1interactive-proof-system-for-a-language-l">1.Interactive Proof system for a Language L</a></li>
+</ul>
+</li>
+<li><a href="#zero-knowledge">Zero knowledge</a>
+<ul>
+<li><a href="#%E6%A8%A1%E6%8B%9F%E5%99%A8simulator">模拟器:Simulator</a></li>
+<li><a href="#%E8%AE%A1%E7%AE%97%E4%B8%8D%E5%8F%AF%E5%8C%BA%E5%88%86%E5%AE%9A%E4%B9%89">计算不可区分定义:</a></li>
+<li><a href="#zero-knowledge-define">Zero Knowledge Define:</a></li>
+<li><a href="#flavor-of-zero-knowledge">Flavor of Zero Knowledge</a></li>
+</ul>
+</li>
+<li><a href="#proof-of-knowledge">Proof of Knowledge</a>
+<ul>
+<li><a href="#the-first-applicationidentity-theft">The First Application:Identity Theft</a></li>
+</ul>
+</li>
+<li><a href="#np-and-zero-knowledge-interactive-proof">NP and Zero Knowledge Interactive Proof</a>
+<ul>
+<li><a href="#%E6%89%BF%E8%AF%BA">承诺</a>
+<ul>
+<li><a href="#%E6%89%BF%E8%AF%BA%E6%80%A7%E8%B4%A8">承诺性质</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%BE%E4%BE%8B%E5%9C%B0%E5%9B%BE%E4%B8%89%E6%9F%93%E8%89%B2%E9%97%AE%E9%A2%98">举例:地图三染色问题</a></li>
+</ul>
+</li>
+<li><a href="#zk-%E7%9A%84%E5%BA%94%E7%94%A8">zk 的应用</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%8D%E6%9D%82%E6%80%A7%E7%90%86%E8%AE%BAcomplexity-theory">复杂性理论(Complexity Theory)</a>
+<ul>
+<li><a href="#interactive-proof">Interactive Proof</a></li>
+<li><a href="#private-coins-model">Private Coins Model</a></li>
+<li><a href="#interactive-proofs-with-public-coins-model">Interactive Proofs with Public Coins Model</a>
+<ul>
+<li><a href="#am-%E4%B8%8E-ma">AM 与 MA</a></li>
+</ul>
+</li>
+<li><a href="#ip--pspace-%E5%AE%9A%E7%90%86">IP = PSPACE 定理</a></li>
+<li><a href="#mip">MIP</a></li>
+<li><a href="#non-interactive-proof">Non Interactive Proof</a></li>
+</ul>
+</li>
+</ul>
 <h1 id="lecture1introduction-to-zero-knowledge-interactive-proofs"><a class="header" href="#lecture1introduction-to-zero-knowledge-interactive-proofs">Lecture1:Introduction to Zero knowledge Interactive Proofs</a></h1>
 <h1 id="np"><a class="header" href="#np">NP</a></h1>
 <h2 id="np-proof"><a class="header" href="#np-proof">NP Proof:</a></h2>
@@ -457,9 +502,6 @@ AM 就是 A 先给 M 发一个随机数，然后 M 再给 A 回复，然后 A �
         </script>
 
 
-        <script src="../../elasticlunr.min.js"></script>
-        <script src="../../mark.min.js"></script>
-        <script src="../../searcher.js"></script>
 
         <script src="../../clipboard.min.js"></script>
         <script src="../../highlight.js"></script>

@@ -1,3 +1,4 @@
+<!-- toc -->
 # Lecture2:Introduction to Modern SNARKs
 
 # Overview about zk-SNARK

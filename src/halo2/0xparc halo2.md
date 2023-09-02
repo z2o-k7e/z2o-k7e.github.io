@@ -1,3 +1,4 @@
+<!-- toc -->
 Understanding and building user-facing applications with `Halo2` and `PLONKish` proving systems
  - Circuits
  - Toolstack

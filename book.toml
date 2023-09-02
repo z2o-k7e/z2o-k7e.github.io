@@ -4,9 +4,17 @@ language = "en"
 multilingual = false
 src = "src"
 title = "World of Z2O-K7E"
+description = "零知世界"
 
 [preprocessor.katex]
 after = ["links"]
 
+[preprocessor.toc]
+command = "mdbook-toc"
+renderer = ["html"]
+
 [output.html]
 mathjax-support = true
+
+[output.html.search]
+enable = false

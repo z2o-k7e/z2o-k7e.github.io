@@ -1,3 +1,4 @@
+<!-- toc -->
 第一代 zkp 算法:  groth16 , groth16 算法的每一个新的业务, 每次迭代都需要重新做 Setup, 模式太重, 需要强信任
 
 后面的 universal setup 优化: 只需要做一次 Setup, 所有的业务都可以使用. 最初代的 universal setup 算法是 Sonic, poly-com 用了 KZG, 但是性能不够

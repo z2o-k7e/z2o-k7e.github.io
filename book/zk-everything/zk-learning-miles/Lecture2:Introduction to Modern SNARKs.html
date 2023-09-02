@@ -8,7 +8,7 @@
 
         <!-- Custom HTML head -->
         
-        <meta name="description" content="">
+        <meta name="description" content="零知世界">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
@@ -131,9 +131,6 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
-                        </button>
                     </div>
 
                     <h1 class="menu-title">World of Z2O-K7E</h1>
@@ -146,16 +143,6 @@
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
-                    </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
-                        </ul>
-                    </div>
-                </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
@@ -169,6 +156,57 @@
                 <div id="content" class="content">
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<ul>
+<li><a href="#lecture2introduction-to-modern-snarks">Lecture2:Introduction to Modern SNARKs</a></li>
+<li><a href="#overview-about-zk-snark">Overview about zk-SNARK</a>
+<ul>
+<li><a href="#why-commercial-so-much">Why commercial so much</a></li>
+<li><a href="#zk-snark-application">Zk-snark application</a></li>
+</ul>
+</li>
+<li><a href="#define-zksnark">Define zksnark</a>
+<ul>
+<li><a href="#arithmetic-circuits">Arithmetic Circuits</a>
+<ul>
+<li><a href="#structured-vs-unstructured-circuits">Structured vs. unstructured circuits</a></li>
+</ul>
+</li>
+<li><a href="#nark-non-interactive-argument-of-knowledge">NARK: Non-interactive ARgument of Knowledge</a>
+<ul>
+<li><a href="#define-nark--normallly">Define NARK  Normallly</a></li>
+<li><a href="#properties-of-nark">Properties of NARK</a></li>
+</ul>
+</li>
+<li><a href="#knowledge-soundness">Knowledge soundness</a></li>
+<li><a href="#snarksuccinct-non-interactive--argument-of-knowledge">SNARK:Succinct Non-interactive  ARgument of Knowledge</a>
+<ul>
+<li><a href="#succinct-preprocessing-nark">succinct preprocessing NARK</a></li>
+<li><a href="#strongly-succinct-preprocessing-nark">strongly succinct preprocessing NARK</a></li>
+<li><a href="#preprocessing-setup">Preprocessing Setup</a></li>
+</ul>
+</li>
+<li><a href="#building-an-efficient-snakr">Building an efficient SNAKR</a>
+<ul>
+<li><a href="#commitment-%E6%89%BF%E8%AF%BA">Commitment 承诺</a>
+<ul>
+<li><a href="#%E6%89%BF%E8%AF%BA%E6%80%A7%E8%B4%A8">承诺性质</a></li>
+<li><a href="#commitment-to-a-function">Commitment to a Function</a></li>
+<li><a href="#polynomial-commitment-scheme">Polynomial Commitment Scheme</a></li>
+<li><a href="#inner-product-argument">Inner product argument</a></li>
+</ul>
+</li>
+<li><a href="#iopinteractive-oracle-proof">IOP:Interactive Oracle Proof</a>
+<ul>
+<li><a href="#properties-of-iop">Properties of IOP</a></li>
+<li><a href="#example-of-iop">Example of IOP</a></li>
+<li><a href="#iop--%E7%9B%B8%E5%BA%94%E7%9A%84-polynomial-%E6%96%B9%E6%A1%88%E6%9E%84%E9%80%A0-snark">IOP + 相应的 Polynomial 方案构造 SNARK</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h1 id="lecture2introduction-to-modern-snarks"><a class="header" href="#lecture2introduction-to-modern-snarks">Lecture2:Introduction to Modern SNARKs</a></h1>
 <h1 id="overview-about-zk-snark"><a class="header" href="#overview-about-zk-snark">Overview about zk-SNARK</a></h1>
 <p><img src="static/THO2bOLrToy8krx9h9XccDJcnro.png" alt="" /></p>
@@ -585,9 +623,6 @@
         </script>
 
 
-        <script src="../../elasticlunr.min.js"></script>
-        <script src="../../mark.min.js"></script>
-        <script src="../../searcher.js"></script>
 
         <script src="../../clipboard.min.js"></script>
         <script src="../../highlight.js"></script>

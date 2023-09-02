@@ -8,7 +8,7 @@
 
         <!-- Custom HTML head -->
         
-        <meta name="description" content="">
+        <meta name="description" content="零知世界">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
@@ -131,9 +131,6 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
-                        </button>
                     </div>
 
                     <h1 class="menu-title">World of Z2O-K7E</h1>
@@ -146,16 +143,6 @@
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
-                    </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
-                        </ul>
-                    </div>
-                </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
@@ -169,6 +156,17 @@
                 <div id="content" class="content">
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<ul>
+<li><a href="#%E6%B7%B1%E5%85%A5%E5%88%86%E6%9E%90supernova%E5%8F%8A%E5%85%B6rom%E5%AE%9E%E7%8E%B0">深入分析SuperNova及其ROM实现</a>
+<ul>
+<li><a href="#nivc%E5%AE%9A%E4%B9%89">NIVC定义</a></li>
+<li><a href="#supernova%E8%AF%81%E6%98%8E%E7%B3%BB%E7%BB%9F">Supernova证明系统</a></li>
+<li><a href="#rom-machine-based-supernova">ROM machine based Supernova</a></li>
+<li><a href="#%E8%87%B4%E8%B0%A2">致谢</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+</li>
+</ul>
 <h1 id="深入分析supernova及其rom实现"><a class="header" href="#深入分析supernova及其rom实现">深入分析SuperNova及其ROM实现</a></h1>
 <p>针对于为有限状态机上程序执行的正确性的问题，Nova是集大成者，作者Setty提出了一种基于Folding的递归证明系统。但是Nova要求在迭代中使用相同的业务电路，可以理解为仅支持单个指令。SuperNova则对其进行了拓展，在每步迭代中可以运行不同的指令(这一问题定义为NIVC, non-uniform IVC)，因此可以把Nova看作是只支持一个指令的NIVC解决方案。之前采用全局电路的方法其开销与所有指令构成的电路规模有关，Supernova最大的创新则是其证明开销只与当前步执行的指令有关，并且产生的overhead是常数。</p>
 <p>本文首先介绍NIVC问题的定义，以及Supernova的基本思路，最后针对于文中没有给出具体说明的电路选择器，详细介绍了ROM模型的实现思路。</p>
@@ -342,9 +340,6 @@ NIVC是对IVC的泛化，在每步增量计算中，Prover可以证明满足一�
         </script>
 
 
-        <script src="../elasticlunr.min.js"></script>
-        <script src="../mark.min.js"></script>
-        <script src="../searcher.js"></script>
 
         <script src="../clipboard.min.js"></script>
         <script src="../highlight.js"></script>

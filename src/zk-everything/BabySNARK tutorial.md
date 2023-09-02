@@ -1,3 +1,5 @@
+<!-- toc -->
+
 零知识证明由于其本身陡峭的入门学习曲线，往往被初学者称为moon math。为了平缓学习曲线，减轻入门压力，babysnark[1]应运而生，本文将作为babysnark原理部分的一个解读版，帮助你更好的理解snark背后的一些基本概念和直觉。在阅读本文之前，希望你已经读过[# 从零开始学习 zk-SNARK](https://secbit.io/blog/2019/12/25/learn-zk-snark-from-zero-part-one/)系列的前4部分，对包括有限域、椭圆曲线等相关知识有一个基本的了解。
 
 ### R1CS

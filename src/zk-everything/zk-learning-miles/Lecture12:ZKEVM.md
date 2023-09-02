@@ -1,3 +1,4 @@
+<!-- toc -->
 # ZK-learning lecture 12:ZK- EVM
 
 # Background and motivation

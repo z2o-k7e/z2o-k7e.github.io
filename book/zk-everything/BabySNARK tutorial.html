@@ -8,7 +8,7 @@
 
         <!-- Custom HTML head -->
         
-        <meta name="description" content="">
+        <meta name="description" content="零知世界">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
@@ -131,9 +131,6 @@
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
-                        </button>
                     </div>
 
                     <h1 class="menu-title">World of Z2O-K7E</h1>
@@ -146,16 +143,6 @@
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
-                    </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
-                        </ul>
-                    </div>
-                </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
@@ -169,6 +156,15 @@
                 <div id="content" class="content">
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<ul>
+<li><a href="#r1cs">R1CS</a></li>
+<li><a href="#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC">多项式插值</a></li>
+<li><a href="#qap">QAP</a></li>
+<li><a href="#%E5%B8%83%E5%B0%94%E7%94%B5%E8%B7%AF">布尔电路</a></li>
+<li><a href="#ssp">SSP</a></li>
+<li><a href="#babysnark">babysnark</a></li>
+<li><a href="#reference">Reference</a></li>
+</ul>
 <p>零知识证明由于其本身陡峭的入门学习曲线，往往被初学者称为moon math。为了平缓学习曲线，减轻入门压力，babysnark[1]应运而生，本文将作为babysnark原理部分的一个解读版，帮助你更好的理解snark背后的一些基本概念和直觉。在阅读本文之前，希望你已经读过<a href="https://secbit.io/blog/2019/12/25/learn-zk-snark-from-zero-part-one/"># 从零开始学习 zk-SNARK</a>系列的前4部分，对包括有限域、椭圆曲线等相关知识有一个基本的了解。</p>
 <h3 id="r1cs"><a class="header" href="#r1cs">R1CS</a></h3>
 <p>比如我们有这样一段程序：</p>
@@ -346,9 +342,6 @@ C
         </script>
 
 
-        <script src="../elasticlunr.min.js"></script>
-        <script src="../mark.min.js"></script>
-        <script src="../searcher.js"></script>
 
         <script src="../clipboard.min.js"></script>
         <script src="../highlight.js"></script>
