@@ -15,6 +15,9 @@ renderer = ["html"]
 
 [output.html]
 mathjax-support = true
+no-section-label = true
 
 [output.html.search]
 enable = false
+
+
