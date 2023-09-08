@@ -92,25 +92,6 @@ as above.
 
 
 
-
-# What are we doing now?
-
-## 进阶研究小组：
-
-
-<p float="left">
-  <img src="https://github.com/zkp-co-learning/zkp-co-learn/assets/33189338/0e5ec85f-fd7e-4ce3-a579-d86c20b763aa" width="20%" />
-  <img src="https://github.com/zkp-co-learning/zkp-co-learn/assets/33189338/230f2aa6-b5bf-4f39-ac70-0d6cb64a140e" width="20%" /> 
-  <img src="https://github.com/zkp-co-learning/zkp-co-learn/assets/33189338/e0ae9d92-eed9-46dd-822d-816bdf59c24b" width="20%" />
-  <img src="https://github.com/zkp-co-learning/zkp-co-learn/assets/33189338/dbb9423a-3c64-47c1-8a12-30a27c57ffcd"  width="20%" />
-  <img src="https://github.com/zkp-co-learning/zkp-co-learn/assets/33189338/e05547fc-61d3-4bc8-ac9c-f4bc0e770f05"  width="20%" />
-
-
-
-</p>
-
-> 如果二维码过期请找 @Demian 索要 \~
-
 ## 投稿
 欢迎大家把自己在写的内容放在这里， [zk-everything] 我们会同时排版到Antalpha Labs的公众号下.(最好留下联系方式，方便后续跟进）
 
@@ -119,14 +100,9 @@ as above.
 
 
 
-(tbl)
-
-
-
 ## Themes ！
 - 自由选题，完成学习并分享可得 **Bounty** ，推荐 PSE 开源项目 \~
   -  [Meeting PSE Share]
-  -  [PSE opensource projects list]
-- 目前法国 🇫🇷 巴黎 ZKML Hackerhouse 火热进行中 🔥
+
 - 年底**土耳其 ZKP HackerHouse** 等你来 ！！
 
