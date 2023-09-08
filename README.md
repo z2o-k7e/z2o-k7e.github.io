@@ -95,6 +95,13 @@ as above.
 ## 投稿
 欢迎大家把自己在写的内容放在这里， [zk-everything] 我们会同时排版到Antalpha Labs的公众号下.(最好留下联系方式，方便后续跟进）
 
+投稿流程：
+1. fork this repo and clone it to local machine
+2. copy directy `.md` file into `src` folder
+3. In `src/SUMMARY.md` (i.e the structure file of mdbook), add link to your newlly added posts
+4. commit and push
+4. to make a PR and wait to merge
+
 
 ### [Github Discussion] 使用方法
 
