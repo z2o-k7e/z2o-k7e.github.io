@@ -72,9 +72,9 @@ $$
 
 $$
 \begin{split}
-t'\_{low}(X)&=t\_{low}(X) + b_0X^N\\
-t'\_{mid}(X)&=t\_{mid}(X) - b_0 + b_1X^N\\
-t'\_{high}(X)&=t\_{high}(X) - b_1\\
+t'_{low}(X)&=t_{low}(X) + b_0X^N\\
+t'_{mid}(X)&=t_{mid}(X) - b_0 + b_1X^N\\
+t'_{high}(X)&=t_{high}(X) - b_1\\
 \end{split}
 $$
 
@@ -82,9 +82,9 @@ $$
 
 $$
 \begin{split}
-&t'\_{low}(X) + t'\_{mid}(X)\cdot X^N + t'\_{high}(X)\cdot X^{2N} \\
-=\ &  t\_{low}(X) + b_0X^N + (t\_{mid}(X) - b_0 + b_1X^N)\cdot X^N + (t\_{high}(X) - b_1)\cdot X^{2n} \\
-=\ & t\_{low}(X) + t\_{mid}(X)\cdot X^N + t\_{high}(X)\cdot X^{2N} \\
+&t'_{low}(X) + t'_{mid}(X)\cdot X^N + t'_{high}(X)\cdot X^{2N} \\
+=\ &  t_{low}(X) + b_0X^N + (t_{mid}(X) - b_0 + b_1X^N)\cdot X^N + (t_{high}(X) - b_1)\cdot X^{2n} \\
+=\ & t_{low}(X) + t_{mid}(X)\cdot X^N + t_{high}(X)\cdot X^{2N} \\
 =\ & t(X)
 \end{split}
 $$
@@ -109,11 +109,11 @@ Daniel Lubarov 按照这个思路给出了第二种随机数填充实现 Zero-Kn
 先看第一类多项式，以 $w_a(X)$ 为例，它编码了 $w_{a,i}$  向量。如果本身向量长度不足 $N$，一般情况下是用零补齐，我们现在可以考虑让 Prover 额外用两个随机数补齐，这样做的效果和方法一的 Blinding 多项式完全一样。 如下所示：
 
 $$
-w'_a(X) = w_a(X) + (b_0\cdot L\_{N-2}(X) + b_1\cdot L\_{N-1}(X))
+w'_a(X) = w_a(X) + (b_0\cdot L_{N-2}(X) + b_1\cdot L_{N-1}(X))
 $$
 
-其中 $b(X)=b_0\cdot L_{N-2}(X) + b_1\cdot L_{N-1}(X)$ 也可以看成是利用 Lagrange Basis 产生的 Blinding 多项式。这里假设 $\{w_{a,i}\}$ 的长度为 $N-2$， $(b_0, b_1)$ 为两个随机数。假设 $w_a(X)$ 的系数为固定值，那么当 $w'\_a(X)$ 被打开两次之后， 
-$b(X)=b_0\cdot L\_{N-2}(X) + b_1\cdot L\_{N-1}(X)$ 的系数即可被求解，从而失去随机化的能力。因此， $w'_a(X)$ 只能承受一次安全的打开操作（假设协议基于 Non-hiding 的多项式承诺）。
+其中 $b(X)=b_0\cdot L_{N-2}(X) + b_1\cdot L_{N-1}(X)$ 也可以看成是利用 Lagrange Basis 产生的 Blinding 多项式。这里假设 $\{w_{a,i}\}$ 的长度为 $N-2$， $(b_0, b_1)$ 为两个随机数。假设 $w_a(X)$ 的系数为固定值，那么当 $w'_a(X)$ 被打开两次之后， 
+$b(X)=b_0\cdot L_{N-2}(X) + b_1\cdot L_{N-1}(X)$ 的系数即可被求解，从而失去随机化的能力。因此， $w'_a(X)$ 只能承受一次安全的打开操作（假设协议基于 Non-hiding 的多项式承诺）。
 
 对于置换累乘多项式 $z(X)$，则需要在累乘向量 $\vec{z}$ 的尾部引入随机值。考虑下 $\vec{z}$ 的计算方式：
 
@@ -208,9 +208,9 @@ $$
 
 $$
 \begin{split}
-w'_a(X) &= w_a(X) + (b_0\cdot L\_{N-6}(X) + b_1\cdot L\_{N-5}(X))\\
-w'_b(X) &= w_b(X) + (b_2\cdot L\_{N-6}(X) + b_3\cdot L\_{N-5}(X))\\
-w'_c(X) &= w_c(X) + (b_4\cdot L\_{N-6}(X) + b_5\cdot L\_{N-5}(X))\\
+w'_a(X) &= w_a(X) + (b_0\cdot L_{N-6}(X) + b_1\cdot L_{N-5}(X))\\
+w'_b(X) &= w_b(X) + (b_2\cdot L_{N-6}(X) + b_3\cdot L_{N-5}(X))\\
+w'_c(X) &= w_c(X) + (b_4\cdot L_{N-6}(X) + b_5\cdot L_{N-5}(X))\\
 \end{split}
 $$
 
@@ -242,7 +242,7 @@ $$
 然后计算承诺：
 
 $$
-C_f = \sum_{i=0}^{n-1}f_i\cdot [\chi^i]_1 + \sum\_{i=0}^{n-1}r_i\cdot[\rho\chi^i]_1 = [f(\chi)+\rho\cdot r(\chi)]_1
+C_f = \sum_{i=0}^{n-1}f_i\cdot [\chi^i]_1 + \sum_{i=0}^{n-1}r_i\cdot[\rho\chi^i]_1 = [f(\chi)+\rho\cdot r(\chi)]_1
 $$
 
 如果我们要在 $X=\zeta$ 处打开一个多项式承诺，先计算 $y=f(\zeta)$，还要计算盲化多项式 $r(X)$ 在 $X=\zeta$ 的求值， $y'=r(\zeta)$，然后产生这两个多项式的求值证明：
@@ -252,7 +252,7 @@ q(X) = f(X) + \rho\cdot r(X) = \frac{f(X)-f(\zeta)}{X-\zeta} + \rho\cdot \frac{r
 $$
 
 $$
-\pi\_{f(\zeta)} = ([q_(X)]_1, y')
+\pi_{f(\zeta)} = ([q_(X)]_1, y')
 $$
 
 检查求值证明的方式如下：

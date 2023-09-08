@@ -158,7 +158,7 @@ $$
 为了构造 $L_i(X)$，先构造不等于零的多项式部分。由于 $L_i(\omega_j)=1, j = i$，因此他一定包含 $\prod_{j,j\neq i}(X-\omega_j)$ 这个多项式因子。但该因子显然在 $X=\omega_i$ 处可能不等于 $1$，即可能 $\prod_{j, j\neq i}(\omega_i-\omega_j)\neq 1$。然后，我们只要让该因子除以这个可能不等于 $1$ 的值即可，于是 $L_i(X)$ 定义如下：
 
 $$
-L_i(X) = \frac{\prod_{j\in H\backslash\{i\}}(X-\omega_j)}{\prod_{j\in H\backslash\{i\}}(\omega_i-\omega_j)} = \prod_{j\in H\backslash\{i\}}^{} \frac{X-\omega_j}{\omega_i-\omega_j}
+L_i(X) = \frac{\prod_{j\in H \setminus \{i\}}(X-\omega_j)}{\prod_{j\in H \setminus \{i\}}(\omega_i-\omega_j)} = \prod_{j\in H \setminus \{i\}} \frac{X-\omega_j}{\omega_i-\omega_j}
 $$
 
 不难发现， $L_i(X)$ 在 $X=\omega_i$ 处等于 $1$，其它位置 $X=\omega_j, j\neq i$ 处等于 $0$。
@@ -216,7 +216,7 @@ $$
 (X-\omega^0)(a(X)-b(X))=0
 $$
 
-当 $X=\omega^0$ 时，左边多项式的第一个因子等于零，而 $X\in H\backslash\\{\omega^0\\}$ 时，则左边第二因子等于零，即表达了除第一项可以不等之外，其它点取值都必须相等。
+当 $X=\omega^0$ 时，左边多项式的第一个因子等于零，而 $X\in H \setminus \{\omega^0\}$ 时，则左边第二因子等于零，即表达了除第一项可以不等之外，其它点取值都必须相等。
 
 可以看出，采用 Lagrange 多项式，我们可以灵活地约束多个向量之间的关系，并且可以把多个约束合并在一起，让 Verifier 仅通过很少的随机挑战就可验证多个向量约束。
 

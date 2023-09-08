@@ -107,12 +107,12 @@ i & \sigma_{a,i} & \sigma_{b,i} & \sigma_{c,i}  \\
 \end{array}
 $$
 
-Prover 用一个随机数 $\beta$（Verifier 提供）来合并 $(\vec{w}_a, \vec{id_a})$， $(\vec{w}_b, \vec{id_b})$， $(\vec{w}_c, \vec{id_c})$，还有置换后的向量： $(\vec{w}_a', \sigma_a)$ ， $(\vec{w}_b', \sigma_b)$， $(\vec{w}_c', \sigma_c)$ 。然后再通过一个随机数 $\gamma$ （Verifier 提供）和连乘来得到 $W$ 和 $W'$ 的 Multisets， $\\{f_i\\}$ 与 $\\{g_i\\}$
+Prover 用一个随机数 $\beta$（Verifier 提供）来合并 $(\vec{w}_a, \vec{id_a})$， $(\vec{w}_b, \vec{id_b})$， $(\vec{w}_c, \vec{id_c})$，还有置换后的向量： $(\vec{w}_a', \sigma_a)$ ， $(\vec{w}_b', \sigma_b)$， $(\vec{w}_c', \sigma_c)$ 。然后再通过一个随机数 $\gamma$ （Verifier 提供）和连乘来得到 $W$ 和 $W'$ 的 Multisets， $\{f_i\}$ 与 $\{g_i\}$
 
 $$
 \begin{split}
 f_i &= (w_{a,i}+\beta\cdot id_{a,i}+\gamma)(w_{b,i}+\beta\cdot id_{b,i}+\gamma)(w_{c,i}+\beta\cdot id_{c,i}+\gamma) \\
-g_i &= (w'\_{a,i}+\beta\cdot \sigma\_{a,i}+\gamma)(w'\_{b,i}+\beta\cdot \sigma\_{b,i}+\gamma)(w'\_{c,i}+\beta\cdot \sigma\_{c,i}+\gamma)
+g_i &= (w'_{a,i}+\beta\cdot \sigma_{a,i}+\gamma)(w'_{b,i}+\beta\cdot \sigma_{b,i}+\gamma)(w'_{c,i}+\beta\cdot \sigma_{c,i}+\gamma)
 \end{split}
 $$
 
@@ -127,7 +127,7 @@ g(X)&=\Big(w_a(X)+\beta\cdot S_{\sigma_a}(X)+\gamma\Big)\Big(w_b(X)+\beta\cdot S
 \end{split}
 $$
 
-如果两个 Multiset 相等 $\\{f_i\\}=\\{g_i\\}$，那么下面的等式成立：
+如果两个 Multiset 相等 $\{f_i\\}=\{g_i\}$，那么下面的等式成立：
 
 $$
 \prod_{X\in H}f(X) = \prod_{X\in H}g(X)
@@ -306,7 +306,7 @@ $$
 - $\bar{w}_a=w_a(\zeta)$， $\bar{w}_b=w_b(\zeta)$， $\bar{w}_c=w_c(\zeta)$
 - $\bar{q}_L=q_L(\zeta)$， $\bar{q}_R=q_R(\zeta)$， $\bar{q}_M=q_M(\zeta)$，  $\bar{q}_O=q_O(\zeta)$， $\bar{q}_C=q_C(\zeta)$
 - $\bar{\sigma}_a=\sigma_a(\zeta)$， $\bar{\sigma}_b=\sigma_b(\zeta)$， $\bar{\sigma}_c=\sigma_c(\zeta)$
-- $\bar{z}\_{(\omega\cdot\zeta)}=z(\omega\cdot\zeta)$， $\bar{z}_{(\zeta)}=z(\zeta)$
+- $\bar{z}_{(\omega\cdot\zeta)}=z(\omega\cdot\zeta)$， $\bar{z}_{(\zeta)}=z(\zeta)$
 - $\bar{t}=t(\zeta)$
 
 Verifier 还要自行计算
@@ -321,7 +321,7 @@ Verifier 还要自行计算
 $$
 \begin{split}
 & \bar{q}_L\bar{w}_a+\bar{q}_R\bar{w}_b+ \bar{q}_M\bar{w}_a\bar{w}_b - \bar{q}_O\bar{w}_c+\bar{q}_C + \phi(\zeta)  \\
-& \qquad \qquad + \alpha(\bar{z}\_{(\omega\cdot\zeta)}\cdot \bar{g}\_{(\zeta)}-\bar{z}\_{(\zeta)}\cdot \bar{f}\_{(\zeta)})+ \alpha^2(L_0(\zeta)\cdot(\bar{z}\_{(\zeta)}-1))\overset{?}{=}\bar{t}\cdot z_H(\zeta)
+& \qquad \qquad + \alpha(\bar{z}_{(\omega\cdot\zeta)}\cdot \bar{g}\_{(\zeta)}-\bar{z}_{(\zeta)}\cdot \bar{f}_{(\zeta)})+ \alpha^2(L_0(\zeta)\cdot(\bar{z}_{(\zeta)}-1))\overset{?}{=}\bar{t}\cdot z_H(\zeta)
 \end{split}
 $$
 
