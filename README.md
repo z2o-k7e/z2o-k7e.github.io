@@ -7,6 +7,7 @@
 - [Paris ZKML](https://www.youtube.com/playlist?list=PLbQFt1T_44DwLHk3TOWUoFMYmVLksr3i6)
 - [ZK Co-learn 第二期](https://www.youtube.com/playlist?list=PLbQFt1T_44DwN1zWl-KWhkp3s0LAkF2a8)
 - [Zkstudy Session](https://www.youtube.com/playlist?list=PLbQFt1T_44DylOOLHiWCIpVGJsrXHhzbs)
+- [Chiang Mai ZKP Demoday](https://www.youtube.com/playlist?list=PLbQFt1T_44DwxgQI946cODKYKYOM4p9iL)
 
 ---
 
