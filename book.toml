@@ -18,6 +18,6 @@ mathjax-support = true
 no-section-label = true
 
 [output.html.search]
-enable = false
+enable = true
 
 
