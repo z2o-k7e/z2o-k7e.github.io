@@ -113,5 +113,5 @@ as above.
 - 自由选题，完成学习并分享可得 **Bounty** ，推荐 PSE 开源项目 \~
   -  [Meeting PSE Share]
 
-- 年底**土耳其 ZKP HackerHouse** 等你来 ！！
+- 年底[土耳其 ZKP HackerHouse](https://labs.antalpha.com/hackerhouse/istanbul/)等你来 ！！
 
