@@ -1,6 +1,6 @@
 # Summary
 
-[TOC](../README.md)
+[README](../README.md)
 
 ---
 
