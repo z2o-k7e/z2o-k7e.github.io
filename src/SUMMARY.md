@@ -21,6 +21,7 @@
 - [4. IsZero Check (ex3)](./halo2/4.%20IsZero%20Check%20(ex3).md)
 - [halo2 Source Code](./halo2/halo2%20Source%20Code.md)
 - [StarLi halo2](./halo2/StarLi%20halo2.md)
+    - [Learning Process](./halo2/wait%20todo/Learning%20Process.md)
 
 
 # Folding Schemes
