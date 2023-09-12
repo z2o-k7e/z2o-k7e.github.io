@@ -3,7 +3,8 @@
 [README](../README.md)
 
 ---
-
+- [郭宇：ZK 技术的学习心得和经验分享](./exp/guoyu.md)
+- [对话姚翔：解读零知识证明的前世今生](./exp/freeyao.md)
 - [理解Plonk](./plonk-intro-cn/plonk-intro.md)
     - [（一）：Plonkish Arithmetization](./plonk-intro-cn/plonk-arithmetization.md)
     - [（二）：多项式编码](./plonk-intro-cn/plonk-lagrange-basis.md)
