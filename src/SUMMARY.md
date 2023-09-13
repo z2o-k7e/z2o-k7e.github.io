@@ -3,8 +3,7 @@
 [README](../README.md)
 
 ---
-- [郭宇：ZK 技术的学习心得和经验分享](./exp/guoyu.md)
-- [对话姚翔：解读零知识证明的前世今生](./exp/freeyao.md)
+
 - [理解Plonk](./plonk-intro-cn/plonk-intro.md)
     - [（一）：Plonkish Arithmetization](./plonk-intro-cn/plonk-arithmetization.md)
     - [（二）：多项式编码](./plonk-intro-cn/plonk-lagrange-basis.md)
@@ -42,3 +41,10 @@
 - [ch2](./public%20goods/第二章.md)
 - [ch4-Proving System](./public%20goods/4-Proving-System.md)
 - [ch5-plonk-intro](./public%20goods/5-plonk-intro.md)
+
+---
+# 经验心得
+
+- [郭宇：ZK 技术的学习心得和经验分享](./exp/guoyu.md)
+- [对话姚翔：解读零知识证明的前世今生](./exp/freeyao.md)
+- [邓燚：零知识，模拟与归约（一个个人化的视角）](https://zhuanlan.zhihu.com/p/268305208)
