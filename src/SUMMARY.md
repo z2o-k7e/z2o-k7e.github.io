@@ -4,14 +4,17 @@
 
 ---
 
-- [理解Plonk](./plonk-intro-cn/plonk-intro.md)
-    - [（一）：Plonkish Arithmetization](./plonk-intro-cn/plonk-arithmetization.md)
-    - [（二）：多项式编码](./plonk-intro-cn/plonk-lagrange-basis.md)
-    - [（三）：置换证明](./plonk-intro-cn/plonk-permutation.md)
-    - [（四）：算术约束与拷贝约束](./plonk-intro-cn/plonk-constraints.md)
-    - [（五）：多项式承诺](./plonk-intro-cn/plonk-polycom.md)
-    - [（六）：实现  Zero Knowledge](./plonk-intro-cn/plonk-randomizing.md)
-    - [（七）：Lookup Gate](./plonk-intro-cn/plonk-lookup.md)
+
+
+# [理解Plonk](./plonk-intro-cn/plonk-intro.md)
+
+- [（一）：Plonkish Arithmetization](./plonk-intro-cn/plonk-arithmetization.md)
+- [（二）：多项式编码](./plonk-intro-cn/plonk-lagrange-basis.md)
+- [（三）：置换证明](./plonk-intro-cn/plonk-permutation.md)
+- [（四）：算术约束与拷贝约束](./plonk-intro-cn/plonk-constraints.md)
+- [（五）：多项式承诺](./plonk-intro-cn/plonk-polycom.md)
+- [（六）：实现  Zero Knowledge](./plonk-intro-cn/plonk-randomizing.md)
+- [（七）：Lookup Gate](./plonk-intro-cn/plonk-lookup.md)
 
 
 
