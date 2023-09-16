@@ -14,14 +14,14 @@
     - [（七）：Lookup Gate](./plonk-intro-cn/plonk-lookup.md)
 
 # Halo2
-- [0xparc halo2](./halo2/0xparc%20halo2.md)
 - [1.Simple Examples](./halo2/1.%20Simple%20Examples.md)
-- [2.Fibonacci(halo2-hope)](./halo2/2.%20Fibonacci%20(halo2-hope).md)
-- [3. Fibonacci (ex1+ex2)](./halo2/3.%20Fibonacci%20(ex1+ex2).md)
-- [4. IsZero Check (ex3)](./halo2/4.%20IsZero%20Check%20(ex3).md)
-- [halo2 Source Code](./halo2/halo2%20Source%20Code.md)
-- [StarLi halo2](./halo2/StarLi%20halo2.md)
-    - [Learning Process](./halo2/wait%20todo/Learning%20Process.md)
+- [2. Fibonacci-example-1](./halo2/2. Fibonacci-example-1)
+- [3. Fibonacci-example-2](./halo2/3. Fibonacci-example-2.md)
+- [4. IsZero Check-example-3](./halo2/4. IsZero Check - example-3.md)
+- [5. Range check.md](./halo2/5. Range check.md)
+- [6. Range Check (code explanation).md](./halo2/6. Range Check (code explanation).md)
+- [7. Range Check - lookup - example-2](./halo2/7. Range Check - lookup - example-2.md)
+	- [Learning Process](./halo2/wait%20todo/Learning%20Process.md)
 
 
 # Folding Schemes
