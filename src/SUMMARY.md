@@ -8,26 +8,29 @@
 
 # [理解Plonk](./plonk-intro-cn/plonk-intro.md)
 
-- [1-Plonkish Arithmetization](./plonk-intro-cn/plonk-arithmetization.md)
-- [2-多项式编码](./plonk-intro-cn/plonk-lagrange-basis.md)
-- [3-置换证明](./plonk-intro-cn/plonk-permutation.md)
-- [4-算术约束与拷贝约束](./plonk-intro-cn/plonk-constraints.md)
-- [5-多项式承诺](./plonk-intro-cn/plonk-polycom.md)
-- [6-实现  Zero Knowledge](./plonk-intro-cn/plonk-randomizing.md)
-- [7-Lookup Gate](./plonk-intro-cn/plonk-lookup.md)
+ - [1-Plonkish Arithmetization](./plonk-intro-cn/plonk-arithmetization.md)
+ - [2-多项式编码](./plonk-intro-cn/plonk-lagrange-basis.md)
+ - [3-置换证明](./plonk-intro-cn/plonk-permutation.md)
+ - [4-算术约束与拷贝约束](./plonk-intro-cn/plonk-constraints.md)
+ - [5-多项式承诺](./plonk-intro-cn/plonk-polycom.md)
+ - [6-实现  Zero Knowledge](./plonk-intro-cn/plonk-randomizing.md)
+ - [7-Lookup Gate](./plonk-intro-cn/plonk-lookup.md)
 
 
 
 # Halo2
 
-- [1-Simple Examples](./halo2/1-Simple-Example.md)
-- [2-Fibonacci-example-1](./halo2/2-Fibonacci-example-1.md)
-- [3-Fibonacci-example-2](./halo2/3-Fibonacci-example-2.md)
-- [4-IsZero Check-example-3](./halo2/4-IsZero-Check-example-3.md)
-- [5-Range check-example-1.md](./halo2/5-Range-check.md)
-- [6-Range Check (code explanation).md](./halo2/6-Range-Check(code-explanation).md)
-- [7-Range-Check-Lookup-example-2)](./halo2/7-Range-Check-lookup(example-2).md)
-  - [Learning Process](./halo2/wait%20todo/Learning-Process.md)
+ - [1-Simple Examples](./halo2/1-Simple-Example.md)
+ - [2-Fibonacci-example-1](./halo2/2-Fibonacci-example-1.md)
+ - [3-Fibonacci-example-2](./halo2/3-Fibonacci-example-2.md)
+ - [4-IsZero Check-example-3](./halo2/4-IsZero-Check-example-3.md)
+ - [5-Range check-example-1.md](./halo2/5-Range-check.md)
+ - [6-Range Check (code explanation).md](./halo2/6-Range-Check(code-explanation).md)
+ - [7-Range-Check-Lookup-example-2)](./halo2/7-Range-Check-lookup(example-2).md)
+    - [Learning Process](./halo2/wait%20todo/Learning-Process.md)
+ - [ZKP Apps with halo2](./halo2/ZKP-APP.md)
+    - [Zordle](./halo2/Zordle.md)
+    - [Hammster](./halo2/Hammster.md)
 
 
 
