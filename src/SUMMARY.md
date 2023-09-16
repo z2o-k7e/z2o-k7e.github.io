@@ -4,6 +4,10 @@
 
 ---
 
+# [ZKP-Tutorial](./zk-everything/zkp-learning-Roadmap.md)
+
+- [ZKP 新手村入门攻略](./zk-everything/zkp-learning-Roadmap.md)
+
 
 
 # [理解Plonk](./plonk-intro-cn/plonk-intro.md)

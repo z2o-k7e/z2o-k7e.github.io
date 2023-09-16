@@ -12,6 +12,8 @@ after = ["links"]
 [preprocessor.toc]
 command = "mdbook-toc"
 renderer = ["html"]
+marker = "[TOC]"
+max-level = 4
 
 [output.html]
 mathjax-support = true
@@ -20,7 +22,7 @@ theme = "theme"
 
 [output.html.fold]
 enable = true   # whether or not to enable section folding
-level = 0         # the depth to start folding
+level = 1        # the depth to start folding
 
 [output.html.search]
 enable = true
