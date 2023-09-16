@@ -1,10 +1,12 @@
 > example 3.rs
 
+### Goal 
+
 we can look up smaller ranges, for example our lookup table right now is eight bits, but using a `single lookup table` we can constrain a one bit value,  or two bit value,  3-bit value and we don't always have to be constraining the maximum range of 8-bits.
 
 our range is 8 bits, but we want to perform a range check on 4 bits.
 
-----
+### Pre-requisites
 
 `value in (1 << (num_bits - 1))..(1 << num_bits)` 这个范围的意思是？
 

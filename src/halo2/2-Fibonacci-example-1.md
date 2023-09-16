@@ -1,6 +1,6 @@
 ### Goal
 
-**Given $f(0) = x, \ \  f(1) = y$ , we will prove $f(9) = z$
+Given $f(0) = x, \ \  f(1) = y$ , we will prove $f(9) = z$
 
 ```bash
     1, 1, 2, 3, 5, 8, 13, ...
