@@ -80,12 +80,12 @@ https://www.rareskills.io/zk-bootcamp
 
 ----
 
-Others 优秀 Courses （随便看看）: 
+其他优秀的 Courses （随便看看）: 
 
-[Zero Knowledge Canon, part 1 & 2 - a16z crypto](https://a16zcrypto.com/posts/article/zero-knowledge-canon/)
+- [Zero Knowledge Canon, part 1 & 2 - a16z crypto](https://a16zcrypto.com/posts/article/zero-knowledge-canon/)
+- https://twitter.com/taikoxyz/status/1679468185291218944 ：
 
-https://twitter.com/taikoxyz/status/1679468185291218944
-
+```
 1. PSE appliedzkp.org/projects 
 2. Rust
 3. complaints about learning rust
@@ -105,37 +105,44 @@ https://twitter.com/taikoxyz/status/1679468185291218944
 17. Definition wars
 18. how one should write zkEVM or ZK-EVM or Zk-EVM or zk-EVM
 19. Lagrange interpolation
+```
+
 
 ### 4. PLONK 协议の奥义
 
-PLONK 无疑是目前最值得学习，需要彻底掌握的协议，halo2
+PLONK 无疑是目前最值得学习，需要彻底掌握的协议
+
+
+
+#### 《理解 Plonk》
+
+- [1-Plonkish Arithmetization](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-arithmetization.html)
+- [2-多项式编码](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-lagrange-basis.html)
+- [3-置换证明](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-permutation.html)
+- [4-算术约束与拷贝约束](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-constraints.html)
+- [5-多项式承诺](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-polycom.html)
+- [6-实现 Zero Knowledge](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-randomizing.html)
+- [7-Lookup Gate](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-lookup.html)
 
 > 出品：Secbit @郭宇 老师 , https://secbit.io/
+> 
+> 是大家公认的全网（包括外网）最好的 PLONK Tutorial。
+> 
+> 学习 PLONK，这一套就够了！（论文可以随便看一下）
 
-《理解 Plonk》
-[1-Plonkish Arithmetization](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-arithmetization.html)
-[2-多项式编码](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-lagrange-basis.html)
-[3-置换证明](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-permutation.html)
-[4-算术约束与拷贝约束](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-constraints.html)
-[5-多项式承诺](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-polycom.html)
-[6-实现 Zero Knowledge](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-randomizing.html)
-[7-Lookup Gate](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-lookup.html)
-
-是大家公认的全网（包括外网）最好的 PLONK Tutorial。
-学习 PLONK，这个就够了（论文可以随便看一下）
 
 PS: 如果文档看晕了，那么推荐郭老师的配套白板视频：
-  - [【理解 PLONK - 1】 by 郭宇老师@安比实验室 05/02](https://github.com/zkp-co-learning/zkp-co-learn/discussions/86)
+ - [【理解 PLONK - 1】 by 郭宇老师@安比实验室 05/02](https://github.com/zkp-co-learning/zkp-co-learn/discussions/86)
  - [【理解 PLONK - 2】 by 郭宇老师@安比实验室 05/03](https://github.com/zkp-co-learning/zkp-co-learn/discussions/89)
  - [【理解 PLONK - 3 - lookup】 by 郭宇老师@安比实验室 05/09](https://github.com/zkp-co-learning/zkp-co-learn/discussions/95)
 
 -----
 
-PLONK 协议代码实践：
-
-- Rust 实现: https://github.com/adria0/plonk-by-fingers
-- Harry 参考一下代码实现 : https://github.com/zkp-co-learning/ZKP/blob/main/5-plonk-intro.md 
-- Dr. Qi zhou 分享: https://706community.notion.site/Python-finite-field-poly-over-Fq-FFT-1968732f468c4c3fa3886a5658c58773?pvs=4
+#### PLONK 代码实践
+ - [plonkathon](https://github.com/0xPARC/plonkathon)
+- [Rust 协议实现](https://github.com/adria0/plonk-by-fingers)
+- [Harry 整理的精简版本 plonkathon 代码实现](https://github.com/zkp-co-learning/ZKP/blob/main/5-plonk-intro.md) 
+- [Dr. Qi zhou 分享](https://706community.notion.site/Python-finite-field-poly-over-Fq-FFT-1968732f468c4c3fa3886a5658c58773?pvs=4)
 
 ### 5. 要不...来点代码?
 
@@ -207,17 +214,16 @@ Some Project Boards:
 
 Awesome 系列 : 
 
-[Awesome Noir](https://github.com/noir-lang/awesome-noir)
-[Awesome Circom](https://github.com/arnaucube/awesome-circom)
-[Awesome Aleo](https://github.com/howardwu/awesome-aleo)
-[Awesome Cairo](https://github.com/auditless/awesome-cairo)
-[Awesome-Folding](https://github.com/lurk-lab/awesome-folding)
-[Awesome HALO2](https://github.com/adria0/awesome-halo2)
-[Awesome PLONK](https://github.com/fluidex/awesome-plonk)
-[Awesome ZKML](https://github.com/worldcoin/awesome-zkml)
-[Awesome zkEVM](https://github.com/LuozhuZhang/awesome-zkevm)
-[Awesome Zero Knowledge](https://github.com/ventali/awesome-zk)
-
+- [Awesome Noir](https://github.com/noir-lang/awesome-noir)
+- [Awesome Circom](https://github.com/arnaucube/awesome-circom)
+- [Awesome Aleo](https://github.com/howardwu/awesome-aleo)
+- [Awesome Cairo](https://github.com/auditless/awesome-cairo)
+- [Awesome-Folding](https://github.com/lurk-lab/awesome-folding)
+- [Awesome HALO2](https://github.com/adria0/awesome-halo2)
+- [Awesome PLONK](https://github.com/fluidex/awesome-plonk)
+- [Awesome ZKML](https://github.com/worldcoin/awesome-zkml)
+- [Awesome zkEVM](https://github.com/LuozhuZhang/awesome-zkevm)
+- [Awesome Zero Knowledge](https://github.com/ventali/awesome-zk)
 
 #### STARK 
 
