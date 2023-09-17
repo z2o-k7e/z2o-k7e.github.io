@@ -8,6 +8,7 @@
 （if you have a vary large `R`, then polynomial is going to be very high degree and that will increase the cost of your circuit so now we have to change our layout a little bit. 
 range check with Lookup table: useful when you're trying to check a larger range and you want to keep the degree bound of your constraints low.）
 
+文件架构：
 ```rust
 ├── range_check
 │   ├── example2
@@ -15,9 +16,15 @@ range check with Lookup table: useful when you're trying to check a larger range
 │   ├── example2.rs   // main config
 ```
 
+调用链：
 ![](imgs/RangeCheck/Pasted%20image%2020230917215114.png)
 
+impl relationship：
 ![](imgs/RangeCheck/Pasted%20image%2020230917220003.png)
+
+Draw the circuit：
+![](imgs/RangeCheck/Pasted%20image%2020230917171123.png)
+
 
 ![[Range-Check-impl-relationship.excalidraw]]
 ### lookup table - table.rs
@@ -348,7 +355,7 @@ mod tests {
     use super::*;
     //// .....
 ```
-##### struct MyCircuit
+#### struct MyCircuit
 
 `MyCircuit`  可以处理 2 种类型的值 : 
  - `value` :  这里的 value 的约束和赋值由 `assign_simple()` 完成
@@ -375,7 +382,7 @@ impl<F: FieldExt, const RANGE: usize, const LOOKUP_RANGE: usize> Circuit<F>
     // fn synthesize
 ```
 
-##### fn synthesis()
+#### fn synthesis()
 
 ```rust
 fn synthesize(
@@ -399,7 +406,7 @@ fn synthesize(
 ```
 
 
-##### test_range_check_2
+#### test_range_check_2
 
  - 在 `i, j` 的双重循环里: 
 	 - `MyCircuit{ 1,10 }`
@@ -433,8 +440,8 @@ fn test_range_check_2() {
     }
   }
 ```
-#### illustration
+### illustration
 
-![](imgs/Pasted%20image%2020230917171123.png)
+![](imgs/RangeCheck/Pasted%20image%2020230917171123.png)
 
 
