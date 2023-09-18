@@ -1,3 +1,4 @@
+[TOC]
 ### Goal
 
 证明一个 value 在给定的范围内，但不透露其具体的值（This helper checks that the value witnessed in a given cell is within a given range）。

@@ -1,3 +1,4 @@
+[TOC]
 ### Goal
 
 We want Prove that : `f(a, b, c) = if a == b {c} else {a - b}` 

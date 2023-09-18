@@ -1,3 +1,4 @@
+[TOC]
 ### Goal
 
 Given $f(0) = x, \ \  f(1) = y$ , we will prove $f(9) = z$

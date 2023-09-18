@@ -1,3 +1,4 @@
+[TOC]
 ### Fibonacci Example 2
 
 回顾 Example-1 里的 Table：
