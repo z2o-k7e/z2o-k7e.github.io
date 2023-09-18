@@ -31,11 +31,13 @@
  - [5-Range check-example-1.md](./halo2/5-Range-check.md)
  - [6-Range Check (code explanation)](./halo2/6-Range-Check(code-explanation).md)
  - [7-Range-Check-Lookup-example-2)](./halo2/7-Range-Check-lookup(example-2).md)
+ - [8-Range-Check-Lookup-example-3)](./halo2/8-Range-Check(example-3).md)
  - [ZKP Apps with halo2](./halo2/ZKP-APP.md)
     - [Zordle](./halo2/Zordle.md)
     - [Hammster](./halo2/Hammster.md)
 
-- [Learning Process](./halo2/wait%20todo/Learning-Process.md)
+- [Appendix]()
+  - [Learning Process](./halo2/wait%20todo/Learning-Process.md)
 
 # Folding Schemes
 
