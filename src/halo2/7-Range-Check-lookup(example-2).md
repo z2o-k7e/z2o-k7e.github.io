@@ -414,7 +414,8 @@ fn synthesize(
 	 - `MyCircuit{ 5,100 }`
 	 - `MyCircuit{ 7,255 }` ...
 
-![](imgs/Pasted%20image%2020230917215114.png)
+like : 
+![](imgs/RangeCheck/Pasted%20image%2020230917215114.png)
 
 ```rust
 #[test]
@@ -443,6 +444,21 @@ fn test_range_check_2() {
 ### illustration
 
 ![](imgs/RangeCheck/Pasted%20image%2020230917171123.png)
+
+### usage
+
+```bash
+cargo test -- --nocapture test_range_check_2
+
+# Draw
+cargo test --release --all-features xxx
+```
+
+ - the white column is the instance column, 
+ - the pink one is the advice and 
+ - the purple one is the selector.
+ - the green part shows the cells that have been assigned
+      - light green : selector not used.
 
 
 ### References : 

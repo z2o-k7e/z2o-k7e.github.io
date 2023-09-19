@@ -491,6 +491,22 @@ fn test_range_check_2() {
 ![[Range-Check-impl-relationship.excalidraw]]
 
 
+### usage
+
+
+```bash
+cargo test -- --nocapture test_range_check_2
+
+# Draw
+cargo test --release --all-features xxx
+```
+
+ - the white column is the instance column, 
+ - the pink one is the advice and 
+ - the purple one is the selector.
+ - the green part shows the cells that have been assigned
+      - light green : selector not used.
+
 
 ### References : 
  - https://github.com/enricobottazzi/halo2-intro/blob/master/src/range_check/example5/table.rs
