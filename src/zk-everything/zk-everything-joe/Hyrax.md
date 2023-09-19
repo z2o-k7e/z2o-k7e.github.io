@@ -1,14 +1,57 @@
-## Reduced Sumcheck Verification
+# Thanks
+<br />
+
+- 感谢SecbitLabs @郭宇 前两个月分享的Spartan Overview (尽管当时也没太理解)， 以及@even 在研究方向上的指引(据说Hyrax 不太好啃)，不至于走太多弯路。
+
+<br />
+
+# Motivation
+
+<br />
+
+缘于folding，缘于NOVA，缘于Setty，了解到了Spartan，但并不认识它，所以才有了本篇及接下来的关于它的一切(预备知识)...... 
+
+![image.png](https://img.learnblockchain.cn/attachments/2023/09/PIzxPgw765066e60867af.png)
+
+关于Spartan，在ZK领域可能时间上相对也有点儿远了，暂且不考虑它在某些方面的争议，它的一些思想其实已经影响到其它比较热门的方向了，比如当下的热点Lasso & Jolt，所以它的研究意义仍然很大。
+
+<br />
+
+# Overview 
+
+<br />
+
+- 本篇文章主要参考Hyrax 论文后半部分5-6节，即Hyrax 基于GKR with ZK Argument的contribution。
+
+<br />
+
+- 主要分为两部分，前半部分Reduced Sumcheck Verification主要针对GKR with ZK Argument的Step Two做的优化，对应Hyrax 论文中的Part 5。
+
+<br />
+
+- 后半部分Reduced Witness Evaluation 主要针对GKR with ZK Argument的Final Step做的优化，对应Hyrax 论文中的Part 6。  
+
+<br />
+
+- 为了方便对照原始论文理解，本文中的notion尽量与Hyrax 原始论文对齐。
+
+<br />
+
+# Reduced Sumcheck Verification
+
+<br />
+
+![image.png](https://img.learnblockchain.cn/attachments/2023/09/KOUCgkBj65066f3d45df7.png)
 
 仍然以这个图为例，$N = 2$，则$b_N = 1$；第0层，$G = 2$，则$b_G = 1$；第1层，$G = 4$，则$b_G = 2$；第2层，$G = 4$，则$b_G = 2$。
 
 <br />
 
-### Number of Sumcheck Commitments
+## Number of Sumcheck Commitments
 
 <br />
 
-为了简单起见，上一章节Sumcheck 协议每次round prover 发送给verifier 的多项式系数的commitment的个数我们固定都是4，也就是说多项式的degree全为3。其实prover 需要commit的多项式的degree是有变化的。
+为了简单起见，上一篇GKR with ZK Argument 中Sumcheck 协议每次round prover 发送给verifier 的多项式系数的commitment的个数我们固定都是4，也就是说多项式的degree全为3。**其实prover 需要commit的多项式的degree是有变化的**。
 
 $$
 \begin{aligned}
@@ -50,7 +93,7 @@ $$
 
 <br />
 
-### Sumcheck Verifications
+## Sumcheck Verifications
 
 <br />
 
@@ -343,7 +386,7 @@ $$
 
 <br />
 
-### Reducing Sumcheck Commitments
+## Reducing Sumcheck Commitments
 
 
 一个field 对应一个commitment:
@@ -383,14 +426,16 @@ $$
 
 <br />
 
-### IPA protocol
+## IPA Protocol Overview
 
 prover 要证明query 向量$y$ 满足:
 $$
 \lang \textcolor{red} {u}, y \rang \overset{?}= \textcolor{red} {v}
 $$
 
-step 1: prover 生成多项式的commitment，并发送给verifier
+### Step One 
+
+prover 生成多项式的commitment，并发送给verifier
 
 $$
 \begin{aligned}
@@ -402,7 +447,9 @@ C_v &= [v]_{g} + [r_v]_h \\
 \end{aligned}
 $$
 
-step 2: prover 采样一个与向量$u$ 等长的向量$d$，对它进行commit；同样也与query 向量$y$ 交互，结果也进行commit，最后同样也发送给verifier
+### Step Two 
+
+prover 采样一个与向量$u$ 等长的向量$d$，对它进行commit；同样也与query 向量$y$ 交互，结果也进行commit，最后同样也发送给verifier
 
 $$
 
@@ -418,7 +465,9 @@ C_{w} &= [w]_{g} + [r_2]_h \\
 
 $$
 
-step 3: verifier 发送一个challenge factor $e$ 给prover，prover 计算
+### Step Three 
+
+verifier 发送一个challenge factor $e$ 给prover，prover 计算
 $$
 \begin{aligned}
 
@@ -433,7 +482,10 @@ $$
 
 并把它们全部发送给verifier。
 
-step 4: 根据commitment 同态性质，verifier 验证：
+### Step Four 
+
+根据commitment 同态性质，verifier 验证：
+
 $$
 
 \begin{aligned}
@@ -454,10 +506,10 @@ $$
 
 <br />
 
-### Reducing Sumcheck into IPA 
+## Reducing Sumcheck into IPA 
 最后我们看看Hyrax 中Sumcheck 协议被reduced成IPA 协议后的执行过程：
 
-#### Step One
+### Step One
 
 把多个verification fold成一个：
 $$
@@ -549,7 +601,7 @@ $$
 $$
 
 
-#### Step Two
+### Step Two
 
 prover 随机生成一个与 $\pi^{*}$ 等长的向量$d$，同$\pi^{*}$ 一样计算它的commitment，及$\lang J^{*}, d \rang$ 的commitment：
 $$
@@ -572,7 +624,7 @@ $$
 
 <br />
 
-#### Step Three
+### Step Three
 
 verifier 发送一个challenge factor $e$ 给prover，prover 计算：
 $$
@@ -604,7 +656,7 @@ z_{\delta_5} &= e \sdot r_{\alpha_5} + r_{\delta_5} \\
 \end{aligned}
 $$
 
-#### Step Four
+### Step Four
 
 verifier 验证：
 $$
@@ -631,3 +683,180 @@ $$
 \end{aligned}
 $$
 
+----
+
+到此为止多个round 的Sumcheck verification就被转换成了一个IPA verification，proof size(commitments) 也被进一步压缩。
+
+<br />
+
+# Reduced Witness Evaluation
+
+<br />
+
+## Recall
+
+<br />
+
+GKR with ZK Argument协议的Final Step是要对最下面一层(input + witness) 的某个evaluation 进行证明，我们仍然用GKR with ZK Argument中的例子：
+$$
+
+\widetilde{V}_2(2, (3, 4)) \overset{?}= 2
+
+$$
+
+<br />
+
+需要verifier基于Step ZERO发送过来的每个witness对应的commitment 计算witness MLE上的evaluation值对应的commitment：
+$$
+\begin{aligned}
+
+\widetilde{w}(x_2, x_3) &= 2 \sdot (1 - x_2)(1 - x_3) + 3 \sdot (1 - x_2)x_3 + 2 \sdot x_2 (1 - x_3) + 4 \sdot x_2 x_3 \\
+
+&\Downarrow \\
+
+\text{commit}(\widetilde{w}(x_2, x_3) ) &= \textcolor{red}{\text{commit}(2)} \sdot (1 - x_2)(1 - x_3) + \textcolor{red}{\text{commit}(3)} \sdot (1 - x_2)x_3 + \textcolor{red}{\text{commit}(2)} \sdot x_2 (1 - x_3) + \textcolor{red}{\text{commit}(4)} \sdot x_2 x_3 \\
+
+\end{aligned}
+$$
+
+<br />
+
+它的问题在于，需要对每个witness进行commit(上面红色标记的部分)，导致communication cost 和 verification cost都会比较高，与witness的长度成线性关系$O(|w|)$，Hyrax 对其进行了压缩，变成了子线性关系$O(\sqrt{|w|})$。
+
+<br />
+
+## Square-root commitment scheme
+
+<br />
+
+Hyrax 在这里的整体思路是，把上面witness evaluation 的commitment的计算代理给了prover，prover 提供计算结果的同时需要提供相应的proof给verifier 验证，当然了verifier 验证的成本肯定要低于自己计算的成本，满足succinct 特性：
+$$
+O(\sqrt{|w|}) < O(|w|)
+$$
+
+把witness evaluation 的commitment的证明最终变成了一个IPA 的证明。
+
+<br />
+
+实例中$|w| = 2^l = 4, l = 2$。
+
+<br />
+
+### Evaluation and Proof
+<br />
+
+prover 把witness 向量$w$转换成一个矩阵$T$表示，$T_{i + 2^{l/2} \sdot j}$ 其中$i、j$分别代表行和列：
+$$
+T = 
+
+\begin{bmatrix}
+w_0 & w_2 \\
+
+w_1 & w_3 \\
+\end{bmatrix}
+$$
+
+<br />
+
+按行进行commit：
+$$
+T_1 = [w_0]_{g_1} + [w_2]_{g_2} + [r_{T_1}]_h \\
+T_2 = [w_1]_{g_1} + [w_3]_{g_2} + [r_{T_2}]_h \\
+$$
+
+把witness的commitment $T_1、T_2$ 连同evaluation 的commitment $\omega$ 一起发送给verifier。
+
+<br />
+
+### Compressed Lagrange Basis
+<br />
+
+基于MLE 多项式：
+$$
+
+\widetilde{w}(r_1, r_2, ..., r_l) = \sum_{b \in \{0, 1\}^l} w(b) \sdot \prod_{k \in \{1, 2, ..., l\}} \chi_{b_k}(r_k)
+
+$$
+
+<br />
+
+我们把Lagrange Basis Polynomial $\chi_b$ 一拆为二：
+$$
+\begin{aligned}
+
+\v{\chi}_b &= \prod_{k = 1}^{l/2}\chi_{b_k}(r_k) \\
+\^{\chi}_b &= \prod_{k = l/2 + 1}^{l}\chi_{b_k}(r_k) \\
+
+L &= (\v{\chi}_0, \v{\chi}_1, ..., \v{\chi}_{2^{l/2} - 1}) \\
+
+R &= (\^{\chi}_0, \v{\chi}_{w^{l/2}}, ..., \v{\chi}_{2^{l/2} \sdot (2^{l/2} - 1)}) \\
+
+\end{aligned}
+$$
+
+<br />
+
+结合上面的witness 矩阵$T$， 一定有：
+$$
+\begin{aligned}
+
+L \sdot T \sdot R &= \sum_{b \in \{0, 1\}^l} w(b) \sdot \prod_{k \in \{1, 2, ..., l\}} \chi_{b_k}(r_k) \\
+
+&= \widetilde{w}(r_1, r_2, ..., r_l)
+
+\end{aligned}
+$$
+
+<br />
+
+> 通过两组$\sqrt{n}$的子向量来represent 长度为$n$的整个向量，这里应该是一种很常见的succinct 做法。比如protostar 论文中3.5 节compressed verification也是采用了这种技巧，细节可以参考 https://learnblockchain.cn/article/6503
+
+<br />
+
+所以verifier 需要自己计算拿到两个向量(为了简化，实例中$|w| = 4$，所以$2\sqrt{|w|} = 4$其实是没有起到compress作用的，如果$|w| > 4$compress 效果就出来了，读者可以自行举例)：
+$$
+
+L = (\v{\chi}_0, \v{\chi}_1) \\
+R = (\v{\chi}_2, \v{\chi}_3) \\
+
+$$
+
+并计算得到：
+$$
+
+T' = \sum_{k = 1} L_k \sdot T_k
+
+$$
+其中 $T_k$ 为commitment，$L_k$ 为verifier 刚计算好的scalar，最终verifier 拿到一个commitment $T'$。
+
+<br />
+
+### IPA for Evaluation Verification
+
+<br />
+
+最终verifier 需要对prover 提供的evaluation的commitment进行验证，这时的验证就变成了标准的IPA 验证：
+$$
+
+\lang \textcolor{red}{T'}, R \rang \overset{?}= \textcolor{red}{\omega}
+
+$$
+
+关于IPA 的执行过程这里就不再赘述了，可以参考上面的IPA Protocol Overview。
+
+<br />
+
+# Summary
+
+到此，Hyrax 协议也就完整了。简单总结一下，Hyrax 本质就是一套GKR 协议，它在proof size 和 verification 方面做了一些工作。
+
+<br />
+
+# References
+<br />
+
+【1】Hyrax 论文：https\://eprint.iacr.org/2017/1132.pdf
+
+【2】PAZK by Thaler：https\://people.cs.georgetown.edu/jthaler/ProofsArgsAndZK.pdf
+
+【3】protostar compressed verification: https://learnblockchain.cn/article/6503
