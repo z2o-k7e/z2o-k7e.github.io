@@ -1,28 +1,35 @@
-![](http://imagesoda.oss-cn-beijing.aliyuncs.com/Sodaoo/2023-09-16-031408.png)
+[TOC]
 
-https://hammster.vercel.app/
+Learning Materials: 
+```bash
+Author: Yu Jiang Tham  ytham
+Demo: https://hammster.vercel.app/
+Demo-Github: https://github.com/ytham/hammster
+```
 
- - private input : vec a / vec b
+### Overview
+
+Hammster is a Next.js web app plus a ZK circuit written in [halo2](https://halo2.dev/). It takes two 8-length vector inputs of binary digits and their [Hamming distance](https://en.wikipedia.org/wiki/Hamming_distance) and generates a proof that the two inputs are the claimed hamming distance away from each other.
+
+ - private input : vec a / vec b   (two 8-length vector inputs)
  - public input : distance n
- - prove that you know a pair of $(a, b)$ whose distance is  `n`
+ - prove that you know a pair of $(a, b)$ whose distance is `n`
 
-![[layout.png]]
+Circuit drawing :
+
+![](imgs/hammster/draw.png)
  - assign private values is a whole block.
  - assign xor region is single blocks' rearrange.
 
-```rust
-cargo install wasm-pack
-```
+XOR 的逻辑可以通过公式`out = a + b - 2ab`来表示。而约束 `lhs.clone() + rhs.clone() - Expression::Constant(F::ONE.double()) * lhs * rhs - out`确实是检查这个逻辑的。当这个约束等于0时，就意味着 XOR 逻辑是正确的
 
-这个逻辑可以通过公式`out = a + b - 2ab`来表示。而约束`lhs.clone() + rhs.clone() - Expression::Constant(F::ONE.double()) * lhs * rhs - out`确实是检查这个逻辑的。当这个约束等于0时，就意味着XOR逻辑是正确的
+然而，回到您之前关于累加器门的问题，这确实很困惑。因为如果`advice[2]`列用于存储 XOR 的结果，那么这些结果都是0或1，如何使用这一列来存储累加的值呢？我同意，它们应该是不兼容的。除非存在其他方式或其他约束，来确保累加的结果只能是 0 或 1 
 
-然而，回到您之前关于累加器门的问题，这确实很困惑。因为如果`advice[2]`列用于存储XOR的结果，那么这些结果都是0或1，如何使用这一列来存储累加的值呢？我同意，它们应该是不兼容的。除非存在其他方式或其他约束，来确保累加的结果只能是 0 或 1 。
+如果我们回到累加器门，确实，它试图确保当前行的值等于之前`BINARY_LENGTH`行的和，这在逻辑上是不合理的，除非`advice[2]`列的其他部分确实只有 0 和 1
 
-如果我们回到累加器门，确实，它试图确保当前行的值等于之前`BINARY_LENGTH`行的和，这在逻辑上是不合理的，除非`advice[2]`列的其他部分确实只有0和1。
+不过，另一种可能性是，这些门是为不同的操作阶段设计的，即在某些阶段`advice[2]`用作XOR的输出，而在其他阶段则用作累加器。如果这是情况，那么可能有其他的选择器或约束确保在给定时刻只有一个门是激活的
 
-不过，另一种可能性是，这些门是为不同的操作阶段设计的，即在某些阶段`advice[2]`用作XOR的输出，而在其他阶段则用作累加器。如果这是情况，那么可能有其他的选择器或约束确保在给定时刻只有一个门是激活的。
-
-为了给您一个确切的答案，我们可能需要更全面地查看这个约束系统，以及`advice[2]`列如何在不同的阶段中被使用。
+为了给您一个确切的答案，我们可能需要更全面地查看这个约束系统，以及`advice[2]`列如何在不同的阶段中被使用
 
 
 #### load_private_and_check_binary()
@@ -113,3 +120,60 @@ layouter.assign_region(
     }
 ```
 
+
+
+### Usage
+
+Prerequisites
+
+- [Node.js & NPM](https://nodejs.org/en/download)
+- [Rust](https://www.rust-lang.org/tools/install)
+- [rustup](https://rustup.rs/)
+- run `rustup toolchain install stable-aarch64-apple-darwin` (for users w/ Apple M processors)
+- [wasm-pack](https://developer.mozilla.org/en-US/docs/WebAssembly/Rust_to_wasm#rust_environment_setup)
+
+> Note: brew install ruts is not work, use official Rust installment.
+
+
+vscode local configure:
+
+```rust
+// ./cargo/config
+
+[target.wasm32-unknown-unknown]
+rustflags = ["-C", "target-feature=+atomics,+bulk-memory,+mutable-globals"]
+
+[unstable]
+build-std = ["panic_abort", "std"]
+
+[build]
+target = "x86_64-apple-darwin"
+
+```
+
+Build & Run:
+
+```bash
+cargo install wasm-pack
+
+cd circuits
+cargo run hammster
+```
+
+Frontend: 
+
+```bash
+# Getting started
+# Install required dependencies:
+$ yarn
+
+# Start the next.js server:
+yarn dev
+
+# Build the wasm packages (you will need to remove `target = "aarch64-apple-darwin"` in `./circuits/.cargo/config` if not using an Apple M processor; I have not tried w/ other platforms):
+yarn build:wasm
+```
+
+### References
+ - Demo: https://hammster.vercel.app/
+ - Demo-Github: https://github.com/ytham/hammster
