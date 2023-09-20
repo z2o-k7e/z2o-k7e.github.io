@@ -51,6 +51,8 @@
 - [Lecture2:Introduction to Modern SNARKs](./zk-everything/zk-learning-miles/Lecture2:Introduction%20to%20Modern%20SNARKs.md)
 - [Lecture12:ZKEVM](./zk-everything/zk-learning-miles/Lecture12:ZKEVM.md)
 - [Lecture16:Hardware acceleration](./zk-everything/zk-learning-miles/Lecture16:Hardware%20acceleration.md)
+- [Spartan preliminary: GKR with ZK Argument](./zk-everything/zk-everything-joe/GKR_with_ZK_Argument.md)
+- [Spartan preliminary: Hyrax](./zk-everything/zk-everything-joe/Hyrax.md)
 
 ---
 # ZKP Public Goods
