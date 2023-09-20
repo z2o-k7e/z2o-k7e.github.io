@@ -29,7 +29,7 @@
 2. 可以在 `./src/zk-everything` 下 `mkdir` 一个以自己名字命名的文件夹
 3. `src/SUMMARY.md` 是前端网站显示的文件组织目录，可以修改该文件，找到一个合适的放置目录，将文章的本地 `.md` 文件位置链接过去
 4. 正常的 PR 流程
-5. 领取 Bounty
+5. 经老师们审核后领取 Bounty！
 
 #### 文章格式
 
@@ -37,11 +37,11 @@
 
 ```bash
 # 1. 文章 metadata 
-#   比如 「贡献者作者信息 (required）」，  「时间、标签 labels、联系方式 (optional） 」
+# metadata 如如 「贡献者作者信息 (required）」，  「标签、时间、联系方式 (optional） 」
 > 作者: 如 @大壮 https://github.com/dazhuang      
-> 标签: 如 halo2, Nova, STARK, Folding schema ....  --- (optional）
-> (可选)时间: 2023-09-10  --- (optional）
-> (可选)联系方式:  --- (optional）
+> 标签: 如 halo2, Nova, STARK, Folding schema .... 
+> 时间: 2023-09-10
+> 联系方式:
 
 # 2. 文章开始之前，可以添加 [TOC] 来生成该文章的 Table of contents（目录）
 [TOC]
@@ -54,9 +54,18 @@
 # 4. 文章末尾可以列出 「致谢」 & 「参考文献 References」
 ```
 
+
+
+----
+
+
+
 如何添加图片？
+
  - 推荐直接在 `.md` 文章同级目录 `mkdir ./imgs` 目录，mdbook 中直接引用该 imgs 目录相对路径
  - 如果您使用的是 OSS 云存储，则无需考虑图片存储，只需一个 `.md` 文件即可~
+
+
 
 ##### 配套代码(optional)
 
