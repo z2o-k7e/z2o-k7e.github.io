@@ -168,9 +168,9 @@
                 <div id="content" class="content">
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
-<p><strong>Welcome to</strong>
-<img src="logo.png" alt="" /></p>
-<p><strong>World !</strong></p>
+<p><span style="color: grey;"><strong>Welcome to the</strong></span></p>
+<p><img src="logo.png" alt="" /></p>
+<p><span style="color: grey;"><strong>World!</strong></span></p>
 <!-- 这边 logo 的寻址地点是 .src , 所以本地 MD 渲染不会显示，mkbook serve --open 能看到就好了-->
 <br />
 <blockquote>
@@ -184,27 +184,43 @@
 <li>可以在 <code>./src/zk-everything</code> 下 <code>mkdir</code> 一个以自己名字命名的文件夹</li>
 <li><code>src/SUMMARY.md</code> 是前端网站显示的文件组织目录，可以修改该文件，找到一个合适的放置目录，将文章的本地 <code>.md</code> 文件位置链接过去</li>
 <li>正常的 PR 流程</li>
-<li>领取 Bounty</li>
+<li>经老师们审核后领取 Bounty！</li>
 </ol>
 <h4 id="文章格式"><a class="header" href="#文章格式">文章格式</a></h4>
 <h5 id="内容模板"><a class="header" href="#内容模板">内容模板:</a></h5>
-<pre><code class="language-bash"># 1. 文章 metadata 
-#   比如 「贡献者作者信息 (required）」，  「时间、标签 labels、联系方式 (optional） 」
-&gt; 作者: 如 @大壮 https://github.com/dazhuang      
-&gt; 标签: 如 halo2, Nova, STARK, Folding schema ....  --- (optional）
-&gt; (可选)时间: 2023-09-10  --- (optional）
-&gt; (可选)联系方式:  --- (optional）
-
-# 2. 文章开始之前，可以添加 [TOC] 来生成该文章的 Table of contents（目录）
-[TOC]
-
-# 3. 文章正文（Markdown 格式的正文内容，无需担心 github 糟糕的渲染）
----- 正文内容... ----
----- 正文内容... ----
----- 正文内容... ----
-
-# 4. 文章末尾可以列出 「致谢」 &amp; 「参考文献 References」
+<ol>
+<li>文章 metadata ，如 「贡献者作者信息 (required）」，  「标签、联系方式 (optional） 」</li>
+</ol>
+<pre><code class="language-bash">&gt; 作者: 如 @大壮 https://github.com/dazhuang      
+&gt; 标签: 如 halo2, Nova, STARK, Folding schema .... # mdbook 暂不支持 tag 功能
+&gt; 时间: 2023-09-10
 </code></pre>
+<blockquote>
+<p>作者：<a href="https://github.com/Demian101">Demian</a></p>
+</blockquote>
+<p>or</p>
+<blockquote>
+<p>Author: Demian</p>
+</blockquote>
+<ol start="2">
+<li>文章开始之前，可以添加 <code>[TOC] </code>来生成该文章的 Table of contents（目录）</li>
+</ol>
+<pre><code class="language-bash">[TOC]
+</code></pre>
+<ol start="3">
+<li>
+<p>文章正文（Markdown 格式的正文内容，无需担心 github 糟糕的渲染）</p>
+</li>
+<li>
+<p>文章末尾可以列出 「致谢」 &amp; 「参考文献 References」</p>
+</li>
+</ol>
+<pre><code># References
+ - [trapdoor-tech halo2 book](https://trapdoor-tech.github.io/halo2-book-chinese/user/simple-example.html)
+ - [icemelon/HaiCheng Shen](https://github.com/icemelon/halo2-examples/blob/master/src/fibonacci/example3.rs)
+ - [0xPARC halo2](https://learn.0xparc.org/)
+</code></pre>
+<hr />
 <p>如何添加图片？</p>
 <ul>
 <li>推荐直接在 <code>.md</code> 文章同级目录 <code>mkdir ./imgs</code> 目录，mdbook 中直接引用该 imgs 目录相对路径</li>
@@ -237,6 +253,11 @@ $ mkbook serve --open       # 本地预览
 <li>公式测试：可以在 <a href="katex.org">katex.org</a> 测试，大家在 Obisidian notes 里怎么写公式，前端就会咋显示，</li>
 </ul>
 <p>（contribution by PR process）</p>
+<br />
+<br />
+<br />
+<br />
+<br />
 <ul>
 <li><a href="#playlists">Playlists</a></li>
 <li><a href="#project-description">Project Description:</a>

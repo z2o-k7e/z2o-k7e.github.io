@@ -8,6 +8,7 @@ description = "零知世界"
 
 [preprocessor.katex]
 after = ["links"]
+macros = "macros.txt" # ref from https://github.com/Trapdoor-Tech/Halo2-Book/blob/master/book/macros.txt
 
 [preprocessor.toc]
 command = "mdbook-toc"
@@ -26,5 +27,3 @@ level = 1        # the depth to start folding
 
 [output.html.search]
 enable = true
-
-

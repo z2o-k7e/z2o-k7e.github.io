@@ -1,7 +1,12 @@
-**Welcome to**
+
+
+<span style="color: grey;">**Welcome to the**</span>
+
 ![](logo.png)
 
-**World !**
+
+
+<span style="color: grey;">**World!**</span>
 
 <!-- 这边 logo 的寻址地点是 .src , 所以本地 MD 渲染不会显示，mkbook serve --open 能看到就好了-->
 
@@ -35,23 +40,39 @@
 
 ##### 内容模板: 
 
+1. 文章 metadata ，如 「贡献者作者信息 (required）」，  「标签、联系方式 (optional） 」
+
 ```bash
-# 1. 文章 metadata 
-# metadata 如如 「贡献者作者信息 (required）」，  「标签、时间、联系方式 (optional） 」
 > 作者: 如 @大壮 https://github.com/dazhuang      
-> 标签: 如 halo2, Nova, STARK, Folding schema .... 
+> 标签: 如 halo2, Nova, STARK, Folding schema .... # mdbook 暂不支持 tag 功能
 > 时间: 2023-09-10
-> 联系方式:
+```
 
-# 2. 文章开始之前，可以添加 [TOC] 来生成该文章的 Table of contents（目录）
+> 作者：[Demian](https://github.com/Demian101)
+
+or
+
+> Author: [Demian](https://github.com/Demian101)
+
+
+
+2. 文章开始之前，可以添加 `[TOC] `来生成该文章的 Table of contents（目录）
+
+```bash
 [TOC]
+```
 
-# 3. 文章正文（Markdown 格式的正文内容，无需担心 github 糟糕的渲染）
----- 正文内容... ----
----- 正文内容... ----
----- 正文内容... ----
 
-# 4. 文章末尾可以列出 「致谢」 & 「参考文献 References」
+
+3. 文章正文（Markdown 格式的正文内容，无需担心 github 糟糕的渲染）
+
+4. 文章末尾可以列出 「致谢」 & 「参考文献 References」
+
+```
+# References
+ - [trapdoor-tech halo2 book](https://trapdoor-tech.github.io/halo2-book-chinese/user/simple-example.html)
+ - [icemelon/HaiCheng Shen](https://github.com/icemelon/halo2-examples/blob/master/src/fibonacci/example3.rs)
+ - [0xPARC halo2](https://learn.0xparc.org/)
 ```
 
 
@@ -103,6 +124,18 @@ Tips :
  - 公式测试：可以在 [katex.org](katex.org) 测试，大家在 Obisidian notes 里怎么写公式，前端就会咋显示，
 
 （contribution by PR process）
+
+
+
+<br />
+
+<br />
+
+<br />
+
+<br />
+
+<br />
 
 
 
