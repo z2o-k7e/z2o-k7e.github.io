@@ -1,3 +1,7 @@
+> author: [@Demian](https://github.com/Demian101)
+> 
+> references: https://learn.0xparc.org/materials/halo2/learning-group-1/exercise-3
+
 [TOC]
 ### Goal 
 
@@ -40,7 +44,7 @@ our range is 8 bits, but we want to perform a range check on 4 bits.
 - 上限值是 `1 << 4` = 16(不含)   因此，该范围表示的数字集合为 `{8, 9, 10, ..., 15}`
 - eg. `1000` 是 8 , `1111` 是  `8+4+2+1 = 15 `
 
-这个范围用于确保在给定的 `num_bits` 下，数字的值在预期的最小和最大之间
+这个范围用于确保在给定的 `num_bits` 下，他所能表示的数字的值在预期的最小和最大之间
 
 ### lookup table - table.rs
 
