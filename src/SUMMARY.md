@@ -61,6 +61,14 @@
 - [ch5-plonk-intro](./public%20goods/5-plonk-intro.md)
 
 ---
+
+
+# ZK Materials
+
+- [ZK Materials](materials/ZK-Materials.md)
+
+
+
 # 经验心得
 
 - [郭宇：ZK 技术的学习心得和经验分享](./exp/guoyu.md)
