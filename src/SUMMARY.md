@@ -8,17 +8,21 @@
 
 - [ZKP 新手村入门攻略](./zk-everything/zkp-learning-Roadmap.md)
 
+# 探索零知识证明系列
+- [（一）初识「零知识」与「证明」](./zkp-intro/1/zkp-back.md)
+- [（二）理解「模拟」](./zkp-intro/2/zkp-simu.md)
+- [（三）寻找「知识」](./zkp-intro/3/zkp-pok.md)
+- [（四）随机「挑战」](./zkp-intro/4/zkp-rom.md)
+- [（五）埋藏「秘密」](./zkp-intro/5/zkp-crs.md)
 
-
-# [理解Plonk](./plonk-intro-cn/plonk-intro.md)
-
- - [1-Plonkish Arithmetization](./plonk-intro-cn/plonk-arithmetization.md)
- - [2-多项式编码](./plonk-intro-cn/plonk-lagrange-basis.md)
- - [3-置换证明](./plonk-intro-cn/plonk-permutation.md)
- - [4-算术约束与拷贝约束](./plonk-intro-cn/plonk-constraints.md)
- - [5-多项式承诺](./plonk-intro-cn/plonk-polycom.md)
- - [6-实现  Zero Knowledge](./plonk-intro-cn/plonk-randomizing.md)
- - [7-Lookup Gate](./plonk-intro-cn/plonk-lookup.md)
+# [理解Plonk系列](./plonk-intro-cn/plonk-intro.md)
+- [1-Plonkish Arithmetization](./plonk-intro-cn/plonk-arithmetization.md)
+- [2-多项式编码](./plonk-intro-cn/plonk-lagrange-basis.md)
+- [3-置换证明](./plonk-intro-cn/plonk-permutation.md)
+- [4-算术约束与拷贝约束](./plonk-intro-cn/plonk-constraints.md)
+- [5-多项式承诺](./plonk-intro-cn/plonk-polycom.md)
+- [6-实现  Zero Knowledge](./plonk-intro-cn/plonk-randomizing.md)
+- [7-Lookup Gate](./plonk-intro-cn/plonk-lookup.md)
 
 
 
