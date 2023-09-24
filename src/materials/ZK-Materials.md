@@ -1,6 +1,6 @@
-> Last update: 2023-09-22 [^1]
-> 
-> 📢 📢   contribute 请 fork [zkp-co-learning.github.io](https://github.com/zkp-co-learning/zkp-co-learning.github.io) PR  即可！  PS:  每个标题 title 对应的 Content Block 里，最上部分是新近的内容资料，下部分是老旧的
+-  Last update: 2023-09-24 [^1]
+- 📢 Feel free to contribute!  Pls fork [zkp-co-learning.github.io](https://github.com/zkp-co-learning/zkp-co-learning.github.io) and PR! 
+- PS: In each title's Content Block, the top part is newer, below is older.
 
 [TOC]
 # Nova / Folding schemas
@@ -128,6 +128,8 @@ https://starknet-astro.super.site/
 
 # ZKML
 
+[Zator: Verified inference of a 512-layer neural network using recursive SNARKs](https://github.com/lyronctk/zator)v
+
 TensorPlonk: A “GPU” for ZKML, Delivering 1,000x Speedups https://medium.com/@danieldkang/tensorplonk-a-gpu-for-zkml-delivering-1-000x-speedups-d1ab0ad27e1c
 
 
@@ -141,8 +143,12 @@ ZKML slides： https://www.canva.com/design/DAFi3o7FiR4/d9LMeacr6QQwYy9C0BQHgA/v
 这篇 ZKML 文章很顶:  https://mirror.xyz/sevenxventures.eth/3USbrj7kcK7lyq_7upA4iyWV5pWMII7KrM40z5zpEXo
 
 
-
 # zkVM
+
+https://github.com/vacp2p/zk-explorations
+ - 对不同 lib 和 algo 实现的 VM 做的性能测试 benchmark
+
+- snarkVM: Aleo 已经把 Marlin 更新成 Varuna 了 [varuna](https://github.com/AleoHQ/snarkVM/tree/testnet3/algorithms/src/snark/varuna)
 
 [徒手写 zkVM  - https://eprint.iacr.org/2023/1032.pdf](https://eprint.iacr.org/2023/1032.pdf)
  - ZERO KNOWLEDGE VIRTUAL MACHINE STEP BY STEP
@@ -172,7 +178,7 @@ Nova VM 来了, 看不过来了。。。。
 我在找一个write a vm from scratch的课程
  - 要是只是vm不要求zkvm那就太多了，比如5天前的这篇 https://andreabergia.com/blog/2023/07/i-have-written-a-jvm-in-rust/
 
-![](imgs/zkvm/1.pic.jpg)
+![](attachs/imgs/zkvm/1.pic.jpg)
 上周测试了一下 PSE evm circuit，生成的 raw proof 用 evm 验证需要大约 4000万+ gas。（本地调高了 block gas limit）
 也测试了 scroll-prover 的 chunk proof，evm 验证大概需要 40万+ gas。感觉 gas fee 这块至少有 100 倍的以上的提升。
 
@@ -324,8 +330,28 @@ jupyter lab
 - [Awesome zkEVM](https://github.com/LuozhuZhang/awesome-zkevm)
 - [Awesome Zero Knowledge](https://github.com/ventali/awesome-zk)
 
+## Quantum
+
+[Quantum Resistance and the Signal Protocol](https://signal.org/blog/pqxdh/)
+ - Signal 已经集成 Kyber了
+
+#### Curves
+
+- [The Pasta Curves for Halo 2 and Beyond](https://electriccoin.co/blog/the-pasta-curves-for-halo-2-and-beyond/)
+- [Mina Book: Pasta Curves](https://o1-labs.github.io/proof-systems/specs/pasta.html)
+- [Pallas and Elliptic Curves](https://medium.com/asecuritysite-when-bob-met-alice/pallas-and-elliptic-curves-f34115904b02)
+- [A survey of elliptic curves for proof systems](https://eprint.iacr.org/2022/586.pdf)
+- [Revisiting cycles of pairing-friendly elliptic curves](https://eprint.iacr.org/2022/1662.pdf)
+- [Pairings in Rank-1 Constraint Systems](https://eprint.iacr.org/2022/1162.pdf)
+- https://github.com/zcash/pasta_curves
+- https://hackage.haskell.org/package/pasta-curves-0.0.1.0/docs/PastaCurves.html
+- https://github.com/nccgroup/pasta-curves
+- https://docs.rs/ark-pallas/0.3.0/ark_pallas/
+
 
 ## Others (can't archive)
+
+[Eos: Efficient Private Delegation of zkSNARK Provers](https://www.usenix.org/conference/usenixsecurity23/presentation/chiesa)
 
 Lurk Beta 估计还得半年以上 https://github.com/lurk-lab/lurk-rs/issues/657
 
@@ -505,4 +531,4 @@ https://twitter.com/i/spaces/1ynJOaMnBlOKR
 
 
 
-[^1]  巨量资料 FYI，大部分出自网络及群聊整理，时间有限出处 没有做细致排版，请恕无法极尽详实覆盖，如需加上出处请联系作者 ~
+[^1] 巨量资料 FYI，大部分出自网络及群聊整理，时间有限出处 没有做细致排版，请恕无法极尽详实覆盖，如需加上出处请联系作者 ~
