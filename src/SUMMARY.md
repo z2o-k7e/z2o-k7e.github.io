@@ -6,7 +6,7 @@
 
 # [ZKP-Tutorial](./zk-everything/zkp-learning-Roadmap.md)
 
-- [ZKP 新手村入门攻略](./zk-everything/zkp-learning-Roadmap.md)
+- [ZKP 新手村入门攻略](./zk-everything/zk-roadmap.md)
 
 # 探索零知识证明系列
 - [（一）初识「零知识」与「证明」](./zkp-intro/1/zkp-back.md)
