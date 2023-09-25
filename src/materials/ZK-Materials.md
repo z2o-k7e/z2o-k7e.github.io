@@ -1,6 +1,11 @@
--  Last update: 2023-09-24 [^1]
-- 📢 Feel free to contribute!  Pls fork [zkp-co-learning.github.io](https://github.com/zkp-co-learning/zkp-co-learning.github.io) and PR! 
-- PS: In each title's Content Block, the top part is newer, below is older.
+Last update: 2023-09-24 [^1]
+
+📢 Feel free to contribute!  Pls fork [zkp-co-learning.github.io](https://github.com/zkp-co-learning/zkp-co-learning.github.io) and PR! 
+
+PS: In each title's Content Block, the top part is newer, below is older.
+
+
+[^1] 巨量资料 FYI，大部分出自网络及群聊整理，时间有限出处 没有做细致排版，请恕无法极尽详实覆盖，如需加上出处请联系作者 ~
 
 [TOC]
 # Nova / Folding schemas
@@ -531,4 +536,3 @@ https://twitter.com/i/spaces/1ynJOaMnBlOKR
 
 
 
-[^1] 巨量资料 FYI，大部分出自网络及群聊整理，时间有限出处 没有做细致排版，请恕无法极尽详实覆盖，如需加上出处请联系作者 ~

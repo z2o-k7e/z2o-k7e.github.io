@@ -26,6 +26,16 @@
 
 
 
+# 从零开始学习 zk-SNARK
+
+- [1-Polynomial-Interaction-and-Proof](./zk-snarks/1-Polynomial-Interaction-and-Proof.md)
+- [2-Non-interactivity&Distributed-Setup](./zk-snarks/2-Non-interactivity&Distributed-Setup.md)
+- [3-General-Purpose-Computation](./zk-snarks/3-General-Purpose-Computation.md)
+- [4-Construction-Properties.md](./zk-snarks/4-Construction-Properties.md)
+- [5-Pinocchio-Protocol](./zk-snarks/5-Pinocchio-Protocol.md)
+
+
+
 # Halo2
 
  - [1-Simple Examples](./halo2/1-Simple-Example.md)
