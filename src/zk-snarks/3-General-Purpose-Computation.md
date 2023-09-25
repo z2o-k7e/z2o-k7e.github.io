@@ -3,7 +3,6 @@
 > - 校对：valuka@安比实验室
 > - [本系列文章](https://arxiv.org/pdf/1906.07221.pdf)已获作者中文翻译授权
 > - [翻译原链接](https://secbit.io/blog/2019/12/25/learn-zk-snark-from-zero-part-one/)
-> - 公式上色、勘误：[@Demian](https://github.com/Demian101)
 
 [TOC]
 
@@ -338,11 +337,14 @@ $$
 
 $$
 \begin{aligned}
-&P: \quad g^{vl(s)} \cdot g^{\textcolor{red}{v'}} = g^{vl(s)+v'} \\
-&V: \quad g^{ \textcolor{green}{\alpha vl(s)}} \cdot (g^ \textcolor{green}{\alpha} )^{\textcolor{red}{v'}} = g^{\textcolor{blue}{\alpha (vl(s)+v')}} \\
-&V: \quad e(g^{\textcolor{green}{\alpha(vl(s)+v'})},\ g) = e(g^{\textcolor{blue}{vl(s)+v'}},g^\textcolor{blue}{\alpha}) \quad \leftarrow 恒等
+&P: \quad g^{vl(s)} \cdot g^{\color{red}{v'}} = g^{vl(s)+v'} \\
+&V: \quad g^{ \color{green}{\alpha vl(s)}} \cdot (g^ {\color{green}{\alpha}} )^{\color{red}{v'}} = g^{\color{blue}{\alpha (vl(s)+v')}} \\
+&V: \quad e(g^{\color{green}{\alpha(vl(s)+v'})},\ g) = e(g^{\color{blue}{vl(s)+v'}}, g^{\color{blue}{\alpha}}) \quad \leftarrow 2  \ \ are \ identically \ \  equal
 \end{aligned}
 $$
+
+
+>  identically equal: 恒等
 
 由于 verification key 中包含了加密了的  $α$  : $g^\alpha$ ， 所以 $P$ 可以用多项式加（或者减）任意一个值 $v'$ 而不会破坏 Pairing 的成立.  后面我们会解决掉这个 bug
 

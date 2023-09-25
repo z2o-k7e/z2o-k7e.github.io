@@ -3,10 +3,8 @@
 > - 校对：valuka@安比实验室
 > - [本系列文章](https://arxiv.org/pdf/1906.07221.pdf)已获作者中文翻译授权
 > - [翻译原链接](https://secbit.io/blog/2019/12/25/learn-zk-snark-from-zero-part-one/)
-> - 公式上色、勘误：[@Demian](https://github.com/Demian101)
 
 [TOC]
-
 ### Restricting a Polynomial (限制多项式)
 
 上文说到 : 
@@ -314,15 +312,15 @@ We are now ready to **consolidate** the **evolved** _zk-SNARKOP_ protocol. (准�
  - 选择随机数  $\delta$      ("零成本"的 zero-knowledge)
  - 构造随机化的证明(randomized proof) :   $π = (\textcolor{blue}{g^{\delta p(s)}}, \ \textcolor{green}{g^{\delta h(s)}}, \ \textcolor{red}{g^{\delta \alpha p(s)}})$
 
-**verification** 
+**verification**  :
 - Parse proof(解析证明)  $\pi$  as   $(g^p,g^h,g^{p'})$
 	- 我觉得这里的表述有问题, 因为 $V$ 是不知道 $\delta$ 的(也不需要知道) ,  $\delta$ 是 $P$ 用零知识武装自己的关键工具, $V$ 不需要解包或还原 $\delta$ ，$V$ 只需用 Pairing 验证证明的一致性 : 
 - 验证多项式约束： $e(g^{p'},g) = e(g^p,g^\alpha)$
 	- $e(g^{\textcolor{orange}{\alpha}} , \ \textcolor{blue}{g^{\delta p(s)}}) = e(\textcolor{red}{g^{\delta \alpha p(s)}}, \  g)$      
-	-      —— $\textcolor{orange}{\alpha}$ 保证 $P$  确实用了 $Setup$ 提供的 $g^{s^i}$
+	- —————— $\textcolor{orange}{\alpha}$ 保证 $P$  确实用了 $Setup$ 提供的 $g^{s^i}$
 - 验证多项式系数： $e(g^p,g) = e(g^{t(s)},g^h)$
 	- $e(g^{\delta p(s)}, g) = e(g^{t(s)}, \ \textcolor{green}{g^{\delta h(s)}})$      
-	-      ——  $\delta$  保护了 $P$ , 实现了零成本 Zero-knowledge
+	- ——————  $\delta$  保护了 $P$ , 实现了零成本 Zero-knowledge
 
 **Remark 3.3** 如果 pairing 的结果有可能在其它类似的乘法协议中被复用，那么这里就完全没有安全性可言了，因为这样的话 $P$ 可以自己构造  $g^{p'} = e(g^p,g^\alpha)$ , 
 > 这里我理解就是 $e(g^p,g^\alpha)$   被 $P$ 拿到了并复用了,  然后他可以发送   $e(g^p,g^\alpha)$  作为 $g^{p'}$ 的值来 cheat   $V$

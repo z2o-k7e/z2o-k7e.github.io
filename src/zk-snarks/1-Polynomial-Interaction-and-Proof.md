@@ -1,13 +1,8 @@
-> ----
->
 > - 作者：Maksym Petkus
 > - 翻译 & 注解：even@安比实验室（even@secbit.io）
 > - 校对：valuka@安比实验室
 > - [本系列文章](https://arxiv.org/pdf/1906.07221.pdf)已获作者中文翻译授权
 > - [翻译原链接](https://secbit.io/blog/2019/12/25/learn-zk-snark-from-zero-part-one/)
-> - 公式上色、勘误：[@Demian](https://github.com/Demian101)
->
-> ----
 
 [TOC]
 
@@ -290,7 +285,7 @@ $$E(v)=g^v \ \ (mod \quad n)$$
 > Besides, 密文之间的乘法操作可能会泄露有关明文的信息。特别是在某些强同态加密方案中，如果不小心执行操作，可能会导致信息泄露。
 
 虽然这些性质第一感觉看起来很不友好，但是这却构成了 _zk-SNARK_ 的基础。这个限制后面将在“加密值乘法 (_Multiplication of Encrypted Values_) ”一节中讲到。
-
+ 
 >  - 通过模运算形成的集合被称为「有限域」，
 >  - 通过计算指数再进行模运算形成的集合构成「循环群」。
 >  - 常见的同态加密方式除了整数幂取模之外，还有椭圆曲线上的倍乘。
@@ -345,13 +340,13 @@ $$
 
 **Verifier**    
 -   最后一步是 Verifier 校验
-	$$
-	\begin{aligned}
-	p &\overset{?}{=} t(s) ·h \quad   即 \\
-	g^{p} &\overset{?}{=} {(g^{h})}^{t(s)} \quad  =>  \\ 
-	g^{p} &\overset{?}{=} g^{t(s)·h}
-	\end{aligned}
-	$$     就能知道 Prover 到底是否有根 ; 为什么呢 ?
+$$
+\begin{aligned}
+p &\overset{?}{=} t(s) ·h \quad   即 \\
+g^{p} &\overset{?}{=} {(g^{h})}^{t(s)} \quad  =>  \\ 
+g^{p} &\overset{?}{=} g^{t(s)·h}
+\end{aligned}
+$$     就能知道 Prover 到底是否有根 ; 为什么呢 ?
 	- 注 :  $g^p$ 和 $g^h$ 是 Prover 传的 ,   $t(s)$ 是 Verifier 自己算的 ; 
 - 因为如果  $g^p ={(g^h)}^{t(s)}$  成立 (即 $g^p=g^{t(s) \cdot h}$  成立) , 根据同态性质 , 即  $p(x)=t(s) \cdot h$  成立 ,  就说明 Prover 真的有多项式的解 
 

@@ -3,7 +3,6 @@
 > - 校对：valuka@安比实验室
 > - [本系列文章](https://arxiv.org/pdf/1906.07221.pdf)已获作者中文翻译授权
 > - [翻译原链接](https://secbit.io/blog/2019/12/25/learn-zk-snark-from-zero-part-one/)
-> - 公式上色、勘误：[@Demian](https://github.com/Demian101)
 
 [TOC]
 

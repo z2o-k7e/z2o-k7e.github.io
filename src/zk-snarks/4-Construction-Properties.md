@@ -3,7 +3,6 @@
 > - 校对：valuka@安比实验室
 > - [本系列文章](https://arxiv.org/pdf/1906.07221.pdf)已获作者中文翻译授权
 > - [翻译原链接](https://secbit.io/blog/2019/12/25/learn-zk-snark-from-zero-part-one/)
-> - 公式上色、勘误：[@Demian](https://github.com/Demian101)
 
 [TOC]
 ### Construction Properties
@@ -177,7 +176,9 @@ $$
 把他们具体组合成 $\textcolor{green}{L(x)} 、 \textcolor{blue}{R(x)} 、 \textcolor{red}{O(x)}$  , 即相加对应操作数如 $\textcolor{green}{3 \cdot l_a(x) +1 \cdot l_w(x)}$  ...
 
 <img src="http://imagesoda.oss-cn-beijing.aliyuncs.com/Sodaoo/2023-08-01-073018.png" width="70%" />
-回味一下上图, Recall  $\color{brown}w=1, \ a=3, \ b=2$ : 
+
+Recap 上图:   $\color{brown}w=1, \ a=3, \ b=2$ : 
+
  - $L(X)=\textcolor{green}{x^2 -5x+7}$  经过了  $\{(1, \ 3_a), \ (2,\ 1_w), \ (3, \ 1_w)\}$
  - $R(X)=\frac{1}{2}x^2 -  \frac{5}{2}x +4$  经过了  $\{(1, \ 2_b), \ (2,\ 6_m - 3_a -2_b), \ (3, \ 1_w)\}$
  - $O(X)$ 则 经过了  $\{(1, \ 6_m), \ (2,\ 6_v - 3_a -2_b), \ (3, \ 1_w)\}$
@@ -405,9 +406,9 @@ $$g^{\beta_l s^0}=g^{\beta_l}$$
 
 > Recall 第三章的 **Remark 4.1** :  $P$ 可以在操作数多项式上分配一个 $\color{red}{v'}$ ，而 $V$ 不能检测到 , 下面具体描述了 $P$  对多项式进行特定加（或减）操作的能力，而这种操作不会影响 $V$ 配对验证 , 因而可以修改多项式使其超出 $V$ 的预期或 _prove a_ _different statement_，后面的章节我们将会解决掉这个问题 :
 > $$\begin{aligned}
-&P: \quad g^{vl(s)} \cdot g^{\textcolor{red}{v'}} = g^{vl(s)+v'} \\
-&V: \quad g^{ \textcolor{green}{\alpha vl(s)}} \cdot (g^ \textcolor{green}{\alpha} )^{\textcolor{red}{v'}} = g^{\textcolor{blue}{\alpha (vl(s)+v')}} \\
-&V: \quad e(g^{\textcolor{green}{\alpha(vl(s)+v'})},\ g) = e(g^{\textcolor{blue}{vl(s)+v'}},g^\textcolor{blue}{\alpha}) \quad \leftarrow 恒等
+&P: \quad g^{vl(s)} \cdot g^{\color{red}{v'}} = g^{vl(s)+v'} \\
+&V: \quad g^{ \color{green}{\alpha vl(s)}} \cdot (g^ {\color{green}{\alpha}} )^{\color{red}{v'}} = g^{\color{blue}{\alpha (vl(s)+v')}} \\
+&V: \quad e(g^{\color{green}{\alpha(vl(s)+v'})},\ g) = e(g^{\color{blue}{vl(s)+v'}},g^{\color{blue}{\alpha}}) \quad \leftarrow 恒等
 \end{aligned}$$
 > 由于 verification key 中包含了加密了的  $α$  : $g^\alpha$ ， 所以 $P$ 可以用多项式加（或者减）任意一个值 $v'$ 而不会破坏 Pairing 的成立.  后面我们会解决掉这个 bug
 
@@ -428,12 +429,14 @@ $$
 - 用分配不成比例的变量 _a_ 来建立左操作数多项式：  $L(x) = \textcolor{green}{a} \cdot l_a(x) +1$
 - 按照常规的方式构造右操作数多项式和输出多项式： $R(x) = r_1(x),\ \  O(x)=b \cdot o_b(x) + c \cdot o_c(x)$
 - 计算除数：  $h(x) = \frac{L(x) \cdot R(x) - O(x)}{t(x)}$
-- 计算加密值：$g^{L(s)} = (g^{l_a(s)})^\textcolor{green}{a} \cdot g^1$ ，并按照常规方式计算 $g^{R(s)},g^{O(s)}$ 
-- 计算 α-shifts 的加密值：$g^{αL(s)} = (g^{αl_a(s)})^\textcolor{green}{a} \cdot g^α$ ，并按照常规方式计算  $g^{αR(s)},g^{αO(s)}$
+- 计算加密值：$g^{L(s)} = (g^{l_a(s)})^{\color{green}{a}} \cdot g^1$  ，并按照常规方式计算 $g^{R(s)},g^{O(s)}$ 
+- 计算 α-shifts 的加密值： $g^{αL(s)} = (g^{αl_a(s)})^{\color{green}{a}} \cdot g^α$ ，并按照常规方式计算  $g^{αR(s)},g^{αO(s)}$
 - 计算变量一致性多项式：
+
 $$
-g^{Z(s)} = \prod_{i \in \{1,a,b,c\}}{\left(g^{β_ll_i(s)+β_rr_i(s)+β_oO_i(s)}\right)^\textcolor{red}{i} \cdot g^{β_l}} = g^{β_l(L(s)+1)+ β_rR(s) +β_oO(s)}
+g^{Z(s)} = \prod_{i \in \{1,a,b,c\}}{\left(g^{\beta_ll_i(s)+\beta_r r_i(s)+\beta_oO_i(s)}\right)^{\color{red}{i}} \cdot g^{\beta_l}} = g^{\beta_l(L(s)+1)+ \beta_rR(s) +\beta_oO(s)}
 $$
+
 其中下标 $i$ 代表对应变量的符号, 指数 $\textcolor{red}{i}$ 代表变量的值；以及未定义的变量多项式的值为 0。
 - set proof : 
 $$
