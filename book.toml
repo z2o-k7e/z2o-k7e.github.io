@@ -1,10 +1,12 @@
 [book]
 authors = ["Antalpha Labs"]
 language = "en"
-multilingual = false
+multilingual = true
 src = "src"
 title = "World of Z2O-K7E"
 description = "零知世界"
+
+# [preprocessor.translation]
 
 [preprocessor.katex]
 after = ["links"]
