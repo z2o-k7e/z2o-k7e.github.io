@@ -18,10 +18,15 @@ renderer = ["html"]
 marker = "[TOC]"
 max-level = 4
 
+[preprocessor.admonish]
+command = "mdbook-admonish"
+assets_version = "2.0.2" # do not edit: managed by `mdbook-admonish install`
+
 [output.html]
 mathjax-support = true
 no-section-label = true
 theme = "theme"
+additional-css = ["./mdbook-admonish.css"]
 
 [output.html.fold]
 enable = true   # whether or not to enable section folding

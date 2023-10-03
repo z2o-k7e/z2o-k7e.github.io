@@ -62,11 +62,16 @@ or
 [TOC]
 ```
 
+3. 可添加admonition block，语法见[这里](https://tommilligan.github.io/mdbook-admonish/)
+
+```admonish success title=""
+This will take a while, go and grab a drink of water.
+```
 
 
-3. 文章正文（Markdown 格式的正文内容，无需担心 github 糟糕的渲染）
+4. 文章正文（Markdown 格式的正文内容，无需担心 github 糟糕的渲染）
 
-4. 文章末尾可以列出 「致谢」 & 「参考文献 References」
+5. 文章末尾可以列出 「致谢」 & 「参考文献 References」
 
 ```
 # References
