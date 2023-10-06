@@ -1,13 +1,16 @@
 [book]
 authors = ["Antalpha Labs"]
 language = "en"
-multilingual = false
+multilingual = true
 src = "src"
 title = "World of Z2O-K7E"
 description = "零知世界"
 
+# [preprocessor.translation]
+
 [preprocessor.katex]
 after = ["links"]
+macros = "macros.txt" # ref from https://github.com/Trapdoor-Tech/Halo2-Book/blob/master/book/macros.txt
 
 [preprocessor.toc]
 command = "mdbook-toc"
@@ -15,10 +18,15 @@ renderer = ["html"]
 marker = "[TOC]"
 max-level = 4
 
+[preprocessor.admonish]
+command = "mdbook-admonish"
+assets_version = "2.0.2" # do not edit: managed by `mdbook-admonish install`
+
 [output.html]
 mathjax-support = true
 no-section-label = true
 theme = "theme"
+additional-css = ["./mdbook-admonish.css"]
 
 [output.html.fold]
 enable = true   # whether or not to enable section folding
@@ -26,5 +34,6 @@ level = 1        # the depth to start folding
 
 [output.html.search]
 enable = true
+
 
 

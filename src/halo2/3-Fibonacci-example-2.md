@@ -1,3 +1,8 @@
+> author: [@Demian](https://github.com/Demian101)
+> 
+> references: https://learn.0xparc.org/materials/halo2
+
+[TOC]
 ### Fibonacci Example 2
 
 回顾 Example-1 里的 Table：

@@ -1,3 +1,8 @@
+> author: [@Demian](https://github.com/Demian101)
+> 
+> references: https://learn.0xparc.org/materials/halo2
+
+[TOC]
 ### Goal
 
 证明一个 value 在给定的范围内，但不透露其具体的值（This helper checks that the value witnessed in a given cell is within a given range）。
@@ -489,6 +494,22 @@ fn test_range_check_2() {
 
 ![[Range-Check-impl-relationship.excalidraw]]
 
+
+### usage
+
+
+```bash
+cargo test -- --nocapture test_range_check_2
+
+# Draw
+cargo test --release --all-features xxx
+```
+
+ - the white column is the instance column, 
+ - the pink one is the advice and 
+ - the purple one is the selector.
+ - the green part shows the cells that have been assigned
+      - light green : selector not used.
 
 
 ### References : 
