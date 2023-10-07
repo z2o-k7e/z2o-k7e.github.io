@@ -67,6 +67,7 @@
 - [Lecture16:Hardware acceleration](./zk-everything/zk-learning-miles/Lecture16:Hardware%20acceleration.md)
 - [Spartan preliminary: GKR with ZK Argument](./zk-everything/zk-everything-joe/GKR_with_ZK_Argument.md)
 - [Spartan preliminary: Hyrax](./zk-everything/zk-everything-joe/Hyrax.md)
+- [Spartan In Depth](./zk-everything/zk-everything-joe/Spartan.md)
 
 ---
 # ZKP Public Goods
