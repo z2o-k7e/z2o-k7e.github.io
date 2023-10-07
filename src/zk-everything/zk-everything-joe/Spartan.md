@@ -921,6 +921,11 @@ $$
 
 <br />
 
+# One more thing
+纵观Spartan 整套协议，里面穿插着大量的Sumcheck 协议、IPA 协议，工程实现中应该会有相应的proof aggregation 的操作，具体细节可以参考Spartan [4]中的7.23 节和 8节。
+
+<br />
+
 # Thanks
 - 本着research 的原则，边“猜”paper 作者的意图边手动推理论证，试图用逻辑说服自己，期间免不了叨扰@even @郭宇 老师来求证自己的“猜想”，真诚表达对他们的感谢
 
