@@ -1,3 +1,8 @@
+> author: [@Demian](https://github.com/Demian101)
+> 
+> references: https://learn.0xparc.org/materials/halo2
+
+[TOC]
 ### Goal
 
 We want Prove that : `f(a, b, c) = if a == b {c} else {a - b}` 
