@@ -1,3 +1,39 @@
+> 作者: [白菜](https://github.com/PayneJoe) \
+> 标签: Sumcheck, IPA, GKR, Hyrax, VSM, Spice, Spark, Spartan \
+> 时间: 2023-10-06 
+
+<br />
+
+# Table of Content
+- [Table of Content](#table-of-content)
+- [Motivation](#motivation)
+- [Introduction](#introduction)
+- [VSM in Spice](#vsm-in-spice)
+  - [Takeaways](#takeaways)
+- [Memory Check for Spark](#memory-check-for-spark)
+  - [Problem](#problem)
+  - [Resolution](#resolution)
+      - [Initialization](#initialization)
+      - [Operation](#operation)
+      - [Verification](#verification)
+  - [Arithmetic](#arithmetic)
+  - [Circuit](#circuit)
+      - [for $\\widetilde{H\_{\\gamma\_1, \\gamma\_2}(Init\_{row})}$ evaluation](#for-widetildeh_gamma_1-gamma_2init_row-evaluation)
+      - [for $\\widetilde{H\_{\\gamma\_1, \\gamma\_2}(WS\_{row})}$ evaluation](#for-widetildeh_gamma_1-gamma_2ws_row-evaluation)
+      - [for $\\widetilde{H\_{\\gamma\_1, \\gamma\_2}(Audit\_{row})}$ evaluation](#for-widetildeh_gamma_1-gamma_2audit_row-evaluation)
+      - [for $\\widetilde{H\_{\\gamma\_1, \\gamma\_2}(RS\_{row})}$ evaluation](#for-widetildeh_gamma_1-gamma_2rs_row-evaluation)
+- [Spark Overview](#spark-overview)
+  - [Target of Spark](#target-of-spark)
+  - [Technic in Spark](#technic-in-spark)
+- [Spartan Protolcol Overview](#spartan-protolcol-overview)
+  - [Round One](#round-one)
+  - [Round Two](#round-two)
+  - [Round Three](#round-three)
+- [One more thing](#one-more-thing)
+- [Thanks](#thanks)
+- [References](#references)
+
+<br />
 
 # Motivation
 
@@ -32,7 +68,7 @@ VSM，全称Verifiable State Machine，这个概念源自Spice[1]。
 <br />
 
 以单个Query或者read operation为例，我们看看Spice 中的VSM 长什么样子：
-![Alt text](image-8.png)
+![Alt text](./img/image-8.png)
 
 <br />
 
@@ -169,7 +205,7 @@ $$
 
 <br />
 
-## Arithmatic
+## Arithmetic
 $$
 
 Init_{row} \cup WS_{row} \overset{?}= Audit_{row} \cup RS_{row}
@@ -266,22 +302,22 @@ $$
 <br />
 
 Circuit for $Init_{row}$: 
-![Alt text](image-3.png)
+![Alt text](./img/image-3.png)
 
 <br />
 
 Circuit for $WS_{row}$: 
-![Alt text](image-5.png)
+![Alt text](./img/image-5.png)
 
 <br />
 
 Circuit for $Audit_{row}$: 
-![Alt text](image-6.png)
+![Alt text](./img/image-6.png)
 
 <br />
 
 Circuit for $RS_{row}$: 
-![Alt text](image-7.png)
+![Alt text](./img/image-7.png)
 
 ----
 
@@ -458,9 +494,12 @@ $$
 <br />
 
 最后我们再revisit 一下之前提到的两个问题：
-> memory check 究竟解决的是什么问题？又为什么可以work？
->
-> 抽象地说是，Verifiable Random Access Memory，简称vRAM。把对内存访问结果的验证转换成一个Verifiable State Machine，简称VSM，的问题，也就是一个可验证的state transition的问题，最后通过电路的形式把state transition验证计算的trace 表达出来。
+
+```admonish info
+memory check 究竟解决的是什么问题？又为什么可以work？
+
+抽象地说是，Verifiable Random Access Memory，简称vRAM。把对内存访问结果的验证转换成一个Verifiable State Machine，简称VSM，的问题，也就是一个可验证的state transition的问题，最后通过电路的形式把state transition验证计算的trace 表达出来。
+```
 
 <br />
 
@@ -508,6 +547,7 @@ $$
 \end{aligned}
 
 $$
+
 > $m$ 代表矩阵的行数/列数，$n$ 代表矩阵中non-zero 元素的个数，$u$ 代表matrix dense MLE中的变量个数。
 
 <br />
@@ -653,6 +693,9 @@ $$
 
 
 到此为止，Spark是如何更高效地解决Sparse Matrix evaluation 问题的就已经解释清楚了。文章的最后我们就可以非常轻松地revisit一下 Spartan 的整个协议了。
+
+<br />
+
 # Spartan Protolcol Overview
 假定，有这么一个业务计算：
 $$
