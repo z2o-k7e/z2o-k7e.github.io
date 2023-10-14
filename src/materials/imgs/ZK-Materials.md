@@ -5,6 +5,8 @@ Last update: 2023-09-24 [^1]
 PS: In each title's Content Block, the top part is newer, below is older.
 
 
+[^1] 巨量资料 FYI，大部分出自网络及群聊整理，时间有限出处 没有做细致排版，请恕无法极尽详实覆盖，如需加上出处请联系作者 ~
+
 [TOC]
 # Nova / Folding schemas
 
@@ -61,7 +63,6 @@ halo2 tinyram  https://github.com/Orbis-Tertius/tiny-ram-halo2
 
 
 # STARK 
-- [A Walk-Through of a Simple zk-STARK Proof](imgs/A%20Walk-Through%20of%20a%20Simple%20zk-STARK%20Proof.pdf)
 
 - Boojum：zkSync的高性能去中心化STARK证明系统 https://blog.csdn.net/mutourend/article/details/131770996
 
@@ -152,16 +153,6 @@ ZKML slides： https://www.canva.com/design/DAFi3o7FiR4/d9LMeacr6QQwYy9C0BQHgA/v
 https://github.com/vacp2p/zk-explorations
  - 对不同 lib 和 algo 实现的 VM 做的性能测试 benchmark
 
-发现了asz有好多好东西啊，stark很好的学习资料 https://github.com/aszepieniec/stark-anatomy
-
-下一期共学STARK+zkVM的资料
-
-https://neptune.cash/
-[STARK 算法解析（第 6 部分: 加速整个流程）](https://mp.weixin.qq.com/s/nBfL0MzqzOxGlSZgw6I85Q)
-https://asz.ink/alan-szepieniec/ he is an advisor to Nervos Foundation.
-https://neptune.cash/
-https://neptune.cash/learn/brainfuck-tutorial/
-
 - snarkVM: Aleo 已经把 Marlin 更新成 Varuna 了 [varuna](https://github.com/AleoHQ/snarkVM/tree/testnet3/algorithms/src/snark/varuna)
 
 [徒手写 zkVM  - https://eprint.iacr.org/2023/1032.pdf](https://eprint.iacr.org/2023/1032.pdf)
@@ -192,14 +183,14 @@ Nova VM 来了, 看不过来了。。。。
 我在找一个write a vm from scratch的课程
  - 要是只是vm不要求zkvm那就太多了，比如5天前的这篇 https://andreabergia.com/blog/2023/07/i-have-written-a-jvm-in-rust/
 
-![](./imgs/1.pic.jpg)
+![](attachs/imgs/zkvm/1.pic.jpg)
 上周测试了一下 PSE evm circuit，生成的 raw proof 用 evm 验证需要大约 4000万+ gas。（本地调高了 block gas limit）
 也测试了 scroll-prover 的 chunk proof，evm 验证大概需要 40万+ gas。感觉 gas fee 这块至少有 100 倍的以上的提升。
 
 chunk proof 里面包涵了 2次压缩，还是做了不少的工作
 
 
-![](./imgs/2.pic.jpg)
+![](imgs/zkvm/2.pic.jpg)
 
 不太确定上面的代码是不是具体的电路，看了下感觉没多少行。[Facepalm]
 
@@ -258,16 +249,24 @@ https://hackmd.io/@sinka/BJUIyufEc
 
 后续：模块化公开课
 ```
+## STARK + zkVM
+
+发现了asz有好多好东西啊，stark很好的学习资料 https://github.com/aszepieniec/stark-anatomy
+
+
+下一期共学STARK+zkVM的资料
+
+https://neptune.cash/
+[STARK 算法解析（第 6 部分: 加速整个流程）](https://mp.weixin.qq.com/s/nBfL0MzqzOxGlSZgw6I85Q)
+https://asz.ink/alan-szepieniec/ he is an advisor to Nervos Foundation.
+https://neptune.cash/
+https://neptune.cash/learn/brainfuck-tutorial/
 
 ## Basics Tutorials
 
 - https://www.rareskills.io/zk-bootcamp
- - https://zkhack.dev/whiteboard/ 挺适合作为基础资料的
 
-I try not to recommend too many sources, since everyone learns differently. But here are a few:  
-- Least Authority’s [Moonmath manual](https://leastauthority.com/community-matters/moonmath-manual/) for learning Snarks. Starts with the basics.  
-- For learning about Starks, StarkWare’s [Stark 101 series](https://starkware.co/stark-101/).  
-- For writing some ZK code and seeing what actually happens: [Noir from Aztec](https://docs.aztec.network/noir)
+ - https://zkhack.dev/whiteboard/ 挺适合作为基础资料的
 ## PSE
 
 From CEX to CCEX with Summa
@@ -294,9 +293,9 @@ Some Project Boards:
 
 三本叙事书籍 : pnp / tns / cw
 
- - [p ?= np](./imgs/pnp.pdf)
- - [Crypto Wars](./imgs/cw.pdf)
- - [The network state](./imgs/The-network-state.pdf)
+ - [p ?= np](./attachs/files/pnp.pdf)
+ - [Crypto Wars](./attachs/files/cw.pdf)
+ - [The network state](./attachs/files/The-network-state.pdf)
 
 https://cryptography.rs/ 
 这个页面很全也很漂亮，我cryptography.land也是受这里启发
@@ -341,7 +340,7 @@ jupyter lab
 [Quantum Resistance and the Signal Protocol](https://signal.org/blog/pqxdh/)
  - Signal 已经集成 Kyber了
 
-## Curves
+#### Curves
 
 - [The Pasta Curves for Halo 2 and Beyond](https://electriccoin.co/blog/the-pasta-curves-for-halo-2-and-beyond/)
 - [Mina Book: Pasta Curves](https://o1-labs.github.io/proof-systems/specs/pasta.html)
@@ -400,23 +399,6 @@ https://0xparc.org/blog/parc-squad 这个有点意思
 
 （发现和另一个研究群人员不overlap再发一遍）过了一遍HyperNova和Customizable constraint systems，感觉这个工作非常让人兴奋。CCS用来统一R1CS AIR PLONKish，然后用Nova IVC的方式multi-folding生成SNARK。有一种ZK界LLVM的即视感。各位老师怎么看。
 
-
-- a16z 整理的比较全的 ZKP 的资料库  https://a16zcrypto.com/zero-knowledge-canon/
-- ZK 零知识: https://buidlerdao.notion.site/ZK-5963083942a744bbb60a0328008868e2
-- 零基础学习 ZK:  https://mirror.xyz/searchblock.eth/y11EKtXAtK3aXRVMV1yYqw7FibKHxI0fK10vlVRDaD4
-- 万字长文捕获 ZK Rollup 时代价值｜ZONFF Research: https://mp.weixin.qq.com/s/5zKdS-GL8w_z4XIDOjv7FA
--  [zksync开源](https://github.com/matter-labs/zksync-era)
-
-怎么零基础学习零知识证明:
-- https://mirror.xyz/searchblock.eth/y11EKtXAtK3aXRVMV1yYqw7FibKHxI0fK10vlVRDaD4
-
-数学 : 
-- 参考学习内容:多项式乘法和除法、拉格朗日插值、Schwartz-Zip-pel 引理、快速傅立叶变换(FFT) 、NTT、MSM 以及 Field extension等。
-- An Introduction to Mathematical Cryptography
-- https://explained-from-first-principles.com/number-theory 这个介绍数论的也不错
-
-初等数论和群论 : 
-- 推荐了 MIT’s 6.875 (Foundations of Cryptography) ，对于国内的同学来讲，建议结合潘承洞版的看，会更好！ 教材链接：[https://mit6875.github.io/HANDOUTS/numbertheory.pdf](https://t.co/kfIc1fO7gV)
 
 # Tricks & Tools
 
@@ -546,17 +528,11 @@ https://www.quantamagazine.org/complexity-theorys-50-year-journey-to-the-limits-
 
 https://twitter.com/i/spaces/1ynJOaMnBlOKR
 
- - [zkp twitter space 202309201217 ](./imgs/202309201217-zkp-twitter-space.pdf)
-
-# Interdisciplinarity
-
-AI:
-- [A hacker's guide to Language Models(1)](https://github.com/fastai/lm-hackers/blob/main/lm-hackers.ipynb)
-- [A hacker's guide to Language Models(2)](https://www.youtube.com/watch?v=jkrNMKz9pWU)
-
-Math:
-- [The-Art-of-Linear-Algebra](https://github.com/kenjihiranabe/The-Art-of-Linear-Algebra)
-- [Animation vs. Math](https://www.youtube.com/watch?v=B1J6Ou4q8vE)
+ - [zkp twitter space 202309201217 ](./attachs/files/202309201217-zkp-twitter-space.pdf)
 
 
-[^1] 巨量资料 FYI，大部分出自网络及群聊整理，时间有限出处 没有做细致排版，请恕无法极尽详实覆盖，如需加上出处请联系作者 ~
+
+
+
+
+

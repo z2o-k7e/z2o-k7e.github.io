@@ -40,7 +40,7 @@
 
 ---
 
-- [Halo2](./halo2/toc.md)
+- [Halo2](./halo2/halo2.md)
   - [1-Simple Examples](./halo2/1-Simple-Example.md)
   - [2-Fibonacci-example-1](./halo2/2-Fibonacci-example-1.md)
   - [3-Fibonacci-example-2](./halo2/3-Fibonacci-example-2.md)
@@ -53,8 +53,9 @@
   - [ZKP Apps with halo2](./halo2/ZKP-APP.md)
       - [Zordle](./halo2/Zordle.md)
       - [Hammster](./halo2/Hammster.md)
-  - [Appendix]()
-    - [Learning Process](./halo2/wait%20todo/Learning-Process.md)
+  - [Appendix-learning-materials](./halo2/halo2-learning-materials.md)
+
+
 
 ---
 
