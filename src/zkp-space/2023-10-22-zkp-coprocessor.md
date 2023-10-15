@@ -246,15 +246,15 @@ Dong
 
 ## 参考
 提到的一些zk项目和团队list：
-- https://brevis.network/
-- https://taiko.xyz/
-- https://www.axiom.xyz/
-- https://www.risczero.com/
-- https://delphinuslab.com/zk-wasm/
-- https://www.moduluslabs.xyz/
-- https://lurk-lang.org/
-- https://www.ingonyama.com/
-- https://manta.network/
-- https://zkbridge.com/
+- [https://brevis.network/](https://brevis.network/)
+- [https://taiko.xyz/](https://taiko.xyz/)
+- [https://www.axiom.xyz/](https://www.axiom.xyz/)
+- [https://www.risczero.com/](https://www.risczero.com/)
+- [https://delphinuslab.com/zk-wasm/](https://delphinuslab.com/zk-wasm/)
+- [https://www.moduluslabs.xyz/](https://www.moduluslabs.xyz/)
+- [https://lurk-lang.org/](https://lurk-lang.org/)
+- [https://www.ingonyama.com/](https://www.ingonyama.com/)
+- [https://manta.network/](https://manta.network/)
+- [https://zkbridge.com/](https://zkbridge.com/)
 
 感谢 Kurt 对部分内容的贡献
