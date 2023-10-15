@@ -1,16 +1,19 @@
 # 聊聊 ZKP Coprocessor
 
 > Author: [Harry](https://twitter.com/harryx1x1)
+>
 > Label: ZKP, ZKP Coprocessor, ZKP Space
+>
 > Date: 2023-10-15
 
-回放链接: https://twitter.com/i/spaces/1rmxPMaezNnKN?s=20
+回放链接: [https://twitter.com/i/spaces/1rmxPMaezNnKN?s=20](https://twitter.com/i/spaces/1rmxPMaezNnKN?s=20)
 
 主聊人:
-- Harry: https://twitter.com/harryx1x1
-- 0xhhh: https://twitter.com/hhh69251498
-- Cecilia: https://twitter.com/ceciliaz030
-- 董沫博士(Dong): https://twitter.com/no89thkey
+- [Harry](https://twitter.com/harryx1x1)
+- [0xhhh](https://twitter.com/hhh69251498)
+- [Cecilia](https://twitter.com/ceciliaz030)
+- [董沫博士(Dong)](https://twitter.com/no89thkey)
+
 ## Harry：什么是 ZKP coprocessor？
 Dong
  - 是区块链的 coprocessor
@@ -163,6 +166,7 @@ Dong
 Dong
 	- 大体上可以这样理解
 	- 但 the graph 安全性没有 ZKP coprocessor 高，因为你要信任跑节点的一方
+
 ## 0xhhh：ZKP coprocessor 有哪些 use case？
 Dong
 - AMM DEX
@@ -239,17 +243,18 @@ Cecilia
 - 但为什么大家都选择了 Ingonyama？
 Dong
 - 因为 Ingonyama 是开源的，代码采用了 MIT 协议
+
 ## 参考
 提到的一些zk项目和团队list：
-https://brevis.network/
-https://taiko.xyz/
-https://www.axiom.xyz/
-https://www.risczero.com/
-https://delphinuslab.com/zk-wasm/
-https://www.moduluslabs.xyz/
-https://lurk-lang.org/
-https://www.ingonyama.com/
-https://manta.network/
-https://zkbridge.com/
+- https://brevis.network/
+- https://taiko.xyz/
+- https://www.axiom.xyz/
+- https://www.risczero.com/
+- https://delphinuslab.com/zk-wasm/
+- https://www.moduluslabs.xyz/
+- https://lurk-lang.org/
+- https://www.ingonyama.com/
+- https://manta.network/
+- https://zkbridge.com/
 
 感谢 Kurt 对部分内容的贡献
