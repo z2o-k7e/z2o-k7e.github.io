@@ -1,6 +1,6 @@
 > author: [@Demian](https://github.com/Demian101)
-> 
-> references: https://learn.0xparc.org/halo2/
+>
+> references: [https://learn.0xparc.org/halo2/](https://learn.0xparc.org/halo2/)
 
 [TOC]
 ### Overview
@@ -38,7 +38,7 @@ trait NumericInstructions<F: Field>: Chip<F> {
     /// Loads a number into the circuit as a private input. 加载隐私输入
     fn load_private(&self, layouter: impl Layouter<F>, a: Value<F>) -> Result<Self::Num, Error>;
 
-    /// Loads a number into the circuit as a fixed constant. 
+    /// Loads a number into the circuit as a fixed constant.
     fn load_constant(&self, layouter: impl Layouter<F>, constant: F) -> Result<Self::Num, Error>;
 
     /// Returns `c = a * b`.
@@ -60,7 +60,7 @@ trait NumericInstructions<F: Field>: Chip<F> {
 }
 ```
 
-Among them, 
+Among them,
   - *Num* 用于适配此 interface 中处理的类型
   - _load_private_ 用于加载 witness
   - _load_constant_ 用于加载常量 (constant)
@@ -72,7 +72,7 @@ Among them,
 对于我们的电路，我们将构建一个[芯片(chip)](https://zcash.github.io/halo2/concepts/chips.html)，在有限域上实现提到的 Numeric Instruction (`trait NumericInstructions`)
 
 > 如果您想开发自定义 chip，则需要去实现 Halo 2 的 _chip_ Trait
-> 
+>
 > 大多数时候，使用 Halo 2 进行电路开发不需要自己定义 Instructions 和 chip。 但如果你需要使用 Halo 2 没有提供的复杂算法，就需要自己实现（例如实现一种新兴的密码算法）。
 
 ```rust
@@ -123,14 +123,14 @@ struct FieldConfig {
 }
 ```
 
-下面我们来构建约束 : 
+下面我们来构建约束 :
  - 最关键的函数 _configure_ 和 _enable_equality_ 用于检查传入参数的相等性
- - 如下图 : 在 `create_gate` 函数中 : 
-	 - 乘数 $(a, \ \ b)$ 分别在同一行的 $a_0 , \ \ a_1$  advice 列  ;  
-	 - 乘积 $(out)$  和 $a$ 同在 $a_0$ 列, $out$ 在 $a$  的下一行 : 
+ - 如下图 : 在 `create_gate` 函数中 :
+	 - 乘数 $(a, \ \ b)$ 分别在同一行的 $a_0 , \ \ a_1$  advice 列  ;
+	 - 乘积 $(out)$  和 $a$ 同在 $a_0$ 列, $out$ 在 $a$  的下一行 :
  -  可以看到在代码中, 都是使用相对位置(relative position) 来描述的 !
 ```rust
-// | a0  | a1  | s_mul | 
+// | a0  | a1  | s_mul |
 // |-----|-----|-------|
 // | lhs | rhs | s_mul |
 // | out |     |       |
@@ -140,7 +140,7 @@ let out = meta.query_advice(advice[0], Rotation::next()); // Attention !!
 ```
 
 最后函数返回多项式约束：
- - 若选择器(Selector) `s_mul` 不为 0，则**激活**校验乘法约束 : 
+ - 若选择器(Selector) `s_mul` 不为 0，则**激活**校验乘法约束 :
 	 - 当 `s_mul * (lhs * rhs - out) == 0`，则说明 _lhs * rhs = out_ 约束成立；
 	 - 当 `s_mul * (lhs * rhs - out) != 0`，说明  _lhs * rhs = out_ 约束不成立！！程序报错
  - 若 `s_mul` 为 0，则**不会激活**检查乘法约束，any subsequent values are fine！
@@ -169,7 +169,7 @@ impl<F: FieldExt> FieldChip<F> {
 
         // 定义我们的乘法门（multiplication gate）
         meta.create_gate("mul", |meta| {
-            // To implement multiplication, we need 3 advice `cells` 
+            // To implement multiplication, we need 3 advice `cells`
             // and 1 selector.  We arrange them like so:
             //
             // | a0  | a1  | s_mul |
@@ -191,7 +191,7 @@ impl<F: FieldExt> FieldChip<F> {
             // `create_gate` 函数返回的多项式表达式，在 proving system 中会被约束等于 0.
             // 约束表达式有以下性质：
             // - 当 s_mul = 0 时，lhs, rhs, out 可以是任意值。
-            // - 当 s_mul != 0 时，lhs, rhs, out 需要满足 lhs * rhs = out 这条约束。 
+            // - 当 s_mul != 0 时，lhs, rhs, out 需要满足 lhs * rhs = out 这条约束。
             vec![s_mul * (lhs * rhs - out)]
         });
 
@@ -251,7 +251,7 @@ impl<F: FieldExt> NumericInstructions<F> for FieldChip<F> {
 
                 // 现在我们可以把乘积放到输出的位置了。
                 let value = a.0.value().copied() * b.0.value();
-                
+
 				// 最后，我们对输出进行赋值，返回一个要在电路的另一部分使用的变量
                 region
                     .assign_advice(|| "lhs * rhs", config.advice[0], 1, || value)
@@ -278,7 +278,7 @@ impl<F: FieldExt> NumericInstructions<F> for FieldChip<F> {
 
 **circuit** Trait 是电路开发的入口。 我们需要定义自己的电路结构并访问 *witness* input
 
-struct `MyCircuit` : 
+struct `MyCircuit` :
  - 在这个结构体中，我们保存隐私输入变量。我们使用  `Option<F>` 类型是因为，在生成密钥阶段，他们不需要有任何的值。在证明阶段中，如果它们任一为 `None` 的话，将得到一个错误。
 
 The interfaces defined before are all used here. _configure_ creates a storage column for advice/instance/constant. _synthesize_ uses a custom chip to get the input witness and constant, and finally, calculate the result and return the public input.
@@ -338,7 +338,7 @@ impl<F: Field> Circuit<F> for MyCircuit<F> {
         //     absq = asq * bsq
         //     c    = constant * asq*bsq
         //
-        // 但是，按下面的方法实现，更加高效: 
+        // 但是，按下面的方法实现，更加高效:
         //     ab   = a*b
         //     absq = ab^2
         //     c    = constant*absq
@@ -401,7 +401,7 @@ You can find the source code for this example [here](https://github.com/zcash/h
 cargo run --example simple-example
 ```
 
-### References: 
+### References:
  - [Jason Morton halo2 codes](https://github.com/jasonmorton/halo2-examples/blob/master/src/fibonacci/example1.rs)
  - [ZCash halo2 books](https://zcash.github.io/halo2/user/simple-example.html#define-a-chip-implementation)
  - [trapdoor-tech halo2 book](https://trapdoor-tech.github.io/halo2-book-chinese/user/simple-example.html)
@@ -436,7 +436,7 @@ trait NumericInstructions<F: Field>: Chip<F> {
     /// Loads a number into the circuit as a private input. 隐私输入
     fn load_private(&self, layouter: impl Layouter<F>, a: Value<F>) -> Result<Self::Num, Error>;
 
-    /// Loads a number into the circuit as a fixed constant. 
+    /// Loads a number into the circuit as a fixed constant.
     fn load_constant(&self, layouter: impl Layouter<F>, constant: F) -> Result<Self::Num, Error>;
 
     /// Returns `c = a * b`.
@@ -458,7 +458,7 @@ trait NumericInstructions<F: Field>: Chip<F> {
 }
 ```
 
-Among them, 
+Among them,
  - *Num* is used to adapt to the type handled in this interface, (适配该接口中处理的类型)
  - _load_private_ is used to load witness,
  - _load_constant_ is used to load constants, 
@@ -502,7 +502,7 @@ impl<F: FieldExt> Chip<F> for FieldChip<F> {
 
 #### [Configure the chip](https://zcash.github.io/halo2/user/simple-example.html#configure-the-chip)
 
-The chip needs to be configured with the columns, permutations, and gates that will be required to implement all of the desired instructions.  (需要为芯片配置好实现我们想要的功能所需要的那些列、置换、门) : 
+The chip needs to be configured with the columns, permutations, and gates that will be required to implement all of the desired instructions.  (需要为芯片配置好实现我们想要的功能所需要的那些列、置换、门) :
 ```rust
 #![allow(unused)]
 fn main() {
@@ -524,14 +524,14 @@ struct FieldConfig {
 }
 ```
 
-下面我们来构建约束 : 
- - the most critical functions _configure_ and _enable_equality_ are used to check the equality of the incoming parameters(传入的参数).  
- - 如下图 : 在 `create_gate` 函数中 : 
-	 - 乘数 $(a, \ \ b)$ 分别在同一行的 $a_0 , \ \ a_1$  advice 列  ;  
-	 - 乘积 $(out)$  和 $a$ 同在 $a_0$ 列, $out$ 在 $a$  的下一行 : 
+下面我们来构建约束 :
+ - the most critical functions _configure_ and _enable_equality_ are used to check the equality of the incoming parameters(传入的参数).
+ - 如下图 : 在 `create_gate` 函数中 :
+	 - 乘数 $(a, \ \ b)$ 分别在同一行的 $a_0 , \ \ a_1$  advice 列  ;
+	 - 乘积 $(out)$  和 $a$ 同在 $a_0$ 列, $out$ 在 $a$  的下一行 :
  -  可以看到在代码中, 都是使用 相对位置来描述的 !
 ```rust
-// | a0  | a1  | s_mul | 
+// | a0  | a1  | s_mul |
 // |-----|-----|-------|
 // | lhs | rhs | s_mul |
 // | out |     |       |
@@ -541,7 +541,7 @@ let out = meta.query_advice(advice[0], Rotation::next()); // Attention !!
 ```
 
 最后函数返回多项式约束：
- - 若 `s_mul` 不为 0，则**激活**校验乘法约束 : 
+ - 若 `s_mul` 不为 0，则**激活**校验乘法约束 :
 	 - 当 `s_mul * (lhs * rhs - out) == 0`，则 _lhs * rhs = out_ 约束成立；
 	 - 当 `s_mul * (lhs * rhs - out) != 0`， _lhs * rhs = out_ 约束不成立；程序报错
  - 若 `s_mul` 为 0，则**不会激活**检查乘法约束，any subsequent values are fine
@@ -570,7 +570,7 @@ impl<F: FieldExt> FieldChip<F> {
 
         // 定义我们的乘法门
         meta.create_gate("mul", |meta| {
-            // To implement multiplication, we need 3 advice `cells` 
+            // To implement multiplication, we need 3 advice `cells`
             // and 1 selector.  We arrange them like so:
             //
             // | a0  | a1  | s_mul |
@@ -592,7 +592,7 @@ impl<F: FieldExt> FieldChip<F> {
             // `create_gate` 函数返回的多项式表达式，在证明系统中一定等于0。
             // 我们的表达式有以下性质：
             // - 当 s_mul = 0 时，lhs, rhs, out 可以是任意值。
-            // - 当 s_mul != 0 时，lhs, rhs, out 将满足 lhs * rhs = out 这条约束。 
+            // - 当 s_mul != 0 时，lhs, rhs, out 将满足 lhs * rhs = out 这条约束。
             vec![s_mul * (lhs * rhs - out)]
         });
 
@@ -611,8 +611,8 @@ impl<F: FieldExt> FieldChip<F> {
 
 The `instructions interface` we defined earlier needs to be implemented, and defining the implementation of Number is to en**capsul**ate(封装) finite field elements.
 
- It should be noted that, in addition to row and column, the position of the cell can also be determined by the relative position offset  (除了行和列之外，单元的位置还可以通过相对位置偏移来确定).  
- 
+ It should be noted that, in addition to row and column, the position of the cell can also be determined by the relative position offset  (除了行和列之外，单元的位置还可以通过相对位置偏移来确定).
+
  Generally, there are `3` types of offsets, 0 representing the current position, `1` representing the next position, and `-1` representing the previous position.
 
 ```rust
@@ -655,7 +655,7 @@ impl<F: Field> NumericInstructions<F> for FieldChip<F> {
             },
         )
     }
-	    
+
 	fn mul(
 		&self,
 		mut layouter: impl Layouter<F>,
@@ -663,7 +663,7 @@ impl<F: Field> NumericInstructions<F> for FieldChip<F> {
 		b: Self::Num,
 	) -> Result<Self::Num, Error> {
 		let config = self.config();
-	
+
 		layouter.assign_region(
 			|| "mul",
 			|mut region: Region<'_, F>| {
@@ -671,18 +671,18 @@ impl<F: Field> NumericInstructions<F> for FieldChip<F> {
 				// so we enable it at region offset 0; this means it will constrain
 				// cells at offsets 0 and 1.
 				config.s_mul.enable(&mut region, 0)?;
-	
+
 				// The inputs we've been given could be located anywhere in the circuit,
 				// but we can only rely on relative offsets inside this region. So we
 				// assign new cells inside the region and constrain them to have the
 				// same values as the inputs.
 				a.0.copy_advice(|| "lhs", &mut region, config.advice[0], 0)?;
 				b.0.copy_advice(|| "rhs", &mut region, config.advice[1], 0)?;
-	
+
 				// Now we can assign the multiplication result, which is to be assigned
 				// into the output position.
 				let value = a.0.value().copied() * b.0.value();
-	
+
 				// Finally, we do the assignment to the output, returning a
 				// variable to be used in another part of the circuit.
 				region
@@ -699,7 +699,7 @@ impl<F: Field> NumericInstructions<F> for FieldChip<F> {
 
 The **circuit** trait is the entrance to the circuit development. We need to define our own circuit structure and access the *witness* input.
 
-struct `MyCircuit` : 
+struct `MyCircuit` :
  - 在这个结构体中，我们保存隐私输入变量。我们使用  `Option<F>` 类型是因为，在生成密钥阶段，他们不需要有任何的值。在证明阶段中，如果它们任一为 `None` 的话，将得到一个错误。
 
 The interfaces defined before are all used here. _configure_ creates a storage column for advice/instance/constant. _synthesize_ uses a custom chip to get the input witness and constant, and finally, calculate the result and return the public input.
@@ -756,7 +756,7 @@ impl<F: FieldExt> Circuit<F> for MyCircuit<F> {
         //     absq = asq*bsq
         //     c    = constant*asq*bsq
         //
-        // 但是，按下面的方法实现，更加高效: 
+        // 但是，按下面的方法实现，更加高效:
         //     ab   = a*b
         //     absq = ab^2
         //     c    = constant*absq
@@ -852,7 +852,7 @@ let lhs = region.assign_advice(
 )?;
 let rhs = region.assign_advice(
 	|| "rhs",
-	config.advice[1], // 第 1 列, 
+	config.advice[1], // 第 1 列,
 	0,                // 第 0 行
 	|| b.value.ok_or(Error::SynthesisError),
 )?;
@@ -862,9 +862,9 @@ region.constrain_equal(b.cell, rhs)?;
 
 GPT：
 > 虽然 `lhs` 和 `rhs` 的值被设置为 `a.value` 和 `b.value`，但是这并不意味着它们在电路中是相等的。在电路的布局中，`a.cell` 和 `b.cell` 可能已经在其他位置被（意外地）赋值和约束过了。而在这个新的区域（region）中，为了进行乘法操作，你需要确保新分配的 `lhs` 和 `rhs` cells 与原始的 `a.cell` 和 `b.cell` 相等
-> 
+>
 > 这就是为什么 `region.constrain_equal` 是必要的：它确保了在这个区域（region）中的计算使用了正确的输入值
-> 
+>
 > 你可以将其视为一个安全性保障。如果没有这个约束，有可能会有其他的值进入这个区域，并可能导致电路生成错误的结果。通过加入这个约束，你确保了乘法操作是在正确的值上进行的。
 
 目前的 halo2_proofs，一般直接使用 `copy_advice`：
