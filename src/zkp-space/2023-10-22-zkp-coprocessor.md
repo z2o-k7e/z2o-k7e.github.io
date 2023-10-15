@@ -127,11 +127,9 @@ Dong
 		- 有一些 aggregation 是可以用的
 			- chain of curves：用两个 curve 导一下，试下来不比 folding 差
 		- 能把一万个 transaction 压缩到分钟级别的证明
-	- 还可以用 folding，比较适合 coprocessor
-		- 但 folding 还差的比较远
-			- 差 parallelization
-			- 不能上链
-				- 现在接的 IPA，但需要改成 groth16，但是个大工程
+	- 还可以用 folding，比较适合 coprocessor，但 folding 还差的比较远
+  	- 差 parallelization
+  	- 不能上链。现在接的 IPA，但需要改成 groth16，但是个大工程
 ### 使用 Folding 提升性能
 0xhhh
 - RiscZero 说用 folding 需要的带宽比较多
