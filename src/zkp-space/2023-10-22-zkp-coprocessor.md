@@ -126,7 +126,7 @@ Dong
 		- 简单的多加两层 recursion，再加并行化
 		- 有一些 aggregation 是可以用的
 			- chain of curves：用两个 curve 导一下，试下来不比 folding 差
-		- 能把一万个 transaction 压缩到分钟几倍的证明
+		- 能把一万个 transaction 压缩到分钟级别的证明
 	- 还可以用 folding，比较适合 coprocessor
 		- 但 folding 还差的比较远
 			- 差 parallelization
