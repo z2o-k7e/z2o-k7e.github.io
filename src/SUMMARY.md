@@ -69,7 +69,7 @@
   - [Spartan preliminary: GKR with ZK Argument](./zk-everything/zk-everything-joe/GKR_with_ZK_Argument.md)
   - [Spartan preliminary: Hyrax](./zk-everything/zk-everything-joe/Hyrax.md)
   - [Spartan In Depth](./zk-everything/zk-everything-joe/Spartan.md)
-  - [SuperNova](./Nova/SuperNova.md) 
+  - [SuperNova](./Nova/SuperNova.md)
 
 ---
 
@@ -88,3 +88,7 @@
   - [郭宇：ZK 技术的学习心得和经验分享](./exp/guoyu.md)
   - [对话姚翔：解读零知识证明的前世今生](./exp/freeyao.md)
   - [邓燚：零知识，模拟与归约（一个个人化的视角）](https://zhuanlan.zhihu.com/p/268305208)
+
+---
+
+- [ZKP Space](./zkp-space/toc.md)
