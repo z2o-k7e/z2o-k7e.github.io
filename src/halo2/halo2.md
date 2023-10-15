@@ -5,7 +5,7 @@
 **必备学习材料：**
 1. [0xPARC Halo2](https://learn.0xparc.org/materials/halo2/learning-group-1/introduction)  是主要参考的视频课程
 2. [参考代码](https://github.com/zkp-co-learning/halo2-step-by-step/tree/main)   是对课程 Reference 代码必要的优化和版本升级
-3. [参考文档: z2o-k7e-Halo2](https://learn.z2o-k7e.world/halo2/toc.html)   是部分电路图解 & 对代码更细致的阐释(仍更新中...)
+3. [参考文档: z2o-k7e-Halo2](https://learn.z2o-k7e.world/halo2/1-Simple-Example.html)   是部分电路图解 & 对代码更细致的阐释(仍更新中...)
 4. 其他必读参考：
 	1. [zcash halo2 book](https://zcash.github.io/halo2/) / [github](https://github.com/zcash/halo2/blob/main/book/)  理论内容偏多，可以当做字典反复查看
 	2. [zcash halo2 book 中文翻译](https://trapdoor-tech.github.io/halo2-book-chinese/) / [github](https://trapdoor-tech.github.io/halo2-book-chinese/)
