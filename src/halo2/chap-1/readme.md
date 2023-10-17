@@ -18,7 +18,7 @@ constraints   :  a^2 * b^2 * constant = out
 | -------- | -------- | -------- | ------------ |
 | *out*    | a        |          |              |
 |          | b        |          |              |
-|          | const    |          |              |
+|          | constant |          |              |
 |          | ab       | b        | 1            |
 |          | ab       |          | 0            |
 |          | ab       | ab       | 1            |
@@ -59,7 +59,7 @@ constraints   :  a^2 * b^2 * constant = out
 在知道了电路构建需要的模块上述电路一共需要四列: 
 
 - 2 列 witness(advice) 用来填充上述表格的`a0`和`a1`列，
-  - 其中 3 个 Private inputs: `a`, `b` 和 `constant` 填入 `a0` 列的前两行。
+  - 其中 3 个 Private inputs: `a`, `b` 和 `constant` 填入 `a0` 列的前三行。
 - 1 列 instance (填入公共输出 out), 
 - 1 列乘法门选择器(s_mul); 
 
@@ -253,7 +253,7 @@ mod tests {
 }
 ```
 
-其中:`MockerProver.run`会分别调用实例化电路的 `configure` 和 `synthesis` 函数以填充 witness 列(详见 Prover 的[assign_advice函数](https://github.com/zcash/halo2/blob/f9838c127ec9c14f6f323e0cfdc0c1392594d37f/halo2_proofs/src/plonk/prover.rs#L135)) 及电路约束。
+其中:`MockerProver.run`会分别调用实例化电路的 `configure` 和 `synthesis` 函数以生成电路约束和填充 witness 列(详见 Prover 的[assign_advice函数](https://github.com/zcash/halo2/blob/f9838c127ec9c14f6f323e0cfdc0c1392594d37f/halo2_proofs/src/plonk/prover.rs#L135))。
 `prover.verify()` 则会检查所有的门、lookup、permuation等生成的约束是否满足。
 
 运行`cargo run test_chap_1_simple`, 测试成功。
@@ -262,7 +262,7 @@ mod tests {
 
 ## 检查 Circuit 布局
 
-同时，还可以利用 Halo2 的 tool 输出电路的整个布局图，advice 列均为红色，instance 列为浅蓝色，selector 列为深蓝色；不同的 region 之间有黑色线分隔，填充过值的 advice 和 instance 列的单元格由绿色和浅绿色组成，填充过值得instance单元格则为深蓝色。可根据此图检查电路是否欠约束(under constrain)，如果欠约束会明显发现对应的单元格**不是绿色**。
+同时，还可以利用 Halo2 的 tool 输出电路的整个布局图，advice 列均为红色，instance 列为浅蓝色，selector 列为深蓝色；不同的 region 之间由黑色线分隔，填充过值的 advice 和 instance 列的单元格由绿色和浅绿色组成，填充过值的instance单元格则为深蓝色。可根据此图检查电路是否欠约束(under constraint)，如果欠约束会明显发现对应的单元格**不是绿色**。
 ```rust
 
     #[cfg(feature = "dev-graph")]
