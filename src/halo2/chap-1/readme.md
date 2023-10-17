@@ -1,4 +1,11 @@
+> - 作者:  [@Po](https://github.com/dajuguan)
+> - 时间: 2023-10-18
+> - 校对: [@Demian](https://github.com/demian101)
+
+
+
 ## Overview
+
 Prover 宣称：它拥有满足 $a^2 * b^2 * constant = out$  约束关系，同时结果公开为 $out$ 的一组 $witness$
 
 现在 Prover 的目的是，写出一个 halo2 电路，能产生可验证其 statement 的一组 proof，让大家信服他的 statement。

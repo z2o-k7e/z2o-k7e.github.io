@@ -8,6 +8,10 @@ PS: In each title's Content Block, the top part is newer, below is older.
 [TOC]
 # Nova / Folding schemas
 
+nova 写的五子棋: https://www.zkconnect4.dev/
+
+Nova 项目: https://github.com/microsoft/Nova/network/dependents
+
 A Brief History of Folding Schemes https://arc.net/e/2831196C-9575-47A6-966E-B34DB840168E 
 - Bootleproof-type IPA是「folding 前史」的一章
 
@@ -31,19 +35,24 @@ Benchmark on recursion Plonky vs Nova https://github.com/nikkolasg/recursive-ben
 
 # halo2 
 
+https://github.com/axiom-crypto/halo2-wasm
+https://github.com/zkCert/halo2-zkcert
+
+[0xPARC Course Recordings, Slides, and Notes](https://0xparc.notion.site/Course-Recordings-Slides-and-Notes-90d0ddb5f9ee49f7a244dbbe60d563ff#549d7b6081e1412a96ac8951dddf9e75)
 
 Taiko: https://github.com/taikoxyz/circuit-tools/tree/main
- - 我们从PSE 的 zkevm里抽象出了一个sdk，大家如果想用halo2开发可以试下[Grin] 欢迎给我提issue
+ - 我们从 PSE 的 zkevm 里抽象出了一个 sdk，大家如果想用 halo2 开发可以试下 [Grin] 欢迎给我提issue
 
 solidity verifier: https://github.com/privacy-scaling-explorations/halo2-solidity-verifier/pulls
 
 halo2 tinyram  https://github.com/Orbis-Tertius/tiny-ram-halo2
 
-- Poseidon:https://github.com/zcash/halo2/blob/main/halo2_gadgets/src/poseidon/pow5.rs
-- proof of validator:https://github.com/asn-d6/halo2-merkle-tree-ipa-bench
-- social recovery:https://hackmd.io/@Nerolation/H1BvRWg02
+- Poseidon: https://github.com/zcash/halo2/blob/main/halo2_gadgets/src/poseidon/pow5.rs
+- proof of validator: https://github.com/asn-d6/halo2-merkle-tree-ipa-bench
+- social recovery: https://hackmd.io/@Nerolation/H1BvRWg02
 
-有人建议： halo2最好的应该是axiom的open source program
+有人建议： halo2 最好的应该是 axiom 的 open source program
+
 
 ----
 
@@ -61,6 +70,9 @@ halo2 tinyram  https://github.com/Orbis-Tertius/tiny-ram-halo2
 
 
 # STARK 
+
+深入探索STARK的安全性和可靠性——STARKs全面安全分析 https://blog.csdn.net/mutourend/article/details/133821797
+
 - [A Walk-Through of a Simple zk-STARK Proof](imgs/A%20Walk-Through%20of%20a%20Simple%20zk-STARK%20Proof.pdf)
 
 - Boojum：zkSync的高性能去中心化STARK证明系统 https://blog.csdn.net/mutourend/article/details/131770996
@@ -192,14 +204,13 @@ Nova VM 来了, 看不过来了。。。。
 我在找一个write a vm from scratch的课程
  - 要是只是vm不要求zkvm那就太多了，比如5天前的这篇 https://andreabergia.com/blog/2023/07/i-have-written-a-jvm-in-rust/
 
-![](./imgs/1.pic.jpg)
+![](imgs/ZK-Materials_image_1.jpg)
 上周测试了一下 PSE evm circuit，生成的 raw proof 用 evm 验证需要大约 4000万+ gas。（本地调高了 block gas limit）
-也测试了 scroll-prover 的 chunk proof，evm 验证大概需要 40万+ gas。感觉 gas fee 这块至少有 100 倍的以上的提升。
+也测试了 scroll-prover 的 chunk proof，evm 验证大概需要 40万+ gas。感觉 gas fee 这块至少有 100 倍的以上的提升
 
 chunk proof 里面包涵了 2次压缩，还是做了不少的工作
 
-
-![](./imgs/2.pic.jpg)
+![](imgs/ZK-Materials_image_2.jpg)
 
 不太确定上面的代码是不是具体的电路，看了下感觉没多少行。[Facepalm]
 
@@ -214,8 +225,11 @@ chunk 和 aggregation 的 column 少了很多，但是应该像 Frank 所说，�
 
 ZK Proof of Email：通往decentralized identity之路 https://blog.csdn.net/mutourend/article/details/129004763?ops_request_misc=&request_id=2425a5a6d21c4b6bbe440828ba478ccf&biz_id=
 
+# Cryptography
 
-
+《公钥密码学研究方法论》[https://documents.uow.edu.au/~fuchun/methodology.html]
+- 这是slides，这是最新的本体： [https://eprint.iacr.org/2023/715
+]
 
 # ZKP Materials
 
@@ -262,7 +276,8 @@ https://hackmd.io/@sinka/BJUIyufEc
 ## Basics Tutorials
 
 - https://www.rareskills.io/zk-bootcamp
- - https://zkhack.dev/whiteboard/ 挺适合作为基础资料的
+- https://zkhack.dev/whiteboard/ 挺适合作为基础资料的
+- https://www.rareskills.io/zk-book
 
 I try not to recommend too many sources, since everyone learns differently. But here are a few:  
 - Least Authority’s [Moonmath manual](https://leastauthority.com/community-matters/moonmath-manual/) for learning Snarks. Starts with the basics.  
@@ -291,6 +306,11 @@ Some Project Boards:
  - Twitter : Follow @drCathieSo_eth  @AndyGuzmanEth
 
 ## books & websites & Podcasts 🎙📚
+
+- 去年出版的《哥德尔传》 <https://book.douban.com/subject/36073022/> 是我近些年读到写得最好的传记，
+- 仅次于我十年前读到的《维特根斯坦传》 <https://book.douban.com/subject/6152040/> （这是不可能被撼动的第一传记神作）
+
+- [The arithmetic of pairing-based proof systems](imgs/ZK-Materials_pdf_1.pdf)
 
 三本叙事书籍 : pnp / tns / cw
 
@@ -355,7 +375,22 @@ jupyter lab
 - https://docs.rs/ark-pallas/0.3.0/ark_pallas/
 
 
+## Lattice
+
+Lattice-based cryptography: The tricky math of dots https://www.youtube.com/watch?v=QDdOoYdb748&list=PLMItfTVgwEAvTX4-sZkcF5s3-l1JDocY0&index=4
+
 ## Others (can't archive)
+
+https://blog.csdn.net/mutourend -- 简中唯一zkp-complete博客[Grin]
+
+当时逐字听译的一个 Brendan 的 talk: Plonky2 简介 https://mp.weixin.qq.com/s/qSWFLQPQJvWHclAvlEXEaQ
+
+Q: 我想知道 这个recursive实际能跑起来的例子哪里有[Lol]
+A:  Plonky2-based的吗？olavm肯定能实际跑起来 https://github.com/Sin7Y/olavm
+
+
+
+[Succinct Proofs and Linear Algebra](https://angeris.github.io/papers/zk-linalg.pdf)
 
 [Eos: Efficient Private Delegation of zkSNARK Provers](https://www.usenix.org/conference/usenixsecurity23/presentation/chiesa)
 
@@ -368,7 +403,7 @@ ABCDE ZK Hacker Camp |【Session 8: Efficient Zero-KnowledgeProofs: Theory and P
  - @Qi Zhou : 话说，我们在做zkWASM的Cannon，也计划用各种foding + aggregate的方案，感兴趣的小伙伴可以报名😄
 - risc0-nova
 	- https://github.com/hero78119/risc0-nova
-- zkGeth, 看起来是把 geth转化成risv64指令集，然后做一个zkrisc出来。
+- zkGeth, 看起来是把 geth 转化成risv64指令集，然后做一个zkrisc出来。
 	- https://hackmd.io/@HqESr6_rQbmdCj2v03vrcQ/HyMA2pkmh 
 - Towards a Nova-based ZK VM 的作者开始写的新书 : 
 	- [zkintro](https://zkintro.com/) 
@@ -425,6 +460,8 @@ https://github.com/joelparkerhenderson/sha256-sentence
 - The SHA256 hash of this message begins with 534d765
 - 我去，厉害了,主要是里面没有什么随机数
 
+https://zkbench.dev/
+trade-offs and performance of different frameworks.
 
 # QA 
 
@@ -435,6 +472,7 @@ Question Lists:
 - Halo2 怎么学 ？
 - P!=NP ?
 - SumCheck 没有办法转成非交互式的zk 证明吧？
+- 为什么 circom 中的 plonk 要求使用 r1cs 约束, 而 halo2 的约束可以任意次的多项式?
 
 
 ----
@@ -532,21 +570,55 @@ https://www.quantamagazine.org/complexity-theorys-50-year-journey-to-the-limits-
 如果强调非交互，就要小心绕过一个结论：一个零知识的public coin的交互式协议是不能应用Fiat-Shair转换为非交互的，soundness不能保证。
 - 这句话难懂，pan老师这个有文章说明么
 
-例子应该是Barak01的non-blackbox simulation里的协议。上次Deng Yi老师讲的
-就是说过早达到zk性质对fs并非好事
+例子应该是 Barak01 的 non-blackbox simulation里的协议。上次Deng Yi老师讲的
+就是说过早达到 zk 性质对 fs 并非好事
 
-我的理解在sumcheck中，每一轮需verifier提供随机数给prover，prover计算g_i（x）并发给verifier，这个计算g_i（x）的过程verifier做不了，所以必须要交互
+我的理解在 sumcheck 中，每一轮需 verifier 提供随机数给prover，prover计算g_i（x）并发给verifier，这个计算 $g_i(x)$ 的过程 verifier 做不了，所以必须要交互
  - 没有让verifier做prover工作的。转非交互的思路是把verifier的工作（发随机数）让prover做（用哈希）。
 - 非交互这个词也不好，非交互不是没有交互，而是单向一轮交互
-- 在sumcheck 的step3 Verifier 
+- 在 sumcheck 的 step3 Verifier 
  checks that the partial sum and total sum agree when the partial sum is evaluated at 0 and 1 and its outputs added。
- - 按照https://semiotic.ai/articles/sumcheck-tutorial/ 中的描述只有verifier 验证partial sum 和total sum 的结果才能发送随机数
+ - 按照 https://semiotic.ai/articles/sumcheck-tutorial/ 中的描述只有verifier 验证partial sum 和total sum 的结果才能发送随机数
 
-# Twitter Sapce
+-----
+
+为什么 circom 中的 plonk 要求使用 r1cs 约束, 而 halo2 的约束可以任意次的多项式?
+
+@Po 首先plonk是有不同版本的，最初的 plonk 论文是vanilla plonk(只包含加法门和乘法门)，再到后来的turboplonk等(支持自定义门)发展的plonkish。我的理解是circom本来设计之初就是为了支持R1CS，只不过 r1cs 可以很容易的转换为vanilla plonk; halo2一开始设计就是针对plonkish + lookup的。所以circom要支持plonkish整个代码设计就要重新调整
+
+
+
+
+# Twitter Sapce & info flow
 
 https://twitter.com/i/spaces/1ynJOaMnBlOKR
-
  - [zkp twitter space 202309201217 ](./imgs/202309201217-zkp-twitter-space.pdf)
+https://www.proofoftrack.xyz/
+还有Suning的newsletter，小伙子精力旺盛，新link整理得很快
+
+郭老师推： https://twitter.com/1dot2
+邹老师博： https://blog.csdn.net/mutourend
+论文看我的这个： https://zk.cryptography.land/ 
+zkmesh: https://zkmesh.substack.com/
+自定义Twitter Threads：比如我这个 https://twitter.com/i/lists/1522499398210531329
+项目方的博客（这个很多，看几篇看对不对胃口，调整）
+Youtube：PSE/a16z/Eth Global etc
+podcast: https://zeroknowledge.fm/
+
+以上所有内容（包括Twitter List）均可RSS订阅，且建议使用RSS订阅
+
+项目程序一手信息几乎唯一的选择：Github
+论文的话 https://eprint.iacr.org/ 
+又想起来这个重要的标准化组织（很少被提起但里面有好东西）： https://zkproof.org/
+比如  https://docs.zkproof.org/presentations
+沙漏老师的feed : https://github.com/PrimitivesLane/PrimitivesFeed
+一个中科院数学所的学生做的密码学链接聚合网  https://link.fffmath.com/
+泛web3终极聚合器RAW： https://twitter.com/nake13/status/1526852356402745346
+
+forum:
+https://ethresear.ch/
+https://zkresear.ch/
+
 
 # Interdisciplinarity
 

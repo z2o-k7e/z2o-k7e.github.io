@@ -6,7 +6,7 @@ src = "src"
 title = "World of Z2O-K7E"
 description = "零知世界"
 
-# [preprocessor.translation]
+# [preprocessor.translation] 
 
 [preprocessor.katex]
 after = ["links"]
@@ -21,6 +21,8 @@ max-level = 4
 [preprocessor.admonish]
 command = "mdbook-admonish"
 assets_version = "3.0.0" # do not edit: managed by `mdbook-admonish install`
+
+
 
 [output.html]
 mathjax-support = true
