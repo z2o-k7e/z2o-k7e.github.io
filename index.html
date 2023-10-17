@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -10,7 +10,7 @@
         
         <meta name="description" content="零知世界">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
         <link rel="shortcut icon" href="favicon.png">
         <link rel="stylesheet" href="css/variables.css">
@@ -33,7 +33,7 @@
         <!-- MathJax -->
         <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </head>
-    <body>
+    <body class="sidebar-visible no-js">
     <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
@@ -63,24 +63,29 @@
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
             var html = document.querySelector('html');
-            html.classList.remove('no-js')
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
         </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
+            var body = document.querySelector('body');
             var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
         </script>
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
@@ -118,9 +123,9 @@
                                 <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
-                        </button>
+                        </label>
                         <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
                             <i class="fa fa-paint-brush"></i>
                         </button>
@@ -141,6 +146,12 @@
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/zkp-co-learning/zkp-co-learning.github.io/edit/main/src/../README.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
 
                     </div>
@@ -246,7 +257,7 @@
 └── zk-everything
 </code></pre>
 <blockquote>
-<p>这边还没想好怎么放，可能后面位置有改动，不过...反正先放就好了 ！</p>
+<p>这边还没想好怎么放，可能后面位置有改动，不过…反正先放就好了 ！</p>
 </blockquote>
 <h4 id="关于-md-渲染"><a class="header" href="#关于-md-渲染">关于 md 渲染</a></h4>
 <p>众所周知，Github  网站的 <code>Latex</code> 等渲染功能非常弱鸡，往往需要一些奇技淫巧才能让公式等正常渲染出来。而在本 MDBOOK 中，您完全不需要关注这种伤害身心的问题，不需要给 github markdown 做专门的适配和魔改。在 Obsidian（或者如 Typora 等主流 Markdown 编辑器）里的  <code>.md</code> 文件显示是什么样的，本网站中都可完美无痛渲染！</p>
@@ -298,7 +309,7 @@ $ mkbook serve --open       # 本地预览
 </ul>
 <hr />
 <h1 id="project-description"><a class="header" href="#project-description">Project Description:</a></h1>
-<p>zkp-co-learning is a Zero-Knowledge Proofs (ZKP) collaborative study and creation project that has been running for three terms. Since February 2023, we have studied https://zkiap.com/, zk-learning.org, plonkathon codes and more with over 300 participants. We are currently preparing advanced content for zk-learning.org.(like Nova、STARK...)</p>
+<p>zkp-co-learning is a Zero-Knowledge Proofs (ZKP) collaborative study and creation project that has been running for three terms. Since February 2023, we have studied https://zkiap.com/, zk-learning.org, plonkathon codes and more with over 300 participants. We are currently preparing advanced content for zk-learning.org.(like Nova、STARK…)</p>
 <p>zkp-co-learning offers bounties to incentivize learners for their technical sharing, actively becoming community maintainers (Maintainer), and for organizing knowledge in the ZKP field. Together, we aim to improve ZKP Public Goods.</p>
 <h2 id="problem-statement"><a class="header" href="#problem-statement">Problem Statement:</a></h2>
 <p>Currently, there are challenges related to high barriers to entry, difficulty in learning in the ZKP field, lack of learning communities, and the overwhelming and opaque nature of information. We intend to address these issues specifically through zkp-co-learning.</p>
@@ -310,7 +321,7 @@ $ mkbook serve --open       # 本地预览
 <li>Harry L: co-Founder of Rebase Community.</li>
 <li>Shirlene 孝羽: director of Creators Co-learning Community</li>
 <li>Demian: zkp-co-learning community maintainer, former JD.com algorithm engineer, https://github.com/Demian101</li>
-<li>Our Maintainers: dream@Scroll, Po@EthStorage, 0xhhh@EthStorage, Frank Jz Liu, miles, 白菜, KEEP, CJ, 笃行, 阳小雪, 啊咪咪小熊, 饭卡里还有不少钱呢...</li>
+<li>Our Maintainers: dream@Scroll, Po@EthStorage, 0xhhh@EthStorage, Frank Jz Liu, miles, 白菜, KEEP, CJ, 笃行, 阳小雪, 啊咪咪小熊, 饭卡里还有不少钱呢…</li>
 <li>sponsoring agency: [Antalpha Labs]</li>
 </ul>
 <h2 id="vision-and-mission"><a class="header" href="#vision-and-mission">Vision and Mission:</a></h2>
@@ -385,7 +396,7 @@ $ mkbook serve --open       # 本地预览
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
 
-                            <a rel="next" href="zk-everything/zk-roadmap.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="zk-everything/zk-roadmap.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -396,7 +407,7 @@ $ mkbook serve --open       # 本地预览
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
 
-                    <a rel="next" href="zk-everything/zk-roadmap.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="zk-everything/zk-roadmap.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
