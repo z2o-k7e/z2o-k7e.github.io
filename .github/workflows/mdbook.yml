@@ -29,7 +29,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      MDBOOK_VERSION: 0.4.21
+      MDBOOK_VERSION: 0.4.35
     steps:
       - uses: actions/checkout@v3
       - name: Install mdBook
@@ -38,7 +38,7 @@ jobs:
           curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.35/mdbook-v0.4.35-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook
           curl -sSL https://github.com/lzanini/mdbook-katex/releases/download/v0.5.8pub/mdbook-katex-v0.5.8-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook      
           curl -sSL https://github.com/badboy/mdbook-toc/releases/download/0.14.1/mdbook-toc-0.14.1-x86_64-unknown-linux-gnu.tar.gz| tar -xz --directory=./mdbook   
-          curl -sSL https://github.com/tommilligan/mdbook-admonish/releases/download/v1.12.1/mdbook-admonish-v1.12.1-x86_64-unknown-linux-gnu.tar.gz| tar -xz --directory=./mdbook
+          curl -sSL https://github.com/tommilligan/mdbook-admonish/releases/download/v1.13.0/mdbook-admonish-v1.13.0-x86_64-unknown-linux-gnu.tar.gz| tar -xz --directory=./mdbook
           echo `pwd`/mdbook >> $GITHUB_PATH
       - name: Setup Pages
         id: pages
