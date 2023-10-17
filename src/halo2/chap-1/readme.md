@@ -304,4 +304,4 @@ mod tests {
 
 
 [^1]: `./halo2_proofs::plonk::Circuit`
-[^2]: 完整代码在 []() 
+[^2]: 完整代码在 [halo2-tutorials: chap-1](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_1/simple.rs) 
