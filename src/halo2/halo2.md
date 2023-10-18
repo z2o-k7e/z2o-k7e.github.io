@@ -1,5 +1,23 @@
 -----
 
+**第一周:**
+1. 课程学习资料: [理解 PLONK 系列](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-intro.html) | [halo2 Introduction](https://learn.0xparc.org/materials/halo2/learning-group-1/introduction) 
+2. 课程学习目标: Understanding and building user-facing applications with `Halo2` and `PLONKish` proving systems
+
+**第二周:**
+1. 课程学习资料:
+	- [Halo2 API & Building a Basic Fibonacci Circuit (Part 1)](https://learn.0xparc.org/materials/halo2/learning-group-1/halo2-api)
+	- [Halo2 API & Building a Basic Fibonacci Circuit (Part 2)](https://learn.0xparc.org/materials/halo2/learning-group-1/halo2-api-continued)
+	- []
+2. 课程学习目标:
+	- 理解 halo2 中 Circuit、region、Layouter、custom gate、constraints 等概念及其 API 代码 represent.
+	- 能够理解 Fibonacci 示例和 isZero 示例的电路构建流程
+
+**第三周**
+
+- [editing...]
+
+----
 **前置学习 (PLONK & Rust)：**
 
  - [x] [PLONK Tutorials](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-arithmetization.html) &  [Lookup Gates @secbit](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-lookup.html)
@@ -13,6 +31,9 @@
 4. 其他必读参考：
 	1. [zcash halo2 book](https://zcash.github.io/halo2/) / [github](https://github.com/zcash/halo2/blob/main/book/)  理论内容偏多，可以当做字典反复查看
 	2. [zcash halo2 book 中文翻译](https://trapdoor-tech.github.io/halo2-book-chinese/) / [github](https://trapdoor-tech.github.io/halo2-book-chinese/)
+
+
+
 
 **其他参考资源:**
 - [halo2.club](https://halo2.club)
