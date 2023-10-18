@@ -1,11 +1,15 @@
+-----
+
 **前置学习 (PLONK & Rust)：**
+
  - [x] [PLONK Tutorials](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-arithmetization.html) &  [Lookup Gates @secbit](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-lookup.html)
  - [x] [Rust 圣经](https://course.rs/about-book.html)
 
 **必备学习材料：**
+
 1. [0xPARC Halo2](https://learn.0xparc.org/halo2)  是主要参考的视频课程
 2. [参考代码](https://github.com/zkp-co-learning/halo2-step-by-step/tree/main)   是对课程 Reference 代码必要的优化和版本升级
-3. [参考文档: z2o-k7e-Halo2](https://learn.z2o-k7e.world/halo2/tmp/1-Simple-Example.html)   是部分电路图解 & 对代码更细致的阐释(仍更新中...) [^1]
+3. [参考文档: z2o-k7e-Halo2](https://learn.z2o-k7e.world/halo2/chap-1/readme.html)   是部分电路图解 & 对代码更细致的阐释(仍更新中...) [^1]
 4. 其他必读参考：
 	1. [zcash halo2 book](https://zcash.github.io/halo2/) / [github](https://github.com/zcash/halo2/blob/main/book/)  理论内容偏多，可以当做字典反复查看
 	2. [zcash halo2 book 中文翻译](https://trapdoor-tech.github.io/halo2-book-chinese/) / [github](https://trapdoor-tech.github.io/halo2-book-chinese/)
@@ -14,8 +18,23 @@
 - [halo2.club](https://halo2.club)
 - [Awesome halo2](https://github.com/adria0/awesome-halo2)
 - [halo2-learning-materials](https://learn.z2o-k7e.world/halo2/halo2.html)
+- [QA](https://github.com/zkp-co-learning/halo2-step-by-step/discussions)  |  [开营视频回放](https://www.youtube.com/watch?v=0BVaXaRpgww&t=10s)
 
-[QA](https://github.com/zkp-co-learning/halo2-step-by-step/discussions)  |  [开营视频回放](https://www.youtube.com/watch?v=0BVaXaRpgww&t=10s)
+
+
+----
+
+
+
+for 纯新手:
+
+1. 新手学习 ZKP 可以参考新手村入门攻略 <https://learn.z2o-k7e.world/zk-everything/zk-roadmap.html> (must)
+2. 学习 PLONK 郭老师的系列没跟上非常正常，一般正常人都大概需要反复读 5 遍，各种概念不断交叉记忆，相互关联，然后才能建立一些直观的印象
+3. 有了一定的印象后，可以参考 [@Harry L 为文档写的 python 代码](https://github.com/Antalpha-Labs/baby-plonk/blob/main/tutorials/understanding-plonk-cn/3-plonk-permutation.ipynb)，手敲印证，加深印象 (optional)
+4. 学习 Rust 编程 (must)
+5. halo2 学习方法论： <https://learn.z2o-k7e.world/halo2/halo2.html>  (must)
+
+
 
 > !有任何看不懂的 Part 都可以提 [issue](https://github.com/zkp-co-learning/halo2-step-by-step/issues) 或者 [Q&A](https://github.com/zkp-co-learning/halo2-step-by-step/discussions/categories/q-a) ~
 > 
@@ -23,4 +42,4 @@
 
 
 
-[^1]: 目前我们打算对这些内容进行一下重新的整理和修改，会随着课程逐步更新和优化，欢迎 👏🏻 PR 和 issue ！
+[^1]: 目前我们正在对部分教程内容进行重新的整理&修改，会随着课程逐步更新和优化，欢迎 👏🏻 PR 和 issue ！

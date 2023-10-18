@@ -1,42 +1,76 @@
+> - 作者:  [@Po](https://github.com/dajuguan)
+> - 时间: 2023-10-18
+> - 校对: [@Demian](https://github.com/demian101)
+
+
+
 ## Overview
+
+Prover 宣称：它拥有满足 $a^2 * b^2 * constant = out$  约束关系，同时结果公开为 $out$ 的一组 $witness$
+
+现在 Prover 的目的是，写出一个 halo2 电路，能产生可验证其 statement 的一组 proof，让大家信服他的 statement。
+
+
+
 考虑如下电路:
+
+```bash
+private inputs:  a, b, constant
+public inputs :  out
+constraints   :  a^2 * b^2 * constant = out
 ```
-private inputs: a,b,const
-public inputs: out
-constrains:
-a^2 * b^2 *const = out
-```
-从电路的角度,只使用乘法门和乘法选择器，上述约束可以算数化为:
+从电路的角度，只使用`乘法门`和乘法`选择器`，上述约束可以算数化为:
 
- | ins   | a0    | a1    | s_mul |
- |-------|-------|-------|-------|
- | *out* |    a  |       |       |
- |       |    b  |       |       |
- |       | const |       |       |
- |       |   ab  |   b   |   1   |
- |       |   ab  |       |   0   |
- |       |   ab  |   ab  |   1   |
- |       | absq  |       |   0   |
- |       |  absq | const |   1   |
- |       | *out* |       |   0   |
+| instance | advice_0 | advice_1 | selector_mul |
+| -------- | -------- | -------- | ------------ |
+| *out*    | a        |          |              |
+|          | b        |          |              |
+|          | constant |          |              |
+|          | ab       | b        | 1            |
+|          | ab       |          | 0            |
+|          | ab       | ab       | 1            |
+|          | absq     |          | 0            |
+|          | absq     | const    | 1            |
+|          | *out*    |          | 0            |
 
-我们的目的则是利用Halo2定义好上述约束(gates和equality constrains)，并填好上述表格(即指定witness)。
-使用Halo2编写电路，需要实现`halo2_proofs::plonk::Circuit`的三个Trait:
-- without_witnesses:创建默认无需witness的Circuit实例
-- configure: 需要自定义:
-    1. 电路配置: 有几列advice(即witness，包含private inputs和trace),instance(public inputs)和电路选择器selector
-    2. gate约束
-- synthesize:需要根据上述表格实现填充witness的逻辑，即按照验证程序的逻辑正确写入将数据写入表格的每个Cell:
-    1. 填充以Region为基本单位(多行+多列构成的矩形)，可以在region中以相对引用的方式引用其他Row
-    2. 有两种填充方式: copy_advice(还会产生equality约束)+assign_advice(不会产生equality约束)
+> absq 即 ab_square
 
-一旦定义好上述3个Trait, Halo2便可以在电路实例化后调用相关API**自动运行**(不需要手动触发上述函数)上述逻辑来填充witness和生成proof。
 
-## 创建电路和Config
 
-> 完整代码见[simple](../src/chap_1/simple.rs)
-上述电路一共需要四列，两列witness(advice)用来填充上述表格的`a0`和`a1`列，一列instance(填入公共输出out),一列乘法门选择器(s_mul);其中三个Private inputs: `a`,`b`和`const`填入`a0`列的前两行。
-```
+我们的目的则是：
+
+1. 利用 Halo2 定义好上述约束 (gates 和 equality constrains)，
+2. 并使用其 private value 填好上述表格 (即 assign witness)。
+
+
+
+使用 Halo2 编写电路，需要为 `struct Circuit` 实现三个 Trait: [^1]
+
+- `without_witnesses`: 创建默认无需 witness 的 Circuit 实例
+- `configure`: 需要自定义:
+    1. 电路配置: 
+       1. advice cols (即 witness，包含 private inputs 和 trace), 
+       2. instance cols (Public Inputs)
+       3. selector (电路选择器)
+    2. custom gate 约束
+- `synthesize`: 需要根据上述表格实现填充 witness 的逻辑，即按照验证程序的逻辑正确写入将数据写入表格的每个 Cell:
+    1. 填充以 Region 为基本单位(多行+多列构成的矩形)，可以在 region 中以相对引用的方式引用其他Row
+    2. 有两种填充方式: copy_advice (还会产生 equality 约束) + assign_advice(不会产生 equality 约束)
+
+一旦定义好上述 3 个 Trait，Halo2 便可以在电路实例化后调用相关 API **自动运行**(不需要手动触发上述函数)上述逻辑来填充witness 和生成 proof。
+
+
+
+## 创建电路和 Config [^2]
+
+在知道了电路构建需要的模块上述电路一共需要四列: 
+
+- 2 列 witness(advice) 用来填充上述表格的`a0`和`a1`列，
+  - 其中 3 个 Private inputs: `a`, `b` 和 `constant` 填入 `a0` 列的前三行。
+- 1 列 instance (填入公共输出 out), 
+- 1 列乘法门选择器(s_mul); 
+
+```rust
 #[derive(Debug, Clone)]
 struct CircuitConfig {
     advice: [Column<Advice>;2],
@@ -52,8 +86,11 @@ struct MyCircuit<F:Field> {
 }
 ```
 
-## 实现Circuit前两个trait
-```
+
+
+## 实现 Circuit 前两个 trait
+
+```rust
 impl <F:Field> Circuit<F> for MyCircuit<F> {
   fn without_witnesses(&self) -> Self {
         Self::default()
@@ -92,28 +129,30 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
     }
 }
 ```
-需要注意的是Halo2中为了优化需要通过enable_equality明确指定哪些列设置equality约束。同时由于要保证gate对每一行的witness都满足约束，所以只能通过query_advice来获取每个门`虚拟的`输入和输出(实际的值在synthesize时填入)以生成多项式约束，即保证gate返回的vec为0。
+需要注意的是 Halo2 中为了优化需要通过 enable_equality 明确指定哪些列设置 equality 约束。同时由于要保证 gate 对每一行的 witness 都满足约束，所以只能通过 query_advice 来获取每个门`虚拟的`输入和输出(实际的值在 synthesize 时填入)以生成多项式约束，即保证 gate 返回的 vec 为 0。
 
-## 实现witness填充
 
-按照表格,一步步填充witness：
-1. load private inputs `a`,`b`和`const`
-2. 分别计算三个乘法的输入输出值(`ab`,`absq`,`out`)，并通过`assign_advice`和`copy_advice`这两个API填充Cell
-3. 通过`constrain_instance` API,约束out那个Cell和instance列的第一个cell相等
-```
+
+## 实现 witness 填充
+
+按照表格,一步步填充 witness：
+1. load private inputs `a`, `b` 和 `constant`
+2. 分别计算三个乘法的输入输出值 (`ab`, `absq`, `out`)，并通过 `assign_advice` 和 `copy_advice` 这两个 API 填充 Cell 
+3. 通过 `constrain_instance` API, 约束 out 所在的 Cell 和 instance 列的第一个 cell 相等
+```rust
 fn load_private<F:Field>( 
     config: &CircuitConfig,
     mut layouter: impl Layouter<F>,
     value: Value<F>) -> Result<Number<F>, Error> {
     layouter.assign_region(
         || "load private", 
-    |mut region| {
-        region.assign_advice(
-            || "private input", 
-            config.advice[0], 
-            0, 
-            || value
-        ).map(Number)
+        |mut region| {
+            region.assign_advice(
+                || "private input", 
+                config.advice[0], 
+                0, 
+                || value
+            ).map(Number)
     })
 }
 
@@ -171,11 +210,13 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
 }
 ```
 
+
+
 ## Mock prove
 
 最后实例化电路，并调用相应的Mock Prover来验证:
 
-```
+```rust
 #[cfg(test)]
 mod tests {
     use halo2_proofs::{dev::MockProver, pasta::Fp};
@@ -219,15 +260,17 @@ mod tests {
 }
 ```
 
-其中:`MockerProver.run`会分别调用实例化电路的`configure`和`synthesis`函数以填充witness列(详见Prover的[assign_advice函数](https://github.com/zcash/halo2/blob/f9838c127ec9c14f6f323e0cfdc0c1392594d37f/halo2_proofs/src/plonk/prover.rs#L135))及电路约束。
-`prover.verify()`则会检查所有的门、lookup、permuation等生成的约束是否满足。
+其中:`MockerProver.run`会分别调用实例化电路的 `configure` 和 `synthesis` 函数以生成电路约束和填充 witness 列(详见 Prover 的[assign_advice函数](https://github.com/zcash/halo2/blob/f9838c127ec9c14f6f323e0cfdc0c1392594d37f/halo2_proofs/src/plonk/prover.rs#L135))。
+`prover.verify()` 则会检查所有的门、lookup、permuation等生成的约束是否满足。
 
 运行`cargo run test_chap_1_simple`, 测试成功。
 
-## 检查Circuit布局
 
-同时，还可以利用Halo2的tool输出电路的整个布局图，advice列均为红色，instance列为浅蓝色，selector列为深蓝色；不同的region之间有黑色线分隔，填充过值的advice和instance列的单元格由绿色和浅绿色组成，填充过值得instance单元格则为深蓝色。可根据此图检查电路是否欠约束(under constrain)，如果欠约束会明显发现对应的单元格**不是绿色**。
-```
+
+## 检查 Circuit 布局
+
+同时，还可以利用 Halo2 的 tool 输出电路的整个布局图，advice 列均为红色，instance 列为浅蓝色，selector 列为深蓝色；不同的 region 之间由黑色线分隔，填充过值的 advice 和 instance 列的单元格由绿色和浅绿色组成，填充过值的instance单元格则为深蓝色。可根据此图检查电路是否欠约束(under constraint)，如果欠约束会明显发现对应的单元格**不是绿色**。
+```rust
 
     #[cfg(feature = "dev-graph")]
     #[test]
@@ -260,3 +303,12 @@ mod tests {
 
 从下图可以看出，整个电路一共9行4列，与表格设计一致。
 ![image](../imgs/simple_annote.png)
+
+
+
+
+
+
+
+[^1]: `./halo2_proofs::plonk::Circuit`
+[^2]: 完整代码在 [halo2-tutorials: chap-1](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_1/simple.rs) 
