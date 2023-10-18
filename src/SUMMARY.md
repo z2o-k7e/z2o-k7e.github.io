@@ -41,7 +41,7 @@
 - [Halo2](./halo2/halo2.md)
   - [Chap-1](./halo2/chap-1/readme.md)
   - [Chap-2 (editing...)]()
-  - [Appendix-learning-materials](./halo2/tmp/halo2-learning-materials.md)
+  - [learning-halo2 (0xPARC)](./halo2/tmp/halo2-learning-materials.md)
       - [1-Simple Examples](./halo2/tmp/1-Simple-Example.md)
       - [2-Fibonacci-example-1](./halo2/tmp/2-Fibonacci-example-1.md)
       - [3-Fibonacci-example-2](./halo2/tmp/3-Fibonacci-example-2.md)
