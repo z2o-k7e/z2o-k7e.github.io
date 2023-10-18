@@ -1,10 +1,10 @@
 # Summary
 
-[README](../README.md)
+[README](./README.md)
 
 ----
 
-- [ZKP 新手村入门攻略](./zk-everything/zk-roadmap.md)
+- [ZKP 新手村入门攻略](./beginner.md)
 
 ---
 
@@ -51,6 +51,7 @@
       - [7-Range-Check-Lookup-example-2)](./halo2/tmp/7-Range-Check-lookup(example-2).md)
       - [8-Range-Check-Lookup-example-3)](./halo2/tmp/8-Range-Check(example-3).md)
       - [9-Range-Check-Decompose)](./halo2/tmp/9-decomposed.md)
+      - [halo2-learning-materials](./halo2/tmp/halo2-learning-materials.md)
       - [ZKP Apps with halo2](./halo2/tmp/ZKP-APP.md)
           - [Zordle](./halo2/tmp/Zordle.md)
           - [Hammster](./halo2/tmp/Hammster.md)

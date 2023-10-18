@@ -2,13 +2,11 @@
 
 <span style="color: grey;">**Welcome to the**</span>
 
-![](logo.png)
+![](./src/logo.png)
 
 
 
 <span style="color: grey;">**World!**</span>
-
-<!-- 这边 logo 的寻址地点是 .src , 所以本地 MD 渲染不会显示，mkbook serve --open 能看到就好了-->
 
 
 
@@ -16,7 +14,7 @@
 
 
 
-> [github](https://github.com/zkp-co-learning) of $\mathcal{Z}_2 \mathbb{O} \ {\text -} \ \mathcal{K}_7 \mathbb{E}$
+> [github](https://github.com/zkp-co-learning) of  $`\mathcal{Z}_2 \mathbb{O} \ {\text -} \ \mathcal{K}_7 \mathbb{E}`$
 
 
 
