@@ -2,12 +2,19 @@
 #
 # To get started with mdBook see: https://rust-lang.github.io/mdBook/index.html
 #
-name: Deploy mdBook site to Pages
+name: Deploy z2o-k7e to Pages
 
 on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
+    paths:
+      - "src/**"
+      - "po/**"
+      - "theme/**"
+      - "justfile"
+      - "book.toml"
+      - .github/workflows/mdbook.yml
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -28,25 +35,31 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
-    env:
-      MDBOOK_VERSION: 0.4.35
     steps:
       - uses: actions/checkout@v3
-      - name: Install mdBook
+
+      # Init build environment
+      - name: Install just
         run: |
-          mkdir mdbook
-          curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.35/mdbook-v0.4.35-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook
-          curl -sSL https://github.com/lzanini/mdbook-katex/releases/download/v0.5.8pub/mdbook-katex-v0.5.8-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=./mdbook      
-          curl -sSL https://github.com/badboy/mdbook-toc/releases/download/0.14.1/mdbook-toc-0.14.1-x86_64-unknown-linux-gnu.tar.gz| tar -xz --directory=./mdbook   
-          curl -sSL https://github.com/tommilligan/mdbook-admonish/releases/download/v1.13.0/mdbook-admonish-v1.13.0-x86_64-unknown-linux-gnu.tar.gz| tar -xz --directory=./mdbook
-          echo `pwd`/mdbook >> $GITHUB_PATH
+          curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | sudo bash -s -- --to /bin
+      - name: Install cargo
+        run: |
+          curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf -y | sh
+          rustup update
+      - name: Init build environment
+        run: just init-builder
+
+      # Build
+      - name: Build with mdBook
+        run: just build
+
+      # Upload artifact for Github pages
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v3
-      - name: Build with mdBook
-        run: mdbook build
+
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v1
         with:
           path: ./book
 
