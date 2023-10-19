@@ -15,7 +15,7 @@ $$f(x)=Q_L(x) \cdot a(x)+Q_R(x)\cdot b(x)+Q_O(x)\cdot c(x)+Q_M(x)\cdot a(x) b(x)
 如下图，可以清晰地看到 PLONK 每个版本的演进，从而支撑了 halo 2 对 custom constraints 和 lookup table 的引进：
 ![](imgs/APIs_image_16.png)
 
-在一般的电路代码结构中，都会有输出、输出、约束等必要构件，在 halo2 中也不列外。只不过，不像 R1CS 那般每个约束都严丝合缝地写成 $c === a * b$ 的格式，halo2 中的约束和输出输入可以形象地”拉平“ 成一张表 (table)。
+在一般的电路代码结构中，都会有输出、输出、约束等必要构件，在 halo2 中也不例外。只不过，不像 R1CS 那般每个约束都严丝合缝地写成 $c === a * b$ 的格式，halo2 中的约束和输出输入可以形象地”拉平“ 成一张表 (table)。
 
 如下图可以看到：
 - 电路表整体由单元（`cell`）、列（`Column`）和行（`Row`）组成，
