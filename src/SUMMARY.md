@@ -39,6 +39,7 @@
 ---
 
 - [Halo2](./halo2/halo2.md)
+  - [Chap-0](./halo2/chap-0/readme.md)
   - [Chap-1](./halo2/chap-1/readme.md)
   - [Chap-2 (editing...)]()
   - [learning-halo2 (0xPARC)](./halo2/tmp/halo2-learning-materials.md)
@@ -48,9 +49,9 @@
       - [4-IsZero Check-example-3](./halo2/tmp/4-IsZero-Check-example-3.md)
       - [5-Range check-example-1.md](./tmp/halo2/5-Range-check.md)
       - [6-Range Check (code explanation)](./halo2/tmp/6-Range-Check(code-explanation).md)
-      - [7-Range-Check-Lookup-example-2)](./halo2/tmp/7-Range-Check-lookup(example-2).md)
-      - [8-Range-Check-Lookup-example-3)](./halo2/tmp/8-Range-Check(example-3).md)
-      - [9-Range-Check-Decompose)](./halo2/tmp/9-decomposed.md)
+      - [7-Range Check-Lookup-example-2)](./halo2/tmp/7-Range-Check-lookup(example-2).md)
+      - [8-Range Check-Lookup-example-3)](./halo2/tmp/8-Range-Check(example-3).md)
+      - [9-Range Check-Decompose)](./halo2/tmp/9-decomposed.md)
       - [halo2-learning-materials](./halo2/tmp/halo2-learning-materials.md)
       - [ZKP Apps with halo2](./halo2/tmp/ZKP-APP.md)
           - [Zordle](./halo2/tmp/Zordle.md)
