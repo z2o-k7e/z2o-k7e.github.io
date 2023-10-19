@@ -4,13 +4,13 @@
 
 ### 电路结构
 
-在 [naive PLONK 协议](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-intro.html) 中，门约束系统相对固定和局限：
+在 [Vanilla PLONK 协议](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-intro.html) 中，门约束系统相对固定和局限：
 $$f(x)=Q_L(x) \cdot a(x)+Q_R(x)\cdot b(x)+Q_O(x)\cdot c(x)+Q_M(x)\cdot a(x) b(x)+Q_C(x)$$
 在 Halo2 中引入了 custom gate 和 lookup table，约束系统中的约束并不限定在一行上的变量，且 "custom gate" 可以任意指定约束需要的计算。 [^1]
 
 ![](imgs/APIs_image_16.png)
 
-如下图可以看到：电路由列（`Column`）和行（`Row`）组成，行和列的组合可以构成 `region`
+如下图可以看到：电路由列（`Column`）和行（`Row`）组成，行和列的组合可以构成 `region`。其中
 列又分为三种类型：`advice`，`instance` 和 `selector` 
 下面我们会分别详细讲解各部分组件 [^2]
 
@@ -18,15 +18,15 @@ $$f(x)=Q_L(x) \cdot a(x)+Q_R(x)\cdot b(x)+Q_O(x)\cdot c(x)+Q_M(x)\cdot a(x) b(x)
 
 #### Columns
 
-我们可以将电路概念化为给定有限域 $\mathbb{F}$ 上 $m$ 列 $n$ 行的矩阵
+我们可以将电路的输入和输出概念化为给定有限域 $\mathbb{F}$ 上 $m$ 列 $n$ 行的矩阵
 - `instance columns` 包含 $Prover/Verifier$ 之间共享的输入，通常用于公共输入 (public inputs)
 	- 例如 SHA256 的结果
 	- Merkle Tree 的根
-  - `advice columns` 包含了 private values witnessed by the $Prover$
-  - `fixed columns`包含在 key generation 阶段设置的 preprocessed values
-	 - 如常量 constant 
-	 - 查找表 Lookup table column
-	 - 选择子 Selector, 同一行可以支持若干种不同的约束, 比如三元三次, 或者三元二次, 选择子就保证了, 比如说有  3 个 custom gate, 可以只满足其中一个就 OK , 或者满足其中的 2 个
+- `advice columns` 包含了 private values witnessed by the $Prover$
+- `fixed columns`包含在 key generation 阶段设置的 preprocessed values
+	- 如常量 constant 
+	- 查找表 Lookup table column
+	- 选择子 Selector, 同一行可以支持若干种不同的约束, 比如三元三次, 或者三元二次, 选择子就保证了, 比如说有  3 个 custom gate, 可以只满足其中一个就 OK , 或者满足其中的 2 个
 
 <!--
 we conceptualise the circuit as a matrix of m columns and n rows,  over a given finite field $\mathbb{F}$ 
@@ -51,16 +51,12 @@ fixed columns contain  preprocessed values set at key generation
 > (borrowed from https://erroldrummond.gitbook.io/halo2-tutorial/)
 
 #### Region
-
-So，什么是 `Region` ?
-- 启发式地来说, 您可以将一个 `region` 视为一个自包含的 Block，在该块内你关心相对偏移(relative offsets)，并且需要以特定方式**相对于其他 Cell 放置你的 Cell**。 而如果您不关心两个块如何相互作用，那么您应该将它们定义在 2 个分别的 regions 中，原因是：如此可以将控制权交给 `layouter` 以优化区域的布局
+在Halo2中我们不会直接约束一整个电路的行和列，而是将整个电路划分为由相邻的行和列组成的Region，在Region中可以采用相对偏移(relative offsets)的方式**访问Cell**。 如果两个约束没有关系的话，那么您应该将它们定义在 2 个分别的 regions 中，原因是：如此可以将控制权交给 `layouter` 以优化区域的布局。
 - 因此，与为整个电路使用一个 region 相反，您应该尝试将其尽可能分解 self-contained regions ，除非整个电路实际上是一遍又一遍重复的同一个门。 在这种情况下，只需要一个 region。 [^4] 
-
 
 <!--
  - heuristically you can think of a region as like a self-contained block of flick and within this block you are concerned with relative offsets and you need certain cells to be placed relative to other cells in a specific way. whereas(相反) if you do not care about how two blocks interact with each other then you should define them in separate regions and the reason why this is better is you can hand some control to the `layouter` to optimize the layout of your regions
  - so as opposed to like using a one region for your whole circuit,  you should try and break it up as far as possible into self-contained regions,  unless your whole circuit is literally the same gate repeating over and over.  in that case,  you just need one region.
-	 - 
 -->
 
 <!--
@@ -89,7 +85,7 @@ So，什么是 `Region` ?
 	 -  $\textcolor{violet}{light \ \ purple}$ : fixed column that is binary (0/1) we call these `selector` like in PLONK paper. 
 	 -  $\textcolor{purple}{light \ \ purple}$ : constant values，比如 5
 
-为什么我们需要电路布局图 (Circuit layout diagram)?
+从电路布局图 (Circuit layout diagram)我们可以观察到一些有意思的结论:
 - 我们希望减少电路使用的空间 (space) , 因为行数越多，fft 操作越多
 - 同时， $Prover$ 需要 commit 每个列。 (make a `commitment` for each column.)
 - 更多的列数，意味着更多的 `commitments`，也就意味着更大的 `proof size`
@@ -100,7 +96,7 @@ So，什么是 `Region` ?
 > 为什么 rows 需要 fft ? 在 PLONK 中使用了多项式承诺，可以将证明生成中涉及到大量的多项式求值、以及计算商多项式等，这些都需要使用 fft 来加速运算 (FFT提供了一个高效的方法来转换多项式系数形式和它们的点值表示)。从而验证该行的多项式约束（custom gate）是否得到满足
 
 
-![[imgs/APIs_image_2.png]]
+![](imgs/APIs_image_2.png)
 
  <!--
  - the advice columns(witness) are still $\textcolor{pink}{pink}$
@@ -225,7 +221,7 @@ struct FieldChip<F: Field> {
 ```
 
 每一个"芯片"类型**都要实现 `Chip` trait** , `Chip` trait 定义了 `Layouter` 在 synthesizing 电路时可能需要的关于电路的某些属性，以及若将该芯片加载到电路所需要设置的任何初始状态
-> synthesizing 电路 : 一般指的是类似 R1CS 那种写约束的意思
+> synthesizing 电路 : 一般指填入电路所需的witness，即每一行的单元格
 
 ```rust
 /// Every chip needs to implement the `Chip` trait !!
