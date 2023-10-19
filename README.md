@@ -117,14 +117,14 @@ This will take a while, go and grab a drink of water.
 
 ```bash
 $ [安装 Rust]
-$ cargo install mdbook mkbook-latex  mdbook-toc
-$ mkbook serve --open       # 本地预览
+$ cargo install mdbook mdbook-latex  mdbook-toc
+$ mdbook serve --open       # 本地预览
 
 ```
 
 Tips :
  - `src/SUMMARY.md` 是会在前端组织显示的所有文件目录及其链接
- - 公式测试：可以在 [katex.org](katex.org) 测试，大家在 Obisidian notes 里怎么写公式，前端就会咋显示，
+ - 公式测试：可以在 [katex.org](https://katex.org/) 测试，大家在 Obisidian notes 里怎么写公式，前端就会咋显示，
 
 （contribution by PR process）
 
