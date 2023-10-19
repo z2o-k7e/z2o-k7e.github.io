@@ -39,7 +39,6 @@
 ---
 
 - [Halo2](./halo2/halo2.md)
-  - [Chap-0](./halo2/chap-0/readme.md)
   - [Chap-1](./halo2/chap-1/readme.md)
   - [Chap-2 (editing...)]()
   - [learning-halo2 (0xPARC)](./halo2/tmp/halo2-learning-materials.md)
