@@ -48,21 +48,20 @@
 > 时间: 2023-09-10
 ```
 
-> 作者：[Demian](https://github.com/Demian101)
-
-or
-
-> Author: [Demian](https://github.com/Demian101)
-
+比如：
+> 作者：[大壮](https://github.com/Demian101)
+> 
+> Author: [大壮](https://github.com/Demian101)
 
 
-2. 文章开始之前，可以添加 `[TOC] `来生成该文章的 Table of contents（目录）
+
+2. 文章开始之前，可以添加 `[TOC] `来让 mdbook 自动生成该文章的 Table of contents（目录）
 
 ```bash
 [TOC]
 ```
 
-3. 可添加admonition block，语法见[这里](https://tommilligan.github.io/mdbook-admonish/)
+3. 可添加 admonition block，语法见[这里](https://tommilligan.github.io/mdbook-admonish/)
 
 ```admonish success title=""
 This will take a while, go and grab a drink of water.
