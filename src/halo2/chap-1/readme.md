@@ -214,7 +214,7 @@ plotters = { version = "0.3.0", default-features = true, optional = true }
 
 常用打印命令：
 ```bash
-
+cargo test --all-features -- --nocapture chap_1::exercise_1::tests::plot_chap_1_circuit 
 ```
 
 ![](imgs/APIs_image_2.png)
