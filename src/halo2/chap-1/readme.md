@@ -1,24 +1,17 @@
-> - 作者:  [@Po](https://github.com/dajuguan)
+> - 作者:  [@Po@Ethstorage.io](https://github.com/dajuguan) / [@Demian](https://github.com/demian101)
 > - 时间: 2023-10-18
-> - 校对: [@Demian](https://github.com/demian101)
-
-
+> - 校对:  [@Po@Ethstorage.io](https://github.com/dajuguan) / [@Demian](https://github.com/demian101)
 
 ## Overview
 
-Prover 宣称：它拥有满足 $a^2 * b^2 * constant = out$  约束关系，同时结果公开为 $out$ 的一组 $witness$
-
-现在 Prover 的目的是，写出一个 halo2 电路，能产生可验证其 statement 的一组 proof，让大家信服他的 statement。
-
-
-
-考虑如下电路:
-
+上一届我们介绍了Halo2的核心概念，本节则以 $a^2 * b^2 * constant = out$ 这个电路为例，来说明如何使用Halo2 API来写电路。
+该电路的各个参数说明如下：
 ```bash
 private inputs:  a, b, constant
 public inputs :  out
 constraints   :  a^2 * b^2 * constant = out
 ```
+我们的目的是写一个电路，让Prover证明对于公共输入`out`,他知道三个秘密输入`a, b, constant`满足$a^2 * b^2 * constant = out$ 这个约束。
 从电路的角度，只使用`乘法门`和乘法`选择器`，上述约束可以算数化为:
 
 | instance | advice_0 | advice_1 | selector_mul |
@@ -33,16 +26,12 @@ constraints   :  a^2 * b^2 * constant = out
 |          | absq     | const    | 1            |
 |          | *out*    |          | 0            |
 
-> absq 即 ab_square
-
-
+> absq 即 ab的平方。
 
 我们的目的则是：
 
 1. 利用 Halo2 定义好上述约束 (gates 和 equality constrains)，
 2. 并使用其 private value 填好上述表格 (即 assign witness)。
-
-
 
 使用 Halo2 编写电路，需要为 `struct Circuit` 实现三个 Trait: [^1]
 
@@ -59,11 +48,9 @@ constraints   :  a^2 * b^2 * constant = out
 
 一旦定义好上述 3 个 Trait，Halo2 便可以在电路实例化后调用相关 API **自动运行**(不需要手动触发上述函数)上述逻辑来填充witness 和生成 proof。
 
-
-
 ## 创建电路和 Config [^2]
 
-在知道了电路构建需要的模块上述电路一共需要四列: 
+根据电路构建所需模块，首先需要确定电路配置，上述电路一共需要四列: 
 
 - 2 列 witness(advice) 用来填充上述表格的`a0`和`a1`列，
   - 其中 3 个 Private inputs: `a`, `b` 和 `constant` 填入 `a0` 列的前三行。
@@ -86,10 +73,8 @@ struct MyCircuit<F:Field> {
 }
 ```
 
-
-
 ## 实现 Circuit 前两个 trait
-
+根据电路配置以及我们只需要乘法门，来实现`configure` trait
 ```rust
 impl <F:Field> Circuit<F> for MyCircuit<F> {
   fn without_witnesses(&self) -> Self {
@@ -130,8 +115,6 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
 }
 ```
 需要注意的是 Halo2 中为了优化需要通过 enable_equality 明确指定哪些列设置 equality 约束。同时由于要保证 gate 对每一行的 witness 都满足约束，所以只能通过 query_advice 来获取每个门`虚拟的`输入和输出(实际的值在 synthesize 时填入)以生成多项式约束，即保证 gate 返回的 vec 为 0。
-
-
 
 ## 实现 witness 填充
 
@@ -266,10 +249,9 @@ mod tests {
 运行`cargo run test_chap_1_simple`, 测试成功。
 
 
-
 ## 检查 Circuit 布局
 
-同时，还可以利用 Halo2 的 tool 输出电路的整个布局图，advice 列均为红色，instance 列为浅蓝色，selector 列为深蓝色；不同的 region 之间由黑色线分隔，填充过值的 advice 和 instance 列的单元格由绿色和浅绿色组成，填充过值的instance单元格则为深蓝色。可根据此图检查电路是否欠约束(under constraint)，如果欠约束会明显发现对应的单元格**不是绿色**。
+同时，还可以利用上街提到的 Halo2 的 tool 输出电路的整个布局图，advice 列均为红色，instance 列为浅蓝色，selector 列为深蓝色；不同的 region 之间由黑色线分隔，填充过值的 advice 和 instance 列的单元格由绿色和浅绿色组成，填充过值的instance单元格则为深蓝色。可根据此图检查电路是否欠约束(under constraint)，如果欠约束会明显发现对应的单元格**不是绿色**。
 ```rust
 
     #[cfg(feature = "dev-graph")]
@@ -304,7 +286,11 @@ mod tests {
 从下图可以看出，整个电路一共9行4列，与表格设计一致。
 ![image](../imgs/simple_annote.png)
 
-
+## 总结
+我们实现电路时一般可遵循三步法:
+1. 确定电路配置：需要几列
+2. 确定好电路需要怎样的门:乘法门，还是自定义门，还是需要加lookup。这样就可以实现Circuit的`configure` trait
+3. 根据电路所需的输入输出，填充好witness。这样就可以实现Circuit的`synthesize` trait
 
 
 
