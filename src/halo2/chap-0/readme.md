@@ -4,16 +4,19 @@
 
 [TOC]
 
-在前面的 prerequisite 课程中，我们学习了 PLONK 协议及其 lookup table 优化，在本节我们将会以 [halo2](https://github.com/zcash/halo2) 这个 Rust library 为基础，详细讲解Halo2的相关基本概念。
+在前面的 prerequisite 课程中，我们学习了 PLONK 协议及其 lookup table 优化，在本节我们将会以 [halo2](https://github.com/zcash/halo2) 这个 Rust library 为基础，详细讲解 Halo2 的相关基本概念。
 
 ### halo2 电路结构
 
 我们知道，在 [Vanilla PLONK 协议](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-intro.html) 中，门约束系统相对固定和局限，表现力并不强：
+
 $$f(x)=Q_L(x) \cdot a(x)+Q_R(x)\cdot b(x)+Q_O(x)\cdot c(x)+Q_M(x)\cdot a(x) b(x)+Q_C(x)$$
+
 为了支持更复杂和更高阶的运算，halo2 中引入了 `custom gate` 和 `lookup table`，这使得约束系统中的约束并不限定在某一行上的变量，`custom gate` 可以任意指定约束需要的计算。 [^1]
 
 如下图，可以清晰地看到 PLONK 每个版本的演进，从而支撑了 halo 2 对 custom constraints 和 lookup table 的引进：
-![](imgs/APIs_image_16.png)
+
+<img src="imgs/APIs_image_16.png" style="zoom:50%;" />
 
 在一般的电路代码结构中，都会有输出、输出、约束等必要构件，在 halo2 中也不例外。只不过，不像 R1CS 那般每个约束都严丝合缝地写成 $c === a * b$ 的格式，halo2 中输出输入可以形象地”拉平“ 成一张表 (table)，所有的约束则可以通过选择这张表的任意单元格来构造。
 
@@ -26,7 +29,7 @@ $$f(x)=Q_L(x) \cdot a(x)+Q_R(x)\cdot b(x)+Q_O(x)\cdot c(x)+Q_M(x)\cdot a(x) b(x)
 
 下面，我们会分别详细讲解各部分组件的用途及使用方法 [^2]
 
-![](imgs/APIs_image_1.png)
+<img src="imgs/APIs_image_1.png" style="zoom:27%;" />
 
 #### Columns
 
@@ -52,6 +55,7 @@ $$f(x)=Q_L(x) \cdot a(x)+Q_R(x)\cdot b(x)+Q_O(x)\cdot c(x)+Q_M(x)\cdot a(x) b(x)
 
 <!--
 we conceptualise the circuit as a matrix of m columns and n rows,  over a given finite field $\mathbb{F}$ 
+
  - `instance columns` contain inputs shared between prover/verifier , generally used for public inputs
 	 - e.g.  the res of SHA256
 	 - a root of a Merkle Tree. 
@@ -102,9 +106,9 @@ layouter 作用在 assignment （电路赋值）期间，即当你用 Witness �
 The layouter will be used during the assignment, namely when you fill up a table with the witness. Each time you will fill up a region. You won't fill the entire table at once.  layouter takes a region as input and assign values to that region.
 -->
 
-为了保证每个gate能当访问到其所需的所有单元格，一般而言对gate所在的region进行电路布局时，region需遵循如下规则： **Region 不需要与 custom gate 具有相同的形状，但 Region 必须覆盖所有相关的 custom gate**
+为了保证每个 gate 能当访问到其所需的所有单元格，一般而言对 gate 所在的 region 进行电路布局时，region 需遵循如下规则： **region 不需要与 custom gate 具有相同的形状，但 region 必须覆盖所有相关的 custom gate**
 
-![](./imgs/APIs_image_10.png)
+<img src="./imgs/APIs_image_10.png" style="zoom:30%;" />
 
 比如上面的例子，在最上方的电路包含两个 custom gate (红色边框标识)，可以创建如下两种region:
 
@@ -139,23 +143,28 @@ The layouter will be used during the assignment, namely when you fill up a table
 - 它尝试尽可能多地合并相关的 regions 以使用**更少的行**。
 
 <!--
+
 - It is a single-pass layouter. 
 - It finds the first empty row, for each column used in the region and takes a maximum.
-- trying to pack all our region as much as possible to use the **fewer rows** 
--->
-Region的布局根据电路可以有各种形状，如:
+- trying to pack all our region as much as possible to use the **fewer rows**  -->
+
+
+
+Region 的布局根据电路可以有各种形状，如:
+
 ![](imgs/APIs_image_11.png)
+
 - Region `1` : use one cell for 3 advice column
 - Region `2` :  "L shape"
 - Region `3` :  "L shape"
 
 以下几个 Q&A 可以帮你进一步理解 region：
-- Q：区域“1”为什么不需要选择器？
-	- A：你可以认为 region 1 是你想要初始化的一些 **private input**，它不涉及任何selector，即这一行的门约束必须成立
+- Q：region 1 为什么不需要选择器？
+	- A：你可以认为 region 1 是你想要初始化的一些 **private input**，它不涉及任何 selector，即这一行的门约束必须成立
 - Q：如下图，为什么 region 4 不向上填充到红色区域？
 	- A：对于 Region 4 , 它本可以填到红色区域里面, 但是这不是咱们 SimpleFloorPlanner 能做的事 ~ （@Dr. Shen haicheng）
 
-![](imgs/APIs_image_12.png)
+<img src="imgs/APIs_image_12.png" style="zoom:50%;" />
 
 <!-- 
 Q: how does region `1` not include a selector ?
@@ -165,7 +174,7 @@ A: you can think of region `1` is some **private input** you want to initialize,
 
 #### Diagrams
 
-在Halo2中可以通过输出diagrams上述电路布局图，以非常直观地看到电路中所有 columns 的状态和电路整体布局，可以帮我们优化电路、查找 bug 等。
+在 Halo2 中可以通过输出 diagrams 上述电路布局图，以非常直观地看到电路中所有 columns 的状态和电路整体布局，可以帮我们优化电路、查找 bug 等。
 
 halo2 一般可以通过调用如下API来生成电路布局图：
 
@@ -224,8 +233,8 @@ cargo test --dev-graph -- --nocapture chap_1::exercise_1::tests::plot_chap_1_cir
  - the $\textcolor{lime}{light \ green}$ cells 说明在电路定义时用到了，是 Region 的一部分
  - the $\textcolor{green}{drak \ green}$ cells 说明被赋值了
  - the $\textcolor{purple}{purple}$ regions 是 `fixed` columns (preprocessed value)
-	 -  $\textcolor{violet}{light \ \ pink}$ : selector. 
-	 -  $\textcolor{purple}{light \ \ purple}$ : constant values，比如 5
+	 -  $\textcolor{violet}{light \ \ purple}$ : selector. 
+	 -  $\textcolor{purple}{dark \ \ purple}$ : constant values，比如 5
 
 对比上图的单通道布局 vs 双通道布局，我们可以观察到一些有意思的结论:
 - 双通道布局器做了更多 region 布局方面的优化，将电路行数由 $2^{12}$ 优化到了 $2^{11}$ ，不过列数也有所增加
@@ -253,3 +262,7 @@ What does columns do ?
  - so, more columns, more commitments ;  more commitments, larger proof.
 
 -->
+
+
+
+以上就是 Halo2 的一些关键概念，在[下面一章](https://learn.z2o-k7e.world/halo2/chap-1/index.html)中，我们将会以一个最简的例子尝试使用 Halo2 library 提供的 API 编写电路！
