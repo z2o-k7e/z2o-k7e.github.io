@@ -18,7 +18,7 @@ $$f(x)=Q_L(x) \cdot a(x)+Q_R(x)\cdot b(x)+Q_O(x)\cdot c(x)+Q_M(x)\cdot a(x) b(x)
 
 <img src="imgs/APIs_image_16.png" style="zoom:50%;" />
 
-在一般的电路代码结构中，都会有输出、输出、约束等必要构件，在 halo2 中也不例外。只不过，不像 R1CS 那般每个约束都严丝合缝地写成 $c === a * b$ 的格式，halo2 中输出输入可以形象地”拉平“ 成一张表 (table)，所有的约束则可以通过选择这张表的任意单元格来构造。
+在一般的电路代码结构中，都会有输出、输出、约束等必要构件，在 halo2 中也不例外。只不过，不像 R1CS 那般每个约束都严丝合缝地写成 $c === a * b$ 的格式，halo2 中，电路的输出输入 Witness 可以形象地看作是成一张矩形表 (table)，所有的约束则可以通过在这张表中规划区域(region)，放置单元格(cells) 来构造。
 
 如下图可以看到：
 - 电路表整体由单元（`cell`）、列（`Column`）和行（`Row`）组成，
@@ -176,7 +176,7 @@ A: you can think of region `1` is some **private input** you want to initialize,
 
 在 Halo2 中可以通过输出 diagrams 上述电路布局图，以非常直观地看到电路中所有 columns 的状态和电路整体布局，可以帮我们优化电路、查找 bug 等。
 
-halo2 一般可以通过调用如下API来生成电路布局图：
+halo2 一般可以通过调用如下 API 来生成电路布局图：
 
 ```rust
 #[cfg(test)]
