@@ -4,15 +4,16 @@
 
 ## Overview
 
-上一届我们介绍了Halo2的核心概念，本节则以 $a^2 * b^2 * constant = out$ 这个电路为例，来说明如何使用Halo2 API来写电路。
+上一届我们介绍了Halo2的核心概念，本节则以 $a^2 * b^2 * constant = out$ 这个电路为例，来说明如何使用 Halo2 API来写电路。
 该电路的各个参数说明如下：
+
 ```bash
 private inputs:  a, b, constant
 public inputs :  out
 constraints   :  a^2 * b^2 * constant = out
 ```
-我们的目的是写一个电路，让Prover证明对于公共输入`out`,他知道三个秘密输入`a, b, constant`满足$a^2 * b^2 * constant = out$ 这个约束。
-从电路的角度，只使用`乘法门`和乘法`选择器`，上述约束可以算数化为:
+我们的目的是写一个电路，让Prover证明对于公共输入`out`,他知道三个秘密输入`a, b, constant`满足 $a^2 * b^2 * constant = out$ 这个约束。
+从电路的角度，只使用 `乘法门` 和 `乘法选择器`，上述约束可以算数化为:
 
 | instance | advice_0 | advice_1 | selector_mul |
 | -------- | -------- | -------- | ------------ |
@@ -26,7 +27,7 @@ constraints   :  a^2 * b^2 * constant = out
 |          | absq     | const    | 1            |
 |          | *out*    |          | 0            |
 
-> absq 即 ab的平方。
+> absq 即 ab 的平方。
 
 我们的目的则是：
 
@@ -48,9 +49,9 @@ constraints   :  a^2 * b^2 * constant = out
 
 一旦定义好上述 3 个 Trait，Halo2 便可以在电路实例化后调用相关 API **自动运行**(不需要手动触发上述函数)上述逻辑来填充witness 和生成 proof。
 
-## 创建电路和 Config [^2]
+## 创建电路和 Config 
 
-根据电路构建所需模块，首先需要确定电路配置，上述电路一共需要四列: 
+根据电路构建所需模块，首先需要确定电路配置，上述电路一共需要四列: [^2]
 
 - 2 列 witness(advice) 用来填充上述表格的`a0`和`a1`列，
   - 其中 3 个 Private inputs: `a`, `b` 和 `constant` 填入 `a0` 列的前三行。
@@ -297,4 +298,5 @@ mod tests {
 
 
 [^1]: `./halo2_proofs::plonk::Circuit`
+
 [^2]: 完整代码在 [halo2-tutorials: chap-1](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_1/simple.rs) 
