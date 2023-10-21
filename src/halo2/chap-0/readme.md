@@ -14,11 +14,13 @@ $$f(x)=Q_L(x) \cdot a(x)+Q_R(x)\cdot b(x)+Q_O(x)\cdot c(x)+Q_M(x)\cdot a(x) b(x)
 
 为了支持更复杂和更高阶的运算，halo2 中引入了 `custom gate` 和 `lookup table`，这使得约束系统中的约束并不限定在某一行上的变量，`custom gate` 可以任意指定约束需要的计算。 [^1]
 
-如下图，可以清晰地看到 PLONK 每个版本的演进，从而支撑了 halo 2 对 custom constraints 和 lookup table 的引进：
+如下图，可以清晰地看到 PLONK 每个版本的演进，从而让 halo 2 能对 custom constraints 和 lookup table 进行支持：
 
 <img src="imgs/APIs_image_16.png" style="zoom:50%;" />
 
-在一般的电路代码结构中，都会有输出、输出、约束等必要构件，在 halo2 中也不例外。只不过，不像 R1CS 那般每个约束都严丝合缝地写成 $c === a * b$ 的格式，halo2 中，电路的输出输入 Witness 可以形象地看作是成一张矩形表 (table)，所有的约束则可以通过在这张表中规划区域(region)，放置单元格(cells) 来构造。
+在一般的电路代码结构中，都会有输出、输出、约束等必要构件，在 halo2 中也不例外。只不过，不像 R1CS 那般每个约束都严丝合缝地写成 $c === a * b$ 的格式，halo2 中，电路的 arithmetization（电路中的 expression） 可以形象地看作是成一张矩形表 (table)，所有的约束则可以通过在这张表中规划区域(region)，放置单元格(cells) 来构造。
+
+> [The halo2 Book](https://zcash.github.io/halo2/concepts/proofs.html): The language that we use to express circuits for a particular proof system is called an _**arithmetization**_. Usually, an arithmetization will define circuits in terms of polynomial constraints on variables over a field. [^9]
 
 如下图可以看到：
 - 电路表整体由单元（`cell`）、列（`Column`）和行（`Row`）组成，
@@ -64,6 +66,31 @@ we conceptualise the circuit as a matrix of m columns and n rows,  over a given 
 
 fixed columns contain  preprocessed values set at key generation
 -->
+
+#### Rows
+
+矩阵中的行数通常是 2 的幂，受有限域 F 的大小限制； 
+行数对应于 Plonkish 算术化(arithmetization) 中的 n-th 单位根(nth root of unity)。 
+约束适用于所有行(apply to all the rows)，但可以通过选择器列中定义的  Selector 启用/禁用。 [^8]
+
+#### Gate
+
+门(Gate) 通常是由一组约束构成，这组约束通常受 selector 控制。 Halo2 提供两种类型的门：
+
+- 标准门(Standard gate)：标准门支持通用算术，例如域乘法和除法
+- 自定义门(Custom gate)：自定义门更具表现力，能够支持电路中的专门操作； 下面的斐波那契电路显示了自定义门的示例（请注意，启用选择器时，门将应用于每一行）
+
+#### Copy constraint
+
+Plonk 的「拷贝约束」是通过「置换证明」（Permutation Argument）来实现，即把表格中需要约束相等的那些值进行循环换位，然后证明换位后的表格和原来的表格完全相等。
+
+Permutation Argument 提供了一种 cheap 的方式来证明集合中部分值的相等性。
+
+如下图，在 Fibonacci 示例中，我们会通过 `copy_advice` API 强制约束红色框、蓝色框的 2 对值分别相等
+
+<img src="./imgs/APIs_image_10.png" style="zoom:30%;" />
+
+
 #### Region
 
 如果是第一次看视频或者读相关文档，你可能会发现 Region 是一个略显抽象的概念，不过没关系，向下读！
@@ -72,7 +99,7 @@ fixed columns contain  preprocessed values set at key generation
 
 如果两个约束没有关系，或者您也不关心两个 "cell" 之间如何相互作用的话，那么就应该将它们分别定义在 2 个不同的 regions 中，如此就可以将控制权交给halo2默认的layouter，让 layouter 去优化整体电路 region 分布，比如合并不同的region到一行来减小电路的规模（layouter 后面会讲解）。
 
-因此，并不推荐将整个电路的逻辑都塞进同一个庞大的 region，您应该尝试将其尽可能分解为逻辑清晰、结构简单的regions。  [^4] 
+因此，并不推荐将整个电路的逻辑都塞进同一个庞大的 region，您应该尝试将其尽可能分解为逻辑清晰、结构简单的 regions。  [^4] 
 
 
 <!--
@@ -266,3 +293,18 @@ What does columns do ?
 
 
 以上就是 Halo2 的一些关键概念，在[下面一章](https://learn.z2o-k7e.world/halo2/chap-1/index.html)中，我们将会以一个最简的例子尝试使用 Halo2 library 提供的 API 编写电路！
+
+----
+
+
+
+
+[^1]: borrowed from Star.Li https://mp.weixin.qq.com/s/VerLN8-tqetKs1Hv6m4KLg
+[^2]: lots of images borrowed from great [0xPARC halo2 lectures](https://learn.0xparc.org/materials/halo2/learning-group-1/halo2-api)
+[^3]: https://www.youtube.com/watch?v=W_zlH2mmtZA  0:41:20 - 0xPARC - # Intro
+[^4]: https://www.youtube.com/watch?v=vGQAMQRlN3E  0:30:49 - 0xPARC - L2
+[^5]: https://www.youtube.com/watch?v=W_zlH2mmtZA 0:44:41 - Intro
+[^6]: https://www.youtube.com/watch?v=vGQAMQRlN3E  0:17:42 - 0xPARC - L2
+[^7]: https://mp.weixin.qq.com/s/VerLN8-tqetKs1Hv6m4KLg 
+[^8]: https://consensys.io/diligence/blog/2023/07/endeavors-into-the-zero-knowledge-halo2-proving-system/
+[^9]: https://zcash.github.io/halo2/concepts/proofs.html
