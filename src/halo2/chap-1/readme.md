@@ -20,7 +20,7 @@ constraints   :  a^2 * b^2 * constant = out
 | *out*    | a        |          |              |
 |          | b        |          |              |
 |          | constant |          |              |
-|          | ab       | b        | 1            |
+|          | a        | b        | 1            |
 |          | ab       |          | 0            |
 |          | ab       | ab       | 1            |
 |          | absq     |          | 0            |
