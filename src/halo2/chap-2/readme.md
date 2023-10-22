@@ -34,7 +34,7 @@ out = d^3
 |       |  d    |       |   0   |   0   |   0   |
 |       |  d    |  out  |   0   |   0   |   1   |
 
-> 完整代码见[simple](../src/simple/simple_3gates.rs)
+> 完整代码见[Halo2 tutotials: chap_2/custom_gates](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_2/exercise_1.rs)
 ### Config
 
 首先，需要明确电路配置，即所需的Advices,Selectors和Instance列，并创建相应的门。
@@ -185,7 +185,7 @@ Chips可以进行组合，底层的Chip尽量使用不同的列(当然也允许C
 |       |  c    | const |   0   |   1   |   0   |
 |       |  d    |   out |   0   |   0   |   1   |
 
-完整代码见[chap_2: simple_chip](https://github.com/zkp-co-learning/
+完整代码见[Halo2 tutorials: chap_2/simple_chip](https://github.com/zkp-co-learning/
 halo2-step-by-step/blob/main/halo2-tutorials/src/chap_2/exercise_2.rs)
 
 ### test & 输出电路布局图
