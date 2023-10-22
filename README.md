@@ -14,7 +14,7 @@
 
 
 
-> [github](https://github.com/zkp-co-learning) of  `$\mathcal{Z}_2 \mathbb{O} \ {\text -} \ \mathcal{K}_7 \mathbb{E}$`
+[github](https://github.com/zkp-co-learning) of  $`\mathcal{Z}_2 \mathbb{O} \ {\text -} \ \mathcal{K}_7 \mathbb{E}`$
 
 
 
