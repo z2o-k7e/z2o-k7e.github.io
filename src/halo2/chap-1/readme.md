@@ -4,7 +4,7 @@
 
 ## Overview
 
-上一届我们介绍了Halo2的核心概念，本节则以 $a^2 * b^2 * constant = out$ 这个电路为例，来说明如何使用 Halo2 API来写电路。
+上节我们介绍了Halo2的核心概念，本节则以 $a^2 * b^2 * constant = out$ 这个电路为例，来说明如何使用 Halo2 API来写电路。
 该电路的各个参数说明如下：
 
 ```bash
@@ -252,7 +252,7 @@ mod tests {
 
 ## 检查 Circuit 布局
 
-同时，还可以利用上街提到的 Halo2 的 tool 输出电路的整个布局图，advice 列均为红色，instance 列为浅蓝色，selector 列为深蓝色；不同的 region 之间由黑色线分隔，填充过值的 advice 和 instance 列的单元格由绿色和浅绿色组成，填充过值的instance单元格则为深蓝色。可根据此图检查电路是否欠约束(under constraint)，如果欠约束会明显发现对应的单元格**不是绿色**。
+同时，还可以利用上节提到的 Halo2 的 tool 输出电路的整个布局图，advice 列均为红色，instance 列为浅蓝色，selector 列为深蓝色；不同的 region 之间由黑色线分隔，填充过值的 advice 和 instance 列的单元格由绿色和浅绿色组成，填充过值的instance单元格则为深蓝色。可根据此图检查电路是否欠约束(under constraint)，如果欠约束会明显发现对应的单元格**不是绿色**。
 ```rust
 
     #[cfg(feature = "dev-graph")]
