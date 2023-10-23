@@ -206,7 +206,7 @@ Chips 可以进行组合，底层的 Chip 尽量使用不同的列(当然也允�
 
 ```rust
 cargo test test_simple_ship
-cargo test plot_chip_circuit --features dev-grap
+cargo test plot_chip_circuit --features dev-graph
 ```
 采用Chip的电路布局图为:
 ![images](../imgs/simple_ship.png)
