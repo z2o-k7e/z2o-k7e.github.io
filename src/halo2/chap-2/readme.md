@@ -1,12 +1,18 @@
-本节我们以一个简单的电路为例，介绍Halo2中的自定义门(custom gates)和chip的概念。
+> - 作者:  [@Po@Ethstorage.io](https://github.com/dajuguan)
+> - 时间: 2023-10-20
+> - 校对:  [@Demian](https://github.com/demian101)
 
-在上一节中，我们使用Halo2的API实现了只包含乘法门的简单电路，但是如果有多种gate呢，这种情况如何处理?
+本节我们以一个简单的电路为例，介绍 Halo2 中的自定义门(custom gates) 和 chip 的概念。
+
+在上一节中，我们使用 Halo2 的API实现了只包含乘法门的简单电路，但是如果有多种 gate 呢，这种情况如何处理?
+
 ## Custom gates
-在Halo2中可通过自定义门来实现，这里需要回顾下Halo2中自定义门的mental model:
+在Halo2中可通过自定义门来实现，这里需要回顾下 Halo2 中自定义门的 mental model:
 ![image](../imgs/custom_gates.png)
 如上式，自定义门可以由任意多种不同的门线性相加构成，每一个门由选择器和门运算逻辑构成，如上式中第一个加法门选择器为$q_{add}$，电路逻辑为$a_2=a_0 + a_1$，Halo2中可以通过`create_gate`创建每个门。不过需要注意的是，看起来这些门之间是独立的，但实际上这些门在最终的电路约束检查中会通过乘以一个随机数`y`，一次行检查一行的witness是否**同时满足所有门**的约束。
 
 ### 问题定义
+
 本节则是证明如下电路:
 ```
 private inputs: a,b,const
@@ -16,9 +22,10 @@ d = c + const
 out = d^3
 ```
 
-注意到再vanilla plonk中约束的degree不能超过2，即只支持加法门和乘法门，但halo2支持通过Ultra plonk来实现更高阶数等自定义门。这里我们使用自定义门来实现$out=d^3$这条约束(注: 其实Ultra plonk中乘法门和加法门也可以看作自定义门，因此下文我们将该这条三次方约束的门称为**立方门**)，相比于需要两条乘法门实现改约束，自定义门可以减少约束的行数。
+注意到再 vanilla plonk 中约束的 degree 不能超过 2，即只支持加法门和乘法门，但 halo2 支持通过 Ultra plonk 来实现更高阶数等自定义门。这里我们使用自定义门来实现$out=d^3$这条约束(注: 其实Ultra plonk中乘法门和加法门也可以看作自定义门，因此下文我们将该这条三次方约束的门称为**立方门**)，相比于需要两条乘法门实现改约束，自定义门可以减少约束的行数。
 
 因此，我们可以画出电路witness表格:
+
 | ins   | a0    | a1    | s_mul | s_add | s_cub |
 |-------|-------|-------|-------|-------|-------|
 |  out  |    a  |       |       |       |       |
@@ -35,10 +42,11 @@ out = d^3
 |       |  d    |  out  |   0   |   0   |   1   |
 
 > 完整代码见[Halo2 tutotials: chap_2/custom_gates](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_2/exercise_1.rs)
+
 ### Config
 
 首先，需要明确电路配置，即所需的Advices,Selectors和Instance列，并创建相应的门。
-```
+```rust
 #[derive(Debug, Clone)]
 struct CircuitConfig {
     advice: [Column<Advice>;2],
@@ -109,8 +117,10 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
 这里我们使用了`Constraints::with_selector` API，等价于直接返回`vec![selecter * gate expression]`。
 
 ### 填入Witness
+
 除了上节的加法门和乘法门之外，我们需要为立方运算增加一个填witness的辅助函数:
-```
+
+```rust
 ...
 fn cub<F:Field>(
     config: &CircuitConfig,
@@ -134,7 +144,8 @@ fn cub<F:Field>(
 > 注意: 推导并填入witness的方式一定要与上述自定义门中引用的单元格和计算方式一致，否则会导致欠约束或约束错误。
 
 然后补充Circuit Trait中的synthesis函数:
-```
+
+```rust
 impl <F:Field> Circuit<F> for MyCircuit<F> {
     ...
     fn synthesize(&self, config: Self::Config, mut layouter: impl Layouter<F>) -> Result<(), Error> {
@@ -158,8 +169,10 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
 ```
 
 ### 测试
+
 实例化电路，并调用相应的Mock Prover来验证。
-```
+
+```rust
 cargo test test_simple_3gates
 ```
 输出相应的电路布局图`cargo test plot_3gates_circuit --features dev-graph`:
@@ -189,7 +202,8 @@ Chips可以进行组合，底层的Chip尽量使用不同的列(当然也允许C
 halo2-step-by-step/blob/main/halo2-tutorials/src/chap_2/exercise_2.rs)
 
 ### test & 输出电路布局图
-```
+
+```rust
 cargo test test_simple_ship
 cargo test plot_chip_circuit --features dev-grap
 ```
