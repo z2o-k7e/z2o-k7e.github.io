@@ -18,12 +18,12 @@
 本节则是证明如下电路:
 
 ```rust
-private inputs: a,b,const
+private inputs: a,b,c
 public inputs: out
 
-a^2 * b^2 = c
-d = c + const
-out = d^3
+d = a^2 * b^2 * c 
+e = c + d
+out = e^3
 ```
 
 注意到在 vanilla plonk 中约束的 degree 不能超过 2，即只支持加法门和乘法门，但 halo2 支持通过 Ultra plonk 来实现更高阶数的 custom gate。这里我们使用一个高阶 custom gate 来实现 $out=d^3$ 这条约束 (注: 其实 Ultra plonk 中乘法门和加法门也可以看作 custom gate，因此下文我们将该这条三次方约束的门称为**立方门**)，相比于原来需要 2 个乘法门实现该约束，custom gate 可以减少帮助约束的行数。
@@ -34,16 +34,16 @@ out = d^3
 |-------|-------|-------|-------|-------|-------|
 |  out  |    a  |       |       |       |       |
 |       |    b  |       |       |       |       |
-|       | const |       |       |       |       |
-|       |   ab  |   b   |   1   |   0   |   0   |
+|       |    c  |       |       |       |       |
+|       |    a  |   b   |   1   |   0   |   0   |
 |       |   ab  |       |   0   |   0   |   0   |
 |       |   ab  |  ab   |   1   |   0   |   0   |
-|       | absq  |       |   0   |   0   |   0   |
-|       |  absq | const |   1   |   0   |   0   |
-|       |  c    |       |   0   |   0   |   0   |
-|       |  c    | const |   0   |   1   |   0   |
+|       |  absq |       |   0   |   0   |   0   |
+|       |  absq |   c   |   1   |   0   |   0   |
 |       |  d    |       |   0   |   0   |   0   |
-|       |  d    |  out  |   0   |   0   |   1   |
+|       |  d    |   c   |   0   |   1   |   0   |
+|       |  e    |       |   0   |   0   |   0   |
+|       |  e    |  out  |   0   |   0   |   1   |
 
 > 完整代码见 [Halo2 tutotials: chap_2/custom_gates](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_2/exercise_1.rs)
 
@@ -72,10 +72,8 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
     fn configure(meta: &mut ConstraintSystem<F>) -> Self::Config {
         let advice = [meta.advice_column(),meta.advice_column()];
         let instance = meta.instance_column();
-        let constant = meta.fixed_column();
 
         meta.enable_equality(instance);
-        meta.enable_constant(constant);
         for c in &advice {
             meta.enable_equality(*c);
         }
@@ -154,14 +152,14 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
     fn synthesize(&self, config: Self::Config, mut layouter: impl Layouter<F>) -> Result<(), Error> {
         let a = load_private(&config,layouter.namespace(|| "load a"), self.a)?;
         let b = load_private(&config,layouter.namespace(|| "load b"), self.b)?;
-        let constant = load_constant(&config,layouter.namespace(|| "load constant"), self.constant)?;
+        let c = load_constant(&config,layouter.namespace(|| "load c"), self.c)?;
 
 
         let ab = mul(&config,layouter.namespace(|| "a*b"), a, b)?;
         let absq = mul(&config,layouter.namespace(|| "ab*ab"), ab.clone(), ab)?;
-        let c = mul(&config, layouter.namespace(|| "absq*constant"), absq, constant.clone())?;
+        let d = mul(&config, layouter.namespace(|| "absq*c"), absq, c.clone())?;
 
-        let d = add(&config, layouter.namespace(|| "absq + constant"), c, constant)?;
+        let e = add(&config, layouter.namespace(|| "absq + c"), d, c)?;
         let out = cub(&config, layouter.namespace(|| "absq^3"), d)?;
 
         //expose public
@@ -195,12 +193,12 @@ Chips 可以进行组合，底层的 Chip 尽量使用不同的列(当然也允�
 | ------|-------|-------|-------|-------|-------|
 | out   |    a  |       |       |       |       |
 |       |    b  |       |       |       |       |
-|       | const |       |       |       |       |
+|       |    c  |       |       |       |       |
 |       |   a   |   b   |   1   |   0   |   0   |
 |       |   ab  |   ab  |   1   |   0   |   0   |
-|       | absq  | const |   1   |   0   |   0   |
-|       |  c    | const |   0   |   1   |   0   |
-|       |  d    |   out |   0   |   0   |   1   |
+|       | absq  |   c   |   1   |   0   |   0   |
+|       |  d    |   c   |   0   |   1   |   0   |
+|       |  e    |   out |   0   |   0   |   1   |
 
 完整代码见 [Halo2 tutorials: chap_2/simple_chip](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_2/exercise_2.rs)
 

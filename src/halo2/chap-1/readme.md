@@ -4,27 +4,27 @@
 
 ## Overview
 
-上节我们介绍了Halo2的核心概念，本节则以 $a^2 * b^2 * constant = out$ 这个电路为例，来说明如何使用 Halo2 API来写电路。
+上节我们介绍了Halo2的核心概念，本节则以 $a^2 * b^2 * c = out$ 这个电路为例，来说明如何使用 Halo2 API来写电路。
 该电路的各个参数说明如下：
 
 ```bash
-private inputs:  a, b, constant
+private inputs:  a, b, c
 public inputs :  out
-constraints   :  a^2 * b^2 * constant = out
+constraints   :  a^2 * b^2 * c = out
 ```
-我们的目的是写一个电路，让Prover证明对于公共输入`out`,他知道三个秘密输入`a, b, constant`满足 $a^2 * b^2 * constant = out$ 这个约束。
+我们的目的是写一个电路，让Prover证明对于公共输入`out`,他知道三个秘密输入`a, b, c`满足 $a^2 * b^2 * c = out$ 这个约束。
 从电路的角度，只使用 `乘法门` 和 `乘法选择器`，上述约束可以算数化为:
 
 | instance | advice_0 | advice_1 | selector_mul |
 | -------- | -------- | -------- | ------------ |
 | *out*    | a        |          |              |
 |          | b        |          |              |
-|          | constant |          |              |
+|          | c        |          |              |
 |          | a        | b        | 1            |
 |          | ab       |          | 0            |
 |          | ab       | ab       | 1            |
 |          | absq     |          | 0            |
-|          | absq     | const    | 1            |
+|          | absq     | c        | 1            |
 |          | *out*    |          | 0            |
 
 > absq 即 ab 的平方。
@@ -54,7 +54,7 @@ constraints   :  a^2 * b^2 * constant = out
 根据电路构建所需模块，首先需要确定电路配置，上述电路一共需要四列: [^2]
 
 - 2 列 witness(advice) 用来填充上述表格的`a0`和`a1`列，
-  - 其中 3 个 Private inputs: `a`, `b` 和 `constant` 填入 `a0` 列的前三行。
+  - 其中 3 个 Private inputs: `a`, `b` 和 `c` 填入 `a0` 列的前三行。
 - 1 列 instance (填入公共输出 out), 
 - 1 列乘法门选择器(s_mul); 
 
@@ -68,7 +68,7 @@ struct CircuitConfig {
 
 #[derive(Default)]
 struct MyCircuit<F:Field> {
-    constant: F,
+    c: F,
     a: Value<F>,
     b: Value<F>
 }
@@ -85,10 +85,8 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
     fn configure(meta: &mut ConstraintSystem<F>) -> Self::Config {
         let advice = [meta.advice_column(),meta.advice_column()];
         let instance = meta.instance_column();
-        let constant = meta.fixed_column();
 
         meta.enable_equality(instance);
-        meta.enable_constant(constant);
         for c in &advice {
             meta.enable_equality(*c);
         }
@@ -120,7 +118,7 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
 ## 实现 witness 填充
 
 按照表格,一步步填充 witness：
-1. load private inputs `a`, `b` 和 `constant`
+1. load private inputs `a`, `b` 和 `c`
 2. 分别计算三个乘法的输入输出值 (`ab`, `absq`, `out`)，并通过 `assign_advice` 和 `copy_advice` 这两个 API 填充 Cell 
 3. 通过 `constrain_instance` API, 约束 out 所在的 Cell 和 instance 列的第一个 cell 相等
 ```rust
@@ -143,7 +141,7 @@ fn load_private<F:Field>(
 fn load_constant<F:Field>( 
     config: &CircuitConfig,
     mut layouter: impl Layouter<F>,
-    constant: F
+    c: F
 ) -> Result<Number<F>, Error> {
     layouter.assign_region(
         || "load private", 
@@ -152,7 +150,7 @@ fn load_constant<F:Field>(
             || "private input", 
             config.advice[0], 
             0, 
-            constant
+            c
         ).map(Number)
     })
 }
@@ -181,15 +179,15 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
     fn synthesize(&self, config: Self::Config, mut layouter: impl Layouter<F>) -> Result<(), Error> {
         let a = load_private(&config,layouter.namespace(|| "load a"), self.a)?;
         let b = load_private(&config,layouter.namespace(|| "load b"), self.b)?;
-        let constant = load_constant(&config,layouter.namespace(|| "load constant"), self.constant)?;
+        let c = load_constant(&config,layouter.namespace(|| "load c"), self.c)?;
 
 
         let ab = mul(&config,layouter.namespace(|| "a*b"), a, b)?;
         let absq = mul(&config,layouter.namespace(|| "ab*ab"), ab.clone(), ab)?;
-        let c = mul(&config, layouter.namespace(|| "absq*constant"), absq, constant)?;
+        let out = mul(&config, layouter.namespace(|| "absq*c"), absq, c)?;
 
         //expose public
-        layouter.namespace(|| "expose c").constrain_instance(c.0.cell(), config.instance, 0)
+        layouter.namespace(|| "expose out").constrain_instance(out.0.cell(), config.instance, 0)
     }
 }
 ```
@@ -213,15 +211,15 @@ mod tests {
         let k = 5;
     
         // Prepare the private and public inputs to the circuit!
-        let constant = Fp::from(2);
+        let c = Fp::from(2);
         let a = Fp::from(2);
         let b = Fp::from(3);
-        let c = constant * a.square() * b.square();
-        println!("c=:{:?}",c);
+        let out = c * a.square() * b.square();
+        println!("out=:{:?}",out);
     
         // Instantiate the circuit with the private inputs.
         let circuit = MyCircuit {
-            constant,
+            c,
             a: Value::known(a),
             b: Value::known(b),
         };
