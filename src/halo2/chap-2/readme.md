@@ -4,27 +4,31 @@
 
 本节我们以一个简单的电路为例，介绍 Halo2 中的自定义门(custom gates) 和 chip 的概念。
 
-在上一节中，我们使用 Halo2 的API实现了只包含乘法门的简单电路，但是如果有多种 gate 呢，这种情况如何处理?
+在上一节中，我们使用 Halo2 的 API 实现了只包含乘法门的简单电路，但是如果有多种 gate 呢，这种情况如何处理?
 
 ## Custom gates
-在Halo2中可通过自定义门来实现，这里需要回顾下 Halo2 中自定义门的 mental model:
-![image](../imgs/custom_gates.png)
-如上式，自定义门可以由任意多种不同的门线性相加构成，每一个门由选择器和门运算逻辑构成，如上式中第一个加法门选择器为$q_{add}$，电路逻辑为$a_2=a_0 + a_1$，Halo2中可以通过`create_gate`创建每个门。不过需要注意的是，看起来这些门之间是独立的，但实际上这些门在最终的电路约束检查中会通过乘以一个随机数`y`，一次行检查一行的witness是否**同时满足所有门**的约束。
+
+在 Halo2 中可通过自定义门(custom gate) 来实现，这里需要回顾下 Halo2 中自定义门(custom gate) 的 mental model [^1]:
+![image](../imgs/custom_gates.png) 
+
+如上式，自定义门可以由任意多种不同的门线性相加构成，每一个门由选择器和门运算逻辑构成，如上式中第一个加法门选择器为 $q_{add}$，电路逻辑为 $a_2=a_0 + a_1$ ，Halo2中可以通过`create_gate`创建每个门。不过需要注意的是，看起来这些门之间是独立的，但实际上这些门在最终的电路约束检查中会通过乘以一个随机数`y`，一次行检查一行的 witness 是否**同时满足所有门**的约束。
 
 ### 问题定义
 
 本节则是证明如下电路:
-```
+
+```rust
 private inputs: a,b,const
 public inputs: out
+
 a^2 * b^2 = c
 d = c + const
 out = d^3
 ```
 
-注意到再 vanilla plonk 中约束的 degree 不能超过 2，即只支持加法门和乘法门，但 halo2 支持通过 Ultra plonk 来实现更高阶数等自定义门。这里我们使用自定义门来实现$out=d^3$这条约束(注: 其实Ultra plonk中乘法门和加法门也可以看作自定义门，因此下文我们将该这条三次方约束的门称为**立方门**)，相比于需要两条乘法门实现改约束，自定义门可以减少约束的行数。
+注意到再 vanilla plonk 中约束的 degree 不能超过 2，即只支持加法门和乘法门，但 halo2 支持通过 Ultra plonk 来实现更高阶数等自定义门。这里我们使用自定义门来实现 $out=d^3$ 这条约束(注: 其实 Ultra plonk 中乘法门和加法门也可以看作自定义门，因此下文我们将该这条三次方约束的门称为**立方门**)，相比于需要两条乘法门实现改约束，自定义门可以减少约束的行数。
 
-因此，我们可以画出电路witness表格:
+因此，我们可以画出电路 witness 表格:
 
 | ins   | a0    | a1    | s_mul | s_add | s_cub |
 |-------|-------|-------|-------|-------|-------|
@@ -33,7 +37,7 @@ out = d^3
 |       | const |       |       |       |       |
 |       |   ab  |   b   |   1   |   0   |   0   |
 |       |   ab  |       |   0   |   0   |   0   |
-|       |   ab  |   ab  |   1   |   0   |   0   |
+|       |   ab  |  ab   |   1   |   0   |   0   |
 |       | absq  |       |   0   |   0   |   0   |
 |       |  absq | const |   1   |   0   |   0   |
 |       |  c    |       |   0   |   0   |   0   |
@@ -209,3 +213,8 @@ cargo test plot_chip_circuit --features dev-grap
 ```
 采用Chip的电路布局图为:
 ![images](../imgs/simple_ship.png)
+
+
+references:
+
+[^1]: 
