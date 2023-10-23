@@ -26,7 +26,7 @@ d = c + const
 out = d^3
 ```
 
-注意到再 vanilla plonk 中约束的 degree 不能超过 2，即只支持加法门和乘法门，但 halo2 支持通过 Ultra plonk 来实现更高阶数等自定义门。这里我们使用自定义门来实现 $out=d^3$ 这条约束(注: 其实 Ultra plonk 中乘法门和加法门也可以看作自定义门，因此下文我们将该这条三次方约束的门称为**立方门**)，相比于需要两条乘法门实现改约束，自定义门可以减少约束的行数。
+注意到在 vanilla plonk 中约束的 degree 不能超过 2，即只支持加法门和乘法门，但 halo2 支持通过 Ultra plonk 来实现更高阶数的 custom gate。这里我们使用一个高阶 custom gate 来实现 $out=d^3$ 这条约束 (注: 其实 Ultra plonk 中乘法门和加法门也可以看作 custom gate，因此下文我们将该这条三次方约束的门称为**立方门**)，相比于原来需要 2 个乘法门实现该约束，custom gate 可以减少帮助约束的行数。
 
 因此，我们可以画出电路 witness 表格:
 
@@ -45,11 +45,12 @@ out = d^3
 |       |  d    |       |   0   |   0   |   0   |
 |       |  d    |  out  |   0   |   0   |   1   |
 
-> 完整代码见[Halo2 tutotials: chap_2/custom_gates](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_2/exercise_1.rs)
+> 完整代码见 [Halo2 tutotials: chap_2/custom_gates](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_2/exercise_1.rs)
 
 ### Config
 
-首先，需要明确电路配置，即所需的Advices,Selectors和Instance列，并创建相应的门。
+首先，需要明确电路配置(CircuitConfig)，即选取所需的 Advices, Selectors 和 Instance 列，并在 `fn configure` 中创建相应的门。
+
 ```rust
 #[derive(Debug, Clone)]
 struct CircuitConfig {
@@ -115,14 +116,13 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
     }
     ...
 }
-
 ```
 
-这里我们使用了`Constraints::with_selector` API，等价于直接返回`vec![selecter * gate expression]`。
+这里我们使用了新的 API —— `Constraints::with_selector`，其实等价于我们之前熟悉的 `vec![selecter * gate expression]` 。
 
-### 填入Witness
+### 填入 Witness
 
-除了上节的加法门和乘法门之外，我们需要为立方运算增加一个填witness的辅助函数:
+除了上述的加法门和乘法门之外，我们需要为立方运算增加一个填 witness 的辅助函数 `fn cub` :
 
 ```rust
 ...
@@ -142,12 +142,11 @@ fn cub<F:Field>(
     })
 }
 ...
-
 ```
 
-> 注意: 推导并填入witness的方式一定要与上述自定义门中引用的单元格和计算方式一致，否则会导致欠约束或约束错误。
+> 注意: 推导并填入 witness 的方式一定要与上述自定义门中引用的单元格和计算方式一致，否则会导致**欠约束**或**约束错误**。
 
-然后补充Circuit Trait中的synthesis函数:
+然后补充 Circuit Trait 中的 `synthesis` 函数:
 
 ```rust
 impl <F:Field> Circuit<F> for MyCircuit<F> {
@@ -174,7 +173,7 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
 
 ### 测试
 
-实例化电路，并调用相应的Mock Prover来验证。
+实例化电路，并调用相应的 Mock Prover 来验证。
 
 ```rust
 cargo test test_simple_3gates
@@ -182,14 +181,15 @@ cargo test test_simple_3gates
 输出相应的电路布局图`cargo test plot_3gates_circuit --features dev-graph`:
 ![images](../imgs/simple_3gates.png)
 
-> 可以看出Halo2的Simple Layouter对乘法门选择器(`s_mul`)和加法门选择器(`s_add`)做了优化，将这两列合并为了1列。
+> 可以看出 Halo2 的 Simple Layouter 对乘法门选择器(`s_mul`) 和加法门选择器(`s_add`) 做了优化，将这两列合并为了 1 列。
 
 ## Chip
-在上述实现中，我们填入witness的函数和Config是分离的，为了更好地复用这些代码，类似于集成电路由很多个Chip构成，Halo2一般将一系列紧密相关的实现特定约束的函数(config以及相应的提供witness的函数)抽象到一个Chip模块。
 
-Chips可以进行组合，底层的Chip尽量使用不同的列(当然也允许Chip共享使用相同的列)。在进行电路设计时应尝试优化所需的Advice列，引入这会影响Proof大小。
+在上述实现中，我们填入 witness 的函数和 Config 是分离的，为了更好地复用这些代码，类似于集成电路由很多个 Chip 构成，**Halo2 一般将一系列紧密相关的实现特定约束的函数(config 以及相应的提供 witness 的函数)抽象到一个 Chip 模块**。
 
-我们可以将本节中的约束抽象为`SimpleChip`,将原来独立的assign witness的几个函数(`load_private`、`load_constant`、`add`、`mul`和`cub`)合并到Simple Chip的assign方法中。此外，采用如下电路布局压缩所需的行数(在电路中我们只划分了了两个大的region，这样减小了复制`ab`、`absq`、`c`和`c`这四个约束):
+Chips 可以进行组合，底层的 Chip 尽量使用不同的列(当然也允许 Chip 共享使用相同的列)。在进行电路设计时应尝试优化所需的 Advice 列，引入这会影响Proof 大小。
+
+我们可以将本节中的约束抽象为` SimpleChip`,将原来独立的 assign witness 的几个函数 (`load_private`、`load_constant`、`add`、`mul`和`cub`) 合并到 Simple Chip 的 `assign` 方法中。此外，采用如下电路布局压缩所需的行数(在电路中我们只划分了了两个大的 region，这样就减小了复制`ab`、`absq`、`c`和`c`这四个约束):
 
 | ins   | a0    | a1    | s_mul | s_add | s_cub |
 | ------|-------|-------|-------|-------|-------|
@@ -202,8 +202,7 @@ Chips可以进行组合，底层的Chip尽量使用不同的列(当然也允许C
 |       |  c    | const |   0   |   1   |   0   |
 |       |  d    |   out |   0   |   0   |   1   |
 
-完整代码见[Halo2 tutorials: chap_2/simple_chip](https://github.com/zkp-co-learning/
-halo2-step-by-step/blob/main/halo2-tutorials/src/chap_2/exercise_2.rs)
+完整代码见 [Halo2 tutorials: chap_2/simple_chip](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_2/exercise_2.rs)
 
 ### test & 输出电路布局图
 
