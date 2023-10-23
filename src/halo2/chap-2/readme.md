@@ -185,7 +185,7 @@ cargo test test_simple_3gates
 
 在上述实现中，我们填入 witness 的函数和 Config 是分离的，为了更好地复用这些代码，类似于集成电路由很多个 Chip 构成，**Halo2 一般将一系列紧密相关的实现特定约束的函数(config 以及相应的提供 witness 的函数)抽象到一个 Chip 模块**。
 
-Chips 可以进行组合，底层的 Chip 尽量使用不同的列(当然也允许 Chip 共享使用相同的列)。在进行电路设计时应尝试优化所需的 Advice 列，引入这会影响Proof 大小。
+Chips 可以进行组合，底层的 Chip 尽量使用不同的列(当然也允许 Chip 共享使用相同的列)。在进行电路设计时应尝试优化所需的 Advice 列，因为这会影响Proof 大小。
 
 我们可以将本节中的约束抽象为` SimpleChip`,将原来独立的 assign witness 的几个函数 (`load_private`、`load_constant`、`add`、`mul`和`cub`) 合并到 Simple Chip 的 `assign` 方法中。此外，采用如下电路布局压缩所需的行数(在电路中我们只划分了了两个大的 region，这样就减小了复制`ab`、`absq`、`c`和`c`这四个约束):
 
