@@ -8,6 +8,7 @@
 1. 课程学习资料:
 	- [Halo2 API & Building a Basic Fibonacci Circuit (Part 1)](https://learn.0xparc.org/materials/halo2/learning-group-1/halo2-api)
 	- [Halo2 API & Building a Basic Fibonacci Circuit (Part 2)](https://learn.0xparc.org/materials/halo2/learning-group-1/halo2-api-continued)
+	- [halo2 simple circuit](https://learn.z2o-k7e.world/halo2/chap-1/index.html) & [halo2 custom gate](https://learn.z2o-k7e.world/halo2/chap-2/index.html)
 2. 课程学习目标:
 	- 理解 halo2 中 Circuit、region、Layouter、custom gate、constraints 等概念及其 API 代码 represent.
 	- 能够理解 Fibonacci 示例和 isZero 示例的电路构建流程
