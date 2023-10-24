@@ -1,4 +1,3 @@
-> [github](https://github.com/zkp-co-learning) of $\mathcal{Z}_2 \mathbb{O} \ {\text -} \ \mathcal{K}_7 \mathbb{E}$
 
 
 ### <span style="color: grey;">**Welcome to the**</span>
@@ -18,14 +17,6 @@
 <br />
 
 <br />
-
-------
-
-[TOC]
-
-------
-
-
 
 
 <br />
