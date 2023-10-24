@@ -42,13 +42,13 @@ The world of ZKP is riddled with challenges - so many noises, steep entry barrie
 
 # 🌟 Core Contributors
 
-- Dr. Qi Zhou: Founder of [ETHStorage](https://eth-store.w3eth.io)
-- Yu Guo@Secbit: Founder of [Secbit](https://secbit.io/), <https://github.com/sec-bit>, author of [understanding PLONK series](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-intro.html)
-- [Kurt Pan](https://cryptography.land/): Ph.D. in Cryptography from Fudan University, https://github.com/kurtpan666 / https://cryptography.land/
-- Shirlene 孝羽: director of Creators Colearning Community
-- [Demian](https://github.com/Demian101): z2o-k7e core contributor, zkp-colearning maintainer
-- Harry L: co-Founder of Rebase Community, Core Contributor of @Antalpha_Labs.
-- Our Maintainers: dream@Scroll, Po@EthStorage, 0xhhh@EthStorage, 周洋(Yang Zhou), 啊咪咪小熊, 张康 Daniel, Frank Jz Liu, miles, 白菜, KEEP, CJ, 笃行, 阳小雪, , 饭卡里还有不少钱呢...
+- **Dr. Qi Zhou**: Founder of [ETHStorage](https://eth-store.w3eth.io)
+- **Yu Guo@Secbit**: Founder of [Secbit](https://secbit.io/), <https://github.com/sec-bit>, author of [understanding PLONK series](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-intro.html)
+- **[Kurt Pan](https://cryptography.land/)**: Ph.D. in Cryptography from Fudan University, https://github.com/kurtpan666 / https://cryptography.land/
+- **Shirlene 孝羽**: director of Creators Colearning Community
+- **[Demian](https://github.com/Demian101)**: z2o-k7e core contributor, zkp-colearning maintainer
+- **Harry L**: co-Founder of Rebase Community, Core Contributor of @Antalpha_Labs.
+- Our Maintainers: **dream@Scroll, Po@EthStorage, 0xhhh@EthStorage, 周洋(Yang Zhou), 啊咪咪小熊, 张康 Daniel, Frank Jz Liu, miles, 白菜, KEEP, CJ, 笃行, 阳小雪, , 饭卡里还有不少钱呢...**
 
 
 # 🚀 Vision & Mission:
