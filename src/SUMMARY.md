@@ -41,10 +41,9 @@
 ---
 
 - [Halo2](./halo2/halo2.md)
-  - [0-basic concepts](./halo2/chap-0/readme.md)
-  - [1-simple-circuit](./halo2/chap-1/readme.md)
-  - [2-custom-gate](./halo2/chap-2/readme.md)
-  - [3-(editing... pls stay tuned! :)]()
+  - [1-basic concepts](./halo2/chap-0/readme.md)
+  - [2-simple-circuit](./halo2/chap-1/readme.md)
+  - [3-custom-gate](./halo2/chap-2/readme.md)
   - [halo2-QA](/halo2/halo2-QA.md)
   - [halo2-learning-materials](./halo2/tmp/halo2-learning-materials.md)
   - [learning-halo2 (0xPARC)](./halo2/tmp/halo2-learning-materials.md)
