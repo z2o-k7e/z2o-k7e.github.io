@@ -1,6 +1,6 @@
-> Last update: 2023-10-23 [^1]
-> 📢 Feel free to contribute!  Pls fork [zkp-co-learning.github.io](https://github.com/zkp-co-learning/zkp-co-learning.github.io) and PR! 
-> PS: In each title's Content Block, the top part is newer, below is older.
+> - Last update: 2023-10-23 [^1]
+> - 📢 Feel free to contribute!  Pls fork [zkp-co-learning.github.io](https://github.com/zkp-co-learning/zkp-co-learning.github.io) and PR! 
+> - PS: In each title's Content Block, the top part is newer, below is older.
 
 
 [TOC]
