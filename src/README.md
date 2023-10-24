@@ -62,7 +62,7 @@ The world of ZKP is riddled with challenges - so many noises, steep entry barrie
 
 Our aspirations for the next 6 months (culminating in ~12/2023) are:
 
-- [x] 1. Launch the [learn.z2o-k7e.world] website and aim for:
+- [x] 1. Launch the [learn.z2o-k7e.world](learn.z2o-k7e.world) website and aim for:
 - [x]   1.1 Comprehensive ZKP learning path sorting and a clear, seamless learning guide. 
 - [x]   1.2. Building amazing [halo2 Course](https://learn.z2o-k7e.world/halo2/halo2.html) to help zkers to write zkp circuits
 - [ ] 2. Develop at least one zk application project with specific needs and use cases.
