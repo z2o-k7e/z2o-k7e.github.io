@@ -13,7 +13,7 @@
 
 <br />
 
-#### [🔍 How to contribute?](./how-to-contribute.md)
+#### [🔍 How to contribute?](https://learn.z2o-k7e.world/how-to-contribute.html)
 
 <br />
 
