@@ -1,12 +1,109 @@
-Last update: 2023-09-24 [^1]
-
-📢 Feel free to contribute!  Pls fork [zkp-co-learning.github.io](https://github.com/zkp-co-learning/zkp-co-learning.github.io) and PR! 
-
-PS: In each title's Content Block, the top part is newer, below is older.
+> Last update: 2023-10-23 [^1]
+> 📢 Feel free to contribute!  Pls fork [zkp-co-learning.github.io](https://github.com/zkp-co-learning/zkp-co-learning.github.io) and PR! 
+> PS: In each title's Content Block, the top part is newer, below is older.
 
 
 [TOC]
-# Nova / Folding schemas
+
+# ZKP building blocks
+
+## Cryptography
+
+《公钥密码学研究方法论》[https://documents.uow.edu.au/~fuchun/methodology.html]
+- 这是 slides，这是最新的本体： [https://eprint.iacr.org/2023/715
+
+
+- 密码学纯理论进展速度也同样相当的惊人，
+ - 清华毕业的Yanyi Liu跟着Rafael Pass 揪着OWF不放疯狂输出，试图彻底搞清楚密码学的复杂性理论基础。
+ - Yilei Chen回国后负责清华姚班的Cryptography课 http://www.chenyilei.net/cryptography-s2023.html， 下一代姚班选手的ZKP就都是他教的了，他在FS要不要密码学哈希，iO/lattice方面也有很多工作。
+ - Lijie Chen就更不用说了，华人TCS之光，博士论文写了551页https://www.mit.edu/~lijieche/Lijie-Chen-thesis.pdf，已经是average-case hardness 和 derandomization领域世界级的专家了，可以去预测哪年得图灵奖了。
+
+**Curves**
+
+- [The Pasta Curves for Halo 2 and Beyond](https://electriccoin.co/blog/the-pasta-curves-for-halo-2-and-beyond/)
+- [Mina Book: Pasta Curves](https://o1-labs.github.io/proof-systems/specs/pasta.html)
+- [Pallas and Elliptic Curves](https://medium.com/asecuritysite-when-bob-met-alice/pallas-and-elliptic-curves-f34115904b02)
+- [A survey of elliptic curves for proof systems](https://eprint.iacr.org/2022/586.pdf)
+- [Revisiting cycles of pairing-friendly elliptic curves](https://eprint.iacr.org/2022/1662.pdf)
+- [Pairings in Rank-1 Constraint Systems](https://eprint.iacr.org/2022/1162.pdf)
+- https://github.com/zcash/pasta_curves
+- https://hackage.haskell.org/package/pasta-curves-0.0.1.0/docs/PastaCurves.html
+- https://github.com/nccgroup/pasta-curves
+- https://docs.rs/ark-pallas/0.3.0/ark_pallas/
+
+## Math.
+
+Probability and Measure https://www.youtube.com/playlist?list=PL0vEWJI_pj7RZ51zecINlzWxpFv83r8RE
+还有这个，我快看完了，超喜欢
+
+- Abstract Algebra I (full course) https://www.youtube.com/playlist?list=PL1r259iKOz-lJ0TjURlrUVASXQimpWAS5
+
+- [The-Art-of-Linear-Algebra](https://github.com/kenjihiranabe/The-Art-of-Linear-Algebra)
+- [Animation vs. Math](https://www.youtube.com/watch?v=B1J6Ou4q8vE)
+
+[Succinct Proofs and Linear Algebra](https://angeris.github.io/papers/zk-linalg.pdf)
+
+
+数学 : 
+- 参考学习内容:多项式乘法和除法、拉格朗日插值、Schwartz-Zip-pel 引理、快速傅立叶变换(FFT) 、NTT、MSM 以及 Field extension等。
+- An Introduction to Mathematical Cryptography
+- https://explained-from-first-principles.com/number-theory 这个介绍数论的也不错
+
+初等数论和群论 : 
+- 推荐了 MIT’s 6.875 (Foundations of Cryptography) ，对于国内的同学来讲，建议结合潘承洞版的看，会更好！ 教材链接：[https://mit6875.github.io/HANDOUTS/numbertheory.pdf](https://t.co/kfIc1fO7gV)
+
+## Rust 
+
+https://github.com/evcxr/evcxr/tree/main/evcxr_jupyter yeah, a Jupyter kernel for Rust
+
+```bash
+cargo install evcxr_jupyter
+evcxr_jupyter --install
+jupyter lab
+```
+
+
+# ZKP Basics Tutorials
+
+这个课也值得跟上：
+PSE Lectures - A full course on Elliptic Curve Cryptography
+https://www.youtube.com/playlist?list=PLV91V4b0yVqQ_inAjuIB5SwBNyYmA9S6M
+
+新火公开课 https://space.bilibili.com/3493266041342842/channel/series
+钟博的课
+
+- https://www.rareskills.io/zk-bootcamp
+- https://zkhack.dev/whiteboard/ 挺适合作为基础资料的
+- https://www.rareskills.io/zk-book
+
+I try not to recommend too many sources, since everyone learns differently. But here are a few:  
+- Least Authority’s [Moonmath manual](https://leastauthority.com/community-matters/moonmath-manual/) for learning Snarks. Starts with the basics.  
+- For learning about Starks, StarkWare’s [Stark 101 series](https://starkware.co/stark-101/).  
+- For writing some ZK code and seeing what actually happens: [Noir from Aztec](https://docs.aztec.network/noir)
+
+- a16z 整理的比较全的 ZKP 的资料库  https://a16zcrypto.com/zero-knowledge-canon/
+- ZK 零知识: https://buidlerdao.notion.site/ZK-5963083942a744bbb60a0328008868e2
+- 零基础学习 ZK:  https://mirror.xyz/searchblock.eth/y11EKtXAtK3aXRVMV1yYqw7FibKHxI0fK10vlVRDaD4
+- 万字长文捕获 ZK Rollup 时代价值｜ZONFF Research: https://mp.weixin.qq.com/s/5zKdS-GL8w_z4XIDOjv7FA
+-  [zksync开源](https://github.com/matter-labs/zksync-era)
+
+怎么零基础学习零知识证明:
+- https://mirror.xyz/searchblock.eth/y11EKtXAtK3aXRVMV1yYqw7FibKHxI0fK10vlVRDaD4
+
+## [Awesome ZKP](https://github.com/matter-labs/awesome-zero-knowledge-proofs) 
+
+- [Awesome Noir](https://github.com/noir-lang/awesome-noir)
+- [Awesome Circom](https://github.com/arnaucube/awesome-circom)
+- [Awesome Aleo](https://github.com/howardwu/awesome-aleo)
+- [Awesome Cairo](https://github.com/auditless/awesome-cairo)
+- [Awesome-Folding](https://github.com/lurk-lab/awesome-folding)
+- [Awesome HALO2](https://github.com/adria0/awesome-halo2)
+- [Awesome PLONK](https://github.com/fluidex/awesome-plonk)
+- [Awesome ZKML](https://github.com/worldcoin/awesome-zkml)
+- [Awesome zkEVM](https://github.com/LuozhuZhang/awesome-zkevm)
+- [Awesome Zero Knowledge](https://github.com/ventali/awesome-zk)
+
+# Nova / Folding schemes
 
 nova 写的五子棋: https://www.zkconnect4.dev/
 
@@ -33,15 +130,18 @@ Benchmark on recursion Plonky vs Nova https://github.com/nikkolasg/recursive-ben
  -  [Nova: A New Chapter in Zero-Knowledge Proofs](https://huobi-ventures.medium.com/nova-a-new-chapter-in-zero-knowledge-proofs-108110cd816e)  (medium这糟糕的排版)
 
 
-# halo2 
+# Halo2 
+
+https://github.com/CPerezz/halo2_sumcheck 👀
 
 https://github.com/axiom-crypto/halo2-wasm
+
 https://github.com/zkCert/halo2-zkcert
 
 [0xPARC Course Recordings, Slides, and Notes](https://0xparc.notion.site/Course-Recordings-Slides-and-Notes-90d0ddb5f9ee49f7a244dbbe60d563ff#549d7b6081e1412a96ac8951dddf9e75)
 
 Taiko: https://github.com/taikoxyz/circuit-tools/tree/main
- - 我们从 PSE 的 zkevm 里抽象出了一个 sdk，大家如果想用 halo2 开发可以试下 [Grin] 欢迎给我提issue
+ - 我们从 PSE 的 zkevm 里抽象出了一个 sdk，大家如果想用 halo2 开发可以试下 [Grin] 欢迎给我提 issue
 
 solidity verifier: https://github.com/privacy-scaling-explorations/halo2-solidity-verifier/pulls
 
@@ -51,8 +151,7 @@ halo2 tinyram  https://github.com/Orbis-Tertius/tiny-ram-halo2
 - proof of validator: https://github.com/asn-d6/halo2-merkle-tree-ipa-bench
 - social recovery: https://hackmd.io/@Nerolation/H1BvRWg02
 
-有人建议： halo2 最好的应该是 axiom 的 open source program
-
+axiom 的 open source program
 
 ----
 
@@ -204,13 +303,13 @@ Nova VM 来了, 看不过来了。。。。
 我在找一个write a vm from scratch的课程
  - 要是只是vm不要求zkvm那就太多了，比如5天前的这篇 https://andreabergia.com/blog/2023/07/i-have-written-a-jvm-in-rust/
 
-![](imgs/ZK-Materials_image_1.jpg)
+![](../未命名/ZK-Materials_image_1.jpg)
 上周测试了一下 PSE evm circuit，生成的 raw proof 用 evm 验证需要大约 4000万+ gas。（本地调高了 block gas limit）
 也测试了 scroll-prover 的 chunk proof，evm 验证大概需要 40万+ gas。感觉 gas fee 这块至少有 100 倍的以上的提升
 
 chunk proof 里面包涵了 2次压缩，还是做了不少的工作
 
-![](imgs/ZK-Materials_image_2.jpg)
+![](../未命名/ZK-Materials_image_2.jpg)
 
 不太确定上面的代码是不是具体的电路，看了下感觉没多少行。[Facepalm]
 
@@ -219,27 +318,31 @@ chunk 和 aggregation 的 column 少了很多，但是应该像 Frank 所说，�
 
 
 
+
+
+# cutting-edge
+## Lattice
+
+Lattice-based cryptography: The tricky math of dots https://www.youtube.com/watch?v=QDdOoYdb748&list=PLMItfTVgwEAvTX4-sZkcF5s3-l1JDocY0&index=4
+
+## Quantum
+
+[Quantum Resistance and the Signal Protocol](https://signal.org/blog/pqxdh/)
+ - Signal 已经集成 Kyber了
+
+
 # ZK Applications
+
+## ZK Email
 
 最近有进展，确实值得研究：ZK Email https://github.com/zkemail
 
 ZK Proof of Email：通往decentralized identity之路 https://blog.csdn.net/mutourend/article/details/129004763?ops_request_misc=&request_id=2425a5a6d21c4b6bbe440828ba478ccf&biz_id=
 
-# Cryptography
-
-《公钥密码学研究方法论》[https://documents.uow.edu.au/~fuchun/methodology.html]
-- 这是slides，这是最新的本体： [https://eprint.iacr.org/2023/715
-]
-
-# ZKP Materials
-
- - [A survey of ZK Languages](https://zkvalidator.com/a-survey-of-zk-languages/)
-
 
 ## zkWASM
 
 [Exploring alternatives to WASM for smart contracts](https://forum.polkadot.network/t/exploring-alternatives-to-wasm-for-smart-contracts/2434/21)
-
 
 一个华人团队搞的 zkwasm
  - https://github.com/DelphinusLab/zkWasm
@@ -273,17 +376,10 @@ https://hackmd.io/@sinka/BJUIyufEc
 后续：模块化公开课
 ```
 
-## Basics Tutorials
 
-- https://www.rareskills.io/zk-bootcamp
-- https://zkhack.dev/whiteboard/ 挺适合作为基础资料的
-- https://www.rareskills.io/zk-book
 
-I try not to recommend too many sources, since everyone learns differently. But here are a few:  
-- Least Authority’s [Moonmath manual](https://leastauthority.com/community-matters/moonmath-manual/) for learning Snarks. Starts with the basics.  
-- For learning about Starks, StarkWare’s [Stark 101 series](https://starkware.co/stark-101/).  
-- For writing some ZK code and seeing what actually happens: [Noir from Aztec](https://docs.aztec.network/noir)
-## PSE
+## **PSE**
+
 
 From CEX to CCEX with Summa
 https://mirror.xyz/privacy-scaling-explorations.eth/_1Y6ExFD_Rs3oDxwx5_kWAj_Tl_L9c0Hm7E6SVJei0A
@@ -305,7 +401,28 @@ Some Project Boards:
  - [https://github.com/chainwayxyz/proof-of-innocence](https://github.com/chainwayxyz/proof-of-innocence)
  - Twitter : Follow @drCathieSo_eth  @AndyGuzmanEth
 
-## books & websites & Podcasts 🎙📚
+
+
+
+
+# Tricks & Tools
+
+https://github.com/joelparkerhenderson/sha256-sentence
+- The SHA256 for this sentence begins with seven, seven, f, zero, a, b, b and five.
+- The SHA256 hash of this message begins with 534d765
+- 我去，厉害了,主要是里面没有什么随机数
+
+https://zkbench.dev/
+trade-offs and performance of different frameworks.
+
+[A survey of ZK Languages](https://zkvalidator.com/a-survey-of-zk-languages/)
+
+# books & websites & Podcasts..🎙📚
+
+https://blog.lambdaclass.com/ 要经常看
+
+https://blog.csdn.net/mutourend -- 简中唯一zkp-complete博客[Grin]
+- 订阅下 mutourend 邹老师的csdn，这技术热点追踪翻译速度才叫快，“区块链媒体”们望尘莫及😂
 
 - 去年出版的《哥德尔传》 <https://book.douban.com/subject/36073022/> 是我近些年读到写得最好的传记，
 - 仅次于我十年前读到的《维特根斯坦传》 <https://book.douban.com/subject/6152040/> （这是不可能被撼动的第一传记神作）
@@ -326,71 +443,55 @@ https://cryptography.rs/
 ----
 
 🎙
-
 老牌密码学播客 ： Security Cryptography Whatever https://securitycryptographywhatever.com/
-
 [Episode 288: Quantum Cryptography with Or Sattath](https://zeroknowledge.fm/288-2/)
 
 
+## zkp info flow
 
-## Rust 
+https://twitter.com/i/spaces/1ynJOaMnBlOKR
+ - [zkp twitter space 202309201217 ](./imgs/202309201217-zkp-twitter-space.pdf)
+https://www.proofoftrack.xyz/
+还有Suning的newsletter，小伙子精力旺盛，新link整理得很快
 
-https://github.com/evcxr/evcxr/tree/main/evcxr_jupyter yeah, a Jupyter kernel for Rust
+郭老师推： https://twitter.com/1dot2
+邹老师博： https://blog.csdn.net/mutourend
+论文看我的这个： https://zk.cryptography.land/ 
+zkmesh: https://zkmesh.substack.com/
+自定义Twitter Threads：比如我这个 https://twitter.com/i/lists/1522499398210531329
+项目方的博客（这个很多，看几篇看对不对胃口，调整）
+Youtube：PSE/a16z/Eth Global etc
+podcast: https://zeroknowledge.fm/
 
-```bash
-cargo install evcxr_jupyter
-evcxr_jupyter --install
-jupyter lab
-```
+以上所有内容（包括Twitter List）均可RSS订阅，且建议使用RSS订阅
 
-## [Awesome ZKP](https://github.com/matter-labs/awesome-zero-knowledge-proofs) 
+项目程序一手信息几乎唯一的选择：Github
+论文的话 https://eprint.iacr.org/ 
+又想起来这个重要的标准化组织（很少被提起但里面有好东西）： https://zkproof.org/
+比如  https://docs.zkproof.org/presentations
+沙漏老师的feed : https://github.com/PrimitivesLane/PrimitivesFeed
+一个中科院数学所的学生做的密码学链接聚合网  https://link.fffmath.com/
+泛web3终极聚合器RAW： https://twitter.com/nake13/status/1526852356402745346
 
-- [Awesome Noir](https://github.com/noir-lang/awesome-noir)
-- [Awesome Circom](https://github.com/arnaucube/awesome-circom)
-- [Awesome Aleo](https://github.com/howardwu/awesome-aleo)
-- [Awesome Cairo](https://github.com/auditless/awesome-cairo)
-- [Awesome-Folding](https://github.com/lurk-lab/awesome-folding)
-- [Awesome HALO2](https://github.com/adria0/awesome-halo2)
-- [Awesome PLONK](https://github.com/fluidex/awesome-plonk)
-- [Awesome ZKML](https://github.com/worldcoin/awesome-zkml)
-- [Awesome zkEVM](https://github.com/LuozhuZhang/awesome-zkevm)
-- [Awesome Zero Knowledge](https://github.com/ventali/awesome-zk)
-
-## Quantum
-
-[Quantum Resistance and the Signal Protocol](https://signal.org/blog/pqxdh/)
- - Signal 已经集成 Kyber了
-
-## Curves
-
-- [The Pasta Curves for Halo 2 and Beyond](https://electriccoin.co/blog/the-pasta-curves-for-halo-2-and-beyond/)
-- [Mina Book: Pasta Curves](https://o1-labs.github.io/proof-systems/specs/pasta.html)
-- [Pallas and Elliptic Curves](https://medium.com/asecuritysite-when-bob-met-alice/pallas-and-elliptic-curves-f34115904b02)
-- [A survey of elliptic curves for proof systems](https://eprint.iacr.org/2022/586.pdf)
-- [Revisiting cycles of pairing-friendly elliptic curves](https://eprint.iacr.org/2022/1662.pdf)
-- [Pairings in Rank-1 Constraint Systems](https://eprint.iacr.org/2022/1162.pdf)
-- https://github.com/zcash/pasta_curves
-- https://hackage.haskell.org/package/pasta-curves-0.0.1.0/docs/PastaCurves.html
-- https://github.com/nccgroup/pasta-curves
-- https://docs.rs/ark-pallas/0.3.0/ark_pallas/
+forum:
+https://ethresear.ch/
+https://zkresear.ch/
 
 
-## Lattice
+# Interdisciplinarity(e.g. AI)
 
-Lattice-based cryptography: The tricky math of dots https://www.youtube.com/watch?v=QDdOoYdb748&list=PLMItfTVgwEAvTX4-sZkcF5s3-l1JDocY0&index=4
+AI:
+- [A hacker's guide to Language Models(1)](https://github.com/fastai/lm-hackers/blob/main/lm-hackers.ipynb)
+- [A hacker's guide to Language Models(2)](https://www.youtube.com/watch?v=jkrNMKz9pWU)
 
-## Others (can't archive)
 
-https://blog.csdn.net/mutourend -- 简中唯一zkp-complete博客[Grin]
+# Others (can't archive)
 
 当时逐字听译的一个 Brendan 的 talk: Plonky2 简介 https://mp.weixin.qq.com/s/qSWFLQPQJvWHclAvlEXEaQ
 
-Q: 我想知道 这个recursive实际能跑起来的例子哪里有[Lol]
+Q: 我想知道 这个 recursive 实际能跑起来的例子哪里有[Lol]
 A:  Plonky2-based的吗？olavm肯定能实际跑起来 https://github.com/Sin7Y/olavm
 
-
-
-[Succinct Proofs and Linear Algebra](https://angeris.github.io/papers/zk-linalg.pdf)
 
 [Eos: Efficient Private Delegation of zkSNARK Provers](https://www.usenix.org/conference/usenixsecurity23/presentation/chiesa)
 
@@ -415,13 +516,6 @@ ABCDE ZK Hacker Camp |【Session 8: Efficient Zero-KnowledgeProofs: Theory and P
 - 仍然记得sinka（高老师）说学习框架最好写一个排序，当时他用的是halo2
 
 
-- 可以订阅下 mutourend 邹老师的csdn，这技术热点追踪翻译速度才叫快，“区块链媒体”们望尘莫及😂
-
-- 密码学纯理论进展速度也同样相当的惊人，
- - 清华毕业的Yanyi Liu跟着Rafael Pass 揪着OWF不放疯狂输出，试图彻底搞清楚密码学的复杂性理论基础。
- - Yilei Chen回国后负责清华姚班的Cryptography课 http://www.chenyilei.net/cryptography-s2023.html， 下一代姚班选手的ZKP就都是他教的了，他在FS要不要密码学哈希，iO/lattice方面也有很多工作。
- - Lijie Chen就更不用说了，华人TCS之光，博士论文写了551页https://www.mit.edu/~lijieche/Lijie-Chen-thesis.pdf，已经是average-case hardness 和 derandomization领域世界级的专家了，可以去预测哪年得图灵奖了。
-
 - [Foundations of Data Availability Sampling](https://eprint.iacr.org/2023/1079.pdf)
 - [Boojum Upgrade: zkSync Era’s New High-performance Proof System for Radical Decentralization](https://zksync.mirror.xyz/HJ2Pj45EJkRdt5Pau-ZXwkV2ctPx8qFL19STM5jdYhc)
 
@@ -435,45 +529,13 @@ https://0xparc.org/blog/parc-squad 这个有点意思
 
 （发现和另一个研究群人员不overlap再发一遍）过了一遍HyperNova和Customizable constraint systems，感觉这个工作非常让人兴奋。CCS用来统一R1CS AIR PLONKish，然后用Nova IVC的方式multi-folding生成SNARK。有一种ZK界LLVM的即视感。各位老师怎么看。
 
-
-- a16z 整理的比较全的 ZKP 的资料库  https://a16zcrypto.com/zero-knowledge-canon/
-- ZK 零知识: https://buidlerdao.notion.site/ZK-5963083942a744bbb60a0328008868e2
-- 零基础学习 ZK:  https://mirror.xyz/searchblock.eth/y11EKtXAtK3aXRVMV1yYqw7FibKHxI0fK10vlVRDaD4
-- 万字长文捕获 ZK Rollup 时代价值｜ZONFF Research: https://mp.weixin.qq.com/s/5zKdS-GL8w_z4XIDOjv7FA
--  [zksync开源](https://github.com/matter-labs/zksync-era)
-
-怎么零基础学习零知识证明:
-- https://mirror.xyz/searchblock.eth/y11EKtXAtK3aXRVMV1yYqw7FibKHxI0fK10vlVRDaD4
-
-数学 : 
-- 参考学习内容:多项式乘法和除法、拉格朗日插值、Schwartz-Zip-pel 引理、快速傅立叶变换(FFT) 、NTT、MSM 以及 Field extension等。
-- An Introduction to Mathematical Cryptography
-- https://explained-from-first-principles.com/number-theory 这个介绍数论的也不错
-
-初等数论和群论 : 
-- 推荐了 MIT’s 6.875 (Foundations of Cryptography) ，对于国内的同学来讲，建议结合潘承洞版的看，会更好！ 教材链接：[https://mit6875.github.io/HANDOUTS/numbertheory.pdf](https://t.co/kfIc1fO7gV)
-
-# Tricks & Tools
-
-https://github.com/joelparkerhenderson/sha256-sentence
-- The SHA256 for this sentence begins with seven, seven, f, zero, a, b, b and five.
-- The SHA256 hash of this message begins with 534d765
-- 我去，厉害了,主要是里面没有什么随机数
-
-https://zkbench.dev/
-trade-offs and performance of different frameworks.
-
-# QA 
+# zkp QA 
 
 Question Lists: 
 - zkp 的前端？后端？算数化？ 
 - 什么是 MSM 加速？ 
-- halo2 vs STARK？
-- Halo2 怎么学 ？
 - P!=NP ?
 - SumCheck 没有办法转成非交互式的zk 证明吧？
-- 为什么 circom 中的 plonk 要求使用 r1cs 约束, 而 halo2 的约束可以任意次的多项式?
-
 
 ----
 
@@ -491,37 +553,6 @@ zkp 的前端？后端？算数化？ 我感觉应该是后端 需要@Kurt Pan �
 
 以groth16为例，涉及7次NTT：4个INTT ，5次msm：其中1次G2的MSM 。
 整体Prover消耗上，MSM应该占据了70%多吧. NTT应该占据10-20%。
-
-----
-
-halo2 vs STARK？
-
-halo2 vs STARK老大难的原因主要是这俩背后都各有巨大的社区。路线之争了属于是，这个无解。
-
-技术上看倒是融合的趋势，比如 https://github.com/maxgillett/halo2-fri-gadget ，plonky2/boojum，CCS等。
-以及可以探索这俩和folding/lookup两大主线的关系
-
-@Zhouqi： 
-1. 我们在探索 zkVM方向的risc0 vs zkWASM就是两个社区的路线一个大的路径了
-2. 下次给大家汇报一下跑risc0的zeth结果，和zkWASM的大规模wasm的结果，我觉得有很多有意思的东西出来
-3. 我可以贡献一期用和改zkWASM的一些心得 hhh
-
------
-
-Q: Halo2 怎么学 ？
-
-@Dream：
-
-使用cario 或者 circom写电路， 是接触不到具体底层电路的设计，优化的，直接裸写电路 成长会很快
-啥叫裸写电路，比如用halo2 原生接口写？
-@Dream：
-- 对，方便优化， 可以知晓底层生成polynomials ，各种计算开销等
-- 我觉得常见的basic 电路（比较大小， lookup等）， 复杂点的如签名电路， merkle tree电路等
-
-嗯嗯。也正准备看一下halo2 原代码的，大佬有没有什么这方面的建议
-
-@Dream：大概挺久以前我看过一遍， 没啥建议，看完并理解文档halo2 book后 ，可以看代码了
-
 
 ----
 
@@ -573,62 +604,13 @@ https://www.quantamagazine.org/complexity-theorys-50-year-journey-to-the-limits-
 例子应该是 Barak01 的 non-blackbox simulation里的协议。上次Deng Yi老师讲的
 就是说过早达到 zk 性质对 fs 并非好事
 
-我的理解在 sumcheck 中，每一轮需 verifier 提供随机数给prover，prover计算g_i（x）并发给verifier，这个计算 $g_i(x)$ 的过程 verifier 做不了，所以必须要交互
+我的理解在 sumcheck 中，每一轮需 verifier 提供随机数给 prover，prover 计算 $g_i(x)$ 并发给verifier，这个计算 $g_i(x)$ 的过程 verifier 做不了，所以必须要交互
  - 没有让verifier做prover工作的。转非交互的思路是把verifier的工作（发随机数）让prover做（用哈希）。
 - 非交互这个词也不好，非交互不是没有交互，而是单向一轮交互
 - 在 sumcheck 的 step3 Verifier 
  checks that the partial sum and total sum agree when the partial sum is evaluated at 0 and 1 and its outputs added。
  - 按照 https://semiotic.ai/articles/sumcheck-tutorial/ 中的描述只有verifier 验证partial sum 和total sum 的结果才能发送随机数
 
------
-
-为什么 circom 中的 plonk 要求使用 r1cs 约束, 而 halo2 的约束可以任意次的多项式?
-
-@Po 首先plonk是有不同版本的，最初的 plonk 论文是vanilla plonk(只包含加法门和乘法门)，再到后来的turboplonk等(支持自定义门)发展的plonkish。我的理解是circom本来设计之初就是为了支持R1CS，只不过 r1cs 可以很容易的转换为vanilla plonk; halo2一开始设计就是针对plonkish + lookup的。所以circom要支持plonkish整个代码设计就要重新调整
-
-
-
-
-# Twitter Sapce & info flow
-
-https://twitter.com/i/spaces/1ynJOaMnBlOKR
- - [zkp twitter space 202309201217 ](./imgs/202309201217-zkp-twitter-space.pdf)
-https://www.proofoftrack.xyz/
-还有Suning的newsletter，小伙子精力旺盛，新link整理得很快
-
-郭老师推： https://twitter.com/1dot2
-邹老师博： https://blog.csdn.net/mutourend
-论文看我的这个： https://zk.cryptography.land/ 
-zkmesh: https://zkmesh.substack.com/
-自定义Twitter Threads：比如我这个 https://twitter.com/i/lists/1522499398210531329
-项目方的博客（这个很多，看几篇看对不对胃口，调整）
-Youtube：PSE/a16z/Eth Global etc
-podcast: https://zeroknowledge.fm/
-
-以上所有内容（包括Twitter List）均可RSS订阅，且建议使用RSS订阅
-
-项目程序一手信息几乎唯一的选择：Github
-论文的话 https://eprint.iacr.org/ 
-又想起来这个重要的标准化组织（很少被提起但里面有好东西）： https://zkproof.org/
-比如  https://docs.zkproof.org/presentations
-沙漏老师的feed : https://github.com/PrimitivesLane/PrimitivesFeed
-一个中科院数学所的学生做的密码学链接聚合网  https://link.fffmath.com/
-泛web3终极聚合器RAW： https://twitter.com/nake13/status/1526852356402745346
-
-forum:
-https://ethresear.ch/
-https://zkresear.ch/
-
-
-# Interdisciplinarity
-
-AI:
-- [A hacker's guide to Language Models(1)](https://github.com/fastai/lm-hackers/blob/main/lm-hackers.ipynb)
-- [A hacker's guide to Language Models(2)](https://www.youtube.com/watch?v=jkrNMKz9pWU)
-
-Math:
-- [The-Art-of-Linear-Algebra](https://github.com/kenjihiranabe/The-Art-of-Linear-Algebra)
-- [Animation vs. Math](https://www.youtube.com/watch?v=B1J6Ou4q8vE)
 
 
 [^1] 巨量资料 FYI，大部分出自网络及群聊整理，时间有限出处 没有做细致排版，请恕无法极尽详实覆盖，如需加上出处请联系作者 ~
