@@ -207,9 +207,12 @@ Halo2 中电路的布局主要与怎么设计门有关，需要在如下变量�
     });
 ```
 
-这里我们使用了 `Constraints::with_selector` 的一个更高级用法，使得当selector enble时，如下两个约束需同时成立:
+这里我们使用了 `Constraints::with_selector` 的一个更高级用法，使得当 selector enable 时，如下两个约束需同时成立:
 1. f(2n-2) + f(2n-1) = f(2n)
 2. f(2n-1) + f(2n) = f(2n+1)
 
 电路布局图为:
 ![images](../imgs/fibo2.png)
+
+## 总结
+不同的电路布局没有绝对的优劣之分，它们都是在行数、列数、degree 、permuation 包括后面会涉及到的 lookup 等进行权衡，最终这些决定了 prover 计算成本与 proof 大小之间的权衡。
