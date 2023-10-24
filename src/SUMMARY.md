@@ -8,6 +8,7 @@
 
 ---
 
+
 - [探索零知识证明系列](./zkp-intro/toc.md)
   - [（一）初识「零知识」与「证明」](./zkp-intro/1/zkp-back.md)
   - [（二）理解「模拟」](./zkp-intro/2/zkp-simu.md)
@@ -15,7 +16,9 @@
   - [（四）随机「挑战」](./zkp-intro/4/zkp-rom.md)
   - [（五）埋藏「秘密」](./zkp-intro/5/zkp-crs.md)
 
+
 ---
+
 
 - [理解 Plonk 系列](./plonk-intro-cn/plonk-intro.md)
   - [1-Plonkish Arithmetization](./plonk-intro-cn/plonk-arithmetization.md)
@@ -26,7 +29,9 @@
   - [6-实现  Zero Knowledge](./plonk-intro-cn/plonk-randomizing.md)
   - [7-Lookup Gate](./plonk-intro-cn/plonk-lookup.md)
 
+
 ---
+
 
 - [从零开始学习 zk-SNARK](./zk-snarks/toc.md)
   - [1-Polynomial-Interaction-and-Proof](./zk-snarks/1-Polynomial-Interaction-and-Proof.md)
@@ -39,9 +44,10 @@
 ---
 
 - [Halo2](./halo2/halo2.md)
-  - [Chap-0](./halo2/chap-0/readme.md)
-  - [Chap-1](./halo2/chap-1/readme.md)
-  - [Chap-2](./halo2/chap-2/readme.md)
+  - [1-basic concepts](./halo2/chap-0/readme.md)
+  - [2-simple-circuit](./halo2/chap-1/readme.md)
+  - [3-custom-gate](./halo2/chap-2/readme.md)
+  - [halo2-QA](./halo2/halo2-QA.md)e
   - [halo2-learning-materials](./halo2/tmp/halo2-learning-materials.md)
   - [learning-halo2 (0xPARC)](./halo2/tmp/halo2-learning-materials.md)
       - [1-Simple Examples](./halo2/tmp/1-Simple-Example.md)
