@@ -34,7 +34,7 @@
 
 ## 📖 What is [z2o-k7e](https://learn.z2o-k7e.world)?
 
-[z2o-k7e](https://learn.z2o-k7e.world) is a community-driven project dedicated to collaborative ZKP (Zero-Knowledge Proof) studies and creation. In three terms zkp learning journey since February 2023, we've explored resources like <https://www.zkiap.com>, <https://zk-learning.org>, [write PLONK protocol with plonkathon](https://github.com/0xPARC/plonkathon) , and [0xPARC halo2 lectures](ongoing now), engaging with over 300 enthusiastic participants.
+[z2o-k7e](https://learn.z2o-k7e.world) is a community-driven project dedicated to collaborative ZKP (Zero-Knowledge Proof) studies and creation. In three terms zkp learning journey since February 2023, we've explored resources like <https://www.zkiap.com>, <https://zk-learning.org>, [write PLONK protocol with plonkathon](https://github.com/0xPARC/plonkathon) , and [0xPARC halo2(ongoing)](https://learn.0xparc.org/halo2), engaging with over 300+ enthusiastic participants!
 
 In this journey, our vibrant community learns collectively, assists one another with q-a, and write zkp-related content collaboratively.
 
@@ -63,8 +63,22 @@ The world of ZKP is riddled with challenges - so many noises, steep entry barrie
 - **[Kurt Pan](https://cryptography.land/)**: Ph.D. in Cryptography from Fudan University, <https://github.com/kurtpan666>
 - **Shirlene 孝羽**: director of Creators Colearning Community
 - **[Demian](https://github.com/Demian101)**: [z2o-k7e](https://learn.z2o-k7e.world) core contributor, zkp-colearning maintainer
+- **dream@Scroll**
 - **Harry L**: co-Founder of Rebase Community, Core Contributor of @Antalpha_Labs.
-- Our Maintainers: **dream@Scroll, Po@EthStorage, 0xhhh@EthStorage, 周洋(Yang Zhou), 啊咪咪小熊, 张康 Daniel, Frank Jz Liu, miles, 白菜, KEEP, CJ, 笃行, 阳小雪, , 饭卡里还有不少钱呢...**
+- Our Maintainers: 
+	- [Po@EthStorage](https://github.com/dajuguan),
+	- 0xhhh@EthStorage,
+	- 周洋(Yang Zhou), 
+	- 啊咪咪小熊, 
+	- 张康 Daniel, 
+	- Frank Jz Liu, 
+	- miles, 
+	- 白菜, 
+	- KEEP, 
+	- CJ, 
+	- 笃行, 
+	- 阳小雪, 
+	- 饭卡里还有不少钱呢...
 
 <br />
 

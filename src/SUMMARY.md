@@ -2,8 +2,6 @@
 
 [About z2o-k7e](./README.md)
 
-[How to contribute?](./how-to-contribute.md)
-
 ----
 
 - [ZKP 新手村入门攻略](./beginner.md)
@@ -41,18 +39,16 @@
 ---
 
 - [Halo2](./halo2/halo2.md)
-  - [0-basic concepts](./halo2/chap-0/readme.md)
-  - [1-simple-circuit](./halo2/chap-1/readme.md)
-  - [2-custom-gate](./halo2/chap-2/readme.md)
-  - [3-(editing... pls stay tuned! :)]()
-  - [halo2-QA](/halo2/halo2-QA.md)
+  - [Chap-0](./halo2/chap-0/readme.md)
+  - [Chap-1](./halo2/chap-1/readme.md)
+  - [Chap-2](./halo2/chap-2/readme.md)
   - [halo2-learning-materials](./halo2/tmp/halo2-learning-materials.md)
   - [learning-halo2 (0xPARC)](./halo2/tmp/halo2-learning-materials.md)
       - [1-Simple Examples](./halo2/tmp/1-Simple-Example.md)
       - [2-Fibonacci-example-1](./halo2/tmp/2-Fibonacci-example-1.md)
       - [3-Fibonacci-example-2](./halo2/tmp/3-Fibonacci-example-2.md)
       - [4-IsZero Check-example-3](./halo2/tmp/4-IsZero-Check-example-3.md)
-      - [5-Range check-example-1.md](./halo2/tmp/5-Range-check.md)
+      - [5-Range check-example-1.md](./tmp/halo2/5-Range-check.md)
       - [6-Range Check (code explanation)](./halo2/tmp/6-Range-Check(code-explanation).md)
       - [7-Range Check-Lookup-example-2)](./halo2/tmp/7-Range-Check-lookup(example-2).md)
       - [8-Range Check-Lookup-example-3)](./halo2/tmp/8-Range-Check(example-3).md)
@@ -79,14 +75,14 @@
 
 ---
 
-- [zkp public goods](./public%20goods/toc.md)
+- [ZKP Public Goods](./public%20goods/toc.md)
   - [ch2](./public%20goods/第二章.md)
   - [ch4-Proving System](./public%20goods/4-Proving-System.md)
   - [ch5-plonk-intro](./public%20goods/5-plonk-intro.md)
 
 ---
 
-- [zk-materials](materials/ZK-Materials.md)
+- [ZK Materials](materials/ZK-Materials.md)
 
 ---
 
