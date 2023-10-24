@@ -3,7 +3,7 @@
 
 ### <span style="color: grey;">**Welcome to the**</span>
 
-![](logo.png)
+![](./src/logo.png)
 
 
 
