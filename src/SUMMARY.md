@@ -2,13 +2,12 @@
 
 [About z2o-k7e](./README.md)
 
-[How to contribute?](./how-to-contribute.md)
-
 ----
 
 - [ZKP 新手村入门攻略](./beginner.md)
 
 ---
+
 
 - [探索零知识证明系列](./zkp-intro/toc.md)
   - [（一）初识「零知识」与「证明」](./zkp-intro/1/zkp-back.md)
@@ -17,7 +16,9 @@
   - [（四）随机「挑战」](./zkp-intro/4/zkp-rom.md)
   - [（五）埋藏「秘密」](./zkp-intro/5/zkp-crs.md)
 
+
 ---
+
 
 - [理解 Plonk 系列](./plonk-intro-cn/plonk-intro.md)
   - [1-Plonkish Arithmetization](./plonk-intro-cn/plonk-arithmetization.md)
@@ -28,7 +29,9 @@
   - [6-实现  Zero Knowledge](./plonk-intro-cn/plonk-randomizing.md)
   - [7-Lookup Gate](./plonk-intro-cn/plonk-lookup.md)
 
+
 ---
+
 
 - [从零开始学习 zk-SNARK](./zk-snarks/toc.md)
   - [1-Polynomial-Interaction-and-Proof](./zk-snarks/1-Polynomial-Interaction-and-Proof.md)
@@ -44,14 +47,14 @@
   - [1-basic concepts](./halo2/chap-0/readme.md)
   - [2-simple-circuit](./halo2/chap-1/readme.md)
   - [3-custom-gate](./halo2/chap-2/readme.md)
-  - [halo2-QA](./halo2/halo2-QA.md)
+  - [halo2-QA](./halo2/halo2-QA.md)e
   - [halo2-learning-materials](./halo2/tmp/halo2-learning-materials.md)
   - [learning-halo2 (0xPARC)](./halo2/tmp/halo2-learning-materials.md)
       - [1-Simple Examples](./halo2/tmp/1-Simple-Example.md)
       - [2-Fibonacci-example-1](./halo2/tmp/2-Fibonacci-example-1.md)
       - [3-Fibonacci-example-2](./halo2/tmp/3-Fibonacci-example-2.md)
       - [4-IsZero Check-example-3](./halo2/tmp/4-IsZero-Check-example-3.md)
-      - [5-Range check-example-1.md](./halo2/tmp/5-Range-check.md)
+      - [5-Range check-example-1.md](./tmp/halo2/5-Range-check.md)
       - [6-Range Check (code explanation)](./halo2/tmp/6-Range-Check(code-explanation).md)
       - [7-Range Check-Lookup-example-2)](./halo2/tmp/7-Range-Check-lookup(example-2).md)
       - [8-Range Check-Lookup-example-3)](./halo2/tmp/8-Range-Check(example-3).md)
@@ -78,14 +81,14 @@
 
 ---
 
-- [zkp public goods](./public%20goods/toc.md)
+- [ZKP Public Goods](./public%20goods/toc.md)
   - [ch2](./public%20goods/第二章.md)
   - [ch4-Proving System](./public%20goods/4-Proving-System.md)
   - [ch5-plonk-intro](./public%20goods/5-plonk-intro.md)
 
 ---
 
-- [zk-materials](materials/ZK-Materials.md)
+- [ZK Materials](materials/ZK-Materials.md)
 
 ---
 
