@@ -25,7 +25,7 @@
 
 ## 📖 What is [z2o-k7e](https://learn.z2o-k7e.world)?
 
-[z2o-k7e](https://learn.z2o-k7e.world) is a community-driven project dedicated to collaborative ZKP (Zero-Knowledge Proof) studies and creation. In three terms zkp learning journey since February 2023, we've explored resources like <https://www.zkiap.com>, <https://zk-learning.org>, [write PLONK protocol with plonkathon](https://github.com/0xPARC/plonkathon) , and [0xPARC halo2 lectures](ongoing now), engaging with over 300 enthusiastic participants.
+[z2o-k7e](https://learn.z2o-k7e.world) is a community-driven project dedicated to collaborative ZKP (Zero-Knowledge Proof) studies and creation. In three terms zkp learning journey since February 2023, we've explored resources like <https://www.zkiap.com>, <https://zk-learning.org>, [write PLONK protocol with plonkathon](https://github.com/0xPARC/plonkathon) , and [0xPARC halo2(ongoing)](https://learn.0xparc.org/halo2), engaging with over 300+ enthusiastic participants!
 
 In this journey, our vibrant community learns collectively, assists one another with q-a, and write zkp-related content collaboratively.
 
