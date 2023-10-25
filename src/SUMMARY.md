@@ -47,7 +47,8 @@
   - [1-basic concepts](./halo2/chap-0/readme.md)
   - [2-simple-circuit](./halo2/chap-1/readme.md)
   - [3-custom-gate](./halo2/chap-2/readme.md)
-  - [halo2-QA](./halo2/halo2-QA.md)e
+  - [4-fibonacci](./halo2/chap-3/readme.md)
+  - [halo2-QA](./halo2/halo2-QA.md)
   - [halo2-learning-materials](./halo2/tmp/halo2-learning-materials.md)
   - [learning-halo2 (0xPARC)](./halo2/tmp/halo2-learning-materials.md)
       - [1-Simple Examples](./halo2/tmp/1-Simple-Example.md)
