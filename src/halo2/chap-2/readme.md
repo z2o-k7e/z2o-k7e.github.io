@@ -2,6 +2,7 @@
 > - 时间: 2023-10-20
 > - 校对:  [@Demian](https://github.com/demian101)
 
+# Custom gates and Chip
 本节我们以一个简单的电路为例，介绍 Halo2 中的自定义门(custom gates) 和 chip 的概念。
 
 在上一节中，我们使用 Halo2 的 API 实现了只包含乘法门的简单电路，但是如果有多种 gate 呢，这种情况如何处理?
@@ -20,13 +21,13 @@
 ```rust
 private inputs: a,b,c
 public inputs: out
-
-d = a^2 * b^2 * c 
-e = c + d
-out = e^3
+constraints:
+    d = a^2 * b^2 * c 
+    e = c + d
+    out = e^3
 ```
 
-注意到在 vanilla plonk 中约束的 degree 不能超过 2，即只支持加法门和乘法门，但 halo2 支持通过 Ultra plonk 来实现更高阶数的 custom gate。这里我们使用一个高阶 custom gate 来实现 $out=d^3$ 这条约束 (注: 其实 Ultra plonk 中乘法门和加法门也可以看作 custom gate，因此下文我们将该这条三次方约束的门称为**立方门**)，相比于原来需要 2 个乘法门实现该约束，custom gate 可以减少帮助约束的行数。
+注意到在 vanilla plonk 中约束的 degree 不能超过 2（只支持加法门和乘法门，witness有三列,且门的2个输入和1个输出只能在一行），但 halo2 支持通过 Ultra plonk 来实现更高阶数以及使用更灵活的单元格的 custom gate。这里我们使用一个高阶 custom gate 来实现 $out=d^3$ 这条约束 (注: 其实 Ultra plonk 中乘法门和加法门也可以看作 custom gate，因此下文我们将该这条三次方约束的门称为**立方门**)，相比于原来需要 2 个乘法门实现该约束，custom gate 可以减少帮助约束的行数。
 
 因此，我们可以画出电路 witness 表格:
 

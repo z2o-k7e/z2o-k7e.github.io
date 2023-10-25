@@ -4,6 +4,8 @@
 
 [TOC]
 
+# Halo2核心概念
+
 在前面的 prerequisite 课程中，我们学习了 PLONK 协议及其 lookup table 优化，在本节我们将会以 [halo2](https://github.com/zcash/halo2) 这个 Rust library 为基础，详细讲解 Halo2 的相关基本概念。
 
 ## halo2 电路结构

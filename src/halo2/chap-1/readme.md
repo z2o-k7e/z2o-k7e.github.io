@@ -2,6 +2,8 @@
 > - 时间: 2023-10-18
 > - 校对:  [@Po@Ethstorage.io](https://github.com/dajuguan) / [@Demian](https://github.com/demian101)
 
+# Halo2 API简介
+
 ## Overview
 
 上节我们介绍了Halo2的核心概念，本节则以 $a^2 * b^2 * c = out$ 这个电路为例，来说明如何使用 Halo2 API来写电路。
