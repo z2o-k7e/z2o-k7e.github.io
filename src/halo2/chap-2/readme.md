@@ -2,7 +2,10 @@
 > - 时间: 2023-10-20
 > - 校对:  [@Demian](https://github.com/demian101)
 
+[TOC]
+
 # Custom gates and Chip
+
 本节我们以一个简单的电路为例，介绍 Halo2 中的自定义门(custom gates) 和 chip 的概念。
 
 在上一节中，我们使用 Halo2 的 API 实现了只包含乘法门的简单电路，但是如果有多种 gate 呢，这种情况如何处理?
@@ -12,7 +15,7 @@
 在 Halo2 中可通过自定义门(custom gate) 来实现，这里需要回顾下 Halo2 中自定义门(custom gate) 的 mental model [^1]:
 ![image](../imgs/custom_gates.png) 
 
-如上式，自定义门可以由任意多种不同的门线性相加构成，每一个门由选择器和门运算逻辑构成，如上式中第一个加法门选择器为 $q_{add}$，电路逻辑为 $a_2=a_0 + a_1$ ，Halo2中可以通过`create_gate`创建每个门。不过需要注意的是，看起来这些门之间是独立的，但实际上这些门在最终的电路约束检查中会通过乘以一个随机数`y`，一次行检查一行的 witness 是否**同时满足所有门**的约束。
+如上式，自定义门可以由任意多种不同的门线性相加构成，每一个门由选择器和门运算逻辑构成，如上式中第一个加法门选择器为 $q_{add}$，电路逻辑为 $a_2=a_0 + a_1$ ，Halo2中可以通过 `create_gate` 创建每个门。不过需要注意的是，看起来这些门之间是独立的，但实际上这些门在最终的电路约束检查中会通过乘以一个随机数`y`，一次行检查一行的 witness 是否**同时满足所有门**的约束。
 
 ### 问题定义
 
@@ -45,6 +48,12 @@ constraints:
 |       |  d    |   c   |   0   |   1   |   0   |
 |       |  e    |       |   0   |   0   |   0   |
 |       |  e    |  out  |   0   |   0   |   1   |
+
+看到这里可能会产生疑问，这个 table 是如何填写出来的呢？其实，这个填写规则是与门约束一一对应的，而门约束可以很随意设计，所以关键是得确定
+
+1. 有几种门约束 
+
+2. 每种门约束涉及哪几个单元格及多项式约束公式
 
 > 完整代码见 [Halo2 tutotials: chap_2/custom_gates](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_2/exercise_1.rs)
 
@@ -215,4 +224,4 @@ cargo test plot_chip_circuit --features dev-graph
 
 references:
 
-[^1]: 
+[^1]: 0xPARC halo2 lectures https://learn.0xparc.org/halo2/

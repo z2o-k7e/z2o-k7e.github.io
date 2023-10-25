@@ -2,6 +2,10 @@
 
 [About z2o-k7e](./README.md)
 
+[How-to-contribute](./how-to-contribute.md)
+
+
+
 ----
 
 - [ZKP 新手村入门攻略](./beginner.md)

@@ -1,21 +1,34 @@
 -----
 
-**第一周:**
-1. 课程学习资料: [理解 PLONK 系列](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-intro.html) | [halo2 Introduction](https://learn.0xparc.org/materials/halo2/learning-group-1/introduction) 
+### **第一周:**
+
+1. 课程学习资料: 
+   1. [理解 PLONK 系列](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-intro.html)
+   2. [1-basic concepts](https://learn.z2o-k7e.world/halo2/chap-0/index.html)
+   3. [0xPARC halo2 Introduction](https://learn.0xparc.org/materials/halo2/learning-group-1/introduction) 
+
 2. 课程学习目标: Understanding and building user-facing applications with `Halo2` and `PLONKish` proving systems
 
-**第二周:**
+
+
+### **第二周:**
+
 1. 课程学习资料:
-	- [Halo2 API & Building a Basic Fibonacci Circuit (Part 1)](https://learn.0xparc.org/materials/halo2/learning-group-1/halo2-api)
-	- [Halo2 API & Building a Basic Fibonacci Circuit (Part 2)](https://learn.0xparc.org/materials/halo2/learning-group-1/halo2-api-continued)
-	- [halo2 simple circuit](https://learn.z2o-k7e.world/halo2/chap-1/index.html) & [halo2 custom gate](https://learn.z2o-k7e.world/halo2/chap-2/index.html)
+	- [2-simple circuit](https://learn.z2o-k7e.world/halo2/chap-1/index.html)
+	- [3-custom gate](https://learn.z2o-k7e.world/halo2/chap-2/index.html)
+	- [4-fibonacci](https://learn.z2o-k7e.world/halo2/chap-3/index.html)
+	- 0xPARC halo2 Lecture:
+	  - [Halo2 API & Building a Basic Fibonacci Circuit (Part 1)](https://learn.0xparc.org/materials/halo2/learning-group-1/halo2-api)
+	  - [Halo2 API & Building a Basic Fibonacci Circuit (Part 2)](https://learn.0xparc.org/materials/halo2/learning-group-1/halo2-api-continued)
 2. 课程学习目标:
 	- 理解 halo2 中 Circuit、region、Layouter、custom gate、constraints 等概念及其 API 代码 represent.
 	- 能够理解 Fibonacci 示例和 isZero 示例的电路构建流程
 
-**第三周**
+### **第三周**
 
 - [editing...]
+
+
 
 ----
 **前置学习 (PLONK & Rust)：**
