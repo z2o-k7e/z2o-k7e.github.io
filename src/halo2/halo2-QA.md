@@ -1,6 +1,9 @@
+
+我们整理分类了 halo2 [discord](https://discord.com/invite/JCTJHzk2) 上面的 **Q&A**，大部分学习中遇到的问题都可以尝试先在此进行分类搜索
+
+
 [TOC]
 
-我们整理分类了 halo2 discord 上面的qa fyi，大部分学习中遇到的问题都可以尝试先在此进行分类搜索
 
 ### Basics
 
