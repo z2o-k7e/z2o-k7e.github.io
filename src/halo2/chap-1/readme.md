@@ -38,7 +38,7 @@ constraints   :  a^2 * b^2 * c = out
 1. 利用 Halo2 定义好上述约束 (gates 和 equality constrains)，
 2. 并使用其 private value 填好上述表格 (即 assign witness)。
 
-使用 Halo2 编写电路，需要为 `struct Circuit` 实现三个 Trait: [^1]
+使用 Halo2 编写电路，需要为 `struct MyCircuit` 实现 `halo2_proofs::plonk::Circuit` trait, 其中包括以下 3 个关联方法: [^1]
 
 - `without_witnesses`: 创建默认无需 witness 的 Circuit 实例
 - `configure`: 需要自定义:
@@ -51,7 +51,7 @@ constraints   :  a^2 * b^2 * c = out
     1. 填充以 Region 为基本单位(多行+多列构成的矩形)，可以在 region 中以相对引用的方式引用其他Row
     2. 有两种填充方式: copy_advice (还会产生 equality 约束) + assign_advice(不会产生 equality 约束)
 
-一旦定义好上述 3 个 Trait，Halo2 便可以在电路实例化后调用相关 API **自动运行**(不需要手动触发上述函数)上述逻辑来填充witness 和生成 proof。
+一旦定义好上述 3 个关联方法，Halo2 便可以在电路实例化后调用相关 API **自动运行**(不需要手动触发上述函数)上述逻辑来填充 witness 和生成 proof。
 
 ## 创建电路和 Config 
 
@@ -78,8 +78,10 @@ struct MyCircuit<F:Field> {
 }
 ```
 
-## 实现 Circuit 前两个 trait
-根据电路配置以及我们只需要乘法门，来实现`configure` trait
+## 实现 Circuit trait 的前两个关联方法
+
+根据电路配置以及我们只需要乘法门，来实现`configure` 方法：
+
 ```rust
 impl <F:Field> Circuit<F> for MyCircuit<F> {
   fn without_witnesses(&self) -> Self {
@@ -196,8 +198,6 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
 }
 ```
 
-
-
 ## Mock prove
 
 最后实例化电路，并调用相应的Mock Prover来验证:
@@ -255,6 +255,7 @@ mod tests {
 ## 检查 Circuit 布局
 
 同时，还可以利用上节提到的 Halo2 的 tool 输出电路的整个布局图，advice 列均为红色，instance 列为浅蓝色，selector 列为深蓝色；不同的 region 之间由黑色线分隔，填充过值的 advice 和 instance 列的单元格由绿色和浅绿色组成，填充过值的instance单元格则为深蓝色。可根据此图检查电路是否欠约束(under constraint)，如果欠约束会明显发现对应的单元格**不是绿色**。
+
 ```rust
 
     #[cfg(feature = "dev-graph")]
@@ -292,8 +293,8 @@ mod tests {
 ## 总结
 我们实现电路时一般可遵循三步法:
 1. 确定电路配置：需要几列
-2. 确定好电路需要怎样的门:乘法门，还是自定义门，还是需要加lookup。这样就可以实现Circuit的`configure` trait
-3. 根据电路所需的输入输出，填充好witness。这样就可以实现Circuit的`synthesize` trait
+2. 确定好电路需要怎样的门:乘法门，还是自定义门，还是需要加 lookup。这样就可以实现 Circuit 的 `configure` 关联方法
+3. 根据电路所需的输入输出，填充好 witness。这样就可以实现 Circuit 的 `synthesize` 关联方法
 
 
 
