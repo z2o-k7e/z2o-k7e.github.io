@@ -20,7 +20,7 @@ $$f(x)=Q_L(x) \cdot a(x)+Q_R(x)\cdot b(x)+Q_O(x)\cdot c(x)+Q_M(x)\cdot a(x) b(x)
 
 <img src="imgs/APIs_image_16.png" style="zoom:50%;" />
 
-在一般的电路代码结构中，都会有输出、输出、约束等必要构件，在 halo2 中也不例外。只不过，不像 R1CS 那般每个约束都严丝合缝地写成 $c === a * b$ 的格式，halo2 中，电路的 arithmetization（电路中的 expression） 可以形象地看作是成一张矩形表 (table)，所有的约束则可以通过在这张表中规划区域(region)，放置单元格(cells) 来构造。
+在一般的电路代码结构中，都会有输入、输出、约束等必要构件，在 halo2 中也不例外。只不过，不像 R1CS 那般每个约束都严丝合缝地写成 $c === a * b$ 的格式，halo2 中，电路的 arithmetization（电路中的 expression） 可以形象地看作是成一张矩形表 (table)，所有的约束则可以通过在这张表中规划区域(region)，放置单元格(cells) 来构造。
 
 > [The halo2 Book](https://zcash.github.io/halo2/concepts/proofs.html): The language that we use to express circuits for a particular proof system is called an _**arithmetization**_. Usually, an arithmetization will define circuits in terms of polynomial constraints on variables over a field. [^9]
 
