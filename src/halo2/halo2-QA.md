@@ -1,4 +1,7 @@
 [TOC]
+
+我们整理分类了 halo2 discord 上面的qa fyi，大部分学习中遇到的问题都可以尝试先在此进行分类搜索
+
 ### Basics
 
 **Q: What's the actual difference between `assign_advice_from_constant` and `assign_advice` in practice?**
