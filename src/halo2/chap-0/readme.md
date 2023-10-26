@@ -142,7 +142,7 @@ The layouter will be used during the assignment, namely when you fill up a table
 比如上面的例子，在最上方的电路包含两个 custom gate (红色边框标识)，可以创建如下两种region:
 
 1. 左边的浅绿色矩形 Region 是 Valid Region ✅ :
-	- 在 Region 中做的赋值 sssignments 已经完全覆盖了左边的 `Custom Gate` 所需要的
+	- 在 Region 中做的赋值 assignments 已经完全覆盖了左边的 `Custom Gate` 所需要的
 	- 假设在 selector col 中，上面的 $S_0 = 1$ , 下面的  $S_0 = 0$ ，则说明用到了左边的 3 个 Cell 
 
 2. 而右边的浅绿色矩形 Region 是 invalid Region ❌: 
