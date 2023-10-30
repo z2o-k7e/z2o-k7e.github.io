@@ -240,7 +240,7 @@ impl <F: Field> Circuit<F> for MyCircuit<F> {
 }
 ```
 
-Chips 可以进行组合，底层的 Chip 尽量使用不同的列 (当然也允许 Chip 共享使用相同的列)。在进行电路设计时应尝试优化所需的 Advice 列，因为这会影响 Proof 大小。
+> 建议仔细阅读、对比上下 2 部分代码，体会其在设计上的不同和 chip 这种模块化封装的思维。
 
 我们将本节中的约束抽象为 `SimpleChip`，将原来独立的 assign witness 的几个函数 (`load_private`、`load_constant`、`add`、`mul`和`cub`) 合并到 Simple Chip 的 `assign` 方法中。此外，采用如下电路布局压缩所需的行数（在电路中我们只划分了了两个大的 region，这样就减小了复制 `ab`、`absq`、`c` 和 `c` 这四个约束） :
 
