@@ -193,11 +193,56 @@ cargo test test_simple_3gates
 
 ## Chip
 
-在上述实现中，我们填入 witness 的函数和 Config 是分离的，为了更好地复用这些代码，类似于集成电路由很多个 Chip 构成，**Halo2 一般将一系列紧密相关的实现特定约束的函数(config 以及相应的提供 witness 的函数)抽象到一个 Chip 模块**。
+在上述实现中，我们填入 witness 的函数和 Config 是分离的，为了更好地复用这些代码，类似于集成电路由很多个 Chip 构成，Halo2 一般将一系列紧密相关的实现特定约束的函数(config 以及相应的提供 witness 的函数) **抽象到一个 Chip 模块**。
 
-Chips 可以进行组合，底层的 Chip 尽量使用不同的列(当然也允许 Chip 共享使用相同的列)。在进行电路设计时应尝试优化所需的 Advice 列，因为这会影响Proof 大小。
+具体的代码参考[在这里](https://github.com/zkp-co-learning/halo2-step-by-step/tree/main/halo2-tutorials)，这里我们简单对比一下 2 部分代码的区别：
 
-我们可以将本节中的约束抽象为` SimpleChip`,将原来独立的 assign witness 的几个函数 (`load_private`、`load_constant`、`add`、`mul`和`cub`) 合并到 Simple Chip 的 `assign` 方法中。此外，采用如下电路布局压缩所需的行数(在电路中我们只划分了了两个大的 region，这样就减小了复制`ab`、`absq`、`c`和`c`这四个约束):
+在前部分的 `custom_gate` 的实现中：
+- 手动定义了 `load_private(),  load_constant()` 
+- 手动定义了 `fn mul() / fn add()/ fn cub()` 这几个处理 witness 的函数
+
+```rust
+// custom_gate.rs
+fn load_private() { ... }
+fn load_constant() { ... }
+fn mul() / fn add() / fn cub() { ... }
+
+impl <F: Field> Circuit<F> for MyCircuit<F> {
+    fn configure()
+    fn synthesize() {
+        let (a, b) = load_private() ..;
+        let ab = mul(a, b);
+        // ...
+    }
+}
+```
+
+在本节的 `simple_chip` 的实现中:
+- 将 load_private()、mul()、cub() 等操作直接封装到了 SimpleChip 中
+- 在实现 MyCircuit 时，直接调用 SimpleChip 里的 configure() 来构建约束; 和 assign() 来填入 witness
+
+```rust
+impl <F: Field> SimpleChip<F> {
+    fn configure()  // same as in custom_gate.
+    fn assign() {
+        // load_private:
+        assign_region(
+            assign_advice
+        )
+        // like fn mul / fn add() / fn cub()
+        copy_advice() .. 
+    }
+
+impl <F: Field> Circuit<F> for MyCircuit<F> {
+    let chip = SimpleChip::construct(config);
+    let out = chip.assign(layouter.namespace(|| "simple ship"), self.a, self.b, self.c)?;
+    chip.expose_public(layouter, out, 0)
+}
+```
+
+Chips 可以进行组合，底层的 Chip 尽量使用不同的列 (当然也允许 Chip 共享使用相同的列)。在进行电路设计时应尝试优化所需的 Advice 列，因为这会影响 Proof 大小。
+
+我们将本节中的约束抽象为 `SimpleChip`，将原来独立的 assign witness 的几个函数 (`load_private`、`load_constant`、`add`、`mul`和`cub`) 合并到 Simple Chip 的 `assign` 方法中。此外，采用如下电路布局压缩所需的行数（在电路中我们只划分了了两个大的 region，这样就减小了复制 `ab`、`absq`、`c` 和 `c` 这四个约束） :
 
 | ins   | a0    | a1    | s_mul | s_add | s_cub |
 | ------|-------|-------|-------|-------|-------|
@@ -210,7 +255,7 @@ Chips 可以进行组合，底层的 Chip 尽量使用不同的列(当然也允�
 |       |  d    |   c   |   0   |   1   |   0   |
 |       |  e    |   out |   0   |   0   |   1   |
 
-完整代码见 [Halo2 tutorials: chap_2/simple_chip](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_2/exercise_2.rs)
+完整代码见 [Halo2 tutorials: chap_2/simple_chip](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_2)
 
 ### test & 输出电路布局图
 
@@ -218,7 +263,7 @@ Chips 可以进行组合，底层的 Chip 尽量使用不同的列(当然也允�
 cargo test test_simple_ship
 cargo test plot_chip_circuit --features dev-graph
 ```
-采用Chip的电路布局图为:
+采用 Chip 的电路布局图为:
 ![images](../imgs/simple_ship.png)
 
 
