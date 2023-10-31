@@ -1,6 +1,6 @@
 # Summary
 
-[About z2o-k7e](./README.md)
+[About z2o-k7e /zu:ˈki:/ ](./README.md)
 
 [How-to-contribute](./how-to-contribute.md)
 
