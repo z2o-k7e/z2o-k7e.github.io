@@ -1,6 +1,6 @@
 # Summary
 
-[About z2o-k7e /zu:ˈki:/ ](./README.md)
+[About z2o-k7e  /zu:ˈki:/](./README.md)
 
 [How-to-contribute](./how-to-contribute.md)
 
@@ -8,7 +8,7 @@
 
 ----
 
-- [ZKP 新手村入门攻略](./beginner.md)
+[ZKP 新手村入门攻略](./beginner.md)
 
 ---
 
@@ -30,7 +30,7 @@
   - [3-置换证明](./plonk-intro-cn/plonk-permutation.md)
   - [4-算术约束与拷贝约束](./plonk-intro-cn/plonk-constraints.md)
   - [5-多项式承诺](./plonk-intro-cn/plonk-polycom.md)
-  - [6-实现  Zero Knowledge](./plonk-intro-cn/plonk-randomizing.md)
+  - [6-实现 Zero Knowledge](./plonk-intro-cn/plonk-randomizing.md)
   - [7-Lookup Gate](./plonk-intro-cn/plonk-lookup.md)
 
 
@@ -52,6 +52,7 @@
   - [2-simple-circuit](./halo2/chap-1/readme.md)
   - [3-custom-gate](./halo2/chap-2/readme.md)
   - [4-fibonacci](./halo2/chap-3/readme.md)
+  - [5-range-check](./halo2/chap-4/readme.md)
   - [halo2-QA](./halo2/halo2-QA.md)
   - [halo2-learning-materials](./halo2/tmp/halo2-learning-materials.md)
   - [learning-halo2 (0xPARC)](./halo2/tmp/halo2-learning-materials.md)
@@ -59,7 +60,7 @@
       - [2-Fibonacci-example-1](./halo2/tmp/2-Fibonacci-example-1.md)
       - [3-Fibonacci-example-2](./halo2/tmp/3-Fibonacci-example-2.md)
       - [4-IsZero Check-example-3](./halo2/tmp/4-IsZero-Check-example-3.md)
-      - [5-Range check-example-1.md](./tmp/halo2/5-Range-check.md)
+      - [5-Range check-example-1.md](./halo2/tmp/5-Range-check.md)
       - [6-Range Check (code explanation)](./halo2/tmp/6-Range-Check(code-explanation).md)
       - [7-Range Check-Lookup-example-2)](./halo2/tmp/7-Range-Check-lookup(example-2).md)
       - [8-Range Check-Lookup-example-3)](./halo2/tmp/8-Range-Check(example-3).md)
@@ -67,8 +68,6 @@
       - [ZKP Apps with halo2](./halo2/tmp/ZKP-APP.md)
           - [Zordle](./halo2/tmp/Zordle.md)
           - [Hammster](./halo2/tmp/Hammster.md)
-
-
 
 ---
 
