@@ -147,10 +147,10 @@ s.t: a[i] ≤ 2^bit[i] -1，  ∀ i ∈ [0, N-1]
 
 例如，对于一个 1 位的值，我们只需查找两种可能的值（0 或 1）；对于一个 2 位的值，我们可以查找四种可能的值（00、01、10 或 11）...
 
-举个具体的例子：比如我们想证明某 value 确实只有 5 位 (即 value <= 31 = 2^5 - 1) 
-- 注意: value = 31/32, bits = 5 都是 private value.
+举个具体的例子：比如某 Prover 想证明其 value 确实只有 5 位 (即 value <=  2^5 - 1 = 31 ) ，
+- (value = 31/32, bit = 5 ) 是 private value.
 - 对于 value = 31，其二进制表达为 `11111`，确实只有 5 位，满足约束
-- 对于 value = 32，其二进制表达为 `100000`，其位数到达了 6 位，但是 Prover 填入电路的 bits 是 5 ，它想作弊是不可能的，因为不满足 lookup table 在该处的约束。
+- 对于 value = 32，其二进制表达为 `100000`，其位数到达了 6 位，但是 Prover 填入电路的 bits 是 5 ，(这里你可以认为这是一个 malicious Prover)，它想作弊，但这是不可能的！ Prover 传入的这 2 个 private inputs 不满足 lookup table 在该处的约束。
 
 
 我们可以设计两列`TableColumn`, 其中一列 lookup table 为整数值 `table_value`，另一列为其对应的 bit 位数 `table_n_bits`； 
@@ -171,6 +171,7 @@ s.t: a[i] ≤ 2^bit[i] -1，  ∀ i ∈ [0, N-1]
 [完整代码见: halo2-tutorials/chap_4/circuit_3](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_4/circuit_3.rs)
 
 ### 电路配置
+
 这里我们重点关注 `lookup` 约束相关代码:
 
 ```rust
@@ -219,7 +220,7 @@ error: lookup input does not exist in table
   (L0, L1) ∉ (F0, F1)
 
   Lookup inputs: 每一个 lookup 会出现这一行,整个 lookup 分为两组: L0 和 L1
-    L0 = x1 * x0 :，这是第一组 (witness: A0列, table: F2列), 电路中为`(b, table.n_bits)`
+    L0 = x1 * x0 :，这是第一组 (witness: A0 列, table: F2 列), 电路中为`(b, table.n_bits)`
     ^
     | Cell layout in region 'a b':
     |   | Offset | A0 | F2 |
@@ -230,7 +231,7 @@ error: lookup input does not exist in table
     |   x0 = 1
     |   x1 = 1
 
-    L1 = x1 * x0 : 这是第二组 (witness: A0列, table: F2列), 电路中为`(v, table.value)`
+    L1 = x1 * x0 : 这是第二组 (witness: A0 列, table: F2 列), 电路中为 `(v, table.value)`
     ^
     | Cell layout in region 'a b':
     |   | Offset | A1 | F2 |
@@ -242,6 +243,7 @@ error: lookup input does not exist in table
     |   x0 = 0x3
     |   x1 = 1
 ```
+
 理解上述报错，可以让我们更快地调试。报错结构如何理解在上图中均已表明，且 cell 的相对值也体现的很清楚(注意 `L1` 中的 `x0` 相对 `L0` 中的 `x0` 向下偏移了 1 , 这与电路一致)。
 
 ## 动态查找表 `PSE Halo2's lookup_any API`
