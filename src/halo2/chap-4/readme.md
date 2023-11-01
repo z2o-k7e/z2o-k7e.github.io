@@ -5,22 +5,33 @@
 [TOC]
 
 # lookup
-前面的章节中我们介绍了 Halo2 的 API 和电路布局等核心概念，这节则介绍 Plonk 证明系统中基于 permutation argment 抽象出的一个强大功能 lookup 。Halo2 中使用的 lookup 对 [plookup](https://eprint.iacr.org/2020/315.pdf) 进行了简化，可以约束**一列或多列**的 cells 的值属于对应的 lookup 列。如下图，我们可以通过 lookup 约束 $w_0,w_1$ 两列中的第 1、3 行属于查找表( $t_0,t_1$列)中的某一行;对于不需要查找的则约束其属于查找表的某个默认行。
+前面的章节中我们介绍了 Halo2 的 API 和电路布局等核心概念，这节则介绍 Plonk 证明系统中基于 permutation argment 抽象出的一个强大功能 lookup 。Halo2 中使用的 lookup 对 [plookup](https://eprint.iacr.org/2020/315.pdf) 进行了简化，可以约束**一列或多列**的 cells 的值属于对应的 lookup 列。如下图，我们可以通过 lookup 约束 $w_0,w_1$ 两列中的第 1、3 行属于查找表( $t_0, t_1$ 列)中的某一行; 对于不需要查找的则约束其属于查找表的某个默认行。
 ![images](../imgs/lookup.png)
-关于Zcash版本的lookup,有两个问题需要注意:
-1. 多列 lookup 不同列的相同行必须**同时存在**于查找表中，Halo2 底层通过一个随机数讲各列对应行的 row 组合起来使其回归到单列 lookup;
-2. 多列 lookup 时，需约束的多列 witness 不一定在同一行，但是查找表中对应的所有列时在同一行。比如上述例子也可以进行如下的lookup:
+关于 Zcash 版本的 lookup，有两个问题需要注意:
+1. 多列 lookup 不同列的相同行必须**同时存在**于查找表中，Halo2 底层通过一个随机数将各列对应行的 row 组合起来使其回归到单列 lookup;
+2. 多列 lookup 时，需约束的多列 witness 不一定在同一行，但是查找表中对应的所有列是在同一行。比如上述例子也可以进行如下的 lookup:
 ![images](../imgs/lookup2.png)
-同时可参考不在对不在同一行的两列进行 lookup的[示例代码: halo2-tutorials/chap_4/circuit_1](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_4/circuit_1.rs)。
+同时可参考对不在同一行的两列进行 lookup 的[示例代码: halo2-tutorials/chap_4/circuit_1](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_4/circuit_1.rs)。
 
 ## 单列 lookup
+
 首先从最简单的单例 lookup 介绍如何使用 lookup API。我们的目的是证明: 
-```
+
+```bash
 private inputs: a[N]
 constant: RANGE
 s.t: a[i] ∈ [0, RANGE], ∀ i ∈ [0, N-1]
 ```
-若直接采用 gate 约束的话，我们需要设计形如 $(a[i] - 0) * (a[i]-1) * (a[i]-2)...(a[i]-RANGE) = 0, ∀ i ∈ [0, N-1] $的电路，当 RANGE 很大时(比如2^16) 电路的 degree 会很高, 这会导致整个 proof 很大。因此，我们可以采用 lookup 方式实现(回忆 permutation argument 只会将 degree 增加1)，将 $[0,RANGE]$ 这些值填入 `TableColumn` 中(Zcash版本Halo2只支持静态查找表, 因此只能填入`TableColumn`)，并借助 `lookup` API来证明 所有的`a[i]` 属于该 `TableColumn` 的某一行。整个电路结构如下:
+
+若直接采用 gate 约束的话，我们需要设计形如
+
+$$(a[i] - 0) * (a[i]-1) * (a[i]-2)...(a[i]-RANGE) = 0, ∀ i ∈ [0, N-1] $$
+
+这样一个连乘表达式约束的电路，这种方式固然直观，但问题在于：当 RANGE 很大时 (比如 $2^16$ )，电路的 degree 会很高, 这会导致整个 proof 很大。
+
+因此，我们可以采用 lookup 方式实现(回忆 permutation argument 只会将 degree 增加 1)，将 $[0, RANGE]$ 这些值填入 `TableColumn` 中 ( Zcash版本 Halo2 只支持静态查找表, 因此只能填入 `TableColumn`)，并借助 `lookup` API 来证明 所有的 `a[i]` 属于该 `TableColumn` 的某一行。 
+
+整个电路结构如下:
 
 | adv   | q_lookup|  table  |
 |-------|---------|---------|
@@ -33,11 +44,14 @@ s.t: a[i] ∈ [0, RANGE], ∀ i ∈ [0, N-1]
 |       |    0    |  RANGE  |
 
 [完整代码见: halo2-tutorials/chap_4/circuit_2](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_4/circuit_2.rs)
+
 ### 电路配置及 lookup 约束
+
 如上表电路需要 1 列 Advice , 一列 TableColumn, 一列 Selector, 该电路配置定义为 `RangeConfig`，将其中的查找表单独定义为 `LookUpTable`。
+
 `RangeConfig` 相应代码为:
 
-```
+```rust
 #[derive(Debug, Clone)]
 struct RangeConfig<F:PrimeField, const RANGE: usize, const NUM: usize>{
     value: Column<Advice>,
@@ -79,10 +93,11 @@ impl <F:PrimeField, const RANGE: usize, const NUM: usize> RangeConfig<F, RANGE, 
 
 ```
 
-lookup 必须使用 `complex_selector`，因为 Halo2 可以根据这个标记知道这种Selecotr 列不需要优化，而普通的 Selector 则可能会被 Layouter 进行合并等优化操作。
+lookup 必须使用 `complex_selector`，因为 Halo2 可以根据这个标记知道这种 Selecotr 列不需要优化，而普通的 Selector 则可能会被 Layouter 进行合并等优化操作。
 
-对于 `LookUpTable`, 使用 `assign_table` 来填充 witness。
-```
+对于 `LookUpTable`, 使用 `assign_table` 来填充 witness :
+
+```rust
 #[derive(Debug, Clone)]
 pub(crate) struct LookUpTable<F:PrimeField, const RANGE: usize> {
     pub(crate) table: TableColumn,
@@ -111,12 +126,15 @@ impl <F:PrimeField, const RANGE: usize> LookUpTable<F, RANGE> {
 电路具体的 Trait 方法实现就比较简单了，在此不再赘述。
 
 ## 多列 lookup
-还可以对多列 witness 与对应的多列查找表进行 `lookup` 约束。本小节考虑如下例子, 证明某个值只有 `n` 比特位:
-```
-private inputs: v[N], bit[N]
-s.t: a[i] ≤ 2^bit[i] -1，  ∀ i ∈ [0, N-1]
 
+还可以对多列 witness 与对应的多列查找表进行 `lookup` 约束。本小节考虑如下例子: 证明某个值只有 `N` 比特位:
+
+```bash
+private inputs:  a[N], bit[N]
+s.t: a[i] ≤ 2^bit[i] -1，  ∀ i ∈ [0, N-1]
 ```
+
+对于所有 i（从 0 到 N-1），`a[i]` 的值必须 <= $2^{bit[i]} -1$ 。 此约束保证了 `a[i]` 中的每个值都只有 `bit[i]` 位。举个例子，如果 `bit[i] = 3`，则 2^bit[i] - 1 的值为 7，这意味着 a[i] 可以是 0, 1, 2, 3, 4, 5, 6 或 7（也就是只有 3 位的任何数）
 
 我们可以设计两列 `TableColumn`, 其中一列为整数值`table_value`，另一列为其对应的bit 位数`table_n_bits`； 并约束 witness 中值那一列 `value` 和比特位那一列 `bit` 属于前述的两列 `TableColumn`。
 
