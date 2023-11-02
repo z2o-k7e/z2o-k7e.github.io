@@ -211,6 +211,87 @@ impl <F:PrimeField, const NUM_BITS: usize, const RANGE: usize> RangeCheckConfig<
 
 这里我们对于不需要 `lookup` 的行为其指定默认值保证所有行均满足 `lookup` 约束， `vec![(b, table.n_bits), (v, table.value)]` 则范围两组对应的`(cell expression, lookup table)`。
 
+## 多列错行 lookup table
+
+如下图所示，假若想约束的的 2 列 witness 不在同一行，而是错行的：
+
+![images](../imgs/lookup_3.png)
+
+对于这种情况 halo2 也可以灵活地处理：
+
+```rust
+impl<F: PrimeField> LookupChip<F> {
+    fn construct(config: LookupConfig) -> Self {
+        LookupChip {
+            config,
+            _marker: PhantomData,
+        }
+    }
+
+    fn configure(meta: &mut ConstraintSystem<F>) -> LookupConfig {
+        let a = meta.advice_column();
+        let b = meta.advice_column();
+        let s = meta.complex_selector();
+        let t1 = meta.lookup_table_column();
+        let t2 = meta.lookup_table_column();
+
+        meta.enable_equality(a);
+        meta.enable_equality(b);
+
+        meta.lookup(|meta| {
+            let cur_a = meta.query_advice(a, Rotation::cur());
+            let next_b = meta.query_advice(b, Rotation::next());
+            let s = meta.query_selector(s);
+            // we'll assgin (0, 0) in t1, t2 table
+            // so the default condition for other rows without need to lookup will also satisfy this constriant
+            vec![(s.clone() * cur_a, t1), (s * next_b, t2)]
+        });
+
+        LookupConfig { a, b, s, t1, t2 }
+    }
+
+    fn assign(
+        &self,
+        mut layouter: impl Layouter<F>,
+        a_arr: &Vec<Value<F>>,
+        b_arr: &Vec<Value<F>>,
+    ) -> Result<(), Error> {
+        layouter.assign_region(
+            || "a,b",
+            |mut region| {
+                for i in 0..a_arr.len() {
+                    self.config.s.enable(&mut region, i)?;
+                    region.assign_advice(|| "a col", self.config.a, i, || a_arr[i])?;
+                }
+
+                for i in 0..b_arr.len() {
+                    region.assign_advice(|| "b col", self.config.b, i, || b_arr[i])?;
+                }
+
+                Ok(())
+            },
+        )?;
+```
+在上面的代码中，
+1. 利用 `[(s.clone() * cur_a, t1), (s * next_b, t2)]` 这 2 个需要同时成立的约束，我们同时约束了 `a` 的当前行和 `b` 的下一行需要存在于多列查找表中。
+2. 在 assign 函数中，我们只对 advice column `a` 进行了约束，而没有对 advice column `b` 应用 selector，目的是只对 a 有值的这些行进行约束。如此就给 b 列提供了更多的灵活性。
+
+```rust
+    #[test]
+    fn test_lookup_on_different_rows() {
+        let k = 5;
+        let a = [0, 1, 2, 3, 4];
+        let b = [0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let a = a.map(|v| Value::known(Fp::from(v))).to_vec();
+        let b = b.map(|v| Value::known(Fp::from(v))).to_vec();
+        let circuit = MyCircuit { a, b };
+        let prover = MockProver::run(k, &circuit, vec![]).unwrap();
+        prover.assert_satisfied();
+    }
+```
+- 如上代码，只对 a 列有值的情况进行了约束，b 列的取值变得灵活。
+
+
 ### lookup Debug 相关
 
 在 lookup 电路设计时，以典型的 `halo2-tutorials/chap_4/circuit_1` 为例，可能会遇到如下报错:
