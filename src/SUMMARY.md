@@ -47,7 +47,7 @@
 
 ---
 
-- [Halo2](./halo2/halo2.md)
+- [Halo2 Tutorial](./halo2/halo2.md)
   - [1-basic concepts](./halo2/chap-0/readme.md)
   - [2-simple-circuit](./halo2/chap-1/readme.md)
   - [3-custom-gate](./halo2/chap-2/readme.md)
