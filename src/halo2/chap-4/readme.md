@@ -329,9 +329,82 @@ error: lookup input does not exist in table
 
 ## 动态查找表 `PSE Halo2's lookup_any API`
 
+### 
+
 注意到使用 Zcash 版本 Halo2 进行 `lookup` 约束时，由于没法对 TableColumn 进行 `query_advice`这导致除了 `lookup` 约束外，无法灵活地对 `TableColumn` 中的 cell 进行 gate 约束，即`TableColumn`必须在电路初始化阶段写死，无法再更改了，即只能进行静态查找。
 
-因此，Zcash 团队的核心开发者为 `PSE Halo2` 版本开发了 `lookup_any` API, 使其也支持对任意类型的列，如`Advice`、`FixedColumn` 等进行 `lookup`, 即实现了动态查找表。鉴于 `lookup_any` 使用方式与 `lookup` 没有太大的区别，就不在此举例，感兴趣的可以查看 PSE Halo2 中关于 `lookup_any` 的[一些例子](https://github.com/privacy-scaling-explorations/halo2/blob/0c3e3b569519b86653a64f412bbce17e4e8acac4/halo2_proofs/src/dev.rs#L1800) 或者 [`brainfuck zkvm`的例子](https://github.com/dajuguan/zkvm_brainfuck/blob/257014e29a81ba3a3e03800893cae8f00082f84d/bf_zk/src/main_config.rs#L46)。
+因此，Zcash 团队的核心开发者为 [PSE Halo2](https://github.com/privacy-scaling-explorations/halo2/blob/0c3e3b569519b86653a64f412bbce17e4e8acac4/halo2_proofs/src/plonk/circuit.rs#L1761) 版本开发了 `lookup_any` API, 使其也支持对任意类型的列，如`Advice`、`FixedColumn` 等进行 `lookup`, 即实现了动态查找表。`lookup_any` 使用方式与 `lookup` 没有太大的区别，来看其具体的[一些例子](https://github.com/privacy-scaling-explorations/halo2/blob/0c3e3b569519b86653a64f412bbce17e4e8acac4/halo2_proofs/src/dev.rs#L1800)
+
+下面的代码中，定义了 2 个 lookup table： `instance_table` & `advice_table` :
+```rust
+	#[test]
+	fn bad_lookup_any() {
+	
+		impl Circuit<Fp> for FaultyCircuit {
+			fn configure(meta: &mut ConstraintSystem<Fp>) -> Self::Config {
+				let instance_table = meta.instance_column(); // lookup as Instance Columns
+				let advice_table = meta.advice_column();
+				let a = cells.query_advice(a, Rotation::cur());
+				
+                meta.annotate_lookup_any_column(instance_table, || "Inst-Table");
+                meta.enable_equality(instance_table);
+                meta.annotate_lookup_any_column(advice_table, || "Adv-Table");
+                meta.enable_equality(advice_table);
+
+                meta.lookup_any("lookup", |cells| {
+                    let advice_table = cells.query_advice(advice_table, Rotation::cur());
+                    let instance_table = cells.query_instance(instance_table, Rotation::cur());
+				// ..
+                    vec![
+                        (
+                            q.clone() * a.clone() + not_q.clone() * default.clone(),
+                            instance_table,
+                        ),
+                        (q * a + not_q * default, advice_table),
+                    ]});
+		}
+		// ...
+	let custom_lookup_table = vec![vec![
+			Fp::from(1u64),
+			Fp::from(2u64),
+			Fp::from(4u64),
+			Fp::from(6u64),
+		]];
+	let prover = MockProver::run(
+			K,
+			&FaultyCircuit {},
+			// This is our "lookup table".
+			custom_lookup_table,
+		)
+		.unwrap();
+		assert_eq!(
+			prover.verify(),
+			Err(vec![VerifyFailure::Lookup {
+				name: "lookup".to_string(),
+				lookup_index: 0,
+				location: FailureLocation::InRegion {
+					region: (1, "Faulty synthesis").into(),
+					offset: 1,
+				}
+			}])
+		);
+	}
+```
+
+如上代码的动态查找表中：
+- 2 个 lookup table 在 Circuit `configure` 阶段被分别定义为了 instance column 和 advice columns，而后在 "lookup" 门约束中（`lookup_any()`），advice col `a` 须满足 2 个约束：
+	- `a` 需能在 lookup table `instance_table` 中被查找到，且同时也
+	- 能在 lookup table `advice_table` 中被查找到
+- 在 `synthesize()` 阶段，`advice_table` 这个 lookup table 由 instance col 生成（可以理解为复制了一份 `instance_table` 到 `advice_table` ）
+	- 在 "Good synthesis" 中，advice 的赋值都能在 2 个 lookup tables 中被查找到，满足约束；
+	- 而在 "Faulty synthesis" 中，`Fp::from(5)` 这个 advice 赋值不能在 lookup tables 中被查找到，所以不满足约束。
+- Prover 在 prove 阶段，可以将 **Public Input(PI) 或 advice column(witness)** 作为 lookup table， 这种方式提供给了 halo2 电路更大的灵活度。
+
+
+
+
+
+除此之外，还可以参考[`brainfuck zkvm`的例子](https://github.com/dajuguan/zkvm_brainfuck/blob/257014e29a81ba3a3e03800893cae8f00082f84d/bf_zk/src/main_config.rs#L46)。
 
 
 
