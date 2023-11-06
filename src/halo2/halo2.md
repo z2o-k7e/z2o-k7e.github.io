@@ -1,6 +1,6 @@
 -----
 
-### **第一周:**
+### **第一周 (10.15~10.21):**
 
 1. 课程学习资料: 
    1. [理解 PLONK 系列](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-intro.html)
@@ -11,7 +11,7 @@
 
 
 
-### **第二周:**
+### **第二周 (10.22~10.28):**
 
 1. 课程学习资料:
 	- [2-simple circuit](https://learn.z2o-k7e.world/halo2/chap-1/index.html)
@@ -24,13 +24,28 @@
 	- 理解 halo2 中 Circuit、region、Layouter、custom gate、constraints 等概念及其 API 代码 represent.
 	- 能够理解 Fibonacci 示例和 isZero 示例的电路构建流程
 
-### **第三周**
+### **第三周 (10.29~11.04)**
 
-- [editing...]
+1. 课程学习资料: 
+	- [lookup table](https://learn.z2o-k7e.world/halo2/chap-4/index.html)
+
+2. 课程学习目标:
+	- 掌握 halo2 中 lookup / lookup_any API 的使用，及其常见应用场景（如 Range-check）
+
+### **第四周 (11.06~11.12)**
+
+1. 课程学习资料:
+	- [0xPARC decompose](https://learn.0xparc.org/materials/halo2/learning-group-1/exercise-3)
+        - 代码 repo: <https://github.com/zkp-co-learning/halo2-step-by-step>
+        - 推荐参考笔记： <https://learn.z2o-k7e.world/halo2/tmp/9-decomposed.html>
+2. 课程学习目标:
+	- decompose 是一个综合性的代码实践，要求我们在阅读源码的同时掌握 halo2 的核心 API。
+
 
 
 
 ----
+
 **前置学习 (PLONK & Rust)：**
 
  - [x] [PLONK Tutorials](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-arithmetization.html) &  [Lookup Gates @secbit](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-lookup.html)
