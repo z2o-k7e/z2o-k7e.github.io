@@ -15,7 +15,7 @@
 2. 多列 lookup 时，需约束的多列 witness 不一定在同一行（如下图中的 $W_0$ 在第一行，$W_1$ 在第二行，这 2 个 witness 不同行），但是查找表中对应的所有列是在同一行（在 lookup table 中 2 个 witness 对应的 42, SHA(42) 是需要再同一行的）。比如上述例子也可以进行如下的 lookup:
 ![images](../imgs/lookup2.png)
 
-同时可参考对不在同一行的两列进行 lookup 的[示例代码: halo2-tutorials/chap_4/circuit_1](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_4/circuit_1.rs)。
+同时可参考对不在同一行的两列进行 lookup 的[示例代码: halo2-tutorials/chap_4/circuit_1](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_4/circuit_3.rs)。
 
 ## 单列 lookup
 
@@ -50,7 +50,7 @@ $$(a[i] - 0) * (a[i]-1) * (a[i]-2)...(a[i]-RANGE) = 0, \ \   \forall i \in [0, N
 |       |   ...   |   ...   |
 |       |    0    |  RANGE  |
 
-[完整代码见: halo2-tutorials/chap_4/circuit_2](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_4/circuit_2.rs)
+[完整代码见: halo2-tutorials/chap_4/circuit_2](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_4/circuit_1.rs)
 
 ### 电路配置及 lookup 约束
 
@@ -168,7 +168,7 @@ s.t: a[i] ≤ 2^bit[i] -1，  ∀ i ∈ [0, N-1]
 |   ...     |     ...     |     ...     |        3         |       4     |
 
 
-[完整代码见: halo2-tutorials/chap_4/circuit_3](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_4/circuit_3.rs)
+[完整代码见: halo2-tutorials/chap_4/circuit_3](https://github.com/zkp-co-learning/halo2-step-by-step/blob/main/halo2-tutorials/src/chap_4/circuit_2.rs)
 
 ### 电路配置
 
@@ -329,7 +329,6 @@ error: lookup input does not exist in table
 
 ## 动态查找表 `PSE Halo2's lookup_any API`
 
-### 
 
 注意到使用 Zcash 版本 Halo2 进行 `lookup` 约束时，由于没法对 TableColumn 进行 `query_advice`这导致除了 `lookup` 约束外，无法灵活地对 `TableColumn` 中的 cell 进行 gate 约束，即`TableColumn`必须在电路初始化阶段写死，无法再更改了，即只能进行静态查找。
 
