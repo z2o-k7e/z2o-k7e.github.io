@@ -1,4 +1,4 @@
-> - 作者:  [@Po@Ethstorage.io](https://github.com/dajuguan) / [@Demian](https://github.com/demian101)
+> - 作者:  [@Po@Ethstorage.io](https://github.com/dajuguan) / [@Demian](https://github.com/demian101) / [Keep](https://github.com/readygo67)
 > - 时间: 2023-10-18
 > - 校对:  [@Po@Ethstorage.io](https://github.com/dajuguan) / [@Demian](https://github.com/demian101)
 
@@ -8,7 +8,7 @@
 
 在前面的 prerequisite 课程中，我们学习了 PLONK 协议及其 lookup table 优化，在本节我们将会以 [halo2](https://github.com/zcash/halo2) 这个 Rust library 为基础，详细讲解 Halo2 的相关基本概念。
 
-## halo2 电路结构
+## Halo2 电路结构
 
 我们知道，在 [Vanilla PLONK 协议](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-intro.html) 中，门约束系统相对固定和局限，表现力并不强：
 
@@ -34,6 +34,23 @@ $$f(x)=Q_L(x) \cdot a(x)+Q_R(x)\cdot b(x)+Q_O(x)\cdot c(x)+Q_M(x)\cdot a(x) b(x)
 下面，我们会分别详细讲解各部分组件的用途及使用方法 [^2]
 
 <img src="imgs/APIs_image_1.png" style="zoom:27%;" />
+
+## Halo2 编程模型
+
+Halo2 的编程模式采用 “ 配置-> (计算+存储 +生成证明) -> 验证 ”三个阶段。
+
+**配置(configure)** 阶段定义约束关系。具体而言就是在 `meta.create_gate` 中从 `table` 中 `query cell`，并将 `query` 的结果 (即 expression，可以简单的理解为从某个 cell 中获取值的方式，在 configure 阶段并不知道具体的值，在第二阶段阶段才会被赋值) 形成约束。
+
+> 为了便于理解，不妨把 `query` 过程理解为 PCB 电路板上的探针，在 PCB 电路上探针取到的值输入到示波器或者逻辑分析仪，而 halo2 电路中的值会被用于生成证明和验证约束。
+> 需要指出，在 configure 阶段，电路并没有通电，也就是说，虽然电路板的逻辑约束已经形成，但是具体的值(信号、电流) 尚未被加载到电路中。
+
+**计算+存储（synthesize）**
+- 在电路的 `synthesize` 函数中，按照操作指令计算，并将计算结果填入适当的 Cell，相当于在 table上留下计算的 `trace`
+
+**证明生成** ： 
+- 在 Prove 阶段，所有用到的 cell 被赋值且形成计算 trace  后，halo2 会具体计算每一列的多项式承诺。
+
+**验证** ： 在 Verify 阶段，检查所有的约束是否满足。
 
 ### Columns
 
