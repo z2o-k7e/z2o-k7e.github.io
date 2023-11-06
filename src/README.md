@@ -1,5 +1,5 @@
-> [github](https://github.com/zkp-co-learning) of $\mathcal{Z}_2 \mathbb{O} \ {\text -} \ \mathcal{K}_7 \mathbb{E}$
-
+> - [github](https://github.com/zkp-co-learning) of $\mathcal{Z}_2 \mathbb{O} \ {\text -} \ \mathcal{K}_7 \mathbb{E}$
+> - contact with us: z2ok7e@gmail.com
 
 ### <span style="color: grey;">**Welcome to the**</span>
 
