@@ -35,9 +35,9 @@
 ### **第四周 (11.06~11.12)**
 
 1. 课程学习资料:
-	- [0xPARC decompose](https://learn.0xparc.org/materials/halo2/learning-group-1/exercise-3)
-        - 代码 repo: <https://github.com/zkp-co-learning/halo2-step-by-step>
-        - 推荐参考笔记： <https://learn.z2o-k7e.world/halo2/tmp/9-decomposed.html>
+    - [0xPARC decompose](https://learn.0xparc.org/materials/halo2/learning-group-1/exercise-3)
+    - 代码 repo: <https://github.com/zkp-co-learning/halo2-step-by-step>
+    - 推荐参考笔记： <https://learn.z2o-k7e.world/halo2/tmp/9-decomposed.html>
 2. 课程学习目标:
 	- decompose 是一个综合性的代码实践，要求我们在阅读源码的同时掌握 halo2 的核心 API。
 
