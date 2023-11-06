@@ -1,4 +1,4 @@
-> - 作者:  [@Po@Ethstorage.io](https://github.com/dajuguan) / [@Demian](https://github.com/demian101) / [Keep](https://github.com/readygo67)
+> - 作者:  [@Po@Ethstorage.io](https://github.com/dajuguan) / [@Demian](https://github.com/demian101) / [@Keep](https://github.com/readygo67)
 > - 时间: 2023-10-18
 > - 校对:  [@Po@Ethstorage.io](https://github.com/dajuguan) / [@Demian](https://github.com/demian101)
 
@@ -34,23 +34,6 @@ $$f(x)=Q_L(x) \cdot a(x)+Q_R(x)\cdot b(x)+Q_O(x)\cdot c(x)+Q_M(x)\cdot a(x) b(x)
 下面，我们会分别详细讲解各部分组件的用途及使用方法 [^2]
 
 <img src="imgs/APIs_image_1.png" style="zoom:27%;" />
-
-## Halo2 编程模型
-
-Halo2 的编程模式采用 “ 配置-> (计算+存储 +生成证明) -> 验证 ”三个阶段。
-
-**配置(configure)** 阶段定义约束关系。具体而言就是在 `meta.create_gate` 中从 `table` 中 `query cell`，并将 `query` 的结果 (即 expression，可以简单的理解为从某个 cell 中获取值的方式，在 configure 阶段并不知道具体的值，在第二阶段阶段才会被赋值) 形成约束。
-
-> 为了便于理解，不妨把 `query` 过程理解为 PCB 电路板上的探针，在 PCB 电路上探针取到的值输入到示波器或者逻辑分析仪，而 halo2 电路中的值会被用于生成证明和验证约束。
-> 需要指出，在 configure 阶段，电路并没有通电，也就是说，虽然电路板的逻辑约束已经形成，但是具体的值(信号、电流) 尚未被加载到电路中。
-
-**计算+存储（synthesize）**
-- 在电路的 `synthesize` 函数中，按照操作指令计算，并将计算结果填入适当的 Cell，相当于在 table上留下计算的 `trace`
-
-**证明生成** ： 
-- 在 Prove 阶段，所有用到的 cell 被赋值且形成计算 trace  后，halo2 会具体计算每一列的多项式承诺。
-
-**验证** ： 在 Verify 阶段，检查所有的约束是否满足。
 
 ### Columns
 
@@ -218,6 +201,7 @@ A: you can think of region `1` is some **private input** you want to initialize,
 -->
 
 
+
 ### Diagrams
 
 在 Halo2 中可以通过输出 diagrams 上述电路布局图，以非常直观地看到电路中所有 columns 的状态和电路整体布局，可以帮我们优化电路、查找 bug 等。
@@ -308,6 +292,24 @@ What does columns do ?
  - so, more columns, more commitments ;  more commitments, larger proof.
 
 -->
+
+
+## Halo2 编程模型
+
+Halo2 的编程模式采用 “ 配置-> (计算+存储 +生成证明) -> 验证 ”三个阶段。
+
+**配置(configure)** 阶段定义约束关系。具体而言就是在 `meta.create_gate` 中从 `table` 中 `query cell`，并将 `query` 的结果 (即 expression，可以简单的理解为从某个 cell 中获取值的方式，在 configure 阶段并不知道具体的值，在第二阶段阶段才会被赋值) 形成约束。
+
+> 为了便于理解，不妨把 `query` 过程理解为 PCB 电路板上的探针，在 PCB 电路上探针取到的值输入到示波器或者逻辑分析仪，而 halo2 电路中的值会被用于生成证明和验证约束。
+> 需要指出，在 configure 阶段，电路并没有通电，也就是说，虽然电路板的逻辑约束已经形成，但是具体的值(信号、电流) 尚未被加载到电路中。
+
+**计算+存储（synthesize）**
+- 在电路的 `synthesize` 函数中，按照操作指令计算，并将计算结果填入适当的 Cell，相当于在 table上留下计算的 `trace`
+
+**证明生成** ： 
+- 在 Prove 阶段，所有用到的 cell 被赋值且形成计算 trace  后，halo2 会具体计算每一列的多项式承诺。
+
+**验证** ： 在 Verify 阶段，检查所有的约束是否满足。
 
 
 
