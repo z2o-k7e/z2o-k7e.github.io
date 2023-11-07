@@ -1,8 +1,10 @@
 # Summary
 
-[About z2o-k7e  /zu:ˈki:/](./README.md)
+[🌟 About z2o-k7e  /zu:ˈki:/](./README.md)
 
-[How-to-contribute](./how-to-contribute.md)
+[🚩 Our Vision & Roadmap](./vision.md)
+
+[📖 How-to-contribute](./how-to-contribute.md)
 
 
 
