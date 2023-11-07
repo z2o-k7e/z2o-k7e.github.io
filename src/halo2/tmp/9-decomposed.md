@@ -1,9 +1,10 @@
-> author: [@Demian](https://github.com/Demian101)
-> 
-> references: https://learn.0xparc.org/materials/halo2/learning-group-1/exercise-3
+> - author: [@Demian](https://github.com/Demian101)
+> - references: https://learn.0xparc.org/materials/halo2/learning-group-1/exercise-3
 
 [TOC]
+
 ### background
+
 
 一个数学事实：对于一个 $n$ 位二进制数如 $110011$，让其对 $2^m$ 取模，余数正好是该数的最低 $m$ 位，如 $m =4$ ：
 $$
@@ -30,19 +31,21 @@ $$
 
 对于一个 10000+ 的数字，使用 lookup Table 就需要一个对应的 10000+ 行的表来约束，这样的线性同步增长显然也是低效的。考虑设计一种算法，将一个大数表示分解（Decompose）成很多个小二进制数的组合如 `(101)(110)(011)(001)...`，然后对其分解的每个小 Group 进行分组约束。
 
-假设 `value` = 165 （在二进制中为 `10100101`）是个 8 位二进制数，则 $N = 8$ 。 设 $K = 3$，也就是我们想将它分解为 3 位的块:
-152 
-$z_0 = value = 165$
-$c_0 = value \pmod{2^K} = 165 \ \ \% \ \ 2^3 = \textcolor{red}{5 = (101)_2}$
+举个例子，对于 `value` = 165 （在二进制中为 `10100101`），这个 8 位二进制数，则 $N = 8$ 。 设 $K = 3$，也就是我们想将它分解为 3 位的块:
 
-$z_1 = (z_0 - c_0) * 2^{-K} = (165-5) \times \frac{1}{8} = 20$
-$c_1 = value \pmod{2^3} = 20 \ \ \% \ \ 2^3 = \textcolor{red}{4 = (100)_2}$
-(更新  $value = value / 2^3 = 20/8 =2$ )
+- $z_0 = value = 165$
+- $c_0 = value \pmod{2^K} = 165 \ \ \% \ \ 2^3 = \textcolor{red}{5 = (101)_2}$
 
-$z_2 = (z_1 - c_1) * 2^{-K} = (20 - 4)  \times \frac{1}{8} = 2$
-$c_2 = value \pmod{2^3} = 2 \ \ \% \ \ 2^3 = \textcolor{red}{2 = (010)_2}$
-(更新  $value = value / 2^3 = 2/8 =0$ )
+- $z_1 = (z_0 - c_0) * 2^{-K} = (165-5) \times \frac{1}{8} = 20$
+- $c_1 = value \pmod{2^3} = 20 \ \ \% \ \ 2^3 = \textcolor{red}{4 = (100)_2}$
+- (更新  $value = value / 2^3 = 20/8 =2$ )
 
+- $z_2 = (z_1 - c_1) * 2^{-K} = (20 - 4)  \times \frac{1}{8} = 2$
+- $c_2 = value \pmod{2^3} = 2 \ \ \% \ \ 2^3 = \textcolor{red}{2 = (010)_2}$
+- (更新  $value = value / 2^3 = 2/8 =0$ )
+
+> - $\pmod 2^K$ 是一个取  K 个低位的操作
+> -   $* \ 2^K$  就是一个右移操作，上一步取完低位后，对于大数来说，我们需要将原来二进制数的高位落到低位，即让新的低位变成原来的高位，方便下一步再取低位。如此循环往复，不断取低位 -> 右移 -> 取低位 ... 直到把大数分解完毕。
 
 于是，我们可以得到： 
 
@@ -53,7 +56,9 @@ $$
 \end{align*}
 $$
 
-这个方法的核心思想是将一个较长的二进制数分解成多个较小的二进制块。这样做的好处是可以通过查找表(range_check)来验证这些小块是否都在正确的范围内，从而验证整个数字是否在预期的范围内。
+这个方法的核心思想是将一个较长的二进制数分解成多个较小的二进制块。这样做的好处是可以通过查找表(range_check) 来验证这些小块是否都在正确的范围内，从而验证整个数字是否在预期的范围内。
+
+> 看懂了这一部分后，就大概可以理解下面 Protocol 所表述的内容。
 
 几个关键步骤：
 1. **初始化 running sum** : 我们用该大二进制数字作为起始值。这个值随着每个步骤的进行会逐渐减小，直到它变为零。
@@ -62,32 +67,31 @@ $$
 4. **验证**: 使用 `range_check` 查找表验证每个块是否在  $[0, 2^K)$  范围内
 5. **终止条件**: 当 running sum 变为零时，整个数字已经完全分解。此时，我们已经验证了整个数字的每一个部分
 
-此方法的优势是它可以有效地验证一个数字是否在给定的范围内，而不需要对整个数字进行查找。它只需要验证分解出来的每个小块
+此方法的优势是它可以有效地验证一个数字是否在给定的范围内，而不需要对整个数字进行查找。它只需要验证分解出来的每个小块。
 
-K 的选择可能主要依赖于查找表的大小
-
-> 此方法提供了一个有效的方式来验证数字是否在给定的范围内，同时还可以利用查找表(range_check) 来大幅度减少计算量，而且
-
+> - $K$ 的选择可能主要依赖于想要构建的查找表的大小
+> - 此方法提供了一个有效的方式来验证大数是否在给定的范围内，即 decompose 后，利用查找表(range_check) 来大幅度减少计算量。
 
 #### 图解：
 
 如下是二进制数字 `593`，我们要将其分解为 `K=3` 位的块：
 
 ```bash
-1001010001
-1 001 010 001
+593 = 1001010001
+    = 1 001 010 001
 
- _____ 数字 173 ________
-|	 | 001 | 010 | 001 |  
+ _____ 数字 593 ________
+|  1 | 001 | 010 | 001 |  
 |____|_____|_____|_____|
 ```
 
-**逐块分解**:  从最右侧开始（小端）逐步处理每个块，并更新 running sum :
-1. 取第一个块(101)，更新 running sum：subtract (101) 并右移 K 位
-2. 取第二个块(1100)，更新running sum：subtract (1100) 并右移 K 位
+**逐块分解**:  从最右侧开始（Little endian, 小端）逐步处理每个块，并更新 running sum :
+1. 取第一个块(001)，更新 running sum：subtract (001) , 并右移 K (K=3) 位
+2. 取第二个块(010)，更新running sum：subtract (010) , 并右移 K 位
 3. ...
 
-如果所有的块都在预期的范围内，那么整个数字也在预期的范围内。
+如果用户所持有的大数 value 和该
+所有的块都在预期的范围内，那么整个数字也在预期的范围内。
 
 #### Protocol ： 
 
@@ -460,7 +464,7 @@ if partial_len > 0 { //  8 % 3 = 2
 cargo test -- --nocapture test_decompose_3
 
 # Draw
-cargo test --release --all-features print_decompose_3
+cargo test --features dev-graph -- --nocapture print_decompose_3
 ```
 
  - the white column is the instance column, 
@@ -469,6 +473,18 @@ cargo test --release --all-features print_decompose_3
  - the green part shows the cells that have been assigned
 	 - light green : selector not used.
 
+### Circuit Drawing
+
+https://www.youtube.com/watch?v=McJIL3_i_u4&t=554s  56’00 
+
+![](imgs/9-decomposed_image_1.png)
+in the advice column, we have two regions 
+regions are bound by solid black lines.
+
+- the first region here, there's like 8 cells(rows?) here. that's our witnessing our running sum
+- the Witness value here was copied into zero at the top of our decomposed value region.
+- dark purple: the selector area
+	- `q_decompose_selector` which we've enabled on every row except the last one in our region
 
 ### References : 
  - https://github.com/enricobottazzi/halo2-intro/blob/master/src/range_check/example5/table.rs
