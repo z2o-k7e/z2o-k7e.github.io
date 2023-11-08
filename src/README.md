@@ -68,7 +68,7 @@ The world of zkp is riddled with challenges - so many noises, steep entry barrie
 - **Kurt Pan**: Ph.D. in Cryptography from Fudan University, author of [cryptography.land](https://cryptography.land/) , <https://github.com/kurtpan666>
 - **Shirlene 孝羽**: director of [Creators colearning Community](https://github.com/orgs/CreatorsDAO)
 - **Demian**: [z2o-k7e](https://learn.z2o-k7e.world) colearning community operator, core contributor.
-- **Harry L**: co-Founder of [Rebase Community](https://rebase.network/), Core Contributor of Antalpha labs
+- **Harry L**: co-Founder of [Rebase Community](https://rebase.network/)
 - **dream@Scroll** : core developer of [Scroll](https://scroll.io/)
 - Our Maintainers: 
 	- [Po@EthStorage](https://github.com/dajuguan),
