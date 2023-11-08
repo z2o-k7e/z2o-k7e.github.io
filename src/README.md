@@ -1,3 +1,18 @@
+<br />
+<br />
+
+### <span style="color: grey;">**Welcome to the**</span>
+
+![](logo.png)
+<!-- 这边 logo 的寻址地点是 .src , 所以本地 MD 渲染不会显示，mkbook serve --open 能看到就好了-->
+
+
+### <span style="color: grey;">**World!**</span>
+
+
+
+<br />
+
 > - [github](https://github.com/zkp-co-learning) of $\mathcal{Z}_2 \mathbb{O} \ {\text -} \ \mathcal{K}_7 \mathbb{E}$
 > - contact with us: <z2ok7e@gmail.com>
 > - Twitter: <https://twitter.com/z2ok7e>
@@ -5,19 +20,13 @@
 > - TG Group: <https://t.me/+zvn88S6jhf5lMzI9>
 
 
-### <span style="color: grey;">**Welcome to the**</span>
-
-![](logo.png)
-
-
-
-### <span style="color: grey;">**World!**</span>
-
-<!-- 这边 logo 的寻址地点是 .src , 所以本地 MD 渲染不会显示，mkbook serve --open 能看到就好了-->
-
 <br />
 
+
+
 #### [🔍 How to contribute?](https://learn.z2o-k7e.world/how-to-contribute.html)
+
+#### [🚩 Our Vision & Roadmap](https://learn.z2o-k7e.world/vision.html) 
 
 <br />
 
@@ -76,9 +85,9 @@ The world of zkp is riddled with challenges - so many noises, steep entry barrie
 	- [Frank Jz Liu](https://github.com/LiuJiazheng),
 	- [CJ](https://github.com/GopherJ), 
 	- [周洋(Yang Zhou)](https://github.com/yz89),
-	- 0xhhh@EthStorage,
-	- 啊咪咪小熊, 
-	- 张康 Daniel, 
+	- [0xhhh@EthStorage](https://github.com/cyl19970726),
+	- [啊咪咪小熊](tianyangtao.com), 
+	- [张康 Daniel](github.com/Insomnia501), 
 	- [miles](https://github.com/miles-six), 
 	- [白菜](https://github.com/PayneJoe),
 	- [笃行](https://github.com/Howard-Hu),
