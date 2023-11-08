@@ -446,7 +446,7 @@ R1CS 的 $(U,V,W)$ 表格的宽度与引线的数量有关，行数跟乘法门�
 
 > ..., and thus our linear contraints are just wiring constraints that can be reduced to a permutation check. 
 
-按照 Plonk 论文的统计，一般情况下，算术电路中加法门的数量是乘法门的两倍。如果这样看来， $W$ 表格的长度会三倍于 R1CS 的矩阵。但这个让步会带来更多的算术化灵活度。
+按照 Plonk 论文的统计，一般情况下，算术电路中加法门的数量是乘法门的两倍。如果这样看来， $W$ 表格的行数会三倍于 R1CS 的矩阵。但这个让步会带来更多的算术化灵活度。
 
 ## 电路验证协议框架
 
