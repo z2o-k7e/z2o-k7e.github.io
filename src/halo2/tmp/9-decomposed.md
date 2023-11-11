@@ -1,10 +1,10 @@
 > - author: [@Demian](https://github.com/Demian101)
 > - references: https://learn.0xparc.org/materials/halo2/learning-group-1/exercise-3
+> - code:  https://github.com/icemelon/halo2-examples/pull/10/files
 
 [TOC]
 
-### background
-
+## background
 
 一个数学事实：对于一个 $n$ 位二进制数如 $110011$，让其对 $2^m$ 取模，余数正好是该数的最低 $m$ 位，如 $m =4$ ：
 $$
@@ -16,9 +16,9 @@ $$
 $$
 对于该数对 $2^m$ 取模的结果：
 1. 所有 $\ge 2^m$ 的项（即 $2^m, \ 2^{m+1} ,\ldots$ ）都会被 $2^m$ 整除，模的结果都 $= 0$, 所以对取模的结果不会有影响或贡献
-2. 所有 $< 2^m$ 的项都加起来才 $= 2^m -1 < 2^m$ ，所以 mod $2^m$ 就等于其所有低位(的和)
+2. 所有 $< 2^m$ 的项都加起来才 $= 2^m -1 < 2^m$ ，所以 mod $2^m$  就等于其所有低位 (的和)
 
-假设对于 $1100101$， 设 $m=3$  即 mod $2^3$ : 
+假设对于 $1100101$， 设 $m=3$  即  $\pmod{2^3}$  : 
 $$
 \begin{align*}
 \textcolor{red}{ \underbrace{2^{n-1}  \cdot  b_{n-1}  + \ldots + 2^3 \cdot b_3}_{discard}} + \underbrace{2^2 \cdot b_2 + 2^1 \cdot b_1 + 2^0 \cdot b_0}_{retain}  \\
@@ -27,9 +27,9 @@ $$
 $$
 因此，对 $2^m$ 取模将保留原数的最低 $m$ 位，并且舍去所有更高的位
 
-### Goal
+## Goal
 
-对于一个 10000+ 的数字，使用 lookup Table 就需要一个对应的 10000+ 行的表来约束，这样的线性同步增长显然也是低效的。考虑设计一种算法，将一个大数表示分解（Decompose）成很多个小二进制数的组合如 `(101)(110)(011)(001)...`，然后对其分解的每个小 Group 进行分组约束。
+对于一个 10000+ 的数字，使用 lookup Table 就需要一个对应的 10000+ 行的表来约束，这样的线性同步增长显然也是低效的。考虑设计一种算法，将一个大数表示分解（Decompose）成很多个小二进制数的组合如 `(101)(110)(011)(001)...`，然后对其分解的每个小 Group 进行分组约束
 
 举个例子，对于 `value` = 165 （在二进制中为 `10100101`），这个 8 位二进制数，则 $N = 8$ 。 设 $K = 3$，也就是我们想将它分解为 3 位的块:
 
@@ -44,8 +44,8 @@ $$
 - $c_2 = value \pmod{2^3} = 2 \ \ \% \ \ 2^3 = \textcolor{red}{2 = (010)_2}$
 - (更新  $value = value / 2^3 = 2/8 =0$ )
 
-> - $\pmod 2^K$ 是一个取  K 个低位的操作
-> -   $* \ 2^K$  就是一个右移操作，上一步取完低位后，对于大数来说，我们需要将原来二进制数的高位落到低位，即让新的低位变成原来的高位，方便下一步再取低位。如此循环往复，不断取低位 -> 右移 -> 取低位 ... 直到把大数分解完毕。
+> - $\pmod{2^K}$  是一个取  K 个低位的操作
+> -   $* \ 2^K$  就是一个右移操作，上一步取完低位后，对于大数来说，我们需要将原来二进制数的高位落到低位，即让新的低位变成原来的高位，方便下一步再取低位。如此循环往复，不断取低位 -> 右移 -> 取低位 ... 直到把大数分解完毕
 
 于是，我们可以得到： 
 
@@ -72,7 +72,7 @@ $$
 > - $K$ 的选择可能主要依赖于想要构建的查找表的大小
 > - 此方法提供了一个有效的方式来验证大数是否在给定的范围内，即 decompose 后，利用查找表(range_check) 来大幅度减少计算量。
 
-#### 图解：
+### 图解：
 
 如下是二进制数字 `593`，我们要将其分解为 `K=3` 位的块：
 
@@ -90,10 +90,9 @@ $$
 2. 取第二个块(010)，更新running sum：subtract (010) , 并右移 K 位
 3. ...
 
-如果用户所持有的大数 value 和该
-所有的块都在预期的范围内，那么整个数字也在预期的范围内。
+如果用户所持有的大数 value 和该 value 所有的块都在预期的范围内，那么整个数字也在预期的范围内。
 
-#### Protocol ： 
+## Protocol description : 
 
 This gadget range-constrains an element witnessed in the circuit to be $N$ bits.
 
@@ -179,11 +178,58 @@ the range check constraint to stay within the degree bound.
 
 This is a custom built version of the decompose running sum function.
 
+## bottom-up 代码分析 
+
+### 执行流程
+
+这里面可以明确注意到函数体中描述的一些调用关系。
+
+```rust
+MyCircuit - configure() {
+    DecomposeConfig::configure(meta, value);  
+}
+
+DecomposeConfig - configure() {
+    let table = RangeTableConfig::configure(meta);
+    meta.lookup(|meta| { ... } );  // Range-constrain each K-bit chunk
+    meta.create_gate("final partial chunk");
+    meta.lookup(|meta| { ... } );  // selector to handle the final partial chunk
+}
+
+RangeTableConfig - configure {
+	let num_bits = meta.lookup_table_column();
+	let value = meta.lookup_table_column();
+}
+
+MyCircuit - synthesize() {
+    config.table.load(&mut layouter)?;
+    let value = layouter.assign_region(
+        region.assign_advice(|| "Witness value", config.running_sum, 0, || self.value);
+        
+    config.assign("synthesize decompose value", value, self.num_bits)
+}
+
+DecomposeConfig - assign(){
+    
+}
+```
+
+Decompose:
+0. Copy in the witnessed `value` 
+1. Compute the interstitial running sum values {z_0, ..., z_C}}
+2. Assign the running sum values
+3. Make sure to enable the relevant selector on each row of the running sum
+4. Constrain the final running sum `z_C` to be 0.
 
 ### lookup table
 
 ```rust
-pub(super) struct RangeTableConfig<F: PrimeField, const NUM_BITS: usize, const RANGE: usize> {
+// Lookup Table for Range Check
+/// A lookup table of values up to LOOKUP_RANGE
+/// e.g. LOOKUP_RANGE = 256, values = [0..255]
+/// This table is tagged by an index `k`, where `k` is the number of bits of the element in the `value` column.
+#[derive(Debug, Clone)]
+pub(super) struct RangeTableConfig<F: PrimeField, const LOOKUP_NUM_BITS: usize, const LOOKUP_RANGE: usize> {
     pub(super) num_bits: TableColumn,
     pub(super) value: TableColumn,
     _marker: PhantomData<F>,
@@ -210,8 +256,145 @@ pub(super) struct RangeTableConfig<F: PrimeField, const NUM_BITS: usize, const R
 |5|16|
 | .. | .. |
 
-- 如上图，比如，4 位 num_bits 可以表示的值是 `8 ~ 16-1`
+如上图，比如，4 位 num_bits 可以表示的值是 `8 ~ 16-1`
+为了适应对 8 字节数字 (u8) 的约束，查找表的大小通常被设计为 8 位，256 行：
+
+```rust
+LOOKUP_NUM_BITS == 8
+LOOKUP_RANGE    == 2 << 8 == 256
+```
+
+对于每个具体的电路实现，_常量泛型(Const generics_) 都支持实现不同大小的查找表：
+```rust
+const LOOKUP_NUM_BITS: usize = 10;
+const LOOKUP_RANGE: usize = 1 << LOOKUP_NUM_BITS;  // 1024.
+let circuit = MyCircuit::<Fp, LOOKUP_NUM_BITS, LOOKUP_RANGE> {
+	value,
+	num_bits,
+};
+```
+
+### synthesize
+
+- 154 的 16 进制是 `0x9A` :
+- 将 0x9A 赋值进 `config.running_sum`  col 的第一行
+- 调用 `config.assign()` 
+
+```rust
+// `self.value`  is  `9a` , is the raw num itself.
+let value = layouter.assign_region(
+	|| "Witness value",
+	|mut region| {
+		region.assign_advice(|| "Witness value", config.running_sum, 0, || self.value)
+	},
+)?;
+
+config.assign(
+	layouter.namespace(|| "synthesize Decompose value"),
+	value,    // value 0x9a.
+	self.num_bits, // 8, the len of binary form of the num `154`.
+)?;
+```
+
+![](imgs/9-decomposed_image_1.png)
+### config.assign()
+
+传入参数： 
+ - value: `0x9a.`
+ - num_bits :  `8` , 是 154 的二进制形式的长度
+```rust
+config.assign(
+	layouter.namespace(|| "Decompose value"),
+	value,    // value 0x9a.
+	self.num_bits, // 8, the len of binary form of the num `154`.
+)?;
+```
+
+assign() 函数:
+ -  `compute_running_sum`  的计算原理
+
+```rust
+fn assign() {
+    // 8 % 3 = 2, 所以最后一个 chunk 只有 2 位， 不足 3 位
+    let partial_len = num_bits % LOOKUP_NUM_BITS; // 8 % 3 = 2
+    
+    /// ...
+
+    let running_sum: Vec<_> = value
+     .value()
+     .map(|&v| compute_running_sum::<_, LOOKUP_NUM_BITS>(v, num_bits)) // 0x9a, 8
+     .transpose_vec(expected_vec_len);
+    
+    // println!("running_sum {:?}", running_sum);
+    /* running_sum : 
+     Rational(0x98, 0x08)  ,   0x98 / 0x08 = 0x13 = 19 (decimal)
+     Rational(0x80, 0x40)  ,   0x80 / 0x40 = 0x02 = 2 
+     Rational(0x00, 0x200) ,   0x00 / 0x200= 0x00 = 0 (循环到这里结束.)
+    */
+```
+
+将上一步计算出的 Running-sum 值循环放入 `self.running_sum` col 
+```rust
+	// 2. Assign the `running sum` values
+	for z_i in running_sum.into_iter() {
+		z = region.assign_advice(
+			|| format!("assign z_{:?}", offset),
+			self.running_sum,
+			offset,
+			|| z_i,
+		)?;
+		offset += 1;
+	}
+```
+
+![](imgs/9-decomposed_image_2.png)
+
+
+处理最高位的 chunk: 
+ - 对于 decimal: 154 ， binary: 10|011|010 这个例子
+ - 最高位的 `10|`  是不足 3 位的，所以需要后面补齐 (`short_range_check()`)
+```rust
+// Handle partial chunk
+// println!("value.value(){:?}", value.value());
+if partial_len > 0 { //  8 % 3 = 2
+	// The final chunk, value.value():  Trivial(0x9a) i.e. 154
+	let final_chunk = value.value().map(|v| {
+		let v: Vec<_> = v
+			.evaluate()
+			.to_le_bits()
+			.iter()
+			.by_vals()
+			.take(num_bits)
+			.collect();
+		
+		//  println!("v .. {:?}", v) : [false, true, false, true, true, false, false, true]    
+		//  i.e. [01011001] <-  这个是低位在前, 高位在后. 因为 154 的二进制表示是 [10011010]
+		let final_chunk = &v[(num_bits - partial_len)..num_bits];
+		// final_chunk: [false, true]    ;      println!("final_chunk{:?}", final_chunk);
+		
+		Assigned::from(F::from(lebs2ip(final_chunk))) // 0x02
+	});
+	// final_chunk: 0x02,  i.e. `10` in binary format.
+	self.short_range_check(&mut region, offset - 1, final_chunk, partial_len)?;
+}
+```
+
+### custom gate
+
+这部分配置了 3 个 gate:
+
+`meta.lookup(|meta| {...})` : 主 lookup gate，用来对主体块 chunk 进行区间约束
+
+`meta.create_gate("final partial chunk", |meta| {...})`
+- 处理特殊情况，当最后一个部分块的位数小于`LOOKUP_NUM_BITS`时，需要对其进行"shift"操作，以使其能够与完整的数据块对比 —— 
+
+`meta.lookup(|meta| {...})`
+- 第二个 lookup gate，用来对 shifted_chunk 进行区间约束。
+
+![](imgs/9-decomposed_image_3.png)
+
 ### DecomposeConfig
+
 
 ```rust
 struct DecomposeConfig<
@@ -295,7 +478,8 @@ meta.create_gate("final partial chunk", |meta| {
 
 
 
-### 代码分析
+----
+
 
 从 Test 开始，以 `num = 154` 为例，
 
@@ -358,135 +542,29 @@ runnning_sum = [9A,]
 
 `MockProver::run` 会调用 `fn configure` 和 `fn synthesize`
 
-#### fn synthesize()
 
-- 154 的 16 进制是 `0x9A` :
-- 将 0x9A 赋值进 `config.running_sum`  col 的第一行
-- 调用 `config.assign()` 
-```rust
-// `self.value`  is  `9a` , is the raw num itself.
-let value = layouter.assign_region(
-	|| "Witness value",
-	|mut region| {
-		region.assign_advice(|| "Witness value", config.running_sum, 0, || self.value)
-	},
-)?;
 
-config.assign(
-	layouter.namespace(|| "Decompose value"),
-	value,    // value 0x9a.
-	self.num_bits, // 8, the len of binary form of the num `154`.
-)?;
-```
-
-#### config.assign()
-
-传入参数： 
- - value: `0x9a.`
- - num_bits :  `8` , 是 154 的二进制形式的长度
-```rust
-config.assign(
-	layouter.namespace(|| "Decompose value"),
-	value,    // value 0x9a.
-	self.num_bits, // 8, the len of binary form of the num `154`.
-)?;
-```
-
-assign() 函数:
- -  `compute_running_sum`  的计算原理
-
-```rust
-fn assign() {
-    // 8 % 3 = 2, 所以最后一个 chunk 只有 2 位， 不足 3 位
-    let partial_len = num_bits % LOOKUP_NUM_BITS; // 8 % 3 = 2
-    
-    /// ...
-
-    let running_sum: Vec<_> = value
-     .value()
-     .map(|&v| compute_running_sum::<_, LOOKUP_NUM_BITS>(v, num_bits)) // 0x9a, 8
-     .transpose_vec(expected_vec_len);
-    
-    // println!("running_sum {:?}", running_sum);
-    /* running_sum : 
-     Rational(0x98, 0x08)  ,   0x98 / 0x08 = 0x13 = 19 (decimal)
-     Rational(0x80, 0x40)  ,   0x80 / 0x40 = 0x02 = 2 
-     Rational(0x00, 0x200) ,   0x00 / 0x200= 0x00 = 0 (循环到这里结束.)
-    */
-```
-
-将上一步计算出的 Running-sum 值循环放入 `self.running_sum,` col.
-```rust
-	// 2. Assign the `running sum` values
-	for z_i in running_sum.into_iter() {
-		z = region.assign_advice(
-			|| format!("assign z_{:?}", offset),
-			self.running_sum,
-			offset,
-			|| z_i,
-		)?;
-		offset += 1;
-	}
-```
-
-处理最高位的 chunk: 
- - 对于 decimal: 154 ， binary: 10|011|010 这个例子
- - 最高位的 `10|`  是不足 3 位的，所以需要后面补齐 (`short_range_check()`)
-```rust
-// Handle partial chunk
-// println!("value.value(){:?}", value.value());
-if partial_len > 0 { //  8 % 3 = 2
-	// The final chunk, value.value():  Trivial(0x9a) i.e. 154
-	let final_chunk = value.value().map(|v| {
-		let v: Vec<_> = v
-			.evaluate()
-			.to_le_bits()
-			.iter()
-			.by_vals()
-			.take(num_bits)
-			.collect();
-		
-		//  println!("v .. {:?}", v) : [false, true, false, true, true, false, false, true]    
-		//  i.e. [01011001] <-  这个是低位在前, 高位在后. 因为 154 的二进制表示是 [10011010]
-		let final_chunk = &v[(num_bits - partial_len)..num_bits];
-		// final_chunk: [false, true]    ;      println!("final_chunk{:?}", final_chunk);
-		
-		Assigned::from(F::from(lebs2ip(final_chunk))) // 0x02
-	});
-	// final_chunk: 0x02,  i.e. `10` in binary format.
-	self.short_range_check(&mut region, offset - 1, final_chunk, partial_len)?;
-}
-```
-
-### Usage
+## Usage
 
 ```bash
-cargo test -- --nocapture test_decompose_3
+cargo test -- --nocapture test_decompose_should_success
 
 # Draw
-cargo test --features dev-graph -- --nocapture print_decompose_3
+cargo test --features dev-graph -- --nocapture print_decompose 
 ```
+
+![](imgs/9-decomposed_image_4.png)
 
  - the white column is the instance column, 
  - the pink one is the advice and 
- - the purple one is the selector.
+ - the purple one is the fixed column is so-called constant fixed columns
+	 - so we loaded the constant 0 over here
+	 - and we constrained that $z_c = 0$  and this last fixed column here um
  - the green part shows the cells that have been assigned
 	 - light green : selector not used.
 
-### Circuit Drawing
-
-https://www.youtube.com/watch?v=McJIL3_i_u4&t=554s  56’00 
-
-![](imgs/9-decomposed_image_1.png)
-in the advice column, we have two regions 
-regions are bound by solid black lines.
-
-- the first region here, there's like 8 cells(rows?) here. that's our witnessing our running sum
-- the Witness value here was copied into zero at the top of our decomposed value region.
-- dark purple: the selector area
-	- `q_decompose_selector` which we've enabled on every row except the last one in our region
-
-### References : 
+## References : 
+ - code : https://github.com/icemelon/halo2-examples/pull/10/files
  - https://github.com/enricobottazzi/halo2-intro/blob/master/src/range_check/example5/table.rs
  - [Jason Morton halo2 codes](https://github.com/jasonmorton/halo2-examples/blob/master/src/fibonacci/example1.rs)
  - [ZCash halo2 books](https://zcash.github.io/halo2/user/simple-example.html#define-a-chip-implementation)
