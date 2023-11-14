@@ -41,13 +41,13 @@ $$f(x)=Q_L(x) \cdot a(x)+Q_R(x)\cdot b(x)+Q_O(x)\cdot c(x)+Q_M(x)\cdot a(x) b(x)
 
 下面我们来详细讲解各个 columns 的含义和用途：
 
-**`instance columns`** ：包含了 $Prover/Verifier$ 之间共享的输入，通常用于公共输入 (public inputs)
+**`instance columns`** ：包含了 Prover/Verifier 之间共享的输入，通常用于公共输入 (public inputs)
 - 例如 SHA256 的结果
 - Merkle Tree 的根
 
 **`advice columns`**：包含了 `private input` & 电路运行中所需的中间变量，即witness,这部分只有$Prover$知道
 
-**`fixed columns`** ：包含在 key generation 阶段设置的 preprocessed values，可以视为是电路结构固定的一部分
+**`fixed columns`** ：包含在 key generation 阶段设置的 preprocessed values，可以视为是电路结构固定的一部分，也是可以被 pre-compute 的
  - 如电路中 hardcoded constant 
  - 查找表 Lookup table column
 
@@ -55,7 +55,8 @@ $$f(x)=Q_L(x) \cdot a(x)+Q_R(x)\cdot b(x)+Q_O(x)\cdot c(x)+Q_M(x)\cdot a(x) b(x)
 
 > 有些教程中也会直接将  selector columns 放入 fixed columns 中，这完全正确！因为 Selector 就是特殊的 fixed columns
 > 
-> Tips: 同一行可以支持若干种不同的约束, 比如三元三次, 或者三元二次, 可以通过selector来选择具体需要满足哪个约束。比如有  3 个 custom gate, 可以只满足其中一个就 OK , 或者满足其中的 2 个，非常灵活
+> Tips: 同一行可以支持若干种不同的约束, 比如三元三次, 或者三元二次, 可以通过 selector 来选择具体需要满足哪个约束。比如有  3 个 custom gate, 可以只满足其中一个就 OK , 或者满足其中的 2 个，非常灵活
+
 
 <!--
 we conceptualise the circuit as a matrix of m columns and n rows,  over a given finite field $\mathbb{F}$ 
