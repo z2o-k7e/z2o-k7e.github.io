@@ -55,6 +55,7 @@
   - [3-custom-gate](./halo2/chap-2/readme.md)
   - [4-fibonacci](./halo2/chap-3/readme.md)
   - [5-range-check](./halo2/chap-4/readme.md)
+  - [6-cost-model](./halo2/cost-model.md)
   - [halo2-QA](./halo2/halo2-QA.md)
   - [halo2-learning-materials](./halo2/tmp/halo2-learning-materials.md)
   - [learning-halo2 (0xPARC)](./halo2/tmp/halo2-learning-materials.md)
