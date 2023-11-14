@@ -118,7 +118,7 @@ $b(X)=b_0\cdot L_{N-2}(X) + b_1\cdot L_{N-1}(X)$ 的系数即可被求解，从�
 对于置换累乘多项式 $z(X)$，则需要在累乘向量 $\vec{z}$ 的尾部引入随机值。考虑下 $\vec{z}$ 的计算方式：
 
 $$
-z_{i+1} = z_i\cdot \frac{(w_a(X) + \beta\cdot X+\gamma)(w_b(X) + \beta\cdot k_1X+\gamma)(w_a(X) + \beta\cdot k_2X+\gamma)}{(w_a(X) + \beta\cdot\sigma_a(X)+\gamma)(w_b(X) + \beta\cdot \sigma_b(X)+\gamma)(w_a(X) + \beta\cdot\sigma_c(X)+\gamma)}
+z_{i+1} = z_i\cdot \frac{(w_a(X) + \beta\cdot X+\gamma)(w_b(X) + \beta\cdot k_1X+\gamma)(w_c(X) + \beta\cdot k_2X+\gamma)}{(w_a(X) + \beta\cdot\sigma_a(X)+\gamma)(w_b(X) + \beta\cdot \sigma_b(X)+\gamma)(w_c(X) + \beta\cdot\sigma_c(X)+\gamma)}
 $$
 
 列出所有的 $z_i$ 的计算如下：
