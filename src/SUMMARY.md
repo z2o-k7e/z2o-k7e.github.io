@@ -74,6 +74,7 @@
 
 ---
 
+- [Recurrent Dilemma](./zkp-QA.md)
 - [zk-everything](./zk-everything/toc.md)
   - [BabySNARK tutorial](./zk-everything/BabySNARK%20tutorial.md)
   - [KZG](./zk-everything/zk-learning-miles/KZG.md)
