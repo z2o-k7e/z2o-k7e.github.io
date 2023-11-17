@@ -87,6 +87,7 @@ top-down 的 approach:
 最后，推荐 PSE 的 [zkevm-specs](https://github.com/privacy-scaling-explorations/zkevm-specs)，文档中详细定义了 zkevm 电路的约束，并且提供了对应的 python 代码。
 - <https://github.com/privacy-scaling-explorations/zkevm-specs>
 
+> - 由 @[Yang Zhou](https://github.com/yz89) 帮助整理 ~
 
 <br />
 <br />
