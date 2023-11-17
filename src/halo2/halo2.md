@@ -41,8 +41,33 @@
 2. 课程学习目标:
 	- decompose 是一个综合性的代码实践，要求我们在阅读源码的同时掌握 halo2 的核心 API。
 
+### **第五周 (11.13~11.19)**
+
+1. 本周以 zkEmail 为例的 zk 应用实例的 halo2 真实应用场景代码实践。
+
+zkEmail 学习方法论：
+
+首先要明确学习目标，学习 zkEmail 能学到什么？我觉得有以下几点：
+1. zk email 是一个解决“实际业务”的中型电路系统；
+2. zk email 是强烈依赖 [halo2-base](https://github.com/axiom-crypto/halo2-lib/tree/community-edition/halo2-base) 的，而 halo2-base 对 halo2 电路有着一定的优化，主要体现在接口优化和灵活的行列设计；
+3. zk email 中会涉及到 RSA，biguint，sha256，regex，base64 等电路；代码模块比较清晰，每个模块也有例子，一周时间学习全部的内容有点多，大家可以根据需求学习；
+
+如果有对以上有兴趣的同学可以学习 zk email 的学习路线建议：
+1. 我觉得可以先从 [halo2-base](https://github.com/axiom-crypto/halo2-lib/tree/community-edition/halo2-base) 入手，学习 axiom 对 halo2 做的优化；
+2. 选择一个感兴趣的模块分析代码切入，逐步深入，比如 从 biguint 计算 => RSA , 逐步把 RSA，Regex，Sha256 这几个电路理解，再理解 zk email 是如何像堆积木一样把整个大电路堆积起来的；
+
+halo2-zk-email 中可以学习到的更多是在电路前端设计上，规模属于中型应用，可能还是花费一些时间的。
+
+> - 由 @DK(零与一)@secbit 帮助整理 ~
 
 
+top-down 的 approach: 
+- 直接打开 <https://emailwallet.org/> 去玩他们最新的出来的 emailwallet 
+- 看 slides: <https://docs.google.com/presentation/d/1nHW57t8SQ-NCqK366_xpkB7WuC3lFX-9/>
+- docs: <https://docs.sendeth.org/>
+- 再打开 github: <https://github.com/zkemail>，就接起来了。
+
+> - 由 @Kurt Pan 帮助整理 ~
 
 ----
 
