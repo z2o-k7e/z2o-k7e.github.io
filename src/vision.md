@@ -18,8 +18,8 @@
 	- [Halo2 code practice](https://github.com/zkp-co-learning/halo2-step-by-step)    ---- `2023.11 完成`
 - [understanding PLONK Series ](https://learn.z2o-k7e.world/plonk-intro-cn/plonk-intro.html) 内容翻译     `2024.1 完成`
 - 2024 年，结合共学社区 Topic，完善 4 期的内容产出
-	- 下一期研究方向(待定)：[zkVM/Nova/IDC](https://github.com/zkp-co-learning/zkp-co-learning.github.io/issues/32) 
-- zkp 领域内容的（体系化）
+	- 下一期研究方向(待定)：[Plonky2/Plonky3/zkVM/Nova/IVC/PCD](https://github.com/zkp-co-learning/zkp-co-learning.github.io/issues/32) 
+- 更多 zkp 领域内容的细分（体系化）
 
 
 
@@ -33,7 +33,6 @@
 **z2o-k7e 有趣的活动**
 
 - zk-summit （2024 年至少要做 2 次国内的 zkp builders 的 zk-summit）
-- [Learning English by zkp](https://github.com/orgs/CreatorsDAO/discussions/50) （通过 Peer Accountability 的模式，使用 zkp-based materials 学英语）
 - zkp 线下 co-building House
+- [Learning English by zkp](https://github.com/orgs/CreatorsDAO/discussions/50) （通过 Peer Accountability 的模式，使用 zkp-based materials 学英语）
 - [zkp Zine/stickers](https://github.com/zkp-co-learning/zkp-co-learning.github.io/issues/33)
-
