@@ -29,10 +29,11 @@
 - [Halo2 As A Compiler Series](https://github.com/zkp-co-learning/halo2-step-by-step/issues/38) 
 
 
-
+<!-- 
 **z2o-k7e 有趣的活动**
 
 - zk-summit （2024 年至少要做 2 次国内的 zkp builders 的 zk-summit）
 - zkp 线下 co-building House
 - [Learning English by zkp](https://github.com/orgs/CreatorsDAO/discussions/50) （通过 Peer Accountability 的模式，使用 zkp-based materials 学英语）
 - [zkp Zine/stickers](https://github.com/zkp-co-learning/zkp-co-learning.github.io/issues/33)
+-->
