@@ -1,4 +1,5 @@
 # LLL算法
+> 作者简介：Xor0v0，硕士在读，零知识证明小白，目前在做一些circom开发和zk审计，密码学爱好者，打过一些web2/3 CTF，最近对zkHACK产生兴趣。欢迎各位大佬一起交流学习。
 
 LLL 算法于 1982 年由三位 L 开头的外国人设计（因此得名），是一种解决 SVP 的近似算法。
 
@@ -13,6 +14,7 @@ LLL 的用途：
 2. 求一个给定代数的最小多项式足够好的 approximation。例如，给定 $1.414213$ 输出 $x^2−2=0$ ，给定 $0.645751$ 输出 $x^2+4x−3=0$ 。
 
 3. 求解整数关系，对于一组实数 $x_1, \dots,x_n$ ，如果存在一组非全零整数 $a_1,\dots,a_n$ 使得 $a_1x_1+\dots+a_nx_n=0$ 成立，则称为这组实数具有整数关系。比如，给定 $\arctan(1),\arctan(1/5),\arctan(1/239)$ ，可以证明下列整数关系存在：
+
    $$
    \arctan(1)-4\arctan(1/5)+\arctan(1/239)=0
    $$
@@ -22,9 +24,9 @@ LLL 的用途：
 
 5. 最近向量问题(CVP)，以及其他格问题。
 
-6. 密码分析中的各种应用（即破坏密码协议）。 例如，对基于背包的密码系统的许多攻击。 此外，最近对RSA的一些特殊情况也有一些攻击，如低公共指数攻击(low public exponent attack)。
+6. 密码分析中的各种应用（即破坏密码协议）。 例如，对基于背包的密码系统的许多攻击。 对RSA的一些特殊情况也有一些攻击，如低公共指数攻击(low public exponent attack)。此外，对DSA系统中求解 HNP 问题也是很好的攻击应用。
 
-下面从三个放马in介绍 LLL 算法：
+下面从三个方面介绍 LLL 算法：
 
 1. 定义一个 LLL 规约基 (reduced basis)，
 2. 提出一种算法来寻找这样的规约基，
@@ -35,25 +37,30 @@ LLL 的用途：
 首先回顾施密特正交化的定义：
 
 定义 1: 给定 n 个线性无关向量 $\pmb{b_1}, \pmb{b_2}, \dots,\pmb{b_n}\in\mathbb{R}^n$ ，其施密特正交化的定义为：
+
 $$
 \tilde{\pmb{b}}_i=\pmb{b}_i-\sum_{j=1}^{i-1}{\mu_{i.j}},where \mu_{i,j}={\frac{(\pmb{b_i,\tilde{b}_j})}{\pmb{(\tilde{b}_j,\tilde{b}_j)}}}
 $$
+
 定义 2: 如果下列情况成立，则格基 $B= \pmb{b_1}, \pmb{b_2}, \dots,\pmb{b_n}\in\mathbb{R}^n$ 是一个 $\gamma-LLL$ 规约基: 
 
-1.  $\forall 1\le i\le n, j\lt i,|\mu_{i,j}|\le1/2$ .
-2.  $\forall 1\le i\lt n, \gamma||\pmb{\tilde{b}}_i||^2\le ||\mu_{i+1,i}{\pmb{\tilde{b}_i+\tilde{b}_{i+1}}}||^2$ .
+1. $\forall 1\le i\le n, j\lt i,|\mu_{i,j}|\le1/2$ .
+2. $\forall 1\le i\lt n, \gamma||\pmb{\tilde{b}}_i||^2\le ||\mu_{i+1,i}{\pmb{\tilde{b}_i+\tilde{b}_{i+1}}}||^2$ .
 
 Remark 1：把一个基转换为规约基总是有可能的，实际上 LLL 算法就是在做这件事。
 
 Remark 2 ：考虑 $\gamma=3/4$ 的清醒是很有用的，在 LLL 算法中， $1/4\lt\gamma\lt1$ .
 
 Remark 3 ：定义 2中的第二个条件可以等价变化为：
+
 $$
 \gamma||\pmb{\tilde{b}}_i||^2\le ||\mu_{i+1,i}{\pmb{\tilde{b}_i+\tilde{b}_{i+1}}}||^2=\mu_{i+1,i}^2||\pmb{\tilde{b}_i}||^2+||\pmb{\tilde{b}_{i+1}}||^2
 $$
-稍微变换之后，可知：第二个 property 可以记作“ $\pmb{\tilde{b}_{i+1}}$ 不会比 $\pmb{\tilde{b}_{i}}$ 短很多”。
+
+稍微变换之后，可知：第二个 property 可以解释为: $\pmb{\tilde{b}_{i+1}}$ 不会比 $\pmb{\tilde{b}_{i}}$ 短很多。
 
 具体的，我们考虑经过施密特正交化得到的格基矩阵为：
+
 $$
 \begin{pmatrix}
 ||\tilde{\pmb{b}}_1||&*&\dots&*\\
@@ -62,9 +69,11 @@ $$
 0&\dots&0&||\tilde{\pmb{b}}_n||
 \end{pmatrix}
 $$
+
 【在线性代数中，正交基可以表示为基向量范数的上三角形式，这是由正交基的性质和**格拉姆-施密特正交化过程的结果**所决定的。】
 
 其中列 i 显示了在这个正交基中 $b_i$ 的坐标。 定义LLL约减基中的第一个条件保证：任何非对角元素的绝对值，最多是同一行对角线元素值的一半。 这可以写成：
+
 $$
 \begin{pmatrix}
 ||\tilde{\pmb{b}}_1||&\le||\tilde{\pmb{b}}_1||&\dots&\le||\tilde{\pmb{b}}_1||\\
@@ -73,15 +82,19 @@ $$
 0&\dots&0&||\tilde{\pmb{b}}_n||
 \end{pmatrix}
 $$
-第二个条件要求这个矩阵的第二列几乎和它的第一列一样长。一次类推。
+
+第二个条件要求这个矩阵的第二列几乎和它的第一列一样长。
 
 LLL 规约基的一个重要特性是它的第一个向量相对较短，如下一个 **claim** 所示。
 
 Claim 1：假设  $\pmb{b_1}, \pmb{b_2}, \dots,\pmb{b_n}\in\mathbb{R}^n$ 是一个 $\gamma-LLL$ 规约基，则有：
+
 $$
 ||\pmb{b}_1||\le(\frac{2}{\sqrt{4\gamma-1}})^{n-1}\lambda_1(\mathcal{L})
 $$
+
 Remark 4: 如果 $\gamma=3/4$ 则有：
+
 $$
 ||\pmb{b}_1||\le2^{\frac{n-1}{2}}\lambda_1{(\mathcal{L})}
 $$
@@ -206,7 +219,7 @@ while True:
 
 我们可以使用论文的方式构造格矩阵，然后使用LLL算法在多项式时间内找到一个解向量，FLAG值就在这个向量里。
 
-至于如何构造格，这涉及到Babai最近平面算法细节，用于解决CVP问题。这个我在下一篇文章会详细在讲解，届时大家就会知道这道题原理。（下一篇文章我也会用小章节对这道题原理进行解释）
+至于如何构造格，这涉及到 Babai 最近平面算法细节，用于解决 CVP 问题。这个我在下一篇文章会详细在讲解，届时大家就会知道这道题原理。（下一篇文章我也会用小章节对这道题原理进行解释）
 
 下面贴出EXP（需要使用 sage-python）。
 

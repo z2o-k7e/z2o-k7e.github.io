@@ -1,4 +1,6 @@
-# Lattice基础-One
+# Lattice基础
+
+> 作者简介：Xor0v0，硕士在读，零知识证明小白，目前在做一些circom开发和zk审计，密码学爱好者，打过一些web2/3 CTF，最近对zkHACK产生兴趣。欢迎各位大佬一起交流学习。
 
 Lattice是现代密码学非常重要的一部分，它也可以被用于构造零知识证明方案，比如这篇[Lattice-Based zk-SNARKs from Square Span Programs](https://eprint.iacr.org/2018/275.pdf)。
 
@@ -23,21 +25,27 @@ Lattice是现代密码学非常重要的一部分，它也可以被用于构造�
 18世纪的大数学家们如Lagrange, Gauss 和后来的Minkowski，都研究过格。近年来，格被计算机科学领域所关注，被用于作为一种算法工具去解决各种问题，在密码学和密码分析中也有大量运用，并且这些构造出来的格从计算复杂性角度上讲拥有着独特的性质。
 
 对于一个格，更正式的定义是：在m维实数空间，给定n个线性无关的m维向量 $\pmb{b_1}, \pmb{b_2}, \dots, \pmb{b_n}\in\mathbb{R}^m$，由这些向量定义的格就是：
+
 $$
 \mathcal{L}(\pmb{b_1}, \pmb{b_2}, \dots, \pmb{b_n})=\{\sum{x_i\pmb{b_i}|x_i\in \mathbb{Z}}\}
 $$
+
 说明：如果没有特别说明，粗体字母表示向量。
 
 > 线性无关向量：给定一组向量 $\pmb{v}_1, \pmb{v}_2,\dots,\pmb{v}_n$ ，如果存在一组不全为零的系数 $a_1,a_2,\dots,a_n$ ，使得下面的等式成立：
+> 
 > $$
 > a_1\pmb{v}_1+a_2\pmb{v}_2+\dots+a_n\pmb{v}_n=\pmb{0}
 > $$
+> 
 > 则称这组向量是线性无关的。线性无关表示每一个元素都是相互独立，而没有冗余信息。
 
 我们把这组线性无关向量称为**格基**(Basis of the lattice)。等价地，我们可以把这组向量按列展开，于是就得到它们的矩阵表示B，有：
+
 $$
 \mathcal{L}(B)=\mathcal{L}(\pmb{b_1}, \pmb{b_2}, \dots, \pmb{b_n})=\{\sum{x_i\pmb{b_i}|x_i\in \mathbb{Z}}\}
 $$
+
 我们定义格的**秩(**rank of lattice)为n，格的**维度**(dimension)为m。如果 $m=n$ ，那么则称这个格为**满秩格**(full-rank lattice)。如果没有特殊说明，本系列文章讲只讨论满秩格，因为其他情况并没有实质的差异。下面给出几个格的例子：
 
 <img src="./imgs/LONE2.png" style="zoom:50%;" />
@@ -65,11 +73,13 @@ $$
 第二个问题是：**如何判断两个给定格基是否是等价的？**
 
 这里需要引入一个工具**幺模矩阵**Unimodular matrix：如果一个矩阵的行列式等于正负一，那么就称其为幺模矩阵。比如下面这个矩阵就是一个幺模矩阵：
+
 $$
 \begin{pmatrix}
 1,2\\0,1
 \end{pmatrix}
 $$
+
 定理2：幺模矩阵的逆也是幺模矩阵。
 
 定理3：两个格基 $B_1,B_2\in\mathbb{R}^{m\times n}$ 是等价的，当且仅当存在某个幺模矩阵 $U\in\mathbb{Z}^{n\times n}$ 使得 $B_2=B_1U$ 成立。
@@ -77,9 +87,11 @@ $$
 推论1：一个n维整数空间的格基 $B\in \mathbb{Z}^{n\times n}$必然是一个幺模矩阵。
 
 对于第二个问题还有一个判断方法，需要引入格基的行列式(Determinant)概念。如果格基是一个方阵（即满秩格），格基的行列式直接是方针的行列式；如果格基不是方针，那么需要使用volumn代替行列式的概念，具体定义为： $\sqrt{det(B^TB)}$。 那么如果两个格基等价，有：
+
 $$
 \sqrt{det({B_1}^TB_1)}=\sqrt{det({U^TB_2}^TB_2U)}=\sqrt{det{({B_2}^T)B_2}}
 $$
+
 (这里大家可以复习一下多矩阵的行列式运算法则)
 
 格的行列式大小与格子密度成反比，行列式越小，格子越多。
@@ -103,9 +115,11 @@ $$
 **一般形式的施密特正交化**
 
 对于n维欧氏空间，设一组基为 $b_1, b_2,\dots,b_n$ ，定义其施密特正交化之后的基向量为  $\tilde{b}_1, \tilde{b}_2,\dots,\tilde{b}_n$ 。其中：
+
 $$
 \tilde{b}_i=b_i-\sum_{j=1}^{i-1}\frac{(\tilde{b}_j,b_i)}{(\tilde{b}_j,\tilde{b}_j)}\tilde{b}_j
 $$
+
 上述  $(\pmb{a}, \pmb{b})$ 记号表示两个向量之间的点乘。
 
 施密特正交化之后的基向量有如下特点：
@@ -131,9 +145,11 @@ Successive minima这个参数一般计作 $\lambda_1$ . 它主要刻画了格的
 它的另一种定义是：最短向量长度 r 是满足半径为 r 的「n维球」的一维张成空间（一条线）所包含的格点中所能形成的最短向量的长度。
 
 于是我们可以推广到 `the i-th successive minima` 概念：
+
 $$
 \lambda_i(\Lambda)=inf\{r | dim(span(\Lambda \cap \overline{B}(0, r))) \ge i\}
 $$
+
 其中 $\overline{B}(0,r)$ 表示以0格点为圆心，格点的范数小于等于 r 所构成的n维封闭球。r 就是满足这个球里的点形成的基向量最短的最短半径。
 
 $\lambda_i(\Lambda)$ 表示格中第 i 短的线性无关向量。
@@ -148,9 +164,11 @@ $\lambda_i(\Lambda)$ 表示格中第 i 短的线性无关向量。
 下面给出如何求 Successive minma 的有效**下界**：
 
 定理 4： 令 $B$ 是秩为 n 的格基，令 $\tilde{B}$ 是其施密特正交化的基，那么：
+
 $$
 \lambda_1(\mathcal{L}(B))\ge \min_{i=1,..n}||\tilde{b}_i||>0
 $$
+
 推论 2：假设 $\Lambda$ 是一个lattice，存在 $\epsilon > 0$ ，对于任意两个非等格点 $x,y\in\Lambda$，满足 $||x-y||>\epsilon$.
 
 【简单理解就是，在格中，两个不同的格点构成的向量的范数一定大于0，是非零向量】
@@ -176,12 +194,15 @@ $$
 断言 2：半径为 r 的 n 维球的体积volumn为： $vol(B(0,r))\ge(\frac{2r}{\sqrt n})^n$ .
 
 推论 3(Minkowski's First Theorem) ： 对于任意秩为 n 的满秩格 $\Lambda$ ， 有：
+
 $$
 \lambda_1(\Lambda)\le\sqrt{n}(\det\Lambda)^{1/n}
 $$
+
 Minkowski's First Theorem 给出的上界不一定很紧致tight。
 
 还有 Minkowski's Second Theorem：
+
 $$
 \prod_{i=1}^{n}\lambda_i(\Lambda)^{1/n}\le\sqrt{n}(\det\Lambda)^{1/n}
 $$
