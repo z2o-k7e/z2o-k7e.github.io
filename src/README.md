@@ -91,9 +91,10 @@ The world of zkp is riddled with challenges - so many noises, steep entry barrie
 	- [miles](https://github.com/miles-six), 
 	- [白菜](https://github.com/PayneJoe),
 	- [笃行](https://github.com/Howard-Hu),
+	- Xor0v0
 	- Wel  
 	- 阳小雪, 
 	- 饭卡里还有不少钱呢...
- 	- 羊驼 
+ 	- 羊驼
 
 <br />
