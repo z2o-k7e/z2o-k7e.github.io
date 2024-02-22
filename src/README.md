@@ -13,7 +13,7 @@
 
 <br />
 
-> - [github](https://github.com/zkp-co-learning) of $\mathcal{Z}_2 \mathbb{O} \ {\text -} \ \mathcal{K}_7 \mathbb{E}$
+> - [github](https://github.com/z2o-k7e) of $\mathcal{Z}_2 \mathbb{O} \ {\text -} \ \mathcal{K}_7 \mathbb{E}$
 > - contact with us: <z2ok7e@gmail.com>
 > - Twitter: <https://twitter.com/z2ok7e>
 > - Youtube channel: <https://www.youtube.com/@z2o-k7e>
