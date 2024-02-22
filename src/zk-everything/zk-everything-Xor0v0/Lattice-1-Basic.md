@@ -20,7 +20,7 @@ Lattice是现代密码学非常重要的一部分，它也可以被用于构造�
 
 格Lattice，顾名思义，就是一个个格子。严格来讲，格是一个数学对象，它的数学定义是：格Lattice由n维空间中具有周期结构的点集构成。【划重点：**Lattice是空间内的离散点集**】下图展示了一个二维实数空间的格点：
 
-<img src="./imgs/LONE1.png" style="zoom:50%;" />
+<div align=center><img src="./imgs/LONE1.png" style="zoom:50%;"></div>
 
 18世纪的大数学家们如Lagrange, Gauss 和后来的Minkowski，都研究过格。近年来，格被计算机科学领域所关注，被用于作为一种算法工具去解决各种问题，在密码学和密码分析中也有大量运用，并且这些构造出来的格从计算复杂性角度上讲拥有着独特的性质。
 
@@ -48,7 +48,7 @@ $$
 
 我们定义格的**秩(**rank of lattice)为n，格的**维度**(dimension)为m。如果 $m=n$ ，那么则称这个格为**满秩格**(full-rank lattice)。如果没有特殊说明，本系列文章讲只讨论满秩格，因为其他情况并没有实质的差异。下面给出几个格的例子：
 
-<img src="./imgs/LONE2.png" style="zoom:50%;" />
+<div align=center><img src="./imgs/LONE2.png" style="zoom:50%;"></div>
 
 特别是： $\mathcal{L}((1))$ 是一个1维的满秩格。注意，一个维度空间的格基不唯一。
 
@@ -109,13 +109,13 @@ $$
 
 **二维平面的施密特正交化**
 
-<img src="imgs/LONE3.png" style="zoom:50%;" />
+<div align=center><img src="imgs/LONE3.png" style="zoom:50%;"></div>
 
 如上图， $b_1,b_2$是一组线性无关向量，它可以作为二维平面的一个格基。以一个基向量为基准，不妨设 $\tilde{b}_1=b_1$，利用投影公式可以求另一个向量 $b_2$ 在这个向量的投影，再作差得到与基准向量的正交向量： $\tilde{b}_2=b_2-\frac{(\tilde{b}_1,b_2)}{(\tilde{b}_1,\tilde{b}_1)}\tilde{b}_1$ .  同理可知三维平面的格基的施密特正交化步骤：首先选取一个基向量作为基准，利用投影公式求出另一个向量在这个向量的投影，作差得到两条相互正交的向量；对于第三条向量，分别对之前两条正交向量求投影向量，然后用分别减去这两个投影向量，即可得到三条正交向量。
 
 **一般形式的施密特正交化**
 
-对于n维欧氏空间，设一组基为 $b_1, b_2,\dots,b_n$ ，定义其施密特正交化之后的基向量为  $\tilde{b}_1, \tilde{b}_2,\dots,\tilde{b}_n$ 。其中：
+对于n维欧氏空间，设一组基为 $b_1, b_2,\dots,b_n$ ，定义其施密特正交化之后的基向量为  $\tilde{b}_1, \tilde{b}_2,\dots,\tilde{b}_n$ 。其中: 
 
 $$
 \tilde{b}_i=b_i-\sum_{j=1}^{i-1}\frac{(\tilde{b}_j,b_i)}{(\tilde{b}_j,\tilde{b}_j)}\tilde{b}_j
@@ -162,7 +162,7 @@ $\lambda_i(\Lambda)$ 表示格中第 i 短的线性无关向量。
 - n维球：这里强调n维，我们都知道球ball是一个三维概念，但是在不同维度空间，“球”坍塌或者扩张为其他表现形式，比如一维空间，球是一条线段，一条向量就在一个一维空间里。
 - 下图中，假设两个格点的水平距离为1，那么 $\lambda_1(\Lambda)=1$ , 但是 $\lambda_2(\Lambda)\ne2$  ，因为等于2的向量与 $\lambda_1(\Lambda)$ 对应的向量是线性相关的。
 
-<img src="imgs/LONE4.png" style="zoom:50%;" />
+<div align=center><img src="imgs/LONE4.png" style="zoom:50%;" /></div>
 
 下面给出如何求 Successive minima 的有效**下界**：
 
@@ -188,7 +188,7 @@ $$
 
 定理 5 (Blichfeld)：任何满秩格 $\Lambda\in \mathbb{R}^n$ 和集合 $S\subseteq\mathbb{R}^n$ ( $vol(S)>\det\Lambda$ )， 存在集合中两个不同的点，使得这两个点构成的向量属于格空间。
 
-<img src="imgs/LONE5.png" style="zoom:50%;" />
+<div align=center><img src="imgs/LONE5.png" style="zoom:50%;" /></div>
 
 如图Figure 6，正如前面所说的，格的行列式表示的基础区域的容量。
 

@@ -166,7 +166,7 @@ sage: pplot
 
 在 sage 中运行得到的图像:
 
-<img src="imgs/LTWO1.png" style="zoom:67%;" />
+<div align=center><img src="imgs/LTWO1.png" style="zoom:50%;" /></div>
 
 注意灰色的格基已经不在和原格基属于同一格了。但是 GS 算法对于理解 LLL 算法仍然很重要，因为它会作为 LLL 算法的一部分。
 

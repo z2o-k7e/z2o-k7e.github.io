@@ -37,7 +37,7 @@ def cvp(basis, t):
 
 上述描述也许比较晦涩，下面给出一个关于算法中递归操作的最自然的解释，并且更加呼应算法的名字：
 
-<img src="imgs/LTRE1.png" style="zoom:67%;" />
+<div align=center><img src="imgs/LTRE1.png" style="zoom:50%;" /></div>
 
 1. 假设 $\pmb{s}$ 是 $\pmb{t}$ 在张成空间 $span(\pmb{b_1},\pmb{b_2},\dots,\pmb{b_n})$ 的一个投影；
 2. 找到倍数 $c$ ，使得 $c\tilde{b}_n+span(\pmb{b_1},\dots,\pmb{b_{n-1}})$ 尽可能的接近于 $\pmb{s}$ ；
