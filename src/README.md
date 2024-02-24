@@ -86,7 +86,7 @@ The world of zkp is riddled with challenges - so many noises, steep entry barrie
 	- [CJ](https://github.com/GopherJ), 
 	- [周洋(Yang Zhou)](https://github.com/yz89),
 	- [0xhhh@EthStorage](https://github.com/cyl19970726),
-	- [啊咪咪小熊](tianyangtao.com), 
+	- [啊咪咪小熊](tianyangtao.io), 
 	- [张康 Daniel](github.com/Insomnia501), 
 	- [miles](https://github.com/miles-six), 
 	- [白菜](https://github.com/PayneJoe),
