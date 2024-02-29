@@ -77,6 +77,7 @@
 - [Lattice-based Crypography](./zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.md)
   - [Lattice-1-Basic](./zk-everything/zk-everything-Xor0v0/Lattice-1-Basic.md)
   - [Lattice-2-LLL](./zk-everything/zk-everything-Xor0v0/Lattice-2-LLL.md)
+  - [Lattice-3-CVP](./zk-everything/zk-everything-Xor0v0/Lattice-3-CVP.md)
 
 - [Recurrent Q&A](./zkp-QA.md)
 - [zk-everything](./zk-everything/toc.md)
