@@ -250,7 +250,7 @@ $$
 其中 $k_i$ 为互相不等的二次非剩余。
 
 $$
-{id_a}(X) = X, \quad {id_b}(X) = k_1\cdot X, \quad  {id_a}(X) = k_2\cdot X
+{id_a}(X) = X, \quad {id_b}(X) = k_1\cdot X, \quad  {id_c}(X) = k_2\cdot X
 $$
 
 这样一来，这三个多项式被大大简化，它们在 $X=\zeta$ 处的计算轻而易举，可以直接由 Verifier 完成。
