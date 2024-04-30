@@ -92,6 +92,7 @@
   - [Spartan preliminary: GKR with ZK Argument](./zk-everything/zk-everything-joe/GKR_with_ZK_Argument.md)
   - [Spartan preliminary: Hyrax](./zk-everything/zk-everything-joe/Hyrax.md)
   - [Spartan In Depth](./zk-everything/zk-everything-joe/Spartan.md)
+  - [BLS12-381 理论与实现](./zk-everything/zk-everything-joe/Theory_and_Practical_Implementation_of_BLS12-381.md)
   - [SuperNova](./Nova/SuperNova.md)
 
 ---
