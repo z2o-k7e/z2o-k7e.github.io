@@ -261,7 +261,7 @@ $$
 
 直接参考[Guide to Pairing-based Cryptography](https://www.math.u-bordeaux.fr/~damienrobert/csi/book/book.pdf) 中的Algorithm 3.2:
 
-![Screen Shot 2024-04-26 at 13.59.01](https://hackmd.io/_uploads/HkjAMTu-A.png)
+![algorithm3.2](./algorithm3_2.png)
 
 
 <br />
@@ -307,7 +307,7 @@ $$
 
 同样直接参考 [Guide to Pairing-based Cryptography](https://www.math.u-bordeaux.fr/~damienrobert/csi/book/book.pdf) 的Algorithm 3.3:
 
-![Screen Shot 2024-04-26 at 14.03.27](https://hackmd.io/_uploads/Bky14p_b0.png)
+![algorithm3.3](./algorithm3_3.png)
 
 
 <br />
@@ -436,7 +436,7 @@ lambda[5] = 3
 
 ## Optimal Ate Pairing
 
-![optimal ate.drawio](https://hackmd.io/_uploads/HyiBWfYZ0.png)
+![optimal ate](./optimal%20ate.drawio.png)
 
 <br />
 
@@ -523,6 +523,10 @@ $$
 
 可以如何找到这么一组系数 $c_i$ 呢? 实际上它是一个关于 **Lattice 的问题**，感兴趣可以继续研究 [Optimal Pairings](https://eprint.iacr.org/2008/096.pdf).
 
+<br />
+
+----
+
 # 有限域上的算术运算
 
 BLS12-381 曲线的定义是这样的:
@@ -549,7 +553,7 @@ $$
         
         **line function** $f_{r, P}$ 不会改变所在的域，$P$在哪个域，这个函数仍然在那个域，比如 $F_p$:
         
-        ![double_add.drawio (1)](https://hackmd.io/_uploads/SkIujg2-A.png)
+        ![double_add.drawio](./double_add.drawio.png)
 
 
     - Evaluation Line Function 
@@ -570,13 +574,13 @@ $$
     
         通过**提指**把**Mill Loop** 的结果$f_{r, P}(Q)$ 推进一个特殊的乘法group，这就是我们所说的 **Cyclotomic Group**， $F_{\varPhi_{12}}$:
     
-        ![easy_part.drawio](https://hackmd.io/_uploads/r1b71-2WC.png)
+        ![easy_part](./easy_part.drawio.png)
 
     - Hard Part
 
         再次通过**提指**从**Cyclotomic Group** 拉到目标乘法group $F_{p^{12}}^{\times}[r]$:
 
-        ![hard_part.drawio](https://hackmd.io/_uploads/Sy5oy-nWC.png)
+        ![hard_part](hard_part.drawio.png)
 
 <br />
 
@@ -973,7 +977,7 @@ twist/untwist的过程是很便宜的，尤其是当我们把期间用到的常�
 
 ### Frobenius Map over $F_{p^2}$
 
-Assume:
+假定:
 $$
 \begin{aligned}
 F_{p^2} &= F_p[u] / X^2 - \alpha \\
@@ -981,11 +985,11 @@ a &= (a_0 + a_1 u) \in F_{p^2} \\
 \end{aligned}
 $$
 
-where $u^2 = \alpha = -1$ and $a_0, a_1 \in F_p$, we have $a_0^p = a_0, a_1^p = a_1$.
+其中 $u^2 = \alpha = -1$ and $a_0, a_1 \in F_p$, we have $a_0^p = a_0, a_1^p = a_1$.
 
 <br />
 
-Then:
+然后:
 $$
 \begin{aligned}
 a^p &= a_0^p + a_1^p \cdot u^p \\
@@ -993,7 +997,7 @@ a^p &= a_0^p + a_1^p \cdot u^p \\
 \end{aligned}
 $$
 
-since $(p - 1) / 2$ must be an odd number, so we have:
+由于 $(p - 1) / 2$ 一定是个奇数，所以我们有:
 $$
 \begin{aligned}
 a^p &= a_0 - a_1 \cdot u \\
@@ -1005,13 +1009,13 @@ $$
 
 <br />
 
-**For conclusion, Frobenius Map $\Phi_d(a) = a^{p^d} = a \in F_{p^2}$ if and only if $2 | d$.**
+**结论： Frobenius Map $\Phi_d(a) = a^{p^d} = a \in F_{p^2}$ 只要 $2 | d$.**
 
 <br />
 
 ### Frobenius Map over $F_{p^6}$
 
-Assume:
+假定:
 $$
 \begin{aligned}
 F_{p^6} &= F_{p^2}[v] / X^3 - \beta \\
@@ -1019,7 +1023,7 @@ a &= (a_0 + a_1 v + a_2 v^2) \in F_{p^6} \\
 \end{aligned}
 $$
 
-where $v^3 = \beta = u + 1$ and $\beta, a_0, a_1, a_2 \in F_{p^2}$, we have $a_0^p = \bar{a}_0, a_1^p = \bar{a}_1, a_2^p = \bar{a}_2$, and 
+其中 $v^3 = \beta = u + 1$ and $\beta, a_0, a_1, a_2 \in F_{p^2}$, 我们有 $a_0^p = \bar{a}_0, a_1^p = \bar{a}_1, a_2^p = \bar{a}_2$, and 
 $$
 \begin{aligned}
 v^p &= \beta^{(p - 1)/3} \cdot v \\
@@ -1031,7 +1035,7 @@ $$
 
 <br />
 
-Then:
+然后:
 $$
 \begin{aligned}
 a^p &= a_0^p + a_1^p \cdot v^p + a_2^p \cdot (v^p)^2 \\
@@ -1045,11 +1049,11 @@ a^{p^2} &= a_0 + a_1 \cdot \bar{\beta}^{(p - 1)/3} \cdot \beta^{(p - 1)/3} \cdot
 a^{p^d} &= C_d(a_0) + C_d(a_1) \cdot N_d(\beta)^{\frac{p - 1}{3}} \cdot v + C_d(a_2) \cdot N_d(\beta)^{2 \cdot \frac{p - 1}{3}} \cdot v^2 \\
 \end{aligned}
 $$
-where $C_d(a_i)$ denotes conjugate $d$ times on $a_i$, and $N_d(\beta)$ denotes norm $d$ times on $\beta$. 
+其中 $C_d(a_i)$ 表示在$a_i$ 共轭 $d$ 次 , and $N_d(\beta)$ 表示在$\beta$上norm  $d$次. 
 
 <br />
 
-Two aspects need to be considered:
+两个方面需要考虑:
 
 - for $C_d(a_i)$
 
@@ -1068,13 +1072,13 @@ Two aspects need to be considered:
 
 <br />
 
-**For conclusion, $\Phi_d(a) = a^{p^d} = a \in F_{p^6}$ if and only if $6 | d$.**
+**结论： $\Phi_d(a) = a^{p^d} = a \in F_{p^6}$ 只要 $6 | d$.**
 
 <br />
 
 ### Frobenius Map over $F_{p^{12}}$
 
-Assume:
+假定:
 $$
 \begin{aligned}
 F_{p^{12}} &= F_{p^6}[w] / X^2 - v \\
@@ -1082,11 +1086,11 @@ a &= (a_0 + a_1 w) \in F_{p^{12}} \\
 \end{aligned}
 $$
 
-where $w^2 = v, v^3 = u + 1, u^2 = -1$ and $w, a_0, a_1 \in F_{p^6}$. 
+其中 $w^2 = v, v^3 = u + 1, u^2 = -1$ and $w, a_0, a_1 \in F_{p^6}$. 
 
 <br />
 
-Similarily,
+类似地,
 $$
 \begin{aligned}
 a^p &= a_0^p + a_1^p \cdot w^p \\
@@ -1101,12 +1105,12 @@ a^{p^d} &= \Phi_d(a_0) + \Phi_d(a_1) \cdot (v^{p^d + p^{d - 1} + ... + 1})^{(p -
 \end{aligned}
 $$
 
-when $d = 12$, since $6 | d$, then we have $\Phi_d(a_i) = a_i$. since $\frac{p^{12} - 1}{2} = (p^6 - 1) \cdot \frac{p^6 + 1}{2}$, and $v \in F_{p^6}$, then we have:
+当 $d = 12$, 由于 $6 | d$, 然后我们就有 $\Phi_d(a_i) = a_i$. 由于 $\frac{p^{12} - 1}{2} = (p^6 - 1) \cdot \frac{p^6 + 1}{2}$, and $v \in F_{p^6}$, 然后我们就有:
 $$
 (v^{p^6 - 1})^{\frac{p^6 + 1}{2}} = 1
 $$
 
-therefore:
+因此:
 $$
 \begin{aligned}
 a^{p^{12}}&= a_0 + a_1 \cdot w \\
@@ -1114,32 +1118,32 @@ a^{p^{12}}&= a_0 + a_1 \cdot w \\
 \end{aligned}
 $$
 
-**For conclusion, $\Phi_d(a) = a^{p^d} = a \in F_{p^{12}}$ if and only if $12 | d$.**
+**结论： $\Phi_d(a) = a^{p^d} = a \in F_{p^{12}}$ 只要 $12 | d$.**
 
 <br />
 
 ### Frobenius Map and Conjunction
 
-There is a quadratic extension:
+有一个 **quadratic extension**:
 $$
 F_{q^2} = F_{q}[u] / X^2 - \alpha
 $$
-where $q = p^m$, assume $a = a_0 + a_1 \cdot u \in F_{q^2} = F_{p^{2m}}$, where $a_0, a_1 \in F_{q} = F_{p^m}$. If we want to do m-times **Frobenius Map** on $a$, then:
+其中 $q = p^m$, 假定 $a = a_0 + a_1 \cdot u \in F_{q^2} = F_{p^{2m}}$, 其中 $a_0, a_1 \in F_{q} = F_{p^m}$. 如果我们想要在$a$上执行$m$次 **Frobenius Map**:
 $$
 \begin{aligned}
 a^{p^m} &= a_0^{p^m} + a_1^{p^m} \cdot u^{p^m} \\
 &= a_0 + a_1 \cdot \alpha^{(p^m - 1)/2} \cdot u\\
 \end{aligned}
 $$
-since $\alpha$ is non-quadratic residual, namely $\alpha^{(p^m - 1)/2} = -1$, therefore we have:
+由于 $\alpha$ is non-quadratic residual, 也就是说 $\alpha^{(p^m - 1)/2} = -1$, 因此我们有:
 $$
 a^q = a^{p^m} = \bar{a}
 $$
-It's free cost!
+完全免费!
 
 <br />
 
-For instance $(F_{p^{12}})^{p^6} = \bar{F}_{p^{12}}, (F_{p^{6}})^{p^3} = \bar{F}_{p^{6}}, (F_{p^{2}})^{p} = \bar{F}_{p^2}, ...$.
+比如 $(F_{p^{12}})^{p^6} = \bar{F}_{p^{12}}, (F_{p^{6}})^{p^3} = \bar{F}_{p^{6}}, (F_{p^{2}})^{p} = \bar{F}_{p^2}, ...$.
 
 <br />
 
