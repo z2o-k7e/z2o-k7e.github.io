@@ -177,8 +177,8 @@
   - 💻 [example3.rs](https://github.com/wenjin1997/awesome-zkp-learning/blob/main/courses/Halo2-0xPARC/halo2-examples/src/fibonacci/example3.rs) : 利用判零电路 [is_zero.rs](https://github.com/wenjin1997/awesome-zkp-learning/blob/main/courses/Halo2-0xPARC/halo2-examples/src/is_zero.rs) 来实现简单的if-else逻辑。
 - [Circuit Exercise (Part 1)](https://learn.0xparc.org/materials/halo2/learning-group-1/exercise-1)
   - 📝 [笔记](https://github.com/wenjin1997/awesome-zkp-learning/blob/main/courses/Halo2-0xPARC/04-Circuit%20Exercises%201/04-note.md)
-- [Circuit Exercise (Part 2)](https://github.com/wenjin1997/awesome-zkp-learning/blob/main/courses/Halo2-0xPARC/05-Circuit%20Exercises%202/05-note.md)
-  - 📝 [笔记](/courses/Halo2-0xPARC/05-Circuit%20Exercises%202/05-note.md)
+- [Circuit Exercise (Part 2)](https://learn.0xparc.org/materials/halo2/learning-group-1/exercise-2)
+  - 📝 [笔记](https://github.com/wenjin1997/awesome-zkp-learning/blob/main/courses/Halo2-0xPARC/05-Circuit%20Exercises%202/05-note.md)
 - [Circuit Exercise (Part 3)](https://learn.0xparc.org/materials/halo2/learning-group-1/exercise-3)
   - 📝 [笔记](https://github.com/wenjin1997/awesome-zkp-learning/blob/main/courses/Halo2-0xPARC/06-Circuit%20Exercise%203/06-note.md)
 - [Custom Gates](https://learn.0xparc.org/materials/halo2/learning-group-1/custom-gates)
