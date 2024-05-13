@@ -9,7 +9,7 @@
 
 本文推荐资料概览如下：
 
-![xmind](/src/zk-everything/zk-everything-Jade/img/ZKP%20Learning.png)
+![xmind](./img/ZKP%20Learning.png)
 
 本文的资料推荐完全是鉴于我个人的学习路径，是从我个人角度的一些推荐。每个人的专业背景与学习方法都有所不同，因此仅供参考。不管怎样，能从这里有所收获都是我莫大的荣幸。
 

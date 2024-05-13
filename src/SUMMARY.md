@@ -12,7 +12,7 @@
 
 [ZKP 新手村入门攻略](./beginner.md)
 
-[Hello ZKP](/src/zk-everything/zk-everything-Jade/Hello_ZKP.md)
+[Hello ZKP](./zk-everything/zk-everything-Jade/Hello_ZKP.md)
 
 ---
 
