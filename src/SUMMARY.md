@@ -28,6 +28,15 @@
 ---
 
 
+- [从零开始学习 zk-SNARK](./zk-snarks/toc.md)
+  - [1-Polynomial-Interaction-and-Proof](./zk-snarks/1-Polynomial-Interaction-and-Proof.md)
+  - [2-Non-interactivity&Distributed-Setup](./zk-snarks/2-Non-interactivity&Distributed-Setup.md)
+  - [3-General-Purpose-Computation](./zk-snarks/3-General-Purpose-Computation.md)
+  - [4-Construction-Properties.md](./zk-snarks/4-Construction-Properties.md)
+  - [5-Pinocchio-Protocol](./zk-snarks/5-Pinocchio-Protocol.md)
+---
+
+
 - [理解 Plonk 系列](./plonk-intro-cn/plonk-intro.md)
   - [1-Plonkish Arithmetization](./plonk-intro-cn/plonk-arithmetization.md)
   - [2-多项式编码](./plonk-intro-cn/plonk-lagrange-basis.md)
@@ -39,14 +48,14 @@
 
 
 ---
+- [理解 Lasso 系列](./lasso-zh/lasso-intro.md)
+  - [理解 Lasso（零）：带索引的查询证明](./lasso-zh/lasso-0.md)
+  - [理解 Lasso（一）：Offline Memory Checking](./lasso-zh/lasso-1.md)
+  - [理解 Lasso (二)：稀疏向量与 Tensor 结构](./lasso-zh/lasso-2.md)
+  - [理解 Lasso (三)：大表格的稀疏查询证明](./lasso-zh/lasso-3.md)
+  - [理解 Lasso (四)：更多的可分解表格](./lasso-zh/lasso-4.md)
+  - [理解 Lasso (五)：表格的 MLE 结构](./lasso-zh/lasso-5.md)
 
-
-- [从零开始学习 zk-SNARK](./zk-snarks/toc.md)
-  - [1-Polynomial-Interaction-and-Proof](./zk-snarks/1-Polynomial-Interaction-and-Proof.md)
-  - [2-Non-interactivity&Distributed-Setup](./zk-snarks/2-Non-interactivity&Distributed-Setup.md)
-  - [3-General-Purpose-Computation](./zk-snarks/3-General-Purpose-Computation.md)
-  - [4-Construction-Properties.md](./zk-snarks/4-Construction-Properties.md)
-  - [5-Pinocchio-Protocol](./zk-snarks/5-Pinocchio-Protocol.md)
 
 
 ---
