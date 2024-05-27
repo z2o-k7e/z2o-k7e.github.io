@@ -1,4 +1,5 @@
 # 理解 Lasso (五)：表格的 MLE 结构
+>- 作者:  **Yu Guo@Secbit**(郭宇): Founder of [Secbit](https://secbit.io/), <https://github.com/sec-bit>
 
 本文介绍 Generalized Lasso，也是 [Lasso] 论文的关键部分之一。与 Lasso 相比，Generalized Lasso 不再对大表格进行拆分，而是把表格作为整体进行证明。为了处理超大尺寸表格，Generalized Lasso 需要要求表格中的每一项是可以通过其 Index 的二进制表示进行计算得到。对于尺寸为 $N$ 的超大表格而言，其 Index 的二进制位数量为 $\log{N}$，因此表格的表项的计算复杂度一定为 $O(\log{N})$。
 
@@ -69,7 +70,7 @@ $$
 v'= \tilde{M}(\vec{r}, \vec{\rho})\cdot \tilde{t}(\vec{\rho})
 $$
 
-第四轮：Prover 发送 $v_M, v_t$ 与 求值证明 $\pi_M, \pi_t$ 给 Verifier 
+第四轮：Prover 发送 $v_M, v_t$ 与 求值证明 $\pi_M, \pi_t$ 给 Verifier
 
 1. $v_M = \tilde{M}(\vec{r}, \vec{\rho})$
 2. $v_t = \tilde{t}(\vec{\rho})$
@@ -208,7 +209,7 @@ $$
 可以看出，Prover 只需要计算 $\mathsf{m}(X, 0, 0)$，$\mathsf{m}(X, 0, 1)$ ，$\mathsf{a}(X, 0, 0)$，$\mathsf{a}(X, 0, 1)$ 这四个多项式的值。而这四个多项式的计算量为 $O(1)$。Prover 发送 $\big(h^{(1)}(0)), h^{(1)}(1), h^{(1)}(2)\big)$
 作为 $h^{(1)}(X)$ 的点值形式发送。
 
-Verifier 发送挑战数 $r_0$，Prover 和 Verifier 检查 
+Verifier 发送挑战数 $r_0$，Prover 和 Verifier 检查
 
 $$
 v\overset{?}{=}h^{(1)}(0) + h^{(1)}(1)
@@ -254,7 +255,7 @@ $$
 Prover 只需要计算 $\mathsf{m}(X, 1, 0)$，$\mathsf{m}(X, 1, 1)$ ，$\mathsf{a}(X, 1, 0)$，$\mathsf{a}(X, 1, 1)$ 这四个多项式的值。而这四个多项式的计算量为 $O(1)$。Prover 发送 $\big(h^{(2)}(0)), h^{(2)}(1), h^{(2)}(2)\big)$
 作为 $h^{(2)}(X)$ 的点值形式发送。
 
-Verifier 发送挑战数 $r_1$，Prover 和 Verifier 检查 
+Verifier 发送挑战数 $r_1$，Prover 和 Verifier 检查
 
 $$
 h^{(1)}(r_1)\overset{?}{=}h^{(2)}(0) + h^{(2)}(1)
@@ -305,7 +306,7 @@ $$
 Prover 发送 $\big(h^{(3)}(0)), h^{(2)}(1), h^{(3)}(2)\big)$
 作为 $h^{(3)}(X)$ 的点值形式发送。
 
-Verifier 发送挑战数 $r_2$，Prover 和 Verifier 检查 
+Verifier 发送挑战数 $r_2$，Prover 和 Verifier 检查
 
 $$
 h^{(2)}(r_2)\overset{?}{=}h^{(3)}(0) + h^{(3)}(1)
@@ -314,7 +315,7 @@ $$
 Prover 和 Verifier 最后通过 PCS 来验证下面的 Evaluation 等式：
 
 $$
-h^{(3)}(r_3) \overset{?}{=} \tilde{u}(r_0, r_1, r_2)\cdot \tilde{t}(r_0, r_1, r_2) 
+h^{(3)}(r_3) \overset{?}{=} \tilde{u}(r_0, r_1, r_2)\cdot \tilde{t}(r_0, r_1, r_2)
 $$
 
 Prover 更新 $E$ 到 $E^{(3)}$，则得到 $v_u=\tilde{u}(r_0, r_1, r_2)$：
@@ -389,7 +390,7 @@ $$
 z_k = \sum_{y\in\mathsf{extend}(k, \log{m}, \log{N})} \tilde{u}(\vec{y})
 $$
 
-这里我们引入了一个新的符号：$\mathsf{extend}(k, \log{m}, \log{N})$，它是一个二进制串的集合 
+这里我们引入了一个新的符号：$\mathsf{extend}(k, \log{m}, \log{N})$，它是一个二进制串的集合
 
 $$
 \mathsf{extend}(k, \log{m}, \log{N}) = \{ y \in \{0,1\}^{\log{N}} \mid \mathsf{prefix}(y) = \mathsf{bits}(k) \}
@@ -482,4 +483,3 @@ $$
 $$
 \tilde{t}_l(r_0, \ldots, r_{j-1}, X, b_{j+1}, \ldots, b_{\log{N}-1}) = \mathsf{m}_l(X, j, b_j)\cdot \tilde{t}_l(r_0, \ldots, r_{j-1}, b_j, b_{j+1}, \ldots, b_{\log{N}-1}) + d_l\cdot (X - r_j) + \mathsf{a}_l(X, j, b_j)
 $$
-

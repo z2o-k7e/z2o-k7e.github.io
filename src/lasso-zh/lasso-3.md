@@ -1,4 +1,5 @@
 # 理解 Lasso (三)：大表格的稀疏查询证明
+>- 作者:  **Yu Guo@Secbit**(郭宇): Founder of [Secbit](https://secbit.io/), <https://github.com/sec-bit>
 
 Lasso 这个名字是 **L**ookup **A**rguments via **S**parse-polynomial-commitments and the **S**umcheck-check protocol, including for **O**versized-tables 的缩写。这里面有三个关键词，
 
@@ -65,7 +66,7 @@ $$
 2. $(v_t, \pi_t)=\mathsf{PCS.Eval}(C_t, \vec{\rho}, v_t; \vec{t})$
 
 当然，我们可以通过把 $M$ 整个向量排成一排，得到长度为 $m\times N$ 长的一维向量 $\vec{\mathcal{h}}$，然后把这个向量在一个 $c$ 维的空间中
-进行拆分: 
+进行拆分:
 
 $$
 \tilde{M}(\vec{X}^{(D_1)},\ldots, \vec{X}^{(D_c)}) = \sum_{i=0}^{m-1}\mathsf{val}(\mathsf{bits}(i)) \cdot \tilde{eq}(\mathsf{bits}(i), \vec{X}^{(D_1)})\cdot \ldots \cdot \tilde{eq}(\mathsf{bits}(i), \vec{X}^{(D_c)})
@@ -120,7 +121,7 @@ $$
 我们把 $T[{\mathsf{col}(i)}]$ 单独排成一个向量 $\vec{h}$，然后把向量编码成 MLE 多项式，记为 $\tilde{h}(\vec{X})$。那么通过一个随机挑战向量 $\vec{r}$， Lookup 的关系就归约到下面的等式:
 
 $$
-\tilde{f}(\vec{r}) \overset{?}{=}  \sum_{i\in[0,m)}h_i\cdot \tilde{eq}_i(\vec{r}) 
+\tilde{f}(\vec{r}) \overset{?}{=}  \sum_{i\in[0,m)}h_i\cdot \tilde{eq}_i(\vec{r})
 $$
 
 根据 Offline Memory Checking 的思路，我们可以证明 $h_i$ 都读取自表格 $T$。这样相当于原地踏步，我们为了证明一个 Lookup关系，我们归约到了另一个 Lookup 关系。不过我们是否可以 $h_i$ 分解到一个二维（或者多维）的子表格上呢？就像 Spark 协议中的 $\vec{e}$ 向量一样，我们是把 $\vec{e}$ 所读取的内存 $\vec{\lambda}$ 分解成了 $\vec{\lambda}^{(x)}$ 和 $\vec{\lambda}^{(y)}$，然后把 $\vec{e}$ 分解为 $\vec{e}^{(x)}$ 和 $\vec{e}^{(y)}$。然而并不是所有的表格都能像 $\vec{\lambda}$ 一样满足 Tensor Structure 的。事实上，绝大部分的表格不满足这个条件。不过幸运地是，尽管他们不满足 Tensor Structure，但是一大类的有用表格可以按照类似的思路处理。
@@ -149,7 +150,7 @@ $$
 
 $$
 \begin{array}{c|cccc}
- & 0 & 1 & 2 & 3\\ 
+ & 0 & 1 & 2 & 3\\
 \hline
 0\cdot 2^2=0 & 0 & 1 & 2 & 3 \\
 1\cdot 2^2 = 4 & 4 & 5 & 6 & 7 \\
@@ -158,7 +159,7 @@ $$
 \end{array}
 $$
 
-矩阵的第一行为 $t^{(x)}=t_\mathsf{{range, 2}}$，第一列也为 $t^{(y)}=t_\mathsf{{range, 2}}$，矩阵中的每个单元可以表示为 
+矩阵的第一行为 $t^{(x)}=t_\mathsf{{range, 2}}$，第一列也为 $t^{(y)}=t_\mathsf{{range, 2}}$，矩阵中的每个单元可以表示为
 
 $$
 T_\mathsf{{range,4}}[i,j]=  2^2 \cdot t^{(x)}[i] + t^{(y)}[j]
@@ -233,7 +234,7 @@ T_i = \mathcal{G}\Big(
 \ t^{(1)}[\mathsf{dim}^{(1)}(i)],
 \ldots,
 \ t^{(c-1)}[\mathsf{dim}^{(c-1)}(i)]
-\ 
+\
 \Big)
 $$
 
@@ -242,14 +243,14 @@ $$
 $$
  \tilde{f}(\vec{X}) \overset{?}{=} \sum_{\vec{b}\in\{0,1\}^{\log{m}}}
 \mathcal{G}\Big(t^{(0)}[\mathsf{dim}^{(0)}(\vec{b})], t^{(1)}[\mathsf{dim}^{(1)}(\vec{b})], \ldots,  t^{(c-1)}[\mathsf{dim}^{(c-1)}(\vec{b})]\Big)
-\cdot \tilde{eq}(\vec{b},\vec{X}) 
+\cdot \tilde{eq}(\vec{b},\vec{X})
 $$
 
 以 32-bit 的 Rangcheck 表格为例，假如我们需要把它分解为四个子表格，这四个子表格完全一摸一样，都是一个 8-bit 的 Rangecheck 表格。那么我们可以写下下面的等式：
 
 $$
 T_{\mathsf{range, 32}}[(i_0,i_1,i_2,i_3)_{(2)}] = 2^{24} \cdot t_{\mathsf{range,8}}[i_0]
-+ 2^{16} \cdot t_{\mathsf{range,8}}[i_1] 
++ 2^{16} \cdot t_{\mathsf{range,8}}[i_1]
 + 2^{8} \cdot t_{\mathsf{range,8}}[i_2]
 + t_{\mathsf{range,8}}[i_3]
 $$
@@ -303,7 +304,7 @@ $$
 1. $v_{e,i} = \tilde{e}^{(i)}(\vec{\rho}), \quad \forall i\in [0, c)$
 2. $\pi_{e,i} = \mathsf{PCS.Eval}(E^{(i)}, \vec{\rho}, v_{e,i}; \vec{e}^{(i)}), \quad \forall i\in [0, c)$
 
-第六轮：Verifier 验证 
+第六轮：Verifier 验证
 
 $$
 \mathsf{PCS.Verify}(\mathsf{cm}(\vec{e}^{(i)}), \vec{\rho}, v_{e,i}, \pi_{e, i}) = 1, \quad \forall i\in [0, c)
@@ -357,7 +358,7 @@ $$
 0 & 00 & 00 & 00 & 01 \\
 1 & 10 & 10 & 10 & 11 \\
 \end{array}
-$$ 
+$$
 
 矩阵中的每个单元格表示 $(A_0, A_1)\&(B_0,B_1)$，其中 $A_0\& B_0=\mathsf{T_{and,1}}[(A_0,B_0)]$，$A_1\& B_1=\mathsf{T_{and,1}}[(A_1,B_1)]$
 满足下面的等式：
@@ -369,9 +370,9 @@ $$
 因此，我们可以推而广之，对于任意的 $W$-bit AND 表格，我们可以把操作数 $A$ 和 $B$ 按位拆分成 $c$ 段，每一段查子表格 $\mathsf{AND}^{(W/c)}$ 确定 $A_i\& B_i$，然后将 $c$ 个运算结果再按位拼装起来。下面写出这个关系等式：
 
 $$
-\mathsf{\widetilde{AND}}^{(W)}(\vec{X}_0\parallel\vec{X}_1\parallel\cdots \parallel \vec{X}_{c-1},\  \vec{Y}_0\parallel\vec{Y}_1\parallel\cdots\parallel \vec{Y}_{c-1}) = 
-2^{c-1} \cdot \mathsf{\widetilde{AND}}^{(W/c)}(\vec{X}_0, \vec{Y}_0) 
-+ 2^{c-2} \cdot \mathsf{\widetilde{AND}}^{(W/c)}(\vec{X}_1, \vec{Y}_1) 
+\mathsf{\widetilde{AND}}^{(W)}(\vec{X}_0\parallel\vec{X}_1\parallel\cdots \parallel \vec{X}_{c-1},\  \vec{Y}_0\parallel\vec{Y}_1\parallel\cdots\parallel \vec{Y}_{c-1}) =
+2^{c-1} \cdot \mathsf{\widetilde{AND}}^{(W/c)}(\vec{X}_0, \vec{Y}_0)
++ 2^{c-2} \cdot \mathsf{\widetilde{AND}}^{(W/c)}(\vec{X}_1, \vec{Y}_1)
 + \ldots
 + \mathsf{\widetilde{AND}}^{(W/c)}(\vec{X}_{c-1}, \vec{Y}_{c-1})
 $$
@@ -381,7 +382,7 @@ $$
 $$
  \tilde{f}(\vec{X},\vec{Y}) \overset{?}{=} \sum_{\vec{a},\vec{b}\in\{0,1\}^{\log{m}}}
 \mathcal{G}_{\mathsf{AND}}({\mathsf{{AND}}^{(W/c)}}[\mathsf{dim}_0(\vec{a}), \mathsf{dim}_0(\vec{b})], \ldots,  {\mathsf{{AND}}^{(W/c)}}[\mathsf{dim}_{c-1}(\vec{a}), \mathsf{dim}_{c-1}(\vec{b})])
-\cdot \tilde{eq}((\vec{a},\vec{b}),(\vec{X},\vec{Y})) 
+\cdot \tilde{eq}((\vec{a},\vec{b}),(\vec{X},\vec{Y}))
 $$
 
 代入上面的 Lasso 协议，我们可以构造出对 $\mathsf{\widetilde{AND}}^{(W)}$ 表格的 Lookup Arugment 方案。

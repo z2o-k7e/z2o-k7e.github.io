@@ -1,5 +1,7 @@
 # 理解 Lasso (二)：稀疏向量与 Tensor 结构
 
+>- 作者:  **Yu Guo@Secbit**(郭宇): Founder of [Secbit](https://secbit.io/), <https://github.com/sec-bit>
+
 本文我们介绍一个基于 Sumcheck 的「稀疏多项式承诺方案」 Spark，这个方案最早出自 [Spartan] 证明系统。Spark 利用了稀疏向量的结构，可以大幅提升 Prover 的效率。Lasso 是在 Spark 的基础上的进一步拓展了对稀疏向量的处理。理解 Spark 是理解 Lasso 的关键。
 
 普通的多项式承诺方案包括两个阶段，一个是承诺（Commitment）阶段，另一个是求值证明（Evaluation Argument）阶段。对于一个 MLE 多项式 $\tilde{g}\in\mathbb{F}[X_0,X_1,\ldots, X_{n-1}]^{\preceq 1}$，求值点 $\vec{u}\in\mathbb{F}^{n}$，以及运算结果 $v=\tilde{g}(\vec{u})$，那么多项式承诺计算如下：
@@ -106,7 +108,7 @@ $$
 
 $$
 \tilde{e}(\vec{X}) = \sum_{i=0}^{m-1}e_i\cdot \tilde{eq}_i(\vec{X})
-\qquad 
+\qquad
 \tilde{h}(\vec{X}) = \sum_{i=0}^{m-1}h_i\cdot \tilde{eq}_i(\vec{X})
 $$
 
@@ -182,7 +184,7 @@ Prover 计算并发送计数器的承诺 $C_c=\mathsf{cm}(\{c_j\})$，$C^\mathsf
 
 Verifier 发送挑战数 $\beta, \gamma$
 
-Prover 计算 $\{R_j\}$, $\{W_j\}$, 
+Prover 计算 $\{R_j\}$, $\{W_j\}$,
 
 $$
 \begin{split}
@@ -249,7 +251,7 @@ $$
 v=\sum_{i\in[0,m)}h_i\cdot e_i
 $$
 
-并把上面的求和等式归约到 
+并把上面的求和等式归约到
 
 $$
 v' = \tilde{h}(\vec{\rho})\cdot \tilde{e}(\vec{\rho})
@@ -391,7 +393,7 @@ $$
 
 $$
 \begin{split}
-\tilde{g}(u_0, u_1, u_2, u_3) &= \sum_{0\le i\lt 4} h_i\cdot \tilde{eq}(\mathsf{bits}(k^{(x)}_i)), (u_0,u_1)) \cdot \tilde{eq}(\mathsf{bits}(k^{(y)}_i), (u_2,u_3)) \\ 
+\tilde{g}(u_0, u_1, u_2, u_3) &= \sum_{0\le i\lt 4} h_i\cdot \tilde{eq}(\mathsf{bits}(k^{(x)}_i)), (u_0,u_1)) \cdot \tilde{eq}(\mathsf{bits}(k^{(y)}_i), (u_2,u_3)) \\
 &= \sum_{0\le i\lt 4} h_i\cdot e^{(x)}_i \cdot e^{(y)}_i
 \end{split}
 $$
@@ -462,10 +464,10 @@ $$
 第三轮：Prover 与 Verifier 执行 Sumcheck 协议，证明下面的等式求和
 
 $$
-v=\sum_{i\in[0,m)}h_i\cdot e^{(x)}_i \cdot e^{(y)}_i 
+v=\sum_{i\in[0,m)}h_i\cdot e^{(x)}_i \cdot e^{(y)}_i
 $$
 
-并把求和等式归约到 
+并把求和等式归约到
 
 $$
 v' = \tilde{h}(\vec{\rho})\cdot \tilde{e}^{(x)}(\vec{\rho})\cdot \tilde{e}^{(y)}(\vec{\rho})
@@ -500,7 +502,7 @@ $$
 \begin{split}
 \vec{\lambda} &= (r_0,1-r_0)\otimes(r_1,1-r_1)\otimes(r_2,1-r_2) \otimes(r_3,1-r_3) \\
 &=\Big((r_0,1-r_0)\otimes(r_1,1-r_1)\Big)\otimes \Big((r_2,1-r_2)\otimes(r_3,1-r_3)\Big) \\
-&= \Big((r_0r_1,(1-r_0)r_1,r_0(1-r_1),(1-r_0)(1-r_1))\Big) \otimes 
+&= \Big((r_0r_1,(1-r_0)r_1,r_0(1-r_1),(1-r_0)(1-r_1))\Big) \otimes
 \Big((r_2r_3,(1-r_2)r_3,r_2(1-r_3),(1-r_2)(1-r_3))\Big) \\
 \end{split}
 $$
@@ -509,16 +511,16 @@ $$
 我们可以根据 Tensor Product 逐步来推导下：
 
 $$
-(r_0, (1-r_0))\otimes(r_1, (1-r_1))= 
+(r_0, (1-r_0))\otimes(r_1, (1-r_1))=
 \begin{array}{c|cc}
  & r_0 & (1-r_0) \\
  \hline
  r_1 & r_0r_1 & (1-r_0)r_1\\
 (1-r_1) & r_0(1-r_1) & (1-r_0)(1-r_1) \\
 \end{array}
-$$ 
+$$
 
-再利用上面的计算结果来计算 $(r_0, (1-r_0))\otimes(r_1, (1-r_1)) \otimes (r_2, (1-r_2))$ 
+再利用上面的计算结果来计算 $(r_0, (1-r_0))\otimes(r_1, (1-r_1)) \otimes (r_2, (1-r_2))$
 
 $$
 \small

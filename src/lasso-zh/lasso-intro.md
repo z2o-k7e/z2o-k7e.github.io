@@ -1,3 +1,5 @@
+>- 作者:  **Yu Guo@Secbit**(郭宇): Founder of [Secbit](https://secbit.io/), <https://github.com/sec-bit>
+
 - [理解 Lasso（零）：带索引的查询证明](./lasso-0.md)
 - [理解 Lasso（一）：Offline Memory Checking](./lasso-1.md)
 - [理解 Lasso (二)：稀疏向量与 Tensor 结构](./lasso-2.md)

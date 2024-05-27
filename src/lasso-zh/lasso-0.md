@@ -1,5 +1,7 @@
 # 理解 Lasso（零）：带索引的查询证明
 
+>- 作者:  **Yu Guo@Secbit**(郭宇): Founder of [Secbit](https://secbit.io/), <https://github.com/sec-bit>
+
 假设我们有一个公开的表格向量 $\vec{t}$，长度为 $N$，和一个查询向量 $\vec{f}$，长度为 $m$，我们可以利用 Lookup Argument 来证明下面的 lookup 关系：
 
 $$
@@ -96,7 +98,7 @@ $$
 不过，Prover 还要额外证明表格列中的每一项 $t_i<\kappa$，这需要 $N$ 个 Range Arguments。
 
 从一个 Indexed Lookup Argument 可以更容易地得到 Unindexed Lookup Argument，只需要把索引向量的承诺从公共输入中移除即可，在协议的开头，Prover 补充发送这个索引承诺即可。
- 
+
 ## Various Lookup Arguments From the Lasso Paper
 
 本系列文章后续将描述总共四个不同的 Indexed Lookup Arguments 协议：

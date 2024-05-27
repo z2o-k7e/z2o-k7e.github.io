@@ -1,4 +1,5 @@
 # 理解 Lasso (四)：更多的可分解表格
+>- 作者:  **Yu Guo@Secbit**(郭宇): Founder of [Secbit](https://secbit.io/), <https://github.com/sec-bit>
 
 Jolt 论文给出了更多的可分解表格，用于表达 RISC-V 指令的计算过程。
 
@@ -102,7 +103,7 @@ $$
 $$
 \mathsf{LTU}^{(W)}(\vec{x}, \vec{y})=\sum_{j=0}^{c-1}
 \Big(
-    \mathsf{LTU}^{(W/c)}(\vec{x}_j, \vec{y}_j)\cdot 
+    \mathsf{LTU}^{(W/c)}(\vec{x}_j, \vec{y}_j)\cdot
     \prod_{k=j+1}^{c-1}\mathsf{EQ}^{(W/c)}(\vec{x}_k, \vec{y}_k)
 \Big)
 $$
@@ -111,10 +112,10 @@ $$
 
 $$
 \mathcal{G}\Big(
-    \mathsf{LTU}^{(W/c)}[X_0\parallel Y_0], \mathsf{EQ}^{(W/c)}[X_0\parallel Y_0], 
-    \mathsf{LTU}^{(W/c)}[X_1\parallel Y_1], \mathsf{EQ}^{(W/c)}[X_1\parallel Y_1], 
+    \mathsf{LTU}^{(W/c)}[X_0\parallel Y_0], \mathsf{EQ}^{(W/c)}[X_0\parallel Y_0],
+    \mathsf{LTU}^{(W/c)}[X_1\parallel Y_1], \mathsf{EQ}^{(W/c)}[X_1\parallel Y_1],
     \ldots,
-    \mathsf{LTU}^{(W/c)}[X_{c-1}\parallel Y_{c-1}], \mathsf{EQ}^{(W/c)}[X_{c-1}\parallel Y_{c-1}] 
+    \mathsf{LTU}^{(W/c)}[X_{c-1}\parallel Y_{c-1}], \mathsf{EQ}^{(W/c)}[X_{c-1}\parallel Y_{c-1}]
 \Big)
 $$
 
@@ -122,7 +123,7 @@ $$
 
 ### SLL 表格
 
-下面是一个不容易切分 bits 的表格，那就是移位运算，比如向左移位（Shift Left Logical, SLL），`0011 << 02 = 1100`。移位运算会给表格的切分带来些麻烦，因为移位运算会将低位分段的部分 bits 
+下面是一个不容易切分 bits 的表格，那就是移位运算，比如向左移位（Shift Left Logical, SLL），`0011 << 02 = 1100`。移位运算会给表格的切分带来些麻烦，因为移位运算会将低位分段的部分 bits
 移动到高位分段。
 
 我们先考虑单个表格的 SLL 运算。下面的 $\mathsf{SLL}_k(\vec{X})$ 表示把长度为 $W$ 的位向量 $\vec{X}$ 向左移 $k$ 位的运算：
@@ -215,6 +216,5 @@ $$
 $$
 \mathsf{SLL}^{(W/c)}(\vec{X}_{c-1}\parallel\cdots\parallel\vec{X}_0,\ \vec{Y}) = \sum_{i=0}^{c-1}2^{i\cdot W/c}\cdot\mathsf{SLL}^{W/c}_i(\vec{X}_i,\vec{Y})
 $$
- 
-应用 Lasso 框架来实现移位运算，参数化的多项式 $\mathcal{G}(\cdot)$ 可以依据上面的等式来定义。
 
+应用 Lasso 框架来实现移位运算，参数化的多项式 $\mathcal{G}(\cdot)$ 可以依据上面的等式来定义。

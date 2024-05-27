@@ -1,5 +1,7 @@
 # 理解 Lasso（一）：Offline Memory Checking
 
+>- 作者:  **Yu Guo@Secbit**(郭宇): Founder of [Secbit](https://secbit.io/), <https://github.com/sec-bit>
+
 假设我们有一个公开的 Table 向量 $\vec{t}$（长度为 $n$），和一个 Lookup 向量 $\vec{f}$（长度为 $m$），此外还有一个索引向量 $\vec{a}$（长度为 $m$），如何证明下面的 Indexed Lookup 关系？
 
 $$
@@ -49,7 +51,7 @@ $$
 
 $$
 \begin{split}
-R_1 &= (1, t_1, 0)\\ 
+R_1 &= (1, t_1, 0)\\
 W_1 &= (1, t_1, 1)\\
 R_2 &= (3, t_3, 0)\\
 W_2 &= (3, t_3, 1)\\
@@ -108,7 +110,7 @@ $$
 
 这四个条件是否完备充分呢？我们可以试着用归谬法推理下：
 
-假如存在有一个 $R^*_j=(a^*,v^*,c^*)$ 中的读取数值 $v^*$ 非法， 即 $v^*\not\in\vec{t}$，并且此刻计数器为 $c^*$。 
+假如存在有一个 $R^*_j=(a^*,v^*,c^*)$ 中的读取数值 $v^*$ 非法， 即 $v^*\not\in\vec{t}$，并且此刻计数器为 $c^*$。
 
 假如 $c^*=0$，那么根据**条件 (4)**，$t^*=S_0[i^*].v$，又因为**条件 (1)**，$S_0(i^*).v=t_{i^*} \in \vec{t}$，这与假设矛盾。
 
@@ -160,7 +162,7 @@ n-1 & t_{n-1} & 0 \\
 S_i(X) & t(X) & S_c(X) \\
 \hline
 \end{array}
-& 
+&
 R=
 \begin{array}{|c|c|c|}
 \hline
@@ -190,7 +192,7 @@ n-1 & t_{n-1} & c'_{n-1} \\
 S_i(X) & t(X) & S'_c(X) \\
 \hline
 \end{array}
-& 
+&
 W=
 \begin{array}{|c|c|c|}
 \hline
@@ -271,7 +273,7 @@ Prover 发送 $\big(C_c, C^\mathsf{final}_c\big)$
 
 Verifier 发送挑战数 $\beta, \gamma$
 
-Prover 计算读取/更新日志向量 $R(X)$, $W(X)$, 
+Prover 计算读取/更新日志向量 $R(X)$, $W(X)$,
 
 $$
 \begin{split}
@@ -308,7 +310,7 @@ $$
 
 这里 $C_I = \mathsf{cm}(0,1,\ldots,n-1)$
 
-## 4. 对比理解 Offline Memory Checking 
+## 4. 对比理解 Offline Memory Checking
 
 与 Plookup, Caulk/Caulk+, flookup, Baloo, CQ 相比， Memory-in-the-head 方式证明 Lookup 是一个巧妙且直观的想法。不过我们会想知道他们之间有何差别？
 
@@ -343,7 +345,7 @@ $$
 $$
 \vec{t}^* = [(t_0, 0), (t_1, 0)]
 $$
- 
+
 那么我们会问下面的公式会成立吗？
 
 $$
@@ -353,7 +355,7 @@ $$
 很显然，它不成立，因为等式左边有 $(t_0, 1)$，而右边的集合中不包含这个元素。显然我们需要在公式的右边补上 $(t_0, 1)$。换句话说，我们需要在右边补上那些由于计数器累加产生的重复表项，记为 $\vec{p}^*$。
 
 $$
- \{f^*_j\} \overset{?}{\subset} \{t^*_i\}\cup\{p^*_j\} 
+ \{f^*_j\} \overset{?}{\subset} \{t^*_i\}\cup\{p^*_j\}
 $$
 
 但是这个向量 $\vec{p}$ 不能由 Prover 提供。为了防止 Prover 作弊， $\vec{p}$ 必须由 Verifier 来提供。那么接下来，我们面临的问题是，Verifier 并不清楚哪些 $f_i$ 重复，并且也不能知道重复了几次。这个问题该如何解决？
@@ -391,7 +393,7 @@ $$
 
 这个思路与 Memory-in-the-head 几乎一摸一样，除了我们不考虑表格的索引问题。基于这个思路，我们可以构造一个 Unindexed Lookup Argument。
 
-### 对比 Plookup 
+### 对比 Plookup
 
 回忆下 Plookup 的方案，对于 $\vec{f}$ 和 $\vec{t}$，如果我们要证明 $\vec{f}\subset \vec{t}$，那么 Prover 需要引入一个中间向量 $\vec{s}$，长度为 $n+m$。它是 $\vec{f}\cup\vec{t}$ 的一个重新排序，按照 $\vec{t}$ 中原有项的顺利进行排列。然后 Prover 证明下面的 Multiset 等价关系：
 
