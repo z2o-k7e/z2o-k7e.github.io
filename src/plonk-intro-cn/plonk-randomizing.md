@@ -230,7 +230,7 @@ srs=\left(
     [1]_1, & [\chi]_1, & [\chi^2]_1, &\cdots, & [\chi^D]_1,\\
     [\rho]_1, & [\rho\chi]_1, & [\rho\chi^2]_1, &\cdots, & [\rho\chi^D]_1,\\
     \end{array}
-    \right),([1]_1, [\rho]_1,[1]_1,[\chi]_2)
+    \right),([1]_2, [\rho]_2,[1]_2,[\chi]_2)
 $$
 
 如果我们要承诺一个多项式 $f(X)=f_0+f_1X+\cdots+f_{n-1}X^{n-1}$，那么需要额外产生一个次数相同的 Blinder 多项式：

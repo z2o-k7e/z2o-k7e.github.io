@@ -34,7 +34,7 @@ $$
 C_1 = \textrm{SHA256}(a_0\parallel a_1 \parallel a_2 \parallel \cdots \parallel a_n)
 $$
 
-或者，我们也可以使用 Petersen 承诺，通过一组随机选择的基，来计算一个 ECC 点：
+或者，我们也可以使用 Pedersen 承诺，通过一组随机选择的基，来计算一个 ECC 点：
 
 $$
 C_2 = a_0 G_0 + a_1  G_1 + \cdots + a_n G_n
