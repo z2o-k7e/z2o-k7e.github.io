@@ -12,11 +12,12 @@
 该电路的各个参数说明如下：
 
 ```bash
-private inputs:  a, b, c
+private inputs:  a, b
 public inputs :  out
+constants: c
 constraints   :  a^2 * b^2 * c = out
 ```
-我们的目的是写一个电路，让Prover证明对于公共输入`out`,他知道三个秘密输入`a, b, c`满足 $a^2 * b^2 * c = out$ 这个约束。
+我们的目的是写一个电路，让Prover证明对于公共输入`out`和常量c,他知道三个秘密输入`a, b`满足 $a^2 * b^2 * c = out$ 这个约束。
 从电路的角度，只使用 `乘法门` 和 `乘法选择器`，上述约束可以算数化为:
 
 | instance | advice_0 | advice_1 | selector_mul |
@@ -94,8 +95,10 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
     fn configure(meta: &mut ConstraintSystem<F>) -> Self::Config {
         let advice = [meta.advice_column(),meta.advice_column()];
         let instance = meta.instance_column();
+        let constant = meta.fixed_column();
 
         meta.enable_equality(instance);
+        meta.enable_constant(constant);
         for c in &advice {
             meta.enable_equality(*c);
         }
@@ -127,7 +130,7 @@ impl <F:Field> Circuit<F> for MyCircuit<F> {
 ## 实现 witness 填充
 
 按照表格,一步步填充 witness：
-1. load private inputs `a`, `b` 和 `c`
+1. load private inputs `a`, `b` 和 constant `c`
 2. 分别计算三个乘法的输入输出值 (`ab`, `absq`, `out`)，并通过 `assign_advice` 和 `copy_advice` 这两个 API 填充 Cell 
 3. 通过 `constrain_instance` API, 约束 out 所在的 Cell 和 instance 列的第一个 cell 相等
 ```rust
@@ -153,10 +156,10 @@ fn load_constant<F:Field>(
     c: F
 ) -> Result<Number<F>, Error> {
     layouter.assign_region(
-        || "load private", 
+        || "load constant", 
     |mut region| {
         region.assign_advice_from_constant(
-            || "private input", 
+            || "constant input", 
             config.advice[0], 
             0, 
             c
