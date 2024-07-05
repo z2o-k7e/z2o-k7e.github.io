@@ -83,3 +83,8 @@ Our aspirations for the next 6 months (culminating in ~12/2023) are:
 - [ ] 2. Develop at least one zk application project with specific needs and use cases.
 - [x] 3. Organize and open-source the vast amount of zk materials that have accumulated and scattered within the current colearning GROUP.
 - [ ] 4. Attract at least 200 more people to participate in zkp technology learning and engage at least 20 developers in the development of zkp projects.
+
+
+## zkp-academy
+
+
