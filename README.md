@@ -87,4 +87,6 @@ Our aspirations for the next 6 months (culminating in ~12/2023) are:
 
 ## zkp-academy
 
+[Plonk course](https://github.com/Antalpha-Labs/zkp-academy/tree/main/Plonk)
 
+[FRI & Stark course](https://github.com/Antalpha-Labs/zkp-academy/tree/main/FRI%26Stark)
