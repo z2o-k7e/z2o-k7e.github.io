@@ -100,7 +100,7 @@ $$
 
 第四步：Verififer 发送挑战数 $\alpha$
 
-第五步：Prover 计算并发送商多项式 $[q(X)]$
+第五步：Prover 计算并发送商多项式承诺 $[q(X)]$
 
 $$
 q(X)=\frac{1}{v_H(X)}\left(
@@ -123,7 +123,7 @@ $$
 $$
 q(\zeta)\cdot v_H(\zeta)\overset{?}{=}\left(\begin{array}{l}
 \big(f'(\zeta)-f'(\omega^{-1}\cdot \zeta))\cdot (f'(\zeta)-t'(\zeta)\big) \\
-+\alpha\cdot\big(L_0(\zeta)\cdot(f'(\zeta)-t'(X))\big)\\
++\alpha\cdot\big(L_0(\zeta)\cdot(f'(\zeta)-t'(\zeta))\big)\\
 +\alpha^2\cdot\big( L_0(\zeta)\cdot (z(\zeta) - 1) \big)\\
 +\alpha^3\cdot\big( z(\omega\cdot \zeta)\cdot (f'(\zeta)+\gamma_1)(t'(\zeta)+\gamma_2) \\
 \qquad - z(\zeta)\cdot (f(\zeta)+\gamma_1)(t(\zeta)+\gamma_2) \big)\\
